@@ -16,6 +16,7 @@ Use the Linear MCP server. If the only Linear tools listed are `authenticate` an
 | Work type | Issue template (`Task`, `Bug`, `Chore` if the team has them), plus a label |
 | Dependency | Issue relation "blocked by"; project dependency for project-level ones |
 | Cycle | Cycle |
+| Checklist | Native in the editor. A `- [ ]` line sent through the MCP server is unverified: read the item back. |
 | Status update | Project update, with health `onTrack`, `atRisk` or `offTrack`; a product update is an initiative update |
 
 Coming from Jira: a Story is an Issue, an Epic is a Project, and an Epic description or Confluence
@@ -28,8 +29,6 @@ List the team's templates (`list_templates`) and read the one you need (`get_tem
 writing. Pass the template's name when creating, so Linear applies its labels and fields. A form
 template's questions are not answered by passing a description: fill its headings in the body
 instead. Common project templates are a product one and an internal-tool one; check which exist.
-
-Write checkboxes in Done When as `- [ ]`. Linear renders them as task lists.
 
 ## Tools
 

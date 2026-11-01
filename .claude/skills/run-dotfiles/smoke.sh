@@ -32,6 +32,8 @@ tests() {
   run python3 -I scripts/test_check_readmes.py
   say "typed skills: agents/openai.yaml keeps them typed in Codex"
   run python3 -I scripts/check_typed_skills.py
+  say "planning terms: no tracker section names such as Done When"
+  run python3 -I scripts/check_planning_terms.py
   say "skill descriptions: valid YAML, at most 500 characters, third person (plugin-dev's rules)"
   local py=(python3 -)
   python3 -c 'import yaml' 2>/dev/null || py=(uv run --quiet --no-project --with pyyaml python3 -)

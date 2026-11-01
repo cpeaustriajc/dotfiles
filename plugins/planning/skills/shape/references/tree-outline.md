@@ -34,7 +34,7 @@ run includes its project and that project's items.
           "kind": "build",
           "requirements": ["R1"],
           "you_see": "The register page with the domain listed in the cart.",
-          "done_when": 3,
+          "checks": 3,
           "chars": 1180,
           "blocked_by": []
         }
@@ -49,7 +49,7 @@ run includes its project and that project's items.
   shaped); `deferred: true` marks a feature or requirement consciously left out of this round.
 - `kind`: `build`, `bug`, `chore` or `prototype`. A prototype item may sit under a Draft spec and
   cites no requirement.
-- `done_when`: the number of Done When checks; `chars`: the whole body's length. The check
+- `checks`: the number of checks; `chars`: the whole body's length. The check
   subtracts the quoted lines of the cited requirements, computed from their `text`, before it
   compares against 1,500.
 

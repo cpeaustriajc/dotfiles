@@ -18,7 +18,7 @@ You say: "Triage #272."
 
 1. Claude reads the issue and searches the code and the installed tools for the same feature.
 2. Claude checks the decision log and closed items for an earlier rejection.
-3. Claude reads each "Done when" item and finds one that needs a merge first.
+3. Claude reads each check and finds one that needs a merge first.
 4. Claude recommends `ready-for-human` and names that item, then waits for your go.
 
 You get one label set and one comment with the brief and the items a person must do.

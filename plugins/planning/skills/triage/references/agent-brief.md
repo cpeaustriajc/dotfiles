@@ -5,7 +5,7 @@ for weeks, so the brief must stay true when files move.
 
 - Name behaviour, types, commands, routes and config keys. No file paths, no line numbers.
 - Say what the system does when the work is done, not how to build it.
-- Each acceptance item is a check one person or agent can run and see pass or fail.
+- Each item under Checks is a check one person or agent can run and see pass or fail.
 - List what is out of scope, so the agent adds nothing next to it.
 
 ## Agent brief
@@ -23,7 +23,7 @@ for weeks, so the brief must stay true when files move.
 **Key interfaces:**
 - `<type, command, route or config key>`: <what changes>
 
-**Acceptance:**
+**Checks:**
 - [ ] <a check with an input and the result you see>
 
 **Out of scope:**
@@ -39,7 +39,7 @@ Add this section to the brief for `ready-for-human`:
 
 ```markdown
 **Needs a person:**
-- <Done-when item>: <why an agent cannot prove it, for example "needs the merge to main first">
+- <check>: <why an agent cannot prove it, for example "needs the merge to main first">
 ```
 
 ## Triage notes (needs-info)

@@ -8,7 +8,7 @@ import json
 import sys
 
 MAX_CHARS = 1500
-DONE_WHEN = range(1, 6)
+CHECKS = range(1, 6)
 
 
 def quoted_len(rid, req):
@@ -70,8 +70,8 @@ def check(tree, launch=False):
             covered.update(cited)
             if kind in ("build", "bug") and not str(item.get("you_see", "")).strip():
                 problems.append(f"{iid}: no 'you see' line")
-            if item.get("done_when") is not None and item["done_when"] not in DONE_WHEN:
-                problems.append(f"{iid}: {item['done_when']} Done When checks; at most 5, so split it")
+            if item.get("checks") is not None and item["checks"] not in CHECKS:
+                problems.append(f"{iid}: {item['checks']} checks; at most 5, so split it")
             body = item.get("chars", 0)
             quoted = sum(quoted_len(r, reqs[r]) for r in set(cited) if r in reqs)
             if body - quoted > MAX_CHARS:

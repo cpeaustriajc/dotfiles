@@ -20,6 +20,7 @@ uses, and offer to note the answer in the project's facts; don't edit the projec
 | Work type | Issue type (`--type`) when the organisation defines types; otherwise a `Task`, `Bug` or `Chore` label |
 | Dependency | Issue dependency (`--blocked-by`, `--blocking`) |
 | Cycle | An iteration field on a Projects board, if the team uses one |
+| Checklist | Native: `- [ ]` renders and counts toward the issue's progress |
 | Status update | A comment on the parent issue, with the health in its first line; or the board's status update |
 
 ## Templates
@@ -28,8 +29,6 @@ Issue templates live in `.github/ISSUE_TEMPLATE/`. `gh issue create --template "
 Markdown template as the starting body; YAML issue forms don't work with it, and `--template`
 can't be combined with `--body`. For a form, or to fill a template headlessly, write the body
 yourself with the form's headings and pass `--body-file`.
-
-Checkboxes (`- [ ]`) render natively and count toward the issue's progress.
 
 ## Tools
 
