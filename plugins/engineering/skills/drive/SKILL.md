@@ -38,14 +38,14 @@ Product, taste and design calls never loop. Neither does work small enough to fi
 Before the first pass, write the predicate and show it to me:
 
 ```markdown
-Done when: <the end state, as the check's own output: "pnpm test cart passes, 0 failing">
+End state: <the end state, as the check's own output: "pnpm test cart passes, 0 failing">
 Check: <the exact command, and where its output goes>
 Holds throughout: <what must stay true: files not to touch, the regression suite green>
 Floor: <at least N passes, so an early lucky win can't end the run> (metric runs only)
 Budget: <passes, hours or spend; whichever comes first ends the run>
 ```
 
-A ticket from `tickets` already has one: its Done When and You see lines are the end state. Never
+A ticket from `tickets` already has one: its checks and You see lines are the end state. Never
 relax the predicate during the run to declare victory; a predicate found wrong stops the run and
 comes to me.
 

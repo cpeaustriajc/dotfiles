@@ -12,7 +12,7 @@
       "name": "design",
       "displayName": "Design",
       "description": "Sign off UI work and motion — check it against the design, add missing microinteractions, make launch videos.",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "author": {
         "name": "John Carlo Austria"
       },
@@ -31,7 +31,7 @@
       "name": "engineering",
       "displayName": "Engineering",
       "description": "Prove the work in the real app — playbooks, design-first builds, unattended loops, bug hunts, code history, review and PRs.",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "author": {
         "name": "John Carlo Austria"
       },

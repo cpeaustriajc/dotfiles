@@ -37,7 +37,7 @@ res() { printf '{"type":"user","sessionId":"%s","message":{"role":"user","conten
 } > drive.tsv
 printf 'Run finished. Session transcripts: %s/%s.jsonl\nCheck: node --test cart.test.js\n' "$dir" "$id" > drive-resume.md
 cat > drive-plan.md <<'PLAN'
-Done when: node --test cart.test.js passes, 0 failing
+End state: node --test cart.test.js passes, 0 failing
 Check: node --test cart.test.js, output pasted in the transcript
 Holds throughout: cart.test.js is not edited
 Budget: 10 passes
