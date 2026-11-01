@@ -11,7 +11,7 @@ shipped skill does its job through that chat only. Until then, each skill must d
 harness where the user runs agents:
 
 - agent multiplexers, such as T3 Code and Herdr
-- native harnesses, such as Claude Code, the ChatGPT desktop app, Antigravity and Muse desktop
+- native harnesses, such as Claude Code, the ChatGPT desktop app, Antigravity and Muse Code
 
 ## Rejected
 

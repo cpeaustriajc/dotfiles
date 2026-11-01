@@ -5,7 +5,7 @@ CJ's skills and mods for coding agents.
 Each skill must do its job in these harnesses:
 
 - agent multiplexers, such as T3 Code and Herdr
-- native harnesses, such as Claude Code, the ChatGPT desktop app, Antigravity and Muse desktop
+- native harnesses, such as Claude Code, the ChatGPT desktop app, Antigravity and Muse Code
 
 Assume that all harnesses converge into a single chat interface. Each skill must then do its job
 through that chat only. Mods are hooks for Claude Code only. For the full criteria, read
