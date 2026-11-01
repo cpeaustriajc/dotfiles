@@ -21,7 +21,7 @@ You type `/implement SHOP-42`.
 4. Fresh reviewers read the commits, and Claude fixes what they find.
 5. Claude opens a pull request that closes SHOP-42 when you merge it.
 
-You get the pull request. It has a verdict and evidence for each Done When line.
+You get the pull request. It has a verdict and evidence for each criterion of the ticket.
 
 ## Install
 
