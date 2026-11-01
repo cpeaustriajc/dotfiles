@@ -18,7 +18,8 @@ files to `~`. It works on macOS and Linux.
 
 | Live file | Source |
 |-----------|--------|
-| `~/.claude/CLAUDE.md`, `statusline-command.sh`, `hooks/*`, `agents/*`, `skills/workflow-models/` | `dot_claude/` |
+| `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` | the shared rules in `.chezmoitemplates/agents.md`; `dot_claude/CLAUDE.md.tmpl` adds the Claude Code rules, `dot_codex/AGENTS.md.tmpl` adds none |
+| `~/.claude/statusline-command.sh`, `hooks/*`, `agents/*`, `skills/workflow-models/` | `dot_claude/` |
 | `~/.claude/settings.json` | only the keys in `dot_claude/.settings.json`, merged by `dot_claude/modify_private_settings.json`; every other live key keeps its live text |
 | `~/.config/nvim/` | `dot_config/nvim/` |
 | `~/.config/tmux/` | `dot_config/tmux/`; `tmux.conf.tmpl` renders per OS |
