@@ -1,5 +1,7 @@
 # dotfiles
 
+@AGENTS.md
+
 Write every rule, skill line and mod on the assumption that a later model makes it obsolete:
 name the failure it prevents, so a run without it can show when that failure stops. When a
 frontier model ships from any vendor the stack runs on, or a vendor engineering blog publishes
