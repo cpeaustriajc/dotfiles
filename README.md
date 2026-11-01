@@ -1,12 +1,21 @@
 # dotfiles
 
-CJ's skills and mods for Claude Code.
+CJ's skills and mods for coding agents.
+
+Each skill must do its job in these harnesses:
+
+- agent multiplexers, such as T3 Code and Herdr
+- native harnesses, such as Claude Code, the ChatGPT desktop app, Antigravity and Muse desktop
+
+Assume that all harnesses converge into a single chat interface. Each skill must then do its job
+through that chat only. Mods are hooks for Claude Code only. For the full criteria, read
+[Success in SCOPE.md](SCOPE.md#success).
 
 - [Install](#install)
 - [Skills](#skills): skills shipped in six plugins: Design, Engineering, Planning, Knowledge, Writing and Principles
 - [Mods](#mods): hooks that change how a session behaves, one plugin each
 - [Models](models/README.md): which model does what, and why cross-vendor review stays
-- [Scope](SCOPE.md): what dotfiles is, and the ideas it rejects with the reason for each
+- [Scope](SCOPE.md): what dotfiles is, its success criteria, and the ideas it rejects with the reason for each
 - [painting-craft: before and after](#painting-craft-before-and-after)
 
 ## Install
