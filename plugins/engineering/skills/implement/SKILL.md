@@ -53,13 +53,14 @@ Check each line. If one fails, stop and name it.
 
 1. The item is `ready-for-agent` (or the team's name for it). Any other state: run `triage`.
 2. It has criteria, each a check that passes or fails.
-3. Every item that blocks it is closed.
+3. Every item that blocks it is closed, or is its stack base with a pushed branch. Without the
+   second case, a stack never builds past its first item.
 
 If the item is `ready-for-human`, build only the part an agent can prove. Put the rest under
 Needs you.
 
-Branch from a fresh trunk. Skip this only if the current branch is already for this item. Never
-build on the trunk.
+Branch from the stack base that the ticket names, else from a fresh trunk. Skip this only if the
+current branch is already for this item. Never build on the trunk.
 
 ## 4. Trust the ticket
 
@@ -75,8 +76,9 @@ A criterion that cannot be met as written is a costly question.
 
 ## 5. Build
 
-1. Run the feature playbook (`playbooks`, `references/feature.md`) from its step 2. The ticket
-   settled step 1. A Bug item runs the bug playbook instead.
+1. Run the feature playbook (`playbooks`, `references/feature.md`) from step 2 to step 6. The
+   ticket settled step 1. Step 7 here opens the PR, after the review. A bug item runs the bug
+   playbook instead, up to its report.
 2. Make each criterion a check. Make each criterion that a user sees an end-to-end check in the
    running app.
 3. Commit per slice. Never commit red. Save each check's command and evidence.
@@ -108,14 +110,15 @@ This session coordinates. Each ticket gets its own Claude Code Projects thread, 
 1 to 7 and opens its own PR (`references/claude-code.md`). This session never builds a ticket.
 
 1. **Frame.** Read the spec and its items. Build the graph from the blocked-by links.
-2. **Frontier.** The frontier is every `ready-for-agent` item whose blockers are closed. List each
-   item that is not ready as a gate.
+2. **Frontier.** The frontier is every `ready-for-agent` item that passes the gate in step 3.
+   List each item that is not ready as a gate.
 3. **Start.** Start one thread per frontier item. The brief's first line is `/implement <item
    link>`.
 4. **Check.** A thread's report is a claim. Read its PR's verdict table. Rerun one check on its
    branch.
-5. **Advance.** When a PR merges, recompute the frontier and start its new items. Never start an
-   item whose blocker is open: it builds on code that is not there yet.
+5. **Advance.** When a PR merges or a stack base is pushed, recompute the frontier and start its
+   new items. The brief names the item's stack base. Never start an item whose blocker has no
+   pushed branch: it builds on code that is not there yet.
 6. **Gates.** Collect each `needs-info` item. Bring them to the user in one batch, not one at a
    time.
 7. **Report.** Give each item with its PR and verdict, the open gates, and each abandoned item
