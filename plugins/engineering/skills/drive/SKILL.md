@@ -124,7 +124,9 @@ judges whether the log tells what happened.
 
 ## 9. Report
 
-When the run ends, in this order:
+When the run ends, in this order. The Attention list is the first thing I read: put nothing above
+it but a title line, no greeting, summary or verdict. Failure: a reply that opened "The run met its
+goal" gave the verdict before the flags, in 4 of 18 eval runs.
 
 - The Attention list from section 8.
 - The predicate's state, with the check's last output.
