@@ -7,11 +7,11 @@ fan-out runs each agent on the cheapest model that can do its job: see
 ## Success
 
 Assume that all harnesses converge into a single chat interface. The stack succeeds when each
-shipped skill does its job through that chat alone. Until then, it must do its job in every harness
-where the user runs agents:
+shipped skill does its job through that chat only. Until then, each skill must do its job in every
+harness where the user runs agents:
 
-- agent multiplexers, such as T3 Code and Herdr;
-- native harnesses, such as Claude Code, the ChatGPT desktop app, Antigravity and Muse desktop.
+- agent multiplexers, such as T3 Code and Herdr
+- native harnesses, such as Claude Code, the ChatGPT desktop app, Antigravity and Muse desktop
 
 ## Rejected
 
