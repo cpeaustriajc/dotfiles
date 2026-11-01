@@ -53,7 +53,7 @@
       "name": "planning",
       "displayName": "Planning",
       "description": "Turn an idea into tickets — find and test ideas, write the spec, cut thin slices and triage them in any tracker.",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "author": {
         "name": "John Carlo Austria"
       },
