@@ -39,7 +39,7 @@ Requirement: Claude must be able to start subagents.
 ## What it does
 
 - Claude writes a bundle file with the diff, the full changed files with line numbers, the spec if one exists, and a short description.
-- The Full reviewer sees the whole bundle. The Blind reviewer sees no description or spec and runs on a model one tier below the session. The Spec reviewer runs only if a spec or issue exists.
+- The Full reviewer sees the whole bundle. The Blind reviewer is the harness's built-in code review, such as `/code-review` in Claude Code, and sees no description or spec. The Spec reviewer runs only if a spec or issue exists.
 - Claude verifies each finding itself. A reviewer can be confidently wrong.
 - Each finding has a proof level: stated, pointed at the line, walked through or run. Act on takes only walked through or run. A real finding with less proof goes to Consider, with a note on what would raise it.
 - Dismissed findings stay visible with a one-line reason, so you can override them.
