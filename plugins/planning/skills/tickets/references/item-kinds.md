@@ -12,7 +12,7 @@ Read this when an item is a Bug or a Chore, when you pick its work type, or when
 
 A **Bug** adds what was expected and what happened, with the steps that reproduce it, under
 Context, and cites the requirement it breaks. The steps start from the reachable state, with its
-trigger named, as a Done When check does.
+trigger named, as a check does.
 
 ## Work types and rules
 
@@ -32,7 +32,7 @@ trigger named, as a Done When check does.
   - [ ] Every user path it changes is covered by an automated test.
   ```
 
-  Its Done When holds checks an engineer can confirm alone: a command that passes, a file state, a
+  Its checks are ones an engineer can confirm alone: a command that passes, a file state, a
   search that finds nothing, or the end-to-end command and where its trace is.
 - **Labels, not separate items, split frontend from backend**, unless the halves ship separately.
   Sub-items hold the tasks under an item that is longer than one cycle.

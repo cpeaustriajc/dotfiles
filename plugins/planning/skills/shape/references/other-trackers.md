@@ -12,12 +12,12 @@ tool's own MCP server or CLI to see what it can create, then map the levels onto
 | Work item | Task, card or item | — |
 | Work type | An item type or template | A label: `Task`, `Bug`, `Chore` |
 | Dependency | A native "blocked by" | A line in the item's Context with a link |
+| Checklist | Native checkboxes, or `- [ ]` rendering | A numbered list |
 
 - **Keep the method, bend the container.** The rules about statements, confirmation before
   splitting, one engineering document and fixed phases hold whatever the tool calls things.
 - **A markdown file as the tracker** (`TODO.md`, `ROADMAP.md`): one heading per project, the spec
   linked rather than inlined, phases as subheadings, work items as checkboxes with the template's
-  Outcome as the line and Done When nested beneath.
-- **No checkbox rendering?** Use a plain numbered list for Done When and say so once.
+  Outcome as the line and its checks nested beneath.
 - **If the tool can't create something** the method needs, say what's missing and hand the person
   the text to paste. Don't fake it through a comment or an unrelated object.

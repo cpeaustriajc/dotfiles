@@ -21,8 +21,8 @@ GOOD = {
         "out_of_scope": ["Payment plans"], "open_questions": [],
         "requirements": [{"id": "R1", "text": "a"}, {"id": "R2", "text": "b"}],
         "items": [
-            {"id": "A", "kind": "build", "requirements": ["R1"], "you_see": "cart", "done_when": 3, "chars": 900},
-            {"id": "B", "kind": "build", "requirements": ["R2"], "you_see": "error", "done_when": 4, "chars": 1200},
+            {"id": "A", "kind": "build", "requirements": ["R1"], "you_see": "cart", "checks": 3, "chars": 900},
+            {"id": "B", "kind": "build", "requirements": ["R2"], "you_see": "error", "checks": 4, "chars": 1200},
         ],
     }],
 }
@@ -80,7 +80,7 @@ case("an item citing a missing requirement fails", seti(requirements=["R7"]), "c
 case("an item citing a dropped requirement fails",
      lambda t: P(t)["requirements"][0].update(dropped=True), "R1, which was dropped")
 case("a build item without a you-see line fails", seti(you_see=" "), "no 'you see'")
-case("six Done When checks fail", seti(done_when=6), "split it")
+case("six checks fail", seti(checks=6), "split it")
 case("an over-long body fails", seti(chars=1600), "1600 characters")
 LONG = "A returning buyer who saved a domain to the watch list gets an email when its price drops, and the link in that email opens checkout with the domain already in the cart and the new price shown."
 

@@ -24,7 +24,7 @@ and how writes are made and checked.
 | Spec | Product owner writes, engineering formats | The spec template in `references/templates.md`, with a status line: Draft, or Confirmed (date, by whom). |
 | Engineering document | Engineering | At most one per project; see Documents. |
 | Phase | Engineering | One of the fixed phases in `references/phases.md`, as a milestone. Its exit check, not a progress bar, ends it. |
-| Work item | Engineering writes, product owner approves the Done When | See `tickets`. |
+| Work item | Engineering writes, product owner approves the checks | See `tickets`. |
 | Done | Verifier | Only a defect against the quoted requirements reopens it. A new ask is a new item. |
 | Accepted | Product owner | The released feature checked against the spec's requirements. |
 

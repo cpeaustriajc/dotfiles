@@ -50,7 +50,7 @@ pick the next item.
 4. **Does the claim hold?** A bug: reproduce it from the reporter's steps. A PR: check it out and
    run its checks. Report one of: confirmed (with the code path), not reproduced, or not enough
    detail. Not enough detail points to `needs-info`.
-5. **Agent or person?** Read each "Done when" item and ask: can an agent prove it inside its
+5. **Agent or person?** Read each check and ask: can an agent prove it inside its
    session? It is `ready-for-human` when an item needs a merge to the main branch first, a
    sign-in, a secret, a real device, a vendor console, a paid account, or a call of taste. Name
    each such item.

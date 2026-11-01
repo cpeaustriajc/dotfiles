@@ -1,7 +1,8 @@
 # Templates
 
-The team's own templates in the tracker win over these. Where the team has none, or its template
-is missing a section below, use these shapes.
+Proposals, not a standard. The project's own templates and section names win. Where the project
+has none, propose these shapes once and use them; where its template lacks a section below, add
+the section's content under the project's nearest heading.
 
 ## Spec
 

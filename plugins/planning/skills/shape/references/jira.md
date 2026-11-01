@@ -17,16 +17,14 @@ items" and projects "spaces"; the APIs and MCP tools still say "issue" and "proj
 | Work type | Work type (Story, Task, Bug); a Chore is a Task with a `chore` label unless the space defines its own type |
 | Dependency | Issue link "is blocked by" (`listJiraIssueLinkTypes` gives the exact name) |
 | Cycle | Sprint |
+| Checklist | Unverified: rich text is stored as Atlassian Document Format. Call `getContentFormatGuide` before the first write, then read the item back. |
 | Status update | A comment on the epic, or the space's own status update feature |
 
 ## Templates and fields
 
 - Read the space's work types and required fields first (`listJiraProjectIssueTypesMetadata`,
   then `getJiraIssueTypeMetaWithFields`). Many spaces have a custom **Acceptance criteria** field;
-  when they do, Done When goes there and the description keeps Context, Outcome and Out of Scope.
-- Rich text is stored as Atlassian Document Format. Whether Markdown checkboxes survive the MCP
-  tool is unverified: call `getContentFormatGuide` before the first write, and read the item back.
-  If checkboxes are lost, use a numbered list and say so.
+  when they do, the checks go there and the description keeps the other sections.
 
 ## Tools
 

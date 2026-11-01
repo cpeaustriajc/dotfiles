@@ -31,7 +31,7 @@ moves and thrown away when direction changes.
   feature touches, and is demoable or verifiable on its own. A schema-only or API-only item is a
   layer, not a slice.
 - **Sized for one session.** One fresh agent session or one person's day finishes it. Split one
-  that needs more than five test cases, has more than five Done When checks, or touches several
+  that needs more than five test cases, has more than five checks, or touches several
   unrelated parts of the code.
 - **Prefactor first.** A change that makes the slice easy goes in its own item, before it.
 - **Order by what blocks.** Give each item the items that must finish before it starts; an item
@@ -52,6 +52,9 @@ being settled inside a ticket, where nobody would find it again.
 
 ## 3. Write each item
 
+Use the project's own work-item template and section names, read fresh as `top-down.md` says.
+With none, propose this one once and use it. The rules below hold under any section names.
+
 ```markdown
 ## Context
 
@@ -61,7 +64,7 @@ being settled inside a ticket, where nobody would find it again.
 
 <The concrete state that is true when this is done. One sentence.>
 
-## Done When
+## Checks
 
 - [ ] R3: <the requirement, quoted word for word>
 - [ ] You see: <the screen, message or state that proves it>. Reach it with: <the account, data, switch or payment method that sets up that state>. (test | eye | engineer)
@@ -75,9 +78,11 @@ being settled inside a ticket, where nobody would find it again.
 - **Context:** 2–4 sentences plus links. Probe data and architecture go in the pull request or
   the engineering document; link them.
 - **Outcome:** one sentence, from the user's side, not a layer-by-layer task list.
-- **Done When:** 3–5 checks. Every requirement the item meets is quoted with its number; at least
+- **Checks:** 3–5. Every requirement the item meets is quoted with its number; at least
   one **You see** line says what the verifier observes. No click-by-click steps, no "record only"
   measurements, no "deliberately absent" lists.
+- **Checkboxes.** Write each check as `- [ ]`. Use a numbered list instead when the adapter's
+  Checklist row says the tracker drops checkboxes, or the read-back shows them lost; say so once.
 - **Each check is reachable.** It names what puts the app in its starting state: the account type,
   the kind of data ("a cart with a premium name", not "a domain"), the test switch, the payment
   method ("bank transfer, left unpaid"). If the state needs a trigger the reader would not guess,

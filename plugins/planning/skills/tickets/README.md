@@ -21,7 +21,7 @@ You say: "Cut the next slice from the checkout spec. R4 through R7 have no ticke
 3. You approve the slice or change its size or order.
 4. Claude writes the items, blockers first, and runs the tree check.
 
-You get work items that each hold Context, Outcome, Done When and, if needed, Out of Scope.
+You get work items that each hold Context, Outcome, Checks and, if needed, Out of Scope.
 
 ## Install
 
@@ -42,10 +42,10 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 - In a stack, the first item branches off main, and each next item branches off the item below it. Each item gets a Stack line with its branch and its base.
 - A lone backlog item, a small fix, and Demo, Launch and Post Launch items branch off main.
 - Claude asks one question: are the size and the blocking right? Any other question goes up to `shape` as a spec change.
-- Each Done When quotes the requirement with its number and has a "You see" line that says what the verifier observes.
+- Each item's checks quote the requirement with its number and has a "You see" line that says what the verifier observes.
 - Each check names the account, data or switch that reaches its state.
 - Each check names who proves it: a one-command test, a person's eye, or the engineer.
-- An item has 3 to 5 Done When checks and a body under about 1,500 characters. A longer item is split.
+- An item has 3 to 5 checks and a body under about 1,500 characters. A longer item is split.
 - Claude labels each item Task, Bug or Chore. A Chore adds a No-QA check and cites no requirement.
 - A bug found after Done becomes a new item, related to the original.
 - Claude writes through your tracker's adapter in `shape/references/`, then runs the tree check. Add `--launch` when the project enters Launch.
