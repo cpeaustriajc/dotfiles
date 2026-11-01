@@ -16,6 +16,9 @@ Arguments: `$ARGUMENTS`.
 Build work that is already decided. The ticket holds the answers. Never reopen the plan. End with
 proof that the user checks later, never with a question.
 
+A criterion is one line of the ticket that says when the work is done. Use the project's own
+name for it in everything you write.
+
 Tool mechanics: `references/claude-code.md`.
 
 ## 0. Pick the mode
@@ -41,15 +44,15 @@ Tool mechanics: `references/claude-code.md`.
    wrong item.
 3. Write its title and link in one line.
 4. If the reference matches two items (an issue and a pull request), stop and ask which.
-5. If there is no reference and the plan is only in this conversation, write its Done When lines
-   as you understood them. Wait for the user's go.
+5. If there is no reference and the plan is only in this conversation, write its criteria as
+   you understood them. Wait for the user's go.
 
 ## 3. Gate
 
 Check each line. If one fails, stop and name it.
 
 1. The item is `ready-for-agent` (or the team's name for it). Any other state: run `triage`.
-2. It has Done When or Acceptance lines, each a check that passes or fails.
+2. It has criteria, each a check that passes or fails.
 3. Every item that blocks it is closed.
 
 If the item is `ready-for-human`, build only the part an agent can prove. Put the rest under
@@ -68,14 +71,14 @@ answer:
 | Easy to undo | Follow the closest existing pattern. Add it to Decided. |
 | Costly to undo, or against the spec or a recorded decision | Stop. Post triage notes on the item, move it to `needs-info`, report. |
 
-A Done When line that cannot be met as written is a costly question.
+A criterion that cannot be met as written is a costly question.
 
 ## 5. Build
 
 1. Run the feature playbook (`playbooks`, `references/feature.md`) from its step 2. The ticket
    settled step 1. A Bug item runs the bug playbook instead.
-2. Make each Done When line a check. Make each You see line an end-to-end check in the running
-   app.
+2. Make each criterion a check. Make each criterion that a user sees an end-to-end check in the
+   running app.
 3. Commit per slice. Never commit red. Save each check's command and evidence.
 4. Do not touch Out of Scope items. Put a side discovery in the report.
 
@@ -92,7 +95,7 @@ Push and open the PR with `create-pr`. The body holds:
 
 1. The tracker's close word or link for the item, so the merge closes it. Never close it by
    hand.
-2. One row per Done When line: the line, the command, the evidence path, and VERIFIED, NOT
+2. One row per criterion: the criterion, the command, the evidence path, and VERIFIED, NOT
    VERIFIED or INCONCLUSIVE. INCONCLUSIVE is not a pass.
 3. **Decided:** each answer from step 4 that the ticket did not give.
 4. **Needs you:** each line only a person can check.
