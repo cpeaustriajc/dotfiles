@@ -7,7 +7,7 @@
 Use it when a ticket is planned and an agent can prove it done. Without it, an agent redesigns settled work or says "done" with no proof.
 
 - To build one `ready-for-agent` ticket, type `/implement <ticket link>`.
-- To build all ready tickets of a spec, type `/implement <spec link>` in a [Claude Code project](https://code.claude.com/docs/en/claude-projects).
+- To build all ready tickets of a spec, type `/implement <spec link>`. In Claude Code, type it in a [project](https://code.claude.com/docs/en/claude-projects).
 
 If an idea still has open questions, use `grill`. If nobody has checked the ticket, use `triage` first. If a change has no tickets and splits into independent parts, run the built-in `/batch` command. A migration across the codebase is one example.
 
@@ -41,7 +41,7 @@ The skill then loads as `/engineering:implement`.
 - It asks you no design questions. An easy choice follows the closest pattern in the code, and the pull request lists it.
 - A costly question stops the run. Claude moves the ticket to `needs-info` and adds a note.
 - Reviewers that did not write the code check the commits.
-- For a spec or several tickets, one Claude Code Projects thread builds each ready ticket. Each thread opens its own pull request.
+- For a spec or several tickets, one parallel worker builds each ready ticket. Each worker opens its own pull request.
 - It starts a ticket only after each blocker is closed, or is pushed as the base of its stack.
 
 ## Limits
@@ -49,9 +49,10 @@ The skill then loads as `/engineering:implement`.
 - It runs only when you type it. Claude never starts it alone.
 - It never merges a pull request. You merge it.
 - It never closes a ticket by hand. The merge closes the ticket.
-- A spec or several tickets need Claude Code Projects. `references/claude-code.md` lists the plans that have it.
+- A spec or several tickets need a harness that runs parallel workers. In Claude Code, this is Projects. `references/claude-code.md` lists the plans that have it.
 
 ## More
 
 - [SKILL.md](SKILL.md) is the method that Claude follows.
+- [references/orchestrate.md](references/orchestrate.md) is the coordinator method for a spec or several tickets.
 - [references/claude-code.md](references/claude-code.md) covers the Projects setup, the thread briefs and `/batch`.
