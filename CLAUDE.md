@@ -91,7 +91,7 @@ Then validate the manifests.
 A shipped skill holds a method that works on any tool. Tool mechanics go in `references/<tool>.md`
 adapters; a team's roles, rules and taste stay in that team's repo, which the skill reads first.
 A skill's template is a proposal for a project that has none, in no tracker's own terms:
-`python3 -I scripts/check_planning_terms.py` bans "Done When" in planning.
+`python3 -I scripts/check_tracker_terms.py` bans "Done When" in every plugin, mod and eval.
 
 A typed skill (`disable-model-invocation: true`) also needs `agents/openai.yaml` with
 `policy.allow_implicit_invocation: false`, or Codex starts it on its own.

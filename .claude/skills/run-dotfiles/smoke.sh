@@ -32,8 +32,8 @@ tests() {
   run python3 -I scripts/test_check_readmes.py
   say "typed skills: agents/openai.yaml keeps them typed in Codex"
   run python3 -I scripts/check_typed_skills.py
-  say "planning terms: no tracker section names such as Done When"
-  run python3 -I scripts/check_planning_terms.py
+  say "tracker terms: no tracker section names such as Done When"
+  run python3 -I scripts/check_tracker_terms.py
   say "trunk: no branch older than a day with commits not on main (AGENTS.md)"
   run python3 -I scripts/check_trunk.py
   say "skill descriptions: valid YAML, at most 500 characters, third person (plugin-dev's rules)"

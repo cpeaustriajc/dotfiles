@@ -16,7 +16,7 @@ clear` ends it.
 - **There is no built-in budget.** Put it in the condition: "or stop after 20 turns", and the
   evaluator judges it from the conversation. Use `--max-budget-usd` for a hard spend cap on a
   headless run.
-- **Compile section 2 into one condition**: the Done when line as pasted check output, the Holds
+- **Compile section 2 into one condition**: the End state line as pasted check output, the Holds
   throughout lines, the Floor, and the Budget clause, in that order. End it with "and the report
   opens with section 8's Attention list", or the goal clears before the audit runs.
 - **It doesn't change permissions.** An unattended run needs auto mode, or the loop stalls on the
