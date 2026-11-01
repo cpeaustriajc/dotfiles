@@ -28,6 +28,7 @@ Paths here are relative to the repo root.
 .claude/skills/run-dotfiles/smoke.sh details   # skills and per-skill token cost, always-on and on-invoke
 .claude/skills/run-dotfiles/smoke.sh doctor    # /skill-doctor with the skill plugins installed
 .claude/skills/run-dotfiles/smoke.sh routing   # claude plugin eval on evals/routing, about $2; RUNS=1 halves it
+.claude/skills/run-dotfiles/smoke.sh behaviour # evals/behaviour, with and without the plugin; CASE=<glob> for one case
 ```
 
 `routing` checks that each request loads its own skill and not its nearest neighbour, with every

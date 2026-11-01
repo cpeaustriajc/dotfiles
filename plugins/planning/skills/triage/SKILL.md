@@ -49,7 +49,10 @@ pick the next item.
    installed) and closed `wontfix` items for the same concept. Show any match.
 4. **Does the claim hold?** A bug: reproduce it from the reporter's steps. A PR: check it out and
    run its checks. Report one of: confirmed (with the code path), not reproduced, or not enough
-   detail. Not enough detail points to `needs-info`.
+   detail. Only a bug confirmed here gets checks and a brief. Not reproduced or not enough detail
+   points to `needs-info` with triage notes. A bug you could not run stays `needs-triage`: say what
+   blocked the run. Failure: checks written for an unproven bug pass on the unchanged code, so the
+   fix proves nothing.
 5. **Agent or person?** Read each check and ask: can an agent prove it inside its
    session? It is `ready-for-human` when an item needs a merge to the main branch first, a
    sign-in, a secret, a real device, a vendor console, a paid account, or a call of taste. Name

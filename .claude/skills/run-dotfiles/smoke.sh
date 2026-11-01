@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Drives the dotfiles marketplace the way a user's Claude Code sees it.
-# Usage (from the repo root): .claude/skills/run-dotfiles/smoke.sh [validate|tests|doctor|details|routing|all]
-# `all` skips routing: it costs about $2 of model calls per run.
+# Usage (from the repo root): .claude/skills/run-dotfiles/smoke.sh [validate|tests|doctor|details|routing|behaviour|all]
+# `all` skips routing and behaviour: they cost model calls. CASE=<glob> runs only matching cases.
 set -uo pipefail
 root="$(cd "$(dirname "$0")/../../.." && pwd)"; cd "$root"
 step="${1:-all}"; failed=0; blocked=0
@@ -73,8 +73,8 @@ details() { say "plugin details"; installed; for p in "${plugins[@]}"; do run en
 
 # The marketplace entry has no plugin.json, so `claude plugin eval .` resolves no plugin. Build a
 # throwaway plugin of symlinks to the shipped skills, named dotfiles, and evaluate that.
-routing() {
-  say "routing evals: each request loads its own skill and no neighbour"
+# $1: the folder under evals/; $2: the --ablation mode.
+suite() {
   local p; p="$(mktemp -d)"; mkdir -p "$p/.claude-plugin" "$p/skills" "$p/evals"
   # A skill with its own cases is copied, not linked: eval finds cases anywhere in the plugin, and
   # the filter below deletes some, which through a link would delete them from the repo.
@@ -84,19 +84,22 @@ routing() {
   done
   [[ -n "$(ls "$p/skills")" ]] || { failed=1; echo "FAILED: no skills linked into the eval plugin"; return; }
   echo '{"name":"dotfiles","version":"0.0.0-eval"}' > "$p/.claude-plugin/plugin.json"
-  cp -r evals/routing/. "$p/evals/"
+  cp -r "evals/$1/." "$p/evals/"
   # Cases with a scaffold_script test behaviour, not routing, and fail without --scaffold.
   grep -rl --include=case.yaml scaffold_script "$p"/evals "$p"/skills 2>/dev/null |
     while read -r c; do rm -rf "$(dirname "$c")"; done
-  (cd "$p" && claude plugin eval . --eval-dir evals --runs "${RUNS:-2}" --ablation none \
-    --trust-plugin --no-publish --max-cost-usd 10 -j 4) || { failed=1; echo "FAILED: routing evals"; }
+  (cd "$p" && claude plugin eval . --eval-dir evals --runs "${RUNS:-2}" --ablation "$2" --case "${CASE:-*}" \
+    --trust-plugin --no-publish --max-cost-usd 10 -j 4) || { failed=1; echo "FAILED: $1 evals"; }
   rm -rf "$p"
 }
 
+routing() { say "routing evals: each request loads its own skill and no neighbour"; suite routing none; }
+behaviour() { say "behaviour evals: each case scored with the plugin and without it"; suite behaviour with-without; }
+
 case "$step" in
-  validate|tests|doctor|details|routing) "$step" ;;
+  validate|tests|doctor|details|routing|behaviour) "$step" ;;
   all) validate; tests; details; doctor ;;
-  *) echo "usage: $0 [validate|tests|doctor|details|routing|all]" >&2; exit 64 ;;
+  *) echo "usage: $0 [validate|tests|doctor|details|routing|behaviour|all]" >&2; exit 64 ;;
 esac
 find plugins -name __pycache__ -prune -exec rm -rf {} +
 (( failed )) && exit 1

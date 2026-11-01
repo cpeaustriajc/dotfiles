@@ -41,6 +41,7 @@ The skill then loads as `/planning:triage`.
 - Claude uses your team's label names when your repo states them.
 - With no item named, Claude lists the issues and outside pull requests that wait on you, oldest first.
 - Claude reproduces a bug, or runs a pull request's checks, before it recommends a state.
+- A bug that Claude cannot reproduce gets questions for the reporter, not checks.
 - Every comment starts with a line that says AI wrote it during triage.
 
 ## Limits
@@ -56,3 +57,4 @@ The skill then loads as `/planning:triage`.
 - [references/agent-brief.md](references/agent-brief.md): the brief and the triage notes.
 - [references/github.md](references/github.md): the `gh` commands.
 - [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.
+- [triage-unproven-bug](../../../../evals/behaviour/triage-unproven-bug/prompt.md): proves an unproven bug gets no checks. Rerun it with `CASE=triage-unproven-bug .claude/skills/run-dotfiles/smoke.sh behaviour`.

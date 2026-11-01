@@ -9,3 +9,4 @@ by these paths. **Tests** and **Check** are the commands that prove it.
 | Mods | [mods.md](mods.md) | `mods/<mod>/**`, `tests/claude-owned/**` |
 | Manifests and READMEs | [manifests.md](manifests.md) | `**/.claude-plugin/**`, `README.md`, `**/README.md`, `scripts/check_readmes.py` |
 | Routing | [routing.md](routing.md) | `evals/routing/**`, any `SKILL.md` frontmatter |
+| Behaviour | [behaviour.md](behaviour.md) | `evals/behaviour/<case>/**` |

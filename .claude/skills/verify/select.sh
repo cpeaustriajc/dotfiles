@@ -19,4 +19,7 @@ for f in $(printf '%s\n' "$files" | grep -E '(^|/)SKILL\.md$'); do
   [[ "$(git show "$base:$f" 2>/dev/null | front)" == "$(front < "$f" 2>/dev/null)" ]] || routing=1
 done
 (( routing )) && printf 'routing\t.claude/skills/run-dotfiles/smoke.sh routing\n'
+for c in $(printf '%s\n' "$files" | sed -n -E 's#^evals/behaviour/([^/]+)/.*#\1#p' | sort -u); do
+  [[ -d "evals/behaviour/$c" ]] && printf 'behaviour %s\tCASE=%s .claude/skills/run-dotfiles/smoke.sh behaviour\n' "$c" "$c"
+done
 exit 0
