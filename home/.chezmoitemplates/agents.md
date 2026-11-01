@@ -2,9 +2,8 @@
 
 ## Terms
 - "Me" and "I" mean the user.
-- Thread: a separate Claude session that builds code.
 - Subagent: a helper agent that only reads, researches or reviews.
-- Harness output: the tool output that I see in the chat, not a file.
+- Chat output: the tool output that I see in the chat, not a file.
 
 ## Precedence
 - A project's test policy overrides the Testing section.
@@ -42,8 +41,8 @@
 
 ## Long commands
 - Run a command that can take longer than a few seconds in the background.
-- Send its output to the harness output, never only to a file. To keep a log too, pipe it
-  through `tee <file>`.
+- Send its output to the chat output, never only to a file. To keep a log too, pipe it through
+  `tee <file>`.
 - Say that a tool prints no progress only after you read its output or its source. Say it once,
   when the command starts.
 
@@ -77,18 +76,11 @@
 - Stop when a pass finds nothing a user would hit. If findings continue, question the design.
 
 ## Delegation
-- The session I talk to plans, writes specs, starts threads and reviews their work. Threads
-  build.
-- A thread shares my checkout unless another thread edits the same repo.
-- Give small fixes for one repo to one thread.
-- Push a thread's branch and open its PR without asking me.
-- Start new work in a fresh thread, not an idle one — an idle thread reads its full history again.
+- Push finished work and open its PR without asking me.
 - Ship the build tickets of one project as one PR stack in blocked-by order, each branch off the
   previous one. Branch other items off main. A restack costs more than the build.
 - Before parallel attempts at one task, tell me how you will pick the winner.
-- Subagents write no code and ask no questions.
-- Put subagents on a cheaper model than yours unless a skill names an exception. Raise effort
-  when one misreads or loops.
+- If you delegate to subagents, they write no code and ask no questions.
 - When a subagent result has no evidence, give it one more try. A second miss is a gap, never a
   pass.
 
@@ -96,11 +88,7 @@
 - Memory and instruction files hold rules, preferences and pointers to sources. Never put a
   decision, finding or status in them — it goes stale unseen.
 - Fix or delete a wrong line. Never add a newer line beside it.
-- Keep a line only if Claude makes a mistake without it.
-- Put knowledge where it loads only when needed: a rule scoped with `paths:` to its files, a
-  procedure in a skill. An `@import` still loads in full.
+- Keep a line only if the agent makes a mistake without it.
+- Put knowledge where it loads only when needed: a rule scoped to its files, a procedure in a
+  skill.
 - When a check can enforce a rule, write the check and keep a pointer to it in the file.
-- Give a custom agent only the instructions its job needs (`omitClaudeMd: true` when it needs
-  none of the project's).
-
-<!-- Sources: https://code.claude.com/docs/en/memory, https://code.claude.com/docs/en/best-practices -->

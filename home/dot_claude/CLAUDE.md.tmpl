@@ -1,0 +1,21 @@
+{{ template "agents.md" . }}
+## Claude Code
+
+### Terms
+- Thread: a separate Claude Code session that builds code.
+
+### Delegation
+- The session I talk to plans, writes specs, starts threads and reviews their work. Threads
+  build.
+- A thread shares my checkout unless another thread edits the same repo.
+- Give small fixes for one repo to one thread.
+- Start new work in a fresh thread, not an idle one — an idle thread reads its full history again.
+- Put subagents on a cheaper model than yours unless a skill names an exception. Raise effort
+  when one misreads or loops.
+
+### Instruction files
+- Scope a rule to its files with `paths:`. An `@import` still loads in full.
+- Give a custom agent only the instructions its job needs (`omitClaudeMd: true` when it needs
+  none of the project's).
+
+<!-- Sources: https://code.claude.com/docs/en/memory, https://code.claude.com/docs/en/best-practices -->
