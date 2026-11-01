@@ -27,15 +27,14 @@ parallel. Diversity comes from what each one sees, never from personas. Tool mec
 `references/claude-code.md`.
 
 - **Full**: the whole bundle, on the session's own model.
-- **Blind**: the diff and the changed files with no description or spec, on a cheaper model
-  than the session's when one exists, so it does not share every blind spot of the Full
-  reviewer. It judges
-  what the code does, not what it was meant to do, so it catches what the description explains
-  away.
+- **Blind**: the harness's built-in code review on the diff target, when the harness has one
+  (the adapter names it). It sees no description or spec. It judges what the code does, not
+  what it was meant to do, so it catches what the description explains away. With no built-in,
+  use a subagent on a cheaper model than the session's, with the diff and the changed files.
 - **Spec**: only when a spec or issue exists. It gets the spec and the diff with no description,
   so it checks the code against what was asked, not what the author says was done.
 
-Every reviewer gets the same prompt:
+Every subagent reviewer gets the same prompt. The built-in review keeps its own:
 
 > Review this change for real defects only: wrong behaviour, regressions, broken edge cases,
 > security holes, data loss, divergence from the spec. No style, naming or "consider adding"
