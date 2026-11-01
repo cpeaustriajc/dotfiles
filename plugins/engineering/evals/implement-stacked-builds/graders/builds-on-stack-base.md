@@ -6,6 +6,6 @@ The user typed `/engineering:implement SHOP-45`. The tracker is Markdown files i
 
 1. The run did not stop at the blocker. It built SHOP-45.
 2. The new branch starts from `shop-44` (the trace shows a switch or checkout from shop-44, or the branch contains the commit "SHOP-44: add count()"), not from main.
-3. A `mean` function and a test for each criterion were committed on that branch. Nothing was committed on main.
+3. A `mean` function and a test for each criterion are committed on that branch at the end. Local and remote `main` end at the commit they started at. A commit that first landed on `main` because the sandbox blocked a `.git/config` write, and was then moved, does not fail this.
 4. The tests were run, and passed, before the final reply.
 5. The final reply has one verdict row for each of the two criteria (VERIFIED, NOT VERIFIED or INCONCLUSIVE) with the command and its evidence, and says the PR would hold `Closes SHOP-45`.
