@@ -89,6 +89,10 @@ Then validate the manifests.
 A shipped skill holds a method that works on any tool. Tool mechanics go in `references/<tool>.md`
 adapters; a team's roles, rules and taste stay in that team's repo, which the skill reads first.
 
+A typed skill (`disable-model-invocation: true`) also needs `agents/openai.yaml` with
+`policy.allow_implicit_invocation: false`, or Codex starts it on its own.
+`python3 -I scripts/check_typed_skills.py` checks it.
+
 A mod never denies or overrides what Claude Code already decides: the permission mode, edits to
 its settings and hooks, the auto-mode classifier. It adds only what the harness lacks.
 `python3 tests/claude-owned/run.py` checks it.
