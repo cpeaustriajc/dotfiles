@@ -63,9 +63,10 @@ handler. These rules always apply:
   hit; if findings continue, question the design.
 
 ## Long commands
-- Run a command that can take longer than a few seconds in the background, with its progress in
-  the harness output, never only in a file. If the tool prints no progress, say so once when it
-  starts.
+- Run a command that can take longer than a few seconds in the background. Its output goes to the
+  harness output, never only to a file. To keep a log too, pipe it through `tee <file>`.
+- Say that a tool prints no progress only after you read its output or its source. Then say it
+  once, when the command starts.
 
 ## Delegation
 - The session I talk to plans, writes specs, starts threads and reviews their work. A thread
