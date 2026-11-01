@@ -4,7 +4,7 @@ description: >
   This skill should be used when the user types "/implement" with a ticket or a spec. It builds
   one ready ticket without supervision: it gets the ticket from the tracker, trusts its answers,
   builds it with the feature playbook, reviews after the commit and opens a PR that closes it.
-  With a spec or several tickets, it starts one Claude Code Projects thread per ready ticket.
+  With a spec or several tickets, it starts one parallel worker per ready ticket.
 disable-model-invocation: true
 argument-hint: "<ticket | spec>"
 ---
@@ -19,7 +19,7 @@ proof that the user checks later, never with a question.
 A criterion is one line of the ticket that says when the work is done. Use the project's own
 name for it in everything you write.
 
-Tool mechanics: `references/claude-code.md`.
+Tool mechanics: `references/<tool>.md` (Claude Code: `references/claude-code.md`).
 
 ## 0. Pick the mode
 
@@ -106,23 +106,5 @@ Report the PR link and the same three lists.
 
 ## Orchestrate
 
-This session coordinates. Each ticket gets its own Claude Code Projects thread, which runs steps
-1 to 7 and opens its own PR (`references/claude-code.md`). This session never builds a ticket.
-
-1. **Frame.** Read the spec and its items. Build the graph from the blocked-by links.
-2. **Frontier.** The frontier is every `ready-for-agent` item that passes the gate in step 3.
-   List each item that is not ready as a gate.
-3. **Start.** Start one thread per frontier item. The brief's first line is `/implement <item
-   link>`.
-4. **Check.** A thread's report is a claim. Read its PR's verdict table. Rerun one check on its
-   branch.
-5. **Advance.** When a PR merges or a stack base is pushed, recompute the frontier and start its
-   new items. The brief names the item's stack base. Never start an item whose blocker has no
-   pushed branch: it builds on code that is not there yet.
-6. **Gates.** Collect each `needs-info` item. Bring them to the user in one batch, not one at a
-   time.
-7. **Report.** Give each item with its PR and verdict, the open gates, and each abandoned item
-   with the reason.
-
-A thread that stops with no PR: read its branch, not its report. Start one fresh thread with the
-remaining work. If that one fails too, abandon the item and add a gate.
+In Orchestrate mode, read `references/orchestrate.md` first and follow it. This session
+coordinates. A worker from the harness builds each ticket.
