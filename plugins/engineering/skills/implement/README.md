@@ -42,7 +42,7 @@ The skill then loads as `/engineering:implement`.
 - A costly question stops the run. Claude moves the ticket to `needs-info` and adds a note.
 - Reviewers that did not write the code check the commits.
 - For a spec or several tickets, one Claude Code Projects thread builds each ready ticket. Each thread opens its own pull request.
-- It starts a ticket only after all its blockers close.
+- It starts a ticket only after each blocker is closed, or is pushed as the base of its stack.
 
 ## Limits
 

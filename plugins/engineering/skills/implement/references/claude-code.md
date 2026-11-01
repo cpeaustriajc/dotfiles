@@ -13,7 +13,8 @@ CLI.
 2. Put the base branch and these rules in the project instructions. Every thread starts from them.
 3. Set the thread cap to 3. More threads use up the plan limits faster than you can check the PRs.
 4. Run `/implement <spec>` in the project conversation.
-5. Each thread is a cloud session with its own branch from the default branch.
+5. Each thread is a cloud session with its own branch from the default branch. For a stacked
+   item, the brief names its base. The thread resets onto that base and opens its PR against it.
 6. Each thread opens its own PR. Auto-fix then handles CI failures, review comments and conflicts.
 
 ## Thread briefs
