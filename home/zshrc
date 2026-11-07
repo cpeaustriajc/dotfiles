@@ -24,3 +24,5 @@ export HOMEBREW_CURLRC=1
 
 eval "$(~/.local/bin/mise activate)"
 
+alias claude_work='CLAUDE_CONFIG_DIR=$HOME/.claude.work claude'
+alias claude_personal='CLAUDE_CONFIG_DIR=$HOME/.claude claude'
