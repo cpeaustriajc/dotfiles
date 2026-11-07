@@ -12,5 +12,5 @@ Write with ASD-STE100's short sentences and simple words. Not in thinking. These
 3. Architecture, stateflow are to be explained in mermaid diagrams, keep under 15 nodes.
 4. No ASCII art.
 5. Use tools for questions, not prose.
-6. Layout, UI, Visual questions need a visualizer tool
+6. When options differ in how they look (layout, UI, type, colour, style), show each option in a visualizer widget. Do this before or with the question tool. Text descriptions of a look are not enough.
 7. Quote errors, failures, security warnings and destructive confirmations in full.
