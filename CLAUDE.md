@@ -106,12 +106,13 @@ its settings and hooks, the auto-mode classifier. It adds only what the harness 
 This repo is the only source. Never hand-copy a skill into `~/.claude/skills` or a project's
 `.agents/skills`: a copy drifts, and a skill installed both ways is listed twice in every session.
 
-## Claude config is shared through chezmoi
+## Claude config is shared through home-manager
 
-`home/` is the chezmoi source (`.chezmoiroot`); `home/dot_claude/` is the `~/.claude` config.
-Never share machine state (`projects/`, memory, transcripts, `.claude.json`).
+`flake.nix` and `home/home.nix` are a home-manager config; `home/claude/` is the `~/.claude`
+config. Never share machine state (`projects/`, memory, transcripts, `.claude.json`).
 
-- Edit here, then `chezmoi diff` and `chezmoi apply`.
-- `settings.json` syncs only the keys in `home/dot_claude/.settings.json`; every other key stays
-  on the machine. To keep a live edit of a synced key, run `home/dot_claude/.settings-capture.sh`.
+- Most live files link into this checkout, so a live edit lands here. A generated file
+  (`CLAUDE.md`, `AGENTS.md`) changes only after `home-manager switch --flake ~/Projects/dotfiles#cj`.
+- `settings.json` syncs only the keys in `home/claude/settings.shared.json`; every other key stays
+  on the machine. To keep a live edit of a synced key, run `home/claude/settings-capture.sh`.
 - This repo is public: no sensitive information.

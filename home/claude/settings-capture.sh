@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Copies the live ~/.claude/settings.json values of the synced keys into
-# ~/Projects/dotfiles/home/dot_claude/.settings.json. The synced keys are the keys of that file:
+# ~/Projects/dotfiles/home/claude/settings.shared.json. The synced keys are the keys of that file:
 # to sync a new key, add it there by hand first. Every other live key stays on this machine.
 # Under "permissions" only the sub-keys in that file are captured, so allow and deny stay here.
 set -euo pipefail
 
-public=~/Projects/dotfiles/home/dot_claude/.settings.json
+public=~/Projects/dotfiles/home/claude/settings.shared.json
 tmp="$(mktemp)"
 trap 'rm -f "$tmp"' EXIT
 
@@ -16,4 +16,4 @@ jq --slurpfile l ~/.claude/settings.json \
   "$public" > "$tmp"
 
 cp "$tmp" "$public"
-git -C "$(dirname "$public")" --no-pager diff --stat -- .settings.json
+git -C "$(dirname "$public")" --no-pager diff --stat -- settings.shared.json

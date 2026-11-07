@@ -1,4 +1,3 @@
-{{ template "agents.md" . }}
 ## Claude Code
 
 ### Terms
