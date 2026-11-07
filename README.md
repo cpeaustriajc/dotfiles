@@ -1,6 +1,10 @@
 # dotfiles
 
-CJ's skills and mods for coding agents.
+CJ's home folder and CJ's skills and mods for coding agents. The repo holds two parts:
+
+- A [home-manager](https://nix-community.github.io/home-manager/) config: [`flake.nix`](flake.nix)
+  and [`home/`](home/README.md) put the Claude Code, Codex, zsh, nvim and tmux config in `~`.
+- A Claude Code plugin marketplace: the skills in `plugins/` and the mods in `mods/`.
 
 Each skill must do its job in these harnesses:
 
@@ -11,8 +15,9 @@ Assume that all harnesses converge into a single chat interface. Each skill must
 through that chat only. Mods are hooks for Claude Code only. For the full criteria, read
 [Success in SCOPE.md](SCOPE.md#success).
 
-- [Install](#install)
-- [Skills](#skills): skills shipped in six plugins: Design, Engineering, Planning, Knowledge, Writing and Principles
+- [Home](home/README.md): set up a new machine, change a home file, sync `settings.json`
+- [Install](#install): add the marketplace and its plugins
+- [Skills](#skills): skills shipped in seven plugins: Design, Engineering, Planning, Knowledge, Writing, Visual and Principles
 - [Mods](#mods): hooks that change how a session behaves, one plugin each
 - [Models](models/README.md): which model does what, and why cross-vendor review stays
 - [Scope](SCOPE.md): what dotfiles is, its success criteria, and the ideas it rejects with the reason for each
