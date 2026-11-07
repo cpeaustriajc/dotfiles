@@ -1,6 +1,6 @@
 ---
-name: Procedural
-description: Procedural ASD-STE100 output, no made-up terms, statechart pictures, questions through tools
+name: Lucid
+description: Lucid ASD-STE100 output, no made-up terms, statechart pictures, questions through tools
 keep-coding-instructions: true
 force-for-plugin: false
 ---

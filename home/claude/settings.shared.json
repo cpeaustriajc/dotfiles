@@ -41,5 +41,5 @@
   "permissions": {
     "blockWritesOutsideWorkingDirectories": true
   },
-  "outputStyle": "Procedural"
+  "outputStyle": "Lucid"
 }
