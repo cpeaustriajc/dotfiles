@@ -152,7 +152,7 @@
       "name": "linear-gate",
       "displayName": "Linear Gate",
       "description": "Stop Linear writes off shift — on shift, your permission mode decides; a delete or cancel asks you first.",
-      "version": "0.2.3",
+      "version": "0.3.0",
       "author": {
         "name": "John Carlo Austria"
       },

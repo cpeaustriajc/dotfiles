@@ -1,6 +1,5 @@
 {
   "name": "linear-gate",
-  "types": "./types/index.d.ts",
   "userConfig": {
     "shiftStart": {
       "type": "string",

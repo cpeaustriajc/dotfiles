@@ -6,7 +6,7 @@ A mod (a plugin that adds a hook to Claude Code) that blocks Linear writes outsi
 
 A Linear write is visible to your whole team, and Linear can post it to Slack. After your shift, one write can notify your team at night.
 
-On shift, a dialog for every write costs you many clicks. Auto mode can decide most writes. linear-gate keeps a dialog only for writes that remove or cancel work, and shows a plain description with a diff.
+On shift, a dialog for every write costs you many clicks. Auto mode can decide most writes. linear-gate asks you only before writes that remove or cancel work, in Claude Code's own permission dialog.
 
 ## Install
 
@@ -29,7 +29,7 @@ Claude reads:
 linear-gate: off shift (09:00-18:00); a Linear write notifies the team's Slack. Do not retry: draft it in the chat for the next shift.
 ```
 
-At 10:00, the same call goes to your permission mode. A call that moves ACME-77 to Canceled opens the dialog "Cancel issue ACME-77 — apply this change?". You pick "Cancel issue ACME-77" or "Leave it", or you type a note.
+At 10:00, the same call goes to your permission mode. A call that moves ACME-77 to Canceled opens the permission dialog with the reason "linear-gate: Cancel issue ACME-77. Everyone on the team sees this." You allow or deny it. Auto mode cannot allow it for you.
 
 ## What it does
 
@@ -37,16 +37,15 @@ At 10:00, the same call goes to your permission mode. A call that moves ACME-77 
 |---|---|
 | Claude or a subagent calls a Linear write tool off shift | Deny it, also in a headless session. |
 | Claude calls a Linear write tool on shift | Leave it to your permission mode. |
-| Claude calls a delete, retire or cancel on shift | Ask you in a dialog. |
+| Claude calls a delete, retire or cancel on shift | Ask you in the permission dialog. |
 | Claude calls a Linear read tool | Let it pass. |
-| You allow the write | Run it, then show a toast with the result. |
-| You pick "Leave it" or type a note | Deny the call. Claude reads the reason. |
-| You close the dialog | Deny the call. |
-| No surface (an interface) is attached to the session on shift | Ask nothing. The host decides. |
+| Auto mode would allow the asked write | Ask you anyway. Only you, the host's callback or a `PermissionRequest` hook can allow it. |
+| A host program answers the session's permission asks | The host decides. |
+| Nobody can be asked, as in a plain `claude -p` run | Deny the call. Claude reads the reason. |
 
-The dialog names the action, such as "Create issue" or "Merge PR". It lists the changed fields. For a document edit, it shows removed text in red and added text in green.
+The reason names the action, such as "Create issue" or "Merge PR", and the issue, PR or document. For a document edit, it names the document by its title.
 
-A delete, a retire or a cancel adds the warning "⚠ Everyone on the team sees this."
+A delete, a retire or a cancel adds "Everyone on the team sees this."
 
 The mod treats a tool as a write if its name is in the list in `hooks/register.tsx`. A tool on the `linear-server` server is also a write if its name starts with a write verb such as `save_`, `delete_` or `update_`.
 
@@ -67,16 +66,13 @@ To turn the mod off, run `claude plugin disable linear-gate@dotfiles`.
 
 - A write tool from another server passes if its name is not in the list.
 - A write tool with a new name on `linear-server` is gated only if it starts with a write verb.
-- A long text or a long list of edits is cut in the dialog, with a count of what is hidden.
-- If the document title lookup fails, the dialog shows the document id.
-- The toast shows a failure only if the tool reports one.
+- The dialog shows one line. It does not show the fields, the text or a diff of the change.
+- If the document title lookup fails, the reason shows the short document id.
 
 ## More
 
 - [hooks/register.tsx](hooks/register.tsx): the hook source.
-- [hooks/register.test.ts](hooks/register.test.ts): the tests for the questions and the decisions.
-- [hooks/dialog.test.ts](hooks/dialog.test.ts): the tests for the dialog colors.
-- [hooks/headless.test.ts](hooks/headless.test.ts): the tests for sessions with no surface.
+- [hooks/register.test.ts](hooks/register.test.ts): the tests for the asks and their reasons.
 - [hooks/shift.test.ts](hooks/shift.test.ts): the tests for the shift hours and the `onShift` option.
 - [marketplace.json](../../.claude-plugin/marketplace.json): the manifest, in this mod's entry.
 - [.claude-plugin/plugin.json](.claude-plugin/plugin.json): the options and their defaults (`userConfig`).
