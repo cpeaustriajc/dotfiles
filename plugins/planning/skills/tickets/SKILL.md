@@ -30,25 +30,30 @@ moves and thrown away when direction changes.
 - **Vertical, not layered.** Each item cuts a narrow but complete path through every layer the
   feature touches, and is demoable or verifiable on its own. A schema-only or API-only item is a
   layer, not a slice.
-- **Sized for one session.** One fresh agent session or one person's day finishes it. Split one
-  that needs more than five test cases, has more than five checks, or touches several
-  unrelated parts of the code.
+- **Sized for one session of its builder.** Name the builder: the cheapest model the project's
+  model picks give that kind of work, not the model that cuts the slice. One fresh session of it
+  finishes the item inside the context budget: the project's, or ask; until answered, 200k. Before
+  you show the slice, estimate each item: fixed session cost + reading + build + proof. With no
+  measure, count 85k fixed and about 10k for each image with its turns, in every round. Split each
+  item whose upper estimate is over the budget, and split a visual item with a review loop
+  smaller. More than five checks or test cases, or unrelated parts of the code, are quick signs to
+  split, not the test. `references/sizing.md` has the costs. Failure: six items passed those signs
+  and each needed 140k–400k.
 - **Prefactor first.** A change that makes the slice easy goes in its own item, before it.
 - **Order by what blocks.** Give each item the items that must finish before it starts; an item
   with none can start now. The riskiest unknown goes first.
-- **Stack an Implementation slice.** When the slice sits under a project-sized container, is in
-  the Implementation phase, and has two or more items that ship code, it is one stacked-PR chain:
-  read `references/stacking.md` before you list the slice. A lone work item with no project, a
-  small fix, Demo prototypes, Launch items and Post Launch bugs branch off the trunk.
+- **Stack an Implementation slice.** Two or more items that ship code, under a project in the
+  Implementation phase, form one stacked-PR chain: read `references/stacking.md` before you list
+  the slice. Other items branch off the trunk.
 - **A wide mechanical change** (a rename whose call sites span the codebase) is the one exception
   to vertical slicing: see `references/item-kinds.md`.
 
 Show me the slice as a list before writing anything: each item's title, the requirements it
-cites, what I would see when it is done, what blocks it, and for a stack its position and the
-branch it builds on, bottom first. Ask whether the granularity and the
-blocking are right, and iterate until I approve. That is the only question at this level. Any
-other question means the spec is unclear, so it goes up to `shape` as a spec change rather than
-being settled inside a ticket, where nobody would find it again.
+cites, what I would see when it is done, what blocks it, its builder, its context estimate and
+what drives it, and for a stack its position and the branch it builds on, bottom first. Ask
+whether the granularity and the blocking are right, and iterate until I approve. That is the only
+question at this level. Any other question means the spec is unclear, so it goes up to `shape` as
+a spec change rather than being settled inside a ticket, where nobody would find it again.
 
 ## 3. Write each item
 
@@ -73,6 +78,10 @@ With none, propose this one once and use it. The rules below hold under any sect
 ## Out of Scope
 
 - <Only the boundaries that prevent a likely misunderstanding. Omit the section if none.>
+
+## Budget
+
+Estimate: <low–high>k of <budget>k, driven by <the largest part>. Proof: <pages, widths, crops>, at most <n> fix rounds. Stop: past <limit>k, commit what passes, write a hand-over note on this item, and stop.
 ```
 
 - **Context:** 2–4 sentences plus links. Probe data and architecture go in the pull request or
@@ -106,14 +115,20 @@ With none, propose this one once and use it. The rules below hold under any sect
   on more than one page, one check names those pages and says each shows the same value for the
   same input: "the same name shows the same price on the shortlist, in the cart and at checkout".
 - **Out of Scope:** 0–3 bullets.
+- **Budget:** the estimate, a fixed proof budget and a stop rule. Proof with no limit has no upper
+  estimate.
+- **No unbounded reads.** The item states the measured facts it needs (sizes, colours, copy). It
+  links a large reference only as a narrow crop or excerpt, never a whole large file or an
+  image-heavy source.
 - **Stack:** an item in a stack ends with a `## Stack` section that names its branch and its base;
   `references/stacking.md` has its form. Omit it on an item that branches off the trunk.
-- **Whole body:** under about 1,500 characters. Longer means split it. Quoted requirement lines do
-  not count; the tree check subtracts them, computed from the cited requirements.
+- **Whole body:** under about 1,500 characters, a quick sign only; the estimate decides the size.
+  Longer means split it. Quoted requirement lines do not count; the tree check subtracts them.
 - **No file paths or code**: they go stale. A prototype's snippet that pins a decision may be
   inlined, marked as from a prototype.
 - **An item is self-contained**: someone who never saw the conversation can pick it up from the
-  item and the spec it links.
+  item and the spec it links. It settles every design call, so a cheaper builder does not make one
+  and the result loses no quality.
 - **No "As a … I want … so that" line** unless the product owner asks for it. That sentence is
   where mechanism and timing tend to sneak in.
 
