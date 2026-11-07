@@ -28,7 +28,6 @@ in
     ".claude/statusline-command.sh".source = link "claude/statusline-command.sh";
     ".claude/agents".source = link "claude/agents";
     ".claude/output-styles".source = link "claude/output-styles";
-    ".claude/skills/workflow-models".source = link "claude/skills/workflow-models";
     # One link per hook: the live hooks folder also holds machine-only hooks.
     ".claude/hooks/deny-1m-subagent.sh".source = link "claude/hooks/deny-1m-subagent.sh";
     ".claude/hooks/deny-linear-engineering-text.sh".source = link "claude/hooks/deny-linear-engineering-text.sh";

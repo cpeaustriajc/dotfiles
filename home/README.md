@@ -41,7 +41,7 @@ home-manager switch --flake ~/Projects/dotfiles#cj
 ```
 
 The linked files are `~/.zshrc`, the nvim and tmux config, and these files in `~/.claude/`:
-`statusline-command.sh`, the hooks, `agents/`, `output-styles/` and `skills/workflow-models/`.
+`statusline-command.sh`, the hooks, `agents/` and `output-styles/`.
 `CLAUDE.md` is `agents.md` followed by `claude/claude-code.md`. `AGENTS.md` is `agents.md` alone.
 
 To look up an option in `home.nix`, search the
