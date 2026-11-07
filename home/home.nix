@@ -13,7 +13,19 @@ in
   programs.home-manager.enable = true;
 
   # The Claude Code hooks need jq.
-  home.packages = [ pkgs.jq ];
+  home.packages = [
+    pkgs.jq
+    (if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostty)
+    pkgs.starship
+    pkgs.git
+    pkgs.gh
+    pkgs.mise
+    pkgs.colima
+    pkgs.docker-client
+    pkgs.neovim
+    pkgs.tmux
+    pkgs.lazygit
+  ];
 
   # Writes ~/.config/nix/nix.conf, so later runs need no --extra-experimental-features.
   nix.package = pkgs.nix;
@@ -40,6 +52,18 @@ in
     ".config/nvim/init.lua".source = link "config/nvim/init.lua";
     ".config/nvim/lua".source = link "config/nvim/lua";
     ".config/tmux".source = link "config/tmux";
+
+    ".config/ghostty/config".source = link "config/ghostty/config";
+    ".config/starship.toml".source = link "config/starship.toml";
+    # Zed itself is installed outside Nix. Zed writes settings.json from its UI. It writes to the link target, so the link stays.
+    ".config/zed/settings.json".source = link "config/zed/settings.json";
+    ".config/zed/keymap.json".source = link "config/zed/keymap.json";
+    # [user] and machine paths go in ~/.config/git/local, which is not in the repo.
+    ".gitconfig".source = link "config/git/gitconfig";
+    ".config/git/ignore".source = link "config/git/ignore";
+    # hosts.yml holds the gh token and stays on the machine.
+    ".config/gh/config.yml".source = link "config/gh/config.yml";
+    ".config/mise/config.toml".source = link "config/mise/config.toml";
   };
 
   # Claude Code rewrites ~/.claude/settings.json itself, so it is not a link. Only the keys of

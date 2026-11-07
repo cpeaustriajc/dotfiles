@@ -1,6 +1,7 @@
 # home
 
-This folder holds the author's home folder config for Claude Code, Codex, zsh, nvim and tmux.
+This folder holds the author's home folder config for Claude Code, Codex, zsh and the apps that
+have text config files: nvim, tmux, Ghostty, Starship, Zed, git, gh and mise.
 [home-manager](https://nix-community.github.io/home-manager/) puts the files in `~`.
 [`home.nix`](home.nix) lists each file, and [`flake.nix`](../flake.nix) pins the versions of
 nixpkgs and home-manager.
@@ -22,6 +23,11 @@ git clone https://github.com/cpeaustriajc/dotfiles ~/Projects/dotfiles
 NIX_CONFIG='extra-experimental-features = nix-command flakes' nix run home-manager/release-26.05 -- switch --flake ~/Projects/dotfiles#cj -b hm-backup
 ```
 
+Then set the `EMAIL` environment variable to your git email, in the system environment or in a
+shell file that is not in this repo. The linked `~/.gitconfig` has no email, because the repo is
+public. Without `EMAIL`, git makes an address from your user and host names and prints a warning. Put other machine-only git settings, for example `[safe] directory`,
+in `~/.config/git/local`. The linked config includes this file if it exists.
+
 `NIX_CONFIG` turns on flakes for this one run. The `-b hm-backup` flag moves each existing file
 in the way to `<name>.hm-backup`, so you lose no live file. The first switch also writes
 `~/.config/nix/nix.conf` with flakes on and installs the `home-manager` command.
@@ -40,8 +46,12 @@ The way to change a file depends on how home-manager puts it in `~`.
 home-manager switch --flake ~/Projects/dotfiles#cj
 ```
 
-The linked files are `~/.zshrc`, the nvim and tmux config, and these files in `~/.claude/`:
-`statusline-command.sh`, the hooks, `agents/` and `output-styles/`.
+The linked files are `~/.zshrc`, `~/.gitconfig`, the config of each app in `config/`, and these
+files in `~/.claude/`: `statusline-command.sh`, the hooks, `agents/` and `output-styles/`.
+Zed, gh, git and mise write their config through the link, so a change from the app lands here.
+On macOS, Ghostty also loads `~/Library/Application Support/com.mitchellh.ghostty/config` after
+the linked file, and its values win. Keep that file absent, and put each setting in
+`config/ghostty/config`.
 `CLAUDE.md` is `agents.md` followed by `claude/claude-code.md`. `AGENTS.md` is `agents.md` alone.
 
 To look up an option in `home.nix`, search the
@@ -74,6 +84,12 @@ tmux reads the system appearance when it loads the config. To apply a new appear
 - Machine-only files next to the links: `~/.config/nvim/nvim-pack-lock.json` and each hook in
   `~/.claude/hooks/` that `home.nix` does not list.
 - The playwright-cli skill. To install it, run `playwright-cli install --skills -g`.
-- Programs. Homebrew and mise install nvim, tmux and the other tools. Nix installs only `jq`,
-  which the hooks need.
+- Programs: `home.nix` installs each app above except Zed, plus `jq` for the hooks, colima, the Docker CLI
+  and lazygit. Homebrew can stay installed next to them; the first `PATH` entry wins.
+- Secrets and machine files: the `EMAIL` value, `~/.config/git/local`, `~/.config/gh/hosts.yml`, `~/.ssh/config`,
+  `~/.docker/config.json`, `~/.config/op/`.
+- Zed itself, opencode and its config, and VS Code.
+- `~/.colima/default/colima.yaml`. Colima writes this file again at each `colima start`
+  (`--save-config` is on by default), so it is not a link.
+- Zed's `settings_backup.json` and lazygit's empty `config.yml`.
 - Machine state: transcripts, history, caches and backups.

@@ -1,0 +1,12 @@
+# The email comes from the EMAIL environment variable, so it is not in this public repo.
+# EMAIL has the lowest priority, so a repo's own user.email still wins.
+[user]
+	name = cpeaustriajc
+# Optional machine-only settings, for example [safe] directory. The file is not in the repo.
+[include]
+	path = ~/.config/git/local
+[http]
+	version = HTTP/1.1
+	postBuffer = 524288000
+[core]
+	compression = 9

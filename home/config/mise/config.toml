@@ -1,0 +1,4 @@
+[tools]
+node = "26"
+php = "latest"
+pnpm = "11"

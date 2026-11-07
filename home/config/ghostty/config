@@ -1,0 +1,5 @@
+font-family = "Monaspace Krypton NF"
+font-family = "Monaspace Neon NF"
+font-size = 16
+theme = dark:Apple System Colors,light:Apple System Colors Light
+shell-integration-features = ssh-terminfo
