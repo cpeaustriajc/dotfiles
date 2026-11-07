@@ -31,7 +31,7 @@
       "name": "engineering",
       "displayName": "Engineering",
       "description": "Prove the work in the real app — playbooks, design-first builds, unattended loops, bug hunts, code history, review and PRs.",
-      "version": "1.2.3",
+      "version": "1.2.4",
       "author": {
         "name": "John Carlo Austria"
       },
@@ -157,17 +157,6 @@
         "name": "John Carlo Austria"
       },
       "source": "./mods/linear-gate",
-      "category": "productivity"
-    },
-    {
-      "name": "session-modes",
-      "displayName": "Session Modes",
-      "description": "Keep a session in one working mode — /mode readonly, research, prototype or build blocks calls past it.",
-      "version": "0.14.5",
-      "author": {
-        "name": "John Carlo Austria"
-      },
-      "source": "./mods/session-modes",
       "category": "productivity"
     },
     {

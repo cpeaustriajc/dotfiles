@@ -39,7 +39,7 @@ This guide removes the old names and installs the new plugins. It also fixes the
 | `bash-trim@cj-stack` | Nothing. The `bashOutputMaxChars` setting caps Bash output. |
 | `secret-guard@cj-stack` | Nothing. The marketplace has no replacement. |
 
-The mods `linear-gate`, `session-modes`, `hone-nudge`, `memory-lint`, `work-folder` and
+The mods `linear-gate`, `hone-nudge`, `memory-lint`, `work-folder` and
 `test-guard` keep their names. Do not change them.
 
 ## Remove the old names

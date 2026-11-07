@@ -278,26 +278,6 @@ if [ -n "$branch" ]; then
   add 1 1 2 "$label"
 fi
 
-# --- Mod state: the session-modes mode, published by the mod as a file ---
-mod_mode=
-mod_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/mod-state"
-case "$session_id" in ""|*[!A-Za-z0-9._-]*) ;; *)
-  mod_m=
-  [ -f "$mod_dir/$session_id.session-modes.json" ] && IFS= read -r -d '' mod_m < "$mod_dir/$session_id.session-modes.json"
-  if [ -n "$mod_m" ]; then
-    mod_mode=$(jq -rn --arg m "$mod_m" '
-      ($m | try fromjson catch {}) as $a
-      | if ($a.mode | IN("audit","no-pr","chat")) then $a.mode else empty end
-    ' 2>/dev/null)
-  fi
-  ;;
-esac
-case "$mod_mode" in
-  audit) add 1 1 3 "${bold}${yellow}audit mode${reset}" ;;
-  no-pr) add 1 1 3 "${bold}${yellow}no-PR mode${reset}" ;;
-  chat)  add 1 1 3 "${bold}${yellow}chat mode${reset}" ;;
-esac
-
 # --- PR for this branch: cached gh result, refreshed off the render path ---
 pr_ci=
 if [ -n "$toplevel" ] && [ -n "$branch" ] && [ -z "$detached" ] && command -v gh >/dev/null 2>&1; then

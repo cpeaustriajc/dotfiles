@@ -43,7 +43,7 @@ exit.
 One mod or script at a time:
 
 ```bash
-claude plugin test mods/session-modes
+claude plugin test mods/linear-gate
 python3 -I plugins/planning/skills/shape/scripts/test_check_tree.py
 bash plugins/knowledge/skills/hone/scripts/test_corrections.sh
 ```
