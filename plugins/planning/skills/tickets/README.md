@@ -17,7 +17,7 @@ Do not use it to write the spec or the milestones: use `shape`. Do not use it to
 You say: "Cut the next slice from the checkout spec. R4 through R7 have no ticket yet."
 
 1. Claude opens the spec and lists which requirements existing items already cite.
-2. Claude shows the slice as a list: title, requirements, what you see and what blocks it.
+2. Claude shows the slice: title, requirements, what you see, blockers, builder and context estimate.
 3. You approve the slice or change its size or order.
 4. Claude writes the items, blockers first, and runs the tree check.
 
@@ -45,7 +45,12 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 - Each item's checks quote the requirement with its number and has a "You see" line that says what the verifier observes.
 - Each check names the account, data or switch that reaches its state.
 - Each check names who proves it: a one-command test, a person's eye, or the engineer.
-- An item has 3 to 5 checks and a body under about 1,500 characters. A longer item is split.
+- Claude names the builder model for each item, from your model picks, and settles every design call so a cheaper builder loses no quality.
+- Claude estimates the context each item uses in a fresh builder session: fixed session cost, reading, building and proof, with every image counted.
+- Claude splits an item whose upper estimate is over the context budget. The budget is the project's, or Claude asks; the default is 200k tokens.
+- Three to five checks and a body under about 1,500 characters are quick signs only. A short item with a screenshot review loop can still be too big.
+- Each item names its proof budget and a stop rule: past a limit, the agent commits what passes, writes a hand-over note and stops.
+- Items state the measured facts they need, and link a large reference only as a crop or an excerpt.
 - Claude labels each item Task, Bug or Chore. A Chore adds a No-QA check and cites no requirement.
 - A bug found after Done becomes a new item, related to the original.
 - Claude writes through your tracker's adapter in `shape/references/`, then runs the tree check. Add `--launch` when the project enters Launch.
@@ -62,6 +67,7 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/item-kinds.md](references/item-kinds.md): work types, the Chore's No-QA check, bugs and wide mechanical changes.
+- [references/sizing.md](references/sizing.md): how Claude estimates context per item, and the measured run behind the numbers.
 - [references/stacking.md](references/stacking.md): commands for plain git, gh stack, Graphite and git-town.
 - [../shape/references/top-down.md](../shape/references/top-down.md): the five rules and the tracker lookup.
 - [../shape/references/tree-outline.md](../shape/references/tree-outline.md): the tree JSON that the check reads.

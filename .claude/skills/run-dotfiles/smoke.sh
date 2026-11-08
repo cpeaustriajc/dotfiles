@@ -72,16 +72,14 @@ doctor() {
 details() { say "plugin details"; installed; for p in "${plugins[@]}"; do run env CLAUDE_CONFIG_DIR="$cfg" claude plugin details "$p@dotfiles"; done; }
 
 # The marketplace entry has no plugin.json, so `claude plugin eval .` resolves no plugin. Build a
-# throwaway plugin of symlinks to the shipped skills, named dotfiles, and evaluate that.
+# throwaway plugin of copies of the shipped skills, named dotfiles, and evaluate that.
 # $1: the folder under evals/; $2: the --ablation mode.
 suite() {
   local p; p="$(mktemp -d)"; mkdir -p "$p/.claude-plugin" "$p/skills" "$p/evals"
-  # A skill with its own cases is copied, not linked: eval finds cases anywhere in the plugin, and
-  # the filter below deletes some, which through a link would delete them from the repo.
-  for d in "$root"/plugins/*/skills/*/; do
-    if [[ -n "$(find "$d" -name case.yaml -print -quit)" ]]; then cp -R "${d%/}" "$p/skills/$(basename "$d")"
-    else ln -s "${d%/}" "$p/skills/$(basename "$d")"; fi
-  done
+  # Copy, never link. Through a link, the eval run is denied Read on a skill's references/ (the
+  # path resolves outside the plugin), so a score measures SKILL.md alone. The filter below also
+  # deletes some cases, which through a link would delete them from the repo.
+  for d in "$root"/plugins/*/skills/*/; do cp -R "${d%/}" "$p/skills/$(basename "$d")"; done
   [[ -n "$(ls "$p/skills")" ]] || { failed=1; echo "FAILED: no skills linked into the eval plugin"; return; }
   echo '{"name":"dotfiles","version":"0.0.0-eval"}' > "$p/.claude-plugin/plugin.json"
   cp -r "evals/$1/." "$p/evals/"

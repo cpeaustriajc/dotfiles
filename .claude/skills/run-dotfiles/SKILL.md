@@ -64,7 +64,8 @@ bash plugins/knowledge/skills/hone/scripts/test_corrections.sh
   config after installing the plugin there.
 - **`claude plugin eval .` resolves no plugin** ("none resolved — cases run against baseline"):
   the repo root has no `plugin.json`, and no plugin folder has one: `marketplace.json` is the only
-  manifest. The driver builds a throwaway plugin of symlinks instead.
+  manifest. The driver builds a throwaway plugin of copies instead. A symlinked skill fails: the
+  eval run is denied Read on its `references/`, so the score measures `SKILL.md` alone.
   The routing cases cap `max_turns` at 3, so "Reached maximum number of turns" in the notes is
   expected; the Skill call comes on turn 1.
 - **`claude plugin validate plugins/<plugin>/skills/<skill>` always fails** with "No manifest found": a

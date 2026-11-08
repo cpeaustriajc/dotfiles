@@ -35,14 +35,16 @@ linear stack and records the parent only as the PR base.
   item branches off the trunk; each later item branches off the item directly below it. One stack
   per slice: the next slice starts a new stack on the trunk once this one lands. Never plan them
   as parallel branches off the trunk: restacking them later rebases every PR, voids each PR's
-  verify verdict, and costs more than the build. Everything else branches off the trunk: a lone
+  verify verdict, and costs more than the build. A fresh thread builds each item, so each item
+  fits the context budget alone, as `SKILL.md` sizes it: no item counts on context from the one
+  below. Everything else branches off the trunk: a lone
   work item with no project, a small fix, Demo prototypes, Launch items and Post Launch bugs.
   Name each branch from the item's id and title, or take the name the tracker suggests.
   `references/stacking.md` has the commands for each stack tool.
 
 ## The Stack section of an item in a stack
 
-It goes last in the item body, after Out of Scope:
+It goes last in the item body, after Budget:
 
 ```markdown
 ## Stack
