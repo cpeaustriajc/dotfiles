@@ -1,7 +1,6 @@
 ---
 paths:
   - "plugins/**"
-  - "evals/**"
   - "mods/**"
   - "**/.claude-plugin/*.json"
   - "CLAUDE.md"
@@ -15,20 +14,6 @@ for it. Use what Claude Code ships before writing your own checks.
 ## Validate the manifests
 
 - `claude plugin validate .` after any manifest, skill or frontmatter change.
-
-## Prove a skill fires and helps
-
-- `claude plugin eval <plugin>` to prove a skill fires and helps, scored against a no-plugin
-  baseline. It reads cases from `evals/` at the plugin root (`plugins/<plugin>/`), or from the
-  folder that `--eval-dir` names (`evals/routing/`, `evals/behaviour/`). A skill's
-  own `evals/evals.json` is skill-creator's format, which it doesn't read.
-  - While you iterate, run one case with `--case <name> --runs 1 --max-cost-usd 3`. Run the
-    full suite at the default runs once, at the end.
-  - After a grader fix, rerun only the cases that grader scores (`--case`).
-  - Before you trust a score, see each grader fail on a wrong answer, and see the skill's tools
-    run in the eval sandbox. If they cannot run, the case is blocked: it neither passes nor fails.
-  - If the no-plugin baseline passes a case, the case cannot show a gain. Make it harder or
-    drop it; do not rerun it.
 
 ## Check a plugin's components and token cost
 

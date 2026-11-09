@@ -3,10 +3,10 @@
 @AGENTS.md
 
 Write every rule, skill line and mod on the assumption that a later model makes it obsolete:
-name the failure it prevents, so a run without it can show when that failure stops. When a
-frontier model ships from any vendor the stack runs on, or a vendor engineering blog publishes
-a best-practice article on coding agents, audit the stack with the instruction-file tools below
-and trim before you add: cut any rule whose failure a model no longer makes without it.
+name the failure it prevents. When a frontier model ships from any vendor the stack runs on, or
+a vendor engineering blog publishes a best-practice article on coding agents, audit the stack
+with the instruction-file tools below and trim before you add: cut any rule whose failure a
+model no longer makes without it.
 
 ## Build only what the tools lack
 
@@ -31,9 +31,6 @@ not make a claim true, and a source that was right before can be wrong now.
 
 - Weigh each claim by what it shows, not by who wrote it: code you can read or run, a measured
   result, a failure it names. A claim with no evidence is only a lead.
-- Adopt an idea or another stack's skill only when the skill eval shows a gain over what it
-  replaces: our skill, or a run without the plugin. A tie keeps ours. Until then, mark it
-  untested.
 - In the skill's or mod's README, name the source and the evidence you used, so an audit can
   remove the idea when that evidence no longer holds.
 
@@ -46,8 +43,6 @@ not make a claim true, and a source that was right before can be wrong now.
 - `SOURCES.md` lists where to look for new articles and leads; being on it is no reason to
   trust a claim.
 - Validate the manifests after any manifest, skill or frontmatter change.
-- Prove a skill fires and helps, scored against a run without the plugin
-  (`.claude/rules/claude-code-authoring.md`).
 - Check a plugin's components and projected token cost.
 - Run a mod's hook tests after you change the mod.
 - Audit the instruction files when a new frontier model ships, and audit a skill or rule after
