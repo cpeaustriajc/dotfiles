@@ -20,6 +20,7 @@ T3 counts below are history.
 |---|---|---|
 | Opus 5 → 5.5 | the main session, nearly always | ~71k of ~85k main-session turns; Opus 5.5 took over in September |
 | Fable 5 / 5.1 | switched to for the hardest work, never as a subagent | ~9.5k turns; 19 of the named `/model` switches |
+| Fable 5.2 | the hardest work, at `high` effort | system card, FrontierCode 2.0: `high` 45.3% at $6.72 per task, against Opus 5.5 at `max` 45.5% at $12.82; `xhigh` 49.1% at $14.19 |
 | Sonnet 5.5 | subagents: research, browser runs, builder retries | "use sonnet 5.5, it's new, more intelligent and faster" (Sept 29) |
 | Haiku 5.5 | swarms, scouts, builder default | "Make sure the swarms are haiku 5.5 trust in that model" (Oct 10); 5.9k turns in October alone |
 | GPT-6 luna | bulk implementation, the only GPT model on fast mode | 116 of 194 delegations while T3 Code was in use |
@@ -39,7 +40,7 @@ falls back to `interrogate` with fresh Claude reviewers.
 
 | Task | Model |
 |---|---|
-| Plan, spec, decide | Opus 5.5 (main session); Fable when Opus stalls |
+| Plan, spec, decide | Opus 5.5 (main session); when Opus stalls, Fable 5.2 at `high` before Opus at `max`; `xhigh` only for long unattended runs |
 | Mechanical or well-specced code | Haiku 5.5 builder, or GPT-6 luna with Codex |
 | Code that needs design calls | Sonnet 5.5 or Opus 5.5 builder |
 | Find files and call sites | Haiku 5.5 (Explore) |
