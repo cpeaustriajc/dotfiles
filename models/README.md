@@ -47,6 +47,29 @@ falls back to `interrogate` with fresh Claude reviewers.
 | Read the web and weigh sources | Sonnet 5.5 (researcher) |
 | Final PR review | GPT-6.1 sol with Codex; Claude-only `interrogate` otherwise |
 
+Subagents run at `medium` effort (`CLAUDE_CODE_SUBAGENT_EFFORT`); an adapter asks for `high` only
+where the job needs it, as `bug-hunt` does. Failure: `high` on every subagent cost about 1.4× for a
+few points (Opus 5.5 on SWE-bench Pro: medium is ~2.5 points under high at ~70% of the cost).
+`ANTHROPIC_DEFAULT_HAIKU_MODEL` pins `haiku` to Haiku 5.5. Failure: on Bedrock, Google Cloud,
+Foundry, Claude Platform on AWS or Claude Code before v2.1.293, the alias still means Haiku 4.5.
+
+### Where the picks depart from Anthropic's guide
+
+Anthropic's guide (claude.dev, "Which Claude model should you build with?", Nov 9 2026) agrees on
+the main session, Explore on Haiku and Sonnet subagents. Two picks differ; re-measure them, don't
+just defer:
+
+- **Fable 5.2 starts at `high`.** The guide escalates: self-check first, then one effort level,
+  then the next model at a *lower* effort (Opus `high` → Fable `medium`). I keep `high` on the
+  FrontierCode 2.0 numbers above. Drop to `medium` if a score-vs-spend run on my tickets shows no gap.
+- **Haiku 5.5 as the default builder.** The guide keeps code edits on the main model or Sonnet and
+  says small models do worse in long agentic loops. My transcripts back Haiku for well-specced
+  slices; the failure to watch is a misread that sends the main model to the wrong file. Compare
+  Haiku and Sonnet builders on a few real tickets by cost per finished task.
+
+Evidence: the guide's SWE-bench Pro, FrontierCode 2.0 and Terminal-Bench 3.0 figures, and its Claude
+Code docs on the `haiku` alias and Explore.
+
 ## Cache-friendly subagents
 
 Each call reads the whole context again. Cached input is cheap, but it is not free.
@@ -59,3 +82,9 @@ Each call reads the whole context again. Cached input is cheap, but it is not fr
   reads the whole context again and does no work.
 - Use one subagent per independent concern, not many small ones. Each subagent loads its own system
   prompt and tools again.
+- Switch models at a natural break: run `/compact` first, or start fresh with a short plan. The
+  cache belongs to the model that wrote it, so the first turn on the new model pays the cache-write
+  price on the whole conversation. Opus 5.5 → Fable 5.2 keeps the earlier thinking; Fable 5.2 → any
+  other model drops it.
+- Where outcomes check themselves (tests, builds), run at `low` and re-run only the failures at
+  `high`: Opus 5.5 did that at ~97% for $0.17 a task, against 95.3% for $0.29 with every task at `high`.
