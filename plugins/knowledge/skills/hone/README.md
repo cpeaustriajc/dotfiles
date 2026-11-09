@@ -65,6 +65,4 @@ To turn the plugin off, run `claude plugin disable knowledge@dotfiles`. This als
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/claude-code.md](references/claude-code.md): the Claude Code commands it uses: the `/insights` report, the instruction-file audit, the lens pass and the trigger proof.
 - [scripts/corrections.py](scripts/corrections.py) and [scripts/test_corrections.sh](scripts/test_corrections.sh): the extractor and its test.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.
-- [tests/hone-lens](../../../../tests/hone-lens/): `claude plugin eval` cases with fixture transcripts that hold no correction; `tests/hone-lens/run.sh` runs them against a no-plugin baseline.
 - [mods/hone-nudge](../../../../mods/hone-nudge/): the optional mod that suggests `/hone <skill>`.

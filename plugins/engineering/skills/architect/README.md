@@ -64,5 +64,4 @@ The skill then loads as `/engineering:architect`.
 - [references/pick.md](references/pick.md), [layout.md](references/layout.md) and [push-back-and-scrap.md](references/push-back-and-scrap.md): the steps after the pick, for a layout task, and after a push back.
 - [references/claude-code.md](references/claude-code.md): models, spawn calls and the side-by-side view.
 - [scripts/moves_only.py](scripts/moves_only.py): the check that a commit holds moves only, with its tests.
-- [../evals/architect-layout-moves](../evals/architect-layout-moves): the eval case for a layout task, from the sketches to the two commits.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.

@@ -53,4 +53,3 @@ The skill then loads as `/knowledge:recall`.
 - [SKILL.md](SKILL.md): the method.
 - [references/claude-code.md](references/claude-code.md): where Claude Code keeps transcripts.
 - [references/claude-desktop.md](references/claude-desktop.md): the desktop app's session search.
-- [evals/triggers.json](evals/triggers.json): the trigger cases.

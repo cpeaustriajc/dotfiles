@@ -56,4 +56,3 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/claude-code.md](references/claude-code.md): the Claude Code tools for the form and the diagrams.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.

@@ -51,5 +51,4 @@ The skill then loads as `/principles:principles`.
 
 - [SKILL.md](SKILL.md): the index and the citation rule.
 - [principle-prove-it-works](../principle-prove-it-works/README.md) and the 19 other `principle-*` folders: one skill per principle.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.
 - The principles are adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) by Lauren Tan, under the MIT license.

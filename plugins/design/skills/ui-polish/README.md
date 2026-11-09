@@ -52,4 +52,3 @@ Requirement: a browser that Claude can drive, so it sees the real screen.
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/motion.md](references/motion.md), [interaction.md](references/interaction.md) and [app-ui.md](references/app-ui.md): the rules Claude checks.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.

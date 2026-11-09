@@ -51,4 +51,3 @@ The skill then loads as `/engineering:why`.
 - [references/git.md](references/git.md): the git and `gh` commands.
 - [references/investigator.md](references/investigator.md): the brief each investigator gets.
 - [references/claude-code.md](references/claude-code.md): models and spawn mechanics.
-- [evals/triggers.json](evals/triggers.json): the trigger cases.

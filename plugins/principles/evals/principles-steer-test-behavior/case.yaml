@@ -1,4 +1,0 @@
-schema_version: "1.1"
-name: principles-steer-test-behavior
-context:
-  scaffold_script: fixture.sh

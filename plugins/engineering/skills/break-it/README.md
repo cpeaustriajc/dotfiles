@@ -59,4 +59,3 @@ Requirement: a browser skill or tool that Claude can drive. Video or GIF recordi
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/claude-code.md](references/claude-code.md): how Claude launches the app in Claude Code before the run.
 - [references/catalog.md](references/catalog.md): the worst-case values Claude seeds, by field type.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.

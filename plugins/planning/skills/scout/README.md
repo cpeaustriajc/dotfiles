@@ -55,4 +55,3 @@ The skill names no files to write.
 ## More
 
 - [SKILL.md](SKILL.md): the questions, the seven methods, the filters and the red flags.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.

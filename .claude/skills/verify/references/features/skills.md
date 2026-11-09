@@ -3,7 +3,7 @@
 What exists: the shipped skills in `plugins/<plugin>/skills/` and this repo's own
 `.claude/skills/`. A skill is Markdown plus optional scripts; there is no app to drive.
 
-- **Code:** `plugins/**`, `evals/**`; `.claude/skills/**`
+- **Code:** `plugins/**`; `.claude/skills/**`
 - **Tests:** `.claude/skills/run-dotfiles/smoke.sh tests` (descriptions, script tests, READMEs)
 - **Check:** `claude plugin validate .` exits 0; each changed `SKILL.md` names only files that exist
   (`grep -o 'references/[a-z-]*\.md'` on it, then `ls` each).

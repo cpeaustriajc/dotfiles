@@ -62,11 +62,10 @@ not make a claim true, and a source that was right before can be wrong now.
   `claude plugin test` reads no `userConfig` defaults (linear-gate failed 86 of 105 tests). With it,
   the entry's `userConfig` does not apply.
 - `plugins/<plugin>/skills/<skill>/`: the shipped skill plugins `design`, `engineering`,
-  `planning`, `knowledge`, `writing` and `principles`. A plugin's own evals go in `plugins/<plugin>/evals/`.
+  `planning`, `knowledge`, `writing` and `principles`.
 - `mods/<mod>/`: one plugin for each mod.
 - To retire a skill or a mod, delete its folder in one commit. Write its name in the commit
   message, so that `git log --diff-filter=D` finds it.
-- `evals/routing/` and `evals/behaviour/`: eval cases across all shipped skills.
 - Every skill and mod folder has a `README.md` for people: `.claude/rules/wiki.md` says how to
   write it, and `python3 -I scripts/check_readmes.py` checks it.
 
@@ -86,7 +85,7 @@ Then validate the manifests.
 A shipped skill holds a method that works on any tool. Tool mechanics go in `references/<tool>.md`
 adapters; a team's roles, rules and taste stay in that team's repo, which the skill reads first.
 A skill's template is a proposal for a project that has none, in no tracker's own terms:
-`python3 -I scripts/check_tracker_terms.py` bans "Done When" in every plugin, mod and eval.
+`python3 -I scripts/check_tracker_terms.py` bans "Done When" in every plugin and mod.
 
 A typed skill (`disable-model-invocation: true`) also needs `agents/openai.yaml` with
 `policy.allow_implicit_invocation: false`, or Codex starts it on its own.

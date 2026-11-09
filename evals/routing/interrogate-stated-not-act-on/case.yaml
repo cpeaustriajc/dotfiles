@@ -1,4 +1,0 @@
-schema_version: "1.1"
-name: interrogate-stated-not-act-on
-context:
-  scaffold_script: fixture.sh

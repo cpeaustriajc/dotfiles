@@ -51,4 +51,3 @@ The scripts in `scripts/` handle model download, narration, music, formats and i
 
 - [SKILL.md](SKILL.md): the workflow and the pre-handover checklist.
 - [references/hyperframes.md](references/hyperframes.md), [voice.md](references/voice.md), [music.md](references/music.md), [models.md](references/models.md) and [launch-kit.md](references/launch-kit.md): details per step.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.

@@ -58,5 +58,3 @@ The Claude Code adapter turns the exit check into a `/goal` condition. It can al
 
 - [SKILL.md](SKILL.md): the method.
 - [references/claude-code.md](references/claude-code.md): how to run the loop with `/goal`, Stop hooks and `/loop`, and how to start the audit agent.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.
-- [evals/handback/](evals/handback/): two `claude plugin eval` cases for the audit, one log that claims a pass the transcript never ran and one clean log. Run `plugins/engineering/skills/drive/evals/handback/run.sh` from the repo root.

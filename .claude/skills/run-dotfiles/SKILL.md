@@ -3,7 +3,7 @@ name: run-dotfiles
 description: >
   This skill should be used to run, test, validate or inspect the dotfiles marketplace as Claude
   Code loads it: plugin validation, every mod's tests, the skill script tests, plugin token costs,
-  /skill-doctor with the skill plugins installed, and the trigger and routing evals. Use it before
+  /skill-doctor with the skill plugins installed. Use it before
   committing a change to a skill, mod or manifest, or to see what a skill costs per turn.
 user-invocable: false
 ---
@@ -27,14 +27,7 @@ Paths here are relative to the repo root.
 .claude/skills/run-dotfiles/smoke.sh tests     # each mod's hook tests + skill script tests
 .claude/skills/run-dotfiles/smoke.sh details   # skills and per-skill token cost, always-on and on-invoke
 .claude/skills/run-dotfiles/smoke.sh doctor    # /skill-doctor with the skill plugins installed
-.claude/skills/run-dotfiles/smoke.sh routing   # claude plugin eval on evals/routing, about $2; RUNS=1 halves it
-.claude/skills/run-dotfiles/smoke.sh behaviour # evals/behaviour, with and without the plugin; CASE=<glob> for one case
 ```
-
-`routing` checks that each request loads its own skill and not its nearest neighbour, with every
-shipped skill installed together, that the typed-only `commit` never loads on its own, and that `create-pr` loads on "open the PR". Each case in `evals/routing/<case>/` is a `prompt.md` plus
-`tool_used` graders on the Skill call. Add a case when a new skill's triggers could collide with
-an old one's.
 
 `doctor` and `details` install the local working tree (not the pushed one) into a `mktemp -d`
 config directory, so your real `~/.claude` never changes and the temp directory is removed on
@@ -62,12 +55,6 @@ bash plugins/knowledge/skills/hone/scripts/test_corrections.sh
 - **The 7-day token and use columns are always empty** in the driver's throwaway config: they come
   from this machine's past sessions. For real usage, run `claude -p "/skill-doctor"` with your own
   config after installing the plugin there.
-- **`claude plugin eval .` resolves no plugin** ("none resolved — cases run against baseline"):
-  the repo root has no `plugin.json`, and no plugin folder has one: `marketplace.json` is the only
-  manifest. The driver builds a throwaway plugin of copies instead. A symlinked skill fails: the
-  eval run is denied Read on its `references/`, so the score measures `SKILL.md` alone.
-  The routing cases cap `max_turns` at 3, so "Reached maximum number of turns" in the notes is
-  expected; the Skill call comes on turn 1.
 - **`claude plugin validate plugins/<plugin>/skills/<skill>` always fails** with "No manifest found": a
   skill folder is not a plugin. Validate the repo root.
 - **Python scripts leave `__pycache__`** in the skill folder; the driver deletes it, and
@@ -75,16 +62,6 @@ bash plugins/knowledge/skills/hone/scripts/test_corrections.sh
 
 ## Not in the driver
 
-- **`claude plugin eval <plugin>`** reads cases from `evals/` at the plugin root, not from a
-  skill's `evals/`; in the driver only `routing` runs it, and `all` leaves it out.
-- **Trigger checks.** Each skill's `evals/triggers.json` holds should-trigger and near-miss prompts
-  for skill-creator's `run_eval`. `run_eval` ignores
-  `disable-model-invocation`, so for the typed-only `commit` it measures only the
-  description; the routing suite checks that it never loads on its own. Run `run_eval` from an
-  empty folder that has a `.claude/` directory, with `--num-workers 1`: parallel workers each write a
-  copy of the skill into the same `.claude/commands/`, Claude invokes another worker's copy, and
-  the run scores as a miss. A prompt that points at content it doesn't include ("file these
-  bugs") makes Claude look for the content first, which also scores as a miss.
 - **Descriptions** follow plugin-dev's rules (`tests` checks them): third person ("This skill
   should be used when…"), at most 500 characters, and a `>` block scalar, since an unquoted
   description containing `": "` is invalid YAML that `claude plugin validate` doesn't catch.

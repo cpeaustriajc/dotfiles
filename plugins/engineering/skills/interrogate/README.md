@@ -57,4 +57,3 @@ Requirement: Claude must be able to start subagents.
 
 - [SKILL.md](SKILL.md): the method and the reviewer prompt.
 - [references/claude-code.md](references/claude-code.md): how the reviewers and the quality pass run in Claude Code.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.

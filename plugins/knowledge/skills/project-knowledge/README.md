@@ -64,5 +64,3 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 - [references/operations.md](references/operations.md): supersede a decision, file research, move rationale out of a repo.
 - [references/plain-prose.md](references/plain-prose.md): the prose patterns to rewrite before a page is published.
 - [scripts/ghwiki.sh](scripts/ghwiki.sh): the GitHub wiki helper.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.
-- [evals/evals.json](evals/evals.json): test cases in skill-creator format.

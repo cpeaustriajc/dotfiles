@@ -51,4 +51,3 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 
 - [SKILL.md](SKILL.md): the method Claude follows and the file template.
 - [references/claude-code.md](references/claude-code.md): the Claude Code build and launch recipe that holds the launch steps.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.

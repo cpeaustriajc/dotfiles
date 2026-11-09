@@ -38,7 +38,7 @@ Then these `##` headings, in this order, with no other `##` headings:
 | Install | Example | skill: which plugin ships it and the install command; mod: you do X, the hook does Y, you see Z |
 | What it does | What it does | what it reads, writes, asks, blocks or changes; a table for a mod's events and decisions |
 | Limits | Settings | skill: what it does not do; mod: each `userConfig` option with its default, and how to turn the mod off |
-| More | Limits | skill: links to `SKILL.md`, `references/`, `evals/`; mod: what slips through, what happens on error |
+| More | Limits | skill: links to `SKILL.md`, `references/`; mod: what slips through, what happens on error |
 | | More | mod: links to the hook source, tests and design notes |
 
 Keep the README under 100 lines. Use `###` headings inside a section only when it is long.

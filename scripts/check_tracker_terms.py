@@ -3,7 +3,7 @@
 
 "Done When" is Linear's habit, not a neutral term. A skill that writes it pushes one tracker's
 practice onto every project; the project's own template names its sections, and the skills say
-"checks" or "end state". This scans the tracked files under plugins/, mods/ and evals/. Prose such
+"checks" or "end state". This scans the tracked files under plugins/ and mods/. Prose such
 as "should only be done when lowering it" passes: the check matches a capital "Done", or the
 words joined by "-" or "_".
 """
@@ -14,7 +14,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BANNED = re.compile(r"\bDone[ _-][Ww]hen\b|\bdone[_-]when\b")
-SCOPE = ["plugins", "mods", "evals"]
+SCOPE = ["plugins", "mods"]
 
 
 def main():

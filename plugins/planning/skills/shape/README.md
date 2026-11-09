@@ -60,4 +60,3 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 - [references/top-down.md](references/top-down.md): the five rules, roles and the tracker lookup.
 - [references/templates.md](references/templates.md), [phases.md](references/phases.md), [spec-mapping.md](references/spec-mapping.md) and [tree-outline.md](references/tree-outline.md): the spec, the phases, old-spec translation and the tree JSON.
 - [scripts/check_tree.py](scripts/check_tree.py) and [scripts/test_check_tree.py](scripts/test_check_tree.py): the tree check and its tests.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.

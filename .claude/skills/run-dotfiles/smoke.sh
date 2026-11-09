@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # Drives the dotfiles marketplace the way a user's Claude Code sees it.
-# Usage (from the repo root): .claude/skills/run-dotfiles/smoke.sh [validate|tests|doctor|details|routing|behaviour|all]
-# `all` skips routing and behaviour: they cost model calls. CASE=<glob> runs only matching cases.
+# Usage (from the repo root): .claude/skills/run-dotfiles/smoke.sh [validate|tests|doctor|details|all]
 set -uo pipefail
 root="$(cd "$(dirname "$0")/../../.." && pwd)"; cd "$root"
 step="${1:-all}"; failed=0; blocked=0
@@ -71,33 +70,10 @@ doctor() {
 
 details() { say "plugin details"; installed; for p in "${plugins[@]}"; do run env CLAUDE_CONFIG_DIR="$cfg" claude plugin details "$p@dotfiles"; done; }
 
-# The marketplace entry has no plugin.json, so `claude plugin eval .` resolves no plugin. Build a
-# throwaway plugin of copies of the shipped skills, named dotfiles, and evaluate that.
-# $1: the folder under evals/; $2: the --ablation mode.
-suite() {
-  local p; p="$(mktemp -d)"; mkdir -p "$p/.claude-plugin" "$p/skills" "$p/evals"
-  # Copy, never link. Through a link, the eval run is denied Read on a skill's references/ (the
-  # path resolves outside the plugin), so a score measures SKILL.md alone. The filter below also
-  # deletes some cases, which through a link would delete them from the repo.
-  for d in "$root"/plugins/*/skills/*/; do cp -R "${d%/}" "$p/skills/$(basename "$d")"; done
-  [[ -n "$(ls "$p/skills")" ]] || { failed=1; echo "FAILED: no skills linked into the eval plugin"; return; }
-  echo '{"name":"dotfiles","version":"0.0.0-eval"}' > "$p/.claude-plugin/plugin.json"
-  cp -r "evals/$1/." "$p/evals/"
-  # Cases with a scaffold_script test behaviour, not routing, and fail without --scaffold.
-  grep -rl --include=case.yaml scaffold_script "$p"/evals "$p"/skills 2>/dev/null |
-    while read -r c; do rm -rf "$(dirname "$c")"; done
-  (cd "$p" && claude plugin eval . --eval-dir evals --runs "${RUNS:-2}" --ablation "$2" --case "${CASE:-*}" \
-    --trust-plugin --no-publish --max-cost-usd 10 -j 4) || { failed=1; echo "FAILED: $1 evals"; }
-  rm -rf "$p"
-}
-
-routing() { say "routing evals: each request loads its own skill and no neighbour"; suite routing none; }
-behaviour() { say "behaviour evals: each case scored with the plugin and without it"; suite behaviour with-without; }
-
 case "$step" in
-  validate|tests|doctor|details|routing|behaviour) "$step" ;;
+  validate|tests|doctor|details) "$step" ;;
   all) validate; tests; details; doctor ;;
-  *) echo "usage: $0 [validate|tests|doctor|details|routing|behaviour|all]" >&2; exit 64 ;;
+  *) echo "usage: $0 [validate|tests|doctor|details|all]" >&2; exit 64 ;;
 esac
 find plugins -name __pycache__ -prune -exec rm -rf {} +
 (( failed )) && exit 1

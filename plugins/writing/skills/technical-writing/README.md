@@ -48,7 +48,6 @@ To turn the plugin off, run `claude plugin disable writing@dotfiles`. This also 
 - [SKILL.md](SKILL.md): the method and the sentence rules.
 - [references/diataxis.md](references/diataxis.md): the rules for each of the four modes.
 - [references/worked-example.md](references/worked-example.md): one rewrite, before and after.
-- [Evals](../../evals/): the `technical-writing-readme-rewrite` and `technical-writing-not-ui-copy` cases.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.
 
 ### Sources and evidence
@@ -57,6 +56,5 @@ To turn the plugin off, run `claude plugin disable writing@dotfiles`. This also 
 - Changes: repo rules first, ASD-STE100 sentence limits, and pstack's own repo rules removed.
 - Status: tested on one case. In `technical-writing-readme-rewrite`, typed as `/technical-writing`, 2 of 2 runs pass with the plugin and 0 of 2 pass without it.
 - Without the plugin, Claude does not read `CONTRIBUTING.md` and keeps "ratchet" and the semicolon. A PR description case passed 2 of 2 in both arms, so it was dropped.
-- Eval command: `claude plugin eval plugins/writing --case 'technical-writing-*' --scaffold`.
 - Native check: Claude Code has no writing standard. Output styles set the chat tone for a whole session and are not picked by task.
 - Prior art: Matt Pocock's `writing-for-agents` covers docs that agents read. His `writing-*` skills shape articles. Neither covers engineering docs for people.

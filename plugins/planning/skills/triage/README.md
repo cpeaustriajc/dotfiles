@@ -56,5 +56,3 @@ The skill then loads as `/planning:triage`.
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/agent-brief.md](references/agent-brief.md): the brief and the triage notes.
 - [references/github.md](references/github.md): the `gh` commands.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.
-- [triage-unproven-bug](../../../../evals/behaviour/triage-unproven-bug/prompt.md): proves an unproven bug gets no checks. Rerun it with `CASE=triage-unproven-bug .claude/skills/run-dotfiles/smoke.sh behaviour`.

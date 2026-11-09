@@ -60,4 +60,3 @@ Scripts need Python packages (numpy, scipy, pillow) and Playwright. `render3d.md
 - [SKILL.md](SKILL.md): the workflow and the review checklist.
 - [references/recipes.md](references/recipes.md): how to build foliage, metal, cloth, faces, windows and water.
 - [references/anatomy.md](references/anatomy.md), [scale.md](references/scale.md), [armour.md](references/armour.md), [render3d.md](references/render3d.md) and [code-techniques.md](references/code-techniques.md): measurements and techniques.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not load the skill.

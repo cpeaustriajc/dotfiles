@@ -48,4 +48,3 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
-- [evals/triggers.json](evals/triggers.json): example requests that should and should not match the skill.

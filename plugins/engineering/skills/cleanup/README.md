@@ -51,4 +51,3 @@ The skill then loads as `/engineering:cleanup`.
 - [SKILL.md](SKILL.md): the method.
 - [references/claude-desktop.md](references/claude-desktop.md): archive and worktree tools in the desktop app.
 - [references/claude-code.md](references/claude-code.md): the terminal.
-- [evals/triggers.json](evals/triggers.json): the trigger cases.
