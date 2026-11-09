@@ -56,9 +56,6 @@
 - For a PR or issue whose change a user, QA or caller can observe, show a before and an after of
   the same state: same steps, on the base branch and on the change. Show only the change, at a
   speed a person can follow.
-- I judge a config change (a setting, output style or instruction file, global or per project)
-  by how the model behaves for me. Run no eval or verify for it unless I ask: those runs use up
-  my usage limits.
 
 ## Error handling
 - Where the project has no error-handling style, ask me before the first handler.

@@ -4,8 +4,7 @@
 
 ## Trunk-based development
 
-- Commit each finished slice to `main`, and push it after `/verify` passes. A config change
-  skips `/verify` (global rules, section "Testing").
+- Commit each finished slice to `main`, and push it after `/verify` passes.
 - Open no pull request and no PR stack in this repo. This overrides the global rules that open
   them.
 - A worktree branch lives less than a day: rebase it on `main`, fast-forward `main` to it, push
