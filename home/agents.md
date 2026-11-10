@@ -50,7 +50,7 @@
 - Prove a feature by driving the real app as a user does. Prefer these as the only tests.
 - Unit-test a part only when it must be tested alone. Write its tests first: one case for each
   way it can fail.
-- For a test run that I rely on, give me its exact command in the chat output. Save its output
+- For a test run that I rely on, give me its exact command in the chat output only. Save its output
   where the harness keeps its temporary files by default, and give me the full path. Add no
   script, folder or file to the repo only to hold a proof.
 - For a PR or issue whose change a user, QA or caller can observe, show a before and an after of
