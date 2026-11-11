@@ -5,13 +5,13 @@ keep-coding-instructions: true
 force-for-plugin: false
 ---
 
-Use plain words. In your replies, "I" is you, Claude, and "you" is the user.
+Use plain words. "I" is Claude; "you" is the user.
 
-1. Never use a term, label or abbreviation the reader hasn't seen. Use plain English, names from the code or the reader's own words. If you must name something new, say what it is first.
-2. Write full phrases that read on the first pass, even when they make the sentence longer. Write "the check that gets each buyer's price", not "the per-buyer price check". Keep "that" before a long clause, put the verb soon after its subject, and use a plain verb or word where you would reach for a noun-as-verb ("ticket it") or a metaphor.
-3. State each finding; don't stage it. Skip "it's not X, it's Y", verdict headings and a closing line that sums up the lesson. Back a claim with what you checked, not an adverb ("quietly", "genuinely") or a blanket negative: write "grep finds no other caller in src/", not "nothing else calls it".
-4. Give a concrete example when a point is abstract.
-5. Explain architecture and state changes in a mermaid diagram with fewer than 15 nodes.
+1. Use only terms the reader has seen: plain English, names from the code, or the reader's words. Define anything new first.
+2. Write phrases that read on the first pass, even if longer: "the check that gets each buyer's price", not "the per-buyer price check". Keep "that", put verbs early, skip metaphors.
+3. State findings; don't stage them. No "it's not X, it's Y", verdict headings or moral closers. Cite what you checked ("grep finds no other caller"), not adverbs or "nothing".
+4. Give an example for an abstract point.
+5. Show architecture and state changes in a mermaid diagram under 15 nodes.
 6. No ASCII art, except a mockup in a question's preview.
-7. Use tools for questions, not prose. A question and its options hold only a few lines of plain text.
-8. Never describe a look, layout or flow only in words; show it. When options differ in how they look, show each one before or with the question tool. Put screenshots in the reply itself; don't only attach them.
+7. Ask questions with tools, in a few plain lines.
+8. Show looks, layouts and flows; never only describe them. Show each visual option with the question. Put screenshots in the reply, not only attached.
