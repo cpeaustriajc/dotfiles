@@ -1,7 +1,6 @@
 # Global guidance
 
 ## Terms
-- "I" and "me" mean the user.
 - Subagent: a helper agent that only reads, researches or reviews.
 - Chat output: tool output I see in the chat, not a file.
 
@@ -10,17 +9,20 @@
   Check it at the source (run it, read the code, `git log`, the docs, the live system), then
   name the check: "unit tests pass; app not driven". Can't check it? Call it a guess. I act on
   what you claim.
-- Prove a feature in the real app, as a user. Unit-test only a part that must work alone: tests
-  first, one per way it can fail. A project's test policy replaces these two rules.
-- Give each run's exact command in the chat. Save its output where the project's verify skill
-  says, or else in the harness's temp folder, and give the path. Add no file to the repo just
-  to hold a proof.
+- Prove a feature in the real app, as a user: through the project's end-to-end suite or verify
+  skill where it has one. Unit-test only a part that must work alone: tests first, one per way
+  it can fail. A project's test policy replaces these two rules.
+- Give each run's command in the chat, and where its output went: where the project's verify
+  skill says, or else the harness's temp folder. Write paths relative to the repo or from `~`.
+  Never put a path with my user name in a PR, issue, commit or other shared place: it shows my
+  account and folder layout. Add no file to the repo just to hold a proof.
 - For a change someone can see: same steps on the base branch, then on the change. Show only
   the change, slow enough to follow.
 
 ## Scope
 - Do only what I asked. Report other problems; don't fix them.
 - Before you write in a repo, tracker, wiki or channel, read its existing items and match them.
+  In code, run the project's formatter and linter.
 - Name a doc section by its title, not its number.
 - A fix far past its asked size (one line grown past about 100)? Stop and ask.
 
@@ -49,21 +51,20 @@
   start.
 
 ## Error handling
-- Use the project's error-handling style. None? Ask me before the first handler. These rules
-  hold under any style:
-- Send every error to a handler that acts on it, or up to the caller with its cause, even when
-  no caller waits. A log alone isn't handling.
-- Retry only a known temporary error, with growing random delays and a limit.
-- Log where the platform collects logs, so the log survives the crash.
-- A guard is a guess until a test fails without it.
+- Use the project's error-handling style, linters and mutation tests. None? Ask me before the
+  first handler.
+- Under any style: send every error to a handler that acts on it, or up to the caller with its
+  cause. A log alone isn't handling. Log where the platform collects logs.
+- Retry only a known temporary error, with growing random delays and a limit. A guard is a
+  guess until a test fails without it.
 
 ## Code review
 - Give reviewers the change's purpose, not just the diff. Diff-only reviewers missed a bug that
   broke the purpose.
 - Take who counts as a user from the project, not from the request.
 - Pick reviewers with different blind spots who know the purpose but not the history.
-- Ask for every spec gap and user-facing defect, no style, ranked by user impact. A reviewer
-  told to hold back reports less; one asked for style always finds some.
+- Ask for every spec gap and user-facing defect, no style, ranked by user impact. Style belongs
+  to the linter. A reviewer told to hold back reports less.
 - Prove a finding on the user's path when you can. Run-time bugs pass read-only reviews.
 - Report each kind of bug once, with its instances.
 - Stop when a pass finds nothing a user would hit. Findings keep coming? Question the design.
@@ -79,4 +80,5 @@
 - Fix or delete a wrong line; don't add a newer one beside it.
 - Keep a line only if the agent errs without it. Write its scope and exception into the rule.
 - Load knowledge only when needed: a rule scoped to its files, a procedure in a skill.
-- Where a check can enforce a rule, write the check and point to it here.
+- Where a check, linter, test or formal verifier can enforce a rule, write it and point to it
+  here.
