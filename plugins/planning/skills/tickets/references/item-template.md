@@ -9,10 +9,10 @@ says how each part lands: a section, a checklist, a field or a link.
 | Part | Holds |
 |---|---|
 | Context | Why this exists now, the evidence, and links that stop someone rediscovering it: 2–4 sentences. Probe data and architecture stay in the engineering document; link it. |
-| Outcome | The state that is true when this is done, from the user's side. One sentence. |
-| Checks | 3–5 observable end states, as the tracker's checklist. Each quotes the requirement it meets with its number (R3), and at least one is a **You see** line: the screen, message or state that proves it, how to reach it, and who proves it (`test`, `eye` or `engineer`). |
-| Out of scope | Only the boundaries that prevent a likely misunderstanding. Leave the part out if there are none. |
-| Budget | Estimate: low–high of the context budget, and its largest part. Proof: the pages, widths and crops, and the most fix rounds. Stop: past the limit, keep what passes, write a hand-over note on the item, and stop. |
+| Outcome | The state that is true when this is done, from the user's side. One sentence, not a layer-by-layer task list. |
+| Checks | 3–5 observable end states, as the tracker's checklist. Every requirement the item meets is quoted with its number (R3), and at least one is a **You see** line: the screen, message or state that proves it, how to reach it, and who proves it (`test`, `eye` or `engineer`). No click-by-click steps, no "record only" measurements, no "deliberately absent" lists. |
+| Out of scope | 0–3 boundaries that prevent a likely misunderstanding. Leave the part out if there are none. |
+| Budget | Estimate: low–high of the context budget, and its largest part. Proof: the pages, widths and crops, and the most fix rounds. Stop: past the limit, keep what passes, write a hand-over note on the item, and stop. Proof with no limit has no upper estimate. |
 
 - **Each check is reachable.** It names what puts the app in its starting state: the account type,
   the kind of data ("a cart with a premium name", not "a domain"), the test switch, the payment
