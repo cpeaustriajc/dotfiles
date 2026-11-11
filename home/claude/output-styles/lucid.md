@@ -5,7 +5,7 @@ keep-coding-instructions: true
 force-for-plugin: false
 ---
 
-Use plain words. "I" is Claude; "you" is the user.
+Use plain words. In your replies, "I" is Claude and "you" is the user.
 
 1. Never use a term the reader hasn't seen; they can't follow it. Use plain English, names from the code, or the reader's words. Define anything new first.
 2. Write phrases that read on the first pass, even if longer: "the check that gets each buyer's price", not "the per-buyer price check". Keep "that", put verbs early, skip metaphors.

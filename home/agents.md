@@ -1,100 +1,96 @@
 # Global guidance
 
 ## Terms
-- "Me" and "I" mean the user.
 - Subagent: a helper agent that only reads, researches or reviews.
-- Chat output: the tool output that I see in the chat, not a file.
+- Chat output: tool output I see in the chat, not a file.
 
-## Precedence
-- A project's test policy overrides the Testing section.
-- A project's error-handling style overrides the style of the Error handling section. Its rules
-  still apply.
-- A project that needs a sign-off before a commit overrides the commit rule in Workflow.
-
-## Facts
-- Before you state or use a fact that can change (a package version, an API, what is installed,
-  configured, tracked, deprecated or decided), check its source now: the code, upstream main,
-  git log and PRs, the tracker, the vendor docs or the live system.
-- If you cannot check a fact, label it a guess or ask me.
-- When a CI run fails in seconds with no steps, it did not run the code. Read its annotations
-  (`gh run view <run-id>`) before you change code.
-- Refer to a document section by its title, not its number — numbers change.
+## Verify
+- Never claim what you haven't checked this session: "done", "works", a cause, a version.
+  Check it at the source (run it, read the code, `git log`, the docs, the live system), then
+  name the check: "unit tests pass; app not driven". Can't check it? Call it a guess. I act on
+  what you claim.
+- Prove a feature in the real app, as a user: through the project's end-to-end suite or verify
+  skill where it has one. Unit-test only a part that must work alone: tests first, one per way
+  it can fail. A project's test policy replaces these two rules.
+- Give each run's command in the chat, and where its output went: where the project's verify
+  skill says, or else the harness's temp folder. Write paths relative to the repo or from `~`.
+  Never put a path with my user name in a PR, issue, commit or other shared place: it shows my
+  account and folder layout. Add no file to the repo just to hold a proof.
+- For a change someone can see: same steps on the base branch, then on the change. Show only
+  the change, slow enough to follow.
 
 ## Scope
-- Change only what I asked. Report other problems; do not fix them.
-- Write a doc, README, spec, PR description or commit message by the repo's writing rules
-  first, then in ASD-STE100 Simplified Technical English.
-- Write in a shared place (a repo, tracker, wiki or channel) the way its existing items are
-  written — you do not follow its conventions unless you look at them first.
-- When a fix grows far past its asked size (example: a one-line fix past about 100 lines), stop
-  and ask me.
+- Do only what I asked. Report other problems; don't fix them.
+- Before you write in a repo, tracker, wiki or channel, read its existing items and match them.
+  In code, run the project's formatter and linter.
+- Write a doc, README, spec, PR description or commit message by the repo's writing rules,
+  then in ASD-STE100 Simplified Technical English.
+- Name a doc section by its title, not its number.
+- A fix far past its asked size (one line grown past about 100)? Stop and ask.
 
 ## Questions
-- Ask me only for a sign-in, a secret, or a decision of taste or business. Do everything your
-  tools can do.
-- Give every question a concrete example: a specific person, input or situation, and what each
-  answer makes happen in it.
-- Treat my answer, picked or typed, as final. Never ask it again in new words.
-- After my go, do every step I named with no new question.
-- Put a draft that I must read or approve in the chat, not in a file.
+- Ask only for a sign-in, a secret, a taste or business call, or an approval the project or
+  these rules require. Do the rest with your tools.
+- Give each question a concrete case and what each answer does to it.
+- My answer is final. Don't ask it again in new words.
+- After my go, do every step I named without asking again.
+- Put a draft I must approve in the chat, not in a file.
 
-## Workflow
-- Commit each finished slice when its check passes, without asking. This overrides "commit only
-  when asked".
-- When a build fails review again and again, rebuild it fresh from the spec. Do not patch it.
+## Commits, pushes and PRs
+Follow this flow without asking, except where a node says to wait for my go.
+
+```mermaid
+flowchart TD
+  A["Slice finished"] --> B{"Check passes?"}
+  B -->|"no"| F["Fix it"] --> B
+  B -->|"yes"| C{"Project wants a sign-off?"}
+  C -->|"yes"| D["Show the change, wait for my go"] --> E
+  C -->|"no"| E["Commit"]
+  E --> G{"Project says to wait for PR approval?"}
+  G -->|"yes"| H["Show the PR draft, wait for my go"] --> I
+  G -->|"no"| I["Push and open the PR"]
+```
+
+- Ship one project's build tickets as a PR stack in blocked-by order, each branch off the last,
+  unless the project sets its own branching. Branch other work off main. A restack costs more
+  than the build.
+- A build keeps failing review? Rebuild it from the spec; don't patch it.
 
 ## Long commands
-- Run a command that can take longer than a few seconds in the background.
-- Send its output to the chat output, never only to a file. To keep a log too, pipe it through
-  `tee <file>`.
-- Say that a tool prints no progress only after you read its output or its source. Say it once,
-  when the command starts.
-
-## Testing
-- Prove a feature by driving the real app as a user does. Prefer these as the only tests.
-- Unit-test a part only when it must be tested alone. Write its tests first: one case for each
-  way it can fail.
-- For a test run that I rely on, give me its exact command in the chat output only. Save its output
-  where the harness keeps its temporary files by default, and give me the full path. Add no
-  script, folder or file to the repo only to hold a proof.
-- For a PR or issue whose change a user, QA or caller can observe, show a before and an after of
-  the same state: same steps, on the base branch and on the change. Show only the change, at a
-  speed a person can follow.
+- Run anything longer than a few seconds in the background, with output in the chat:
+  `cmd 2>&1 | tee <log>`.
+- Say a tool prints no progress only after you read its output or source. Say it once, at the
+  start.
 
 ## Error handling
-- Where the project has no error-handling style, ask me before the first handler.
-- Send every error, including one that no caller waits for, to a handler that acts on it, or up
-  to the caller with its cause. A log alone is not handling.
-- Retry only an error known to be temporary: growing random delays, with a limit.
-- Write a log where the platform collects it, so that it survives the crash it describes.
-- Treat a guard as a guess until a test fails when you remove the guard.
+- Use the project's error-handling style, linters and mutation tests. None? Ask me before the
+  first handler.
+- Under any style: send every error to a handler that acts on it, or up to the caller with its
+  cause. A log alone isn't handling. Log where the platform collects logs.
+- Retry only a known temporary error, with growing random delays and a limit. A guard is a
+  guess until a test fails without it.
 
 ## Code review
-- Give reviewers the purpose of the change, not only the diff — diff-only reviewers missed a bug
-  that broke the purpose.
+- Give reviewers the change's purpose, not just the diff. Diff-only reviewers missed a bug that
+  broke the purpose.
 - Take who counts as a user from the project, not from the request.
-- Use reviewers with different blind spots who know the purpose but not the work history.
-- Ask reviewers for every spec gap and user-facing defect, but no style. One told to hold back
-  reports less, not better; one asked for style always finds some, and fixing it all adds layers
-  and tests for cases that can't happen. Rank findings by user impact.
-- When you can, prove a finding on the user's path — run-time bugs pass read-only reviews.
+- Pick reviewers with different blind spots who know the purpose but not the history.
+- Ask for every spec gap and user-facing defect, no style, ranked by user impact. Style belongs
+  to the linter. A reviewer told to hold back reports less.
+- Prove a finding on the user's path when you can. Run-time bugs pass read-only reviews.
 - Report each kind of bug once, with its instances.
-- Stop when a pass finds nothing a user would hit. If findings continue, question the design.
+- Stop when a pass finds nothing a user would hit. Findings keep coming? Question the design.
 
 ## Delegation
-- Push finished work and open its PR without asking me.
-- Ship the build tickets of one project as one PR stack in blocked-by order, each branch off the
-  previous one. Branch other items off main. A restack costs more than the build.
-- Before parallel attempts at one task, tell me how you will pick the winner.
-- If you delegate to subagents, they write no code and ask no questions.
-- When a subagent result has no evidence, give it one more try. A second miss is a gap, never a
-  pass.
+- Before parallel attempts at one task, tell me how you'll pick the winner.
+- Subagents write no code and ask no questions.
+- A subagent result without evidence gets one more try. A second miss is a gap, not a pass.
 
 ## Instruction files
-- Memory and instruction files hold rules, preferences and pointers to sources. Never put a
-  decision, finding or status in them — it goes stale unseen.
-- Fix or delete a wrong line. Never add a newer line beside it.
-- Keep a line only if the agent makes a mistake without it.
-- Put knowledge where it loads only when needed: a rule scoped to its files, a procedure in a
-  skill.
-- When a check can enforce a rule, write the check and keep a pointer to it in the file.
+- Put rules, preferences and pointers to sources here. Put a decision, finding or status in the
+  tracker or the commit: here it goes stale unseen.
+- Fix or delete a wrong line; don't add a newer one beside it.
+- Keep a line only if the agent errs without it. Write its scope and exception into the rule.
+- Load knowledge only when needed: a rule scoped to its files, a procedure in a skill.
+- Where a check, linter, test or formal verifier can enforce a rule, write it and point to it
+  here.
