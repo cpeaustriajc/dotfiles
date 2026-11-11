@@ -66,8 +66,14 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
+- [references/item-template.md](references/item-template.md): the item template and the rules for each check.
 - [references/item-kinds.md](references/item-kinds.md): work types, the Chore's No-QA check, bugs and wide mechanical changes.
 - [references/sizing.md](references/sizing.md): how Claude estimates context per item, and the measured run behind the numbers.
 - [references/stacking.md](references/stacking.md): commands for plain git, gh stack, Graphite and git-town.
 - [../shape/references/top-down.md](../shape/references/top-down.md): the five rules and the tracker lookup.
 - [../shape/references/tree-outline.md](../shape/references/tree-outline.md): the tree JSON that the check reads.
+
+### Sources and evidence
+
+- Source: Matt Pocock's `writing-for-agents` skill, from `mattpocock/skills` on `main`. Its rules: cut a sentence the model obeys by default, and point to a source of truth over a copy. It gives no measured result.
+- Evidence: on 2026-11-11, terse project skills in one product repo kept their exact steps in most runs. Those skills point to the tracker's templates and the repo's rules and copy none of them.

@@ -1,5 +1,12 @@
 # GitHub adapter
 
+## Steps
+
+- Sign-in: `gh auth status`. A matching repo: `gh repo list`.
+- Push: `git push -u`.
+- Open: `gh pr create`, `--draft` only when asked. Pass `--base` when a base was given, or the
+  branch was cut from one that exists on origin (`git ls-remote --heads origin <base>`).
+
 ## Upload evidence
 
 - `gh pr create`, `gh pr edit`, `gh pr comment`, `gh issue create`, `gh issue edit` and
