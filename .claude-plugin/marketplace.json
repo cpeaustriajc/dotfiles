@@ -131,24 +131,6 @@
       ]
     },
     {
-      "name": "principles",
-      "displayName": "Principles",
-      "description": "Apply engineering principles by name — prove it works, subtract before you add, attack the premise, and 17 more.",
-      "version": "1.0.1",
-      "author": {
-        "name": "John Carlo Austria"
-      },
-      "source": "./plugins/principles",
-      "category": "development",
-      "keywords": [
-        "principles",
-        "design",
-        "testing",
-        "debugging",
-        "refactoring"
-      ]
-    },
-    {
       "name": "linear-gate",
       "displayName": "Linear Gate",
       "description": "Stop Linear writes off shift — on shift, your permission mode decides; a delete or cancel asks you first.",

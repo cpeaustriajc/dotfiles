@@ -34,7 +34,8 @@ The skills ship in seven plugins. Install only the plugins that you need.
 | `knowledge` | Keep what the team learns: a decision log, research pages, lessons from past sessions, and a recap of recent work. | project-knowledge, hone, recall |
 | `writing` | Write docs in plain ASD-STE100, and cut the tells of AI-written prose. | technical-writing, unslop |
 | `visual` | Paint scenes in code to a gallery standard, and re-pitch or catch up a chat in plain words with a picture. | painting-craft, bro, ketchup |
-| `principles` | Apply engineering principles by name, such as "prove it works", "subtract before you add" and "attack the premise". | principles, and the 20 `principle-*` skills that it indexes |
+
+The 20 engineering principles are prompts you paste, not a plugin: [PROMPTS.md](PROMPTS.md).
 
 ### Claude Code
 
@@ -71,7 +72,7 @@ outside Claude Code.
 ## Skills
 
 The agent starts a skill when your request matches the skill's description. A typed skill starts
-only when you call it by name. All 20 `principle-*` skills are typed.
+only when you call it by name.
 
 | Skill | Plugin | What it does |
 |---|---|---|
@@ -110,7 +111,6 @@ only when you call it by name. All 20 `principle-*` skills are typed.
 | [painting-craft](plugins/visual/skills/painting-craft/README.md) | visual | Draws and paints in code to a gallery standard, with a screenshot review loop. It is not for UI icons, charts or diagrams. |
 | [bro](plugins/visual/skills/bro/README.md) | visual | Typed. Re-pitches the last message in plain words, with the missing context first and one picture. |
 | [ketchup](plugins/visual/skills/ketchup/README.md) | visual | Typed. Tells you what changed in this chat since your last message, and which calls you must make. |
-| [principles](plugins/principles/skills/principles/README.md) | principles | Picks the rule that applies from the 20 `principle-*` skills when you name a principle or make a design, test or debug decision. |
 
 A skill holds no tool details and no project facts. The tool details go in the skill's
 `references/<tool>.md` adapters. A project's own facts stay in that project.
