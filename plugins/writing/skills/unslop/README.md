@@ -44,5 +44,6 @@ To turn the plugin off, run `claude plugin disable writing@dotfiles`. This also 
 
 ## More
 
-- [SKILL.md](SKILL.md): the method and the full pattern list.
+- [SKILL.md](SKILL.md): the steps.
+- [references/patterns.md](references/patterns.md): the full numbered pattern list.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.

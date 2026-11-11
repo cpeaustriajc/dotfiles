@@ -2,7 +2,7 @@
 
 ## Spawns
 
-- how's explorers and explainer use the spawns in `../how/references/claude-code.md`.
+- how's explorers and explainer use the spawns in how's own adapter, which `SKILL.md` links.
 - Send how's first spawns in the same message as why's first git command, so the two run in
   parallel.
 - why's narrow default is git and its PRs. Add a tracker or docs source, at most two, only when
@@ -16,7 +16,7 @@
 - `how` and `why` ship in the engineering plugin, with `teach`. `unslop` ships in the writing plugin. `/how` and `/unslop` are
   slash-only, so read `../how/SKILL.md`, `../why/SKILL.md` and
   `../../../writing/skills/unslop/SKILL.md` and follow them.
-- If that `unslop/SKILL.md` is missing, write plain English by the rules in SKILL.md and say so
+- If that `unslop/SKILL.md` is missing, write plain English by `teaching.md` and say so
   in one line at the end of the reply, never before the short answer.
 
 ## Diagram series

@@ -54,4 +54,6 @@ The skill names no files to write.
 
 ## More
 
-- [SKILL.md](SKILL.md): the questions, the seven methods, the filters and the red flags.
+- [SKILL.md](SKILL.md): the starting questions and the steps Claude follows.
+- [references/methods.md](references/methods.md): the seven research methods.
+- [references/filters.md](references/filters.md): the eight filters and the red flags.

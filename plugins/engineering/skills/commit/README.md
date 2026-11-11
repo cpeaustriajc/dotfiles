@@ -48,3 +48,5 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
+- [references/git.md](references/git.md): the git commands for each step.
+- [references/claude-code.md](references/claude-code.md): the branch prefix in Claude Code.

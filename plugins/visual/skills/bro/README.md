@@ -48,5 +48,6 @@ The skill then loads as `/visual:bro`.
 
 - [SKILL.md](SKILL.md): the method.
 - [references/claude-code.md](references/claude-code.md): the read-only tools and the diagram.
+- [references/repitch.md](references/repitch.md): the rules for each step and for the sentences.
 - [LICENSE-wait-what](LICENSE-wait-what): follows Matt Pocock's `wait-what`, under the MIT licence.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.

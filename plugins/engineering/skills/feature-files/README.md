@@ -49,5 +49,6 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 
 ## More
 
-- [SKILL.md](SKILL.md): the method Claude follows and the file template.
+- [SKILL.md](SKILL.md): the method Claude follows.
+- [references/template.md](references/template.md): the feature file template and its rules.
 - [references/claude-code.md](references/claude-code.md): the Claude Code build and launch recipe that holds the launch steps.

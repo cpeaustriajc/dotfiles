@@ -21,5 +21,11 @@ These techniques recur whatever the subject.
 - For moving objects, take several screenshots a fraction of a second apart, so each one is caught passing something.
 
 **Raster passes and 3D figures**
-- Paint the scene in 2D, where you control the style. Model posed figures in 3D, where proportion and foreshortening must be right. Then run one stylisation pass over everything. `render3d.md` covers the renderer, cloth, IK and the pitfalls that cost hours.
+- Paint the scene in 2D, where you control the style. Model posed figures in 3D, where proportion and foreshortening must be right. Then run one stylisation pass over everything.
 - Preview a figure at final scale over a cached scene before running the full pipeline.
+- Render the final picture at twice its display size (3200 × 2000 for 1600 × 1000). A picture
+  rendered at display size and scaled up goes soft where the viewer looks.
+- For a painted tradition (oil, gouache), run `scripts/paintpass.py <src> <dst> --width 3200
+  --brush 0.5 --focus x,y,w,h` over the composed PNG (`--depth <mask>` when you have one), so every
+  part shares one brushwork and the extra pixels become finer strokes. The pass unifies; it cannot
+  rescue a weak drawing. Flat-vector and graphic styles skip it: brushwork smears their crisp edges.

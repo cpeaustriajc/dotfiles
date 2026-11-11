@@ -5,7 +5,7 @@ ellipses and flat fills. These are construction recipes for the parts that fail 
 starts from structure (what the thing is made of and how light meets it), because a reviewer reads
 structure at zoom, not colour.
 
-Build a hero element as a study first (SKILL.md, step 5), at the size it will be seen zoomed in.
+Build a hero element as a study first, at the size it will be seen zoomed in.
 
 ## Contents
 
@@ -81,8 +81,8 @@ environment, in bands that follow the form:
 6. **Separate the plates.** A knee or elbow is several pieces (cop, wings, lames); a gauntlet has
    finger lames. Draw the pieces, then shade each one with the bands.
 
-For a figure in armour whose pose foreshortens, render it with `render3d.md`. Its materials already
-do environment reflection.
+A figure in armour whose pose foreshortens is rendered in 3D; the renderer's materials already do
+environment reflection.
 
 ## Mail and other fine repeating texture
 
@@ -108,7 +108,7 @@ do environment reflection.
 - At 40–80 px tall, a face is lit planes, not features: the brow ridge's shadow over the eyes, the
   side plane of the nose, the cheekbone plane, the shadow under the lower lip and chin. Eyes are a
   dark socket shape, not drawn lids.
-- Keep the head's proportions measured (`anatomy.md`), and put the darkest dark of the head where
+- Keep the head's proportions measured, and put the darkest dark of the head where
   the planes turn away from the light.
 - Hands: one mass with the thumb as a separate wedge; fingers grouped, touching. In a gauntlet,
   follow the plate recipe.

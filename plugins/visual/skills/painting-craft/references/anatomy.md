@@ -3,6 +3,7 @@
 Measurements for people, horses, dogs and cars, and the pose geometry that decided whether a pose read as natural. All values are in centimetres. Use them as defaults, and replace them with a canon or museum source when one exists.
 
 ## Contents
+- Rules from reviews
 - Adult man, 180 cm
 - Seated on the ground
 - Pose geometry
@@ -10,6 +11,19 @@ Measurements for people, horses, dogs and cars, and the pose geometry that decid
 - Dog
 - Cars
 - Ratios to check at review
+
+## Rules from reviews
+
+- **Measure.** Build figures, animals and vehicles from these dimensions and write down each
+  number's source. Eyeballed figures came out 1.6× too long, twice. With no canon height, use a
+  named proxy, such as the actor's height, and say so.
+- **Turned figures go 3D.** A figure that faces the viewer, sits or points a limb at the camera
+  foreshortens, and flat 2D plates can't fake it. 2D works only near profile.
+- **Machines have anatomy.** A vehicle reads as fast as a face. Measure length, height, wheelbase
+  and wheel size; draw wheels in arches with dark wells, split glass, a door line, lights and a
+  contact shadow.
+- **Hands have mass.** At painting scale a hand is about 40 px: one unit, fingers touching, a clear
+  cuff. Separate thin fingers read as claws.
 
 ## Adult man, 180 cm
 

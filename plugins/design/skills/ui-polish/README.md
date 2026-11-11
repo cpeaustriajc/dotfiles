@@ -51,4 +51,7 @@ Requirement: a browser that Claude can drive, so it sees the real screen.
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
+- [references/layout.md](references/layout.md): the layout and content rules Claude checks on every screen.
+- [references/verdict.md](references/verdict.md): the table, the verdict and the sign-off.
 - [references/motion.md](references/motion.md), [interaction.md](references/interaction.md) and [app-ui.md](references/app-ui.md): the rules Claude checks.
+- [references/quality-bar.md](references/quality-bar.md): the bar for designs and prototypes, and the taste references.

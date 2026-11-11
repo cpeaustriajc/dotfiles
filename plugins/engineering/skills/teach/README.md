@@ -48,4 +48,5 @@ The skill then loads as `/engineering:teach`.
 
 - [SKILL.md](SKILL.md): the method.
 - [references/claude-code.md](references/claude-code.md): spawns, the diagram series and the text fallback.
+- [references/teaching.md](references/teaching.md): the detail behind each step: what to teach, sources, the build-up, confidence words and the voice rules on top of `unslop`.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.

@@ -7,6 +7,7 @@ What was learned getting Henry's kit right (Bohemia, 1403, after the KCD2 cover 
 - Layering and fit
 - Mistakes made
 - Researching costume for another period
+- Accuracy for any subject
 
 ## European kit about 1390-1420
 
@@ -77,3 +78,14 @@ Worked starting points, from game-canon pictures:
 - **Late Sengoku (Sekiro).** Wolf wears a shinobi's practical kit. Check the Shinobi Prosthetic, the Kusabimaru (a katana with a blade of about 70) and his tattered haori and scarf against game art; canon beats history here.
 - **Edo period (Onimusha: Way of the Sword).** Musashi and the Oni Gauntlet come from game key art. Tosei-gusoku plate-and-lame armour for any samurai foes.
 - **Night City and Los Santos.** Read clothing and cars from game stills. Car proportions (wheelbase, wheel diameter) are as checkable as armour sizes.
+
+## Accuracy for any subject
+
+- Reference images are the spec. When they disagree, follow the majority and name the one you set
+  aside.
+- The research brief above works for any subject: shapes and sizes, not essays. Sources: the
+  source work's cover art, key art and stills (ask the user for screenshots when wikis block
+  fetching); museum collections for costume; makers' spec pages for sizes; Wikipedia and survey
+  data for buildings and places.
+- Check each costume piece and building against the setting's date and region. When the request
+  mixes them, or canon and history disagree, say so, then do what the user asked.

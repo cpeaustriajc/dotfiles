@@ -31,8 +31,7 @@ One section per platform, each with a main version and a short one, written as t
   give guidance on how to take part there instead.
 
 End the page with the copy rules, each linked to the decision it comes from, so whoever writes the
-next post checks against them. Derive the rules from the project (SKILL.md, "The rules come from the
-project first"); do not carry rules from one project to another.
+next post checks against them. Derive the rules from the project's own sources; do not carry rules from one project to another.
 
 ## Publishing
 

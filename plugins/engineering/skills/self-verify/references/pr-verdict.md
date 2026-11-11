@@ -1,6 +1,6 @@
 # PR verdict
 
-Read this before you give, or set up, the verdict on a PR. The evidence rules in `SKILL.md` apply to it.
+Read this before you give, or set up, the verdict on a PR. The evidence rules that `SKILL.md` links apply to it.
 
 A fresh agent that did not write the change runs the project verify skill on the PR head. For any
 check that fails, it also runs that check on the base.

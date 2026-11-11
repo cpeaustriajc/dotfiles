@@ -1,6 +1,6 @@
 # Plain prose
 
-Read this before you publish a page. `SKILL.md`, section "Writing safely", says when.
+Read this before you publish a page. Step 5 of SKILL.md says when.
 
 A check cannot match these, so read for them. Rewrite each one on a page before you publish it:
 

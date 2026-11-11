@@ -1,6 +1,6 @@
 # Worst-case catalog
 
-Use this when the run seeds worst-case data. Pick the rows that match the fields the flow shows.
+Use this when the run seeds worst-case data (step 5 of `SKILL.md`). Pick the rows that match the fields the flow shows.
 
 **Map the fields first**
 - List every value the screen renders: field, where it comes from, its type, its limit, and
@@ -9,6 +9,8 @@ Use this when the run seeds worst-case data. Pick the rows that match the fields
   `maxLength`. Write "unbounded" where none exists. A front-end limit lower or higher than the
   back-end limit is a finding.
 - Each test value is either realistic or the real limit. No random strings.
+- Name each value and the rule it attacks ("a 63-character label stays on one line"), not
+  only a technique ("fuzz the form").
 - Put the values in through the same seam as the demo data: fixture, mock, props or API stub.
   Never edit the markup to cause a break.
 

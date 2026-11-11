@@ -3,6 +3,10 @@
 Mechanics checked against https://code.claude.com/docs/en/claude-projects.md and
 https://code.claude.com/docs/en/commands in November 2026. Check again when a detail matters.
 
+## Tracker
+
+Use the tracker's MCP server or CLI for every read and write in this run.
+
 ## Workers: Projects
 
 A worker in `references/orchestrate.md` is a Projects thread.

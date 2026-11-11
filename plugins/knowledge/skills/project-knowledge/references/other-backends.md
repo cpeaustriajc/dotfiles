@@ -1,6 +1,6 @@
 # Other backends
 
-The conventions in SKILL.md do not change. Map the four operations — find, read, record,
+The conventions in SKILL.md and the shared shape do not change. Map the four operations — find, read, record,
 supersede — onto whatever the backend's MCP server or CLI offers.
 
 ## Confluence

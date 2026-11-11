@@ -1,6 +1,6 @@
 # Scale, space and the built world
 
-How to keep a scene in one believable space, and the real-world sizes of the things that most often give a scene its scale. Figures and vehicles are in `anatomy.md`. Values here are typical real-world sizes from general knowledge, not canon. Replace them with a canon or survey source when the subject has one, and say which you used.
+How to keep a scene in one believable space, and the real-world sizes of the things that most often give a scene its scale. Values here are typical real-world sizes from general knowledge, not canon. Replace them with a canon or survey source when the subject has one, and say which you used.
 
 ## Contents
 - One scale per depth plane
@@ -9,6 +9,7 @@ How to keep a scene in one believable space, and the real-world sizes of the thi
 - Buildings
 - Streets
 - Trees and plants
+- Contact, light and edges
 - Water, wet ground and reflections
 - Atmosphere
 
@@ -77,6 +78,21 @@ A road seen side-on is a band whose height comes from the camera's pitch, with k
 
 - A bough starts inside its trunk. Canopy clumps overlap the branches that carry them. Roots flare into the ground.
 - Trees in a row along a road stand on the verge, so they are nearer than the road and in front of the traffic on it.
+
+## Contact, light and edges
+
+- A moving object crosses everything on its path: check its draw order against each object at
+  both ends of the path.
+- Seat things on their support. Roads climb hills and reach gates. A bough starts inside its
+  trunk, canopy clumps overlap their branches, roots flare into the ground.
+- Draw contact: a dark accent where things meet. A sword point is in the grass, feet are planted
+  at ankle height, a car sits on its tyres' contact line with a shadow under it.
+- One light. Cast shadows fall from one source and soften with distance from the caster. A
+  rendered figure needs a ground shadow catcher, or it floats.
+- Every edge is intended. Stray lines come from overlapping paths drawn in the wrong order;
+  smoothed closed curves bulge past their end points. Clip shapes to their region.
+- A moved horizon, camera or layout moves everything placed against it: re-check labels, props,
+  clipped regions and overlaps.
 
 ## Water, wet ground and reflections
 

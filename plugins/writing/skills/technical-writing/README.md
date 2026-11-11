@@ -45,7 +45,8 @@ To turn the plugin off, run `claude plugin disable writing@dotfiles`. This also 
 
 ## More
 
-- [SKILL.md](SKILL.md): the method and the sentence rules.
+- [SKILL.md](SKILL.md): the steps.
+- [references/sentence-rules.md](references/sentence-rules.md): the sentence rules.
 - [references/diataxis.md](references/diataxis.md): the rules for each of the four modes.
 - [references/worked-example.md](references/worked-example.md): one rewrite, before and after.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.

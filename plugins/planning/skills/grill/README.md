@@ -55,4 +55,5 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
+- [references/rounds.md](references/rounds.md): the ledger, how Claude asks, and how it reads your answers.
 - [references/claude-code.md](references/claude-code.md): the Claude Code tools for the form and the diagrams.

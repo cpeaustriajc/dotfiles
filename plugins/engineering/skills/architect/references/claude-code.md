@@ -7,14 +7,14 @@
 | Sonnet | `Agent` with `subagent_type: "researcher"`, `model: "sonnet"`, `run_in_background: true`; if `researcher` is not listed, `Explore` with `model: "sonnet"` |
 | Opus | the main session itself, after the Sonnet `Agent` call has started |
 
-- The Sonnet prompt holds `runner-prompt.md`, the task and the Phase A grounding, never your
+- The Sonnet prompt holds `runner-prompt.md`, the task and the step 1 grounding, never your
   own candidate.
 - Both runner agent types have only read tools. Never use `general-purpose` for the runner: it can
   edit, and no file changes before the pick.
 - Never `model: "opus"` on a subagent; the session is the Opus runner. Models follow dotfiles's
   `models/README.md`.
-- In the Phase A grounding, the how method's explorers and explainer use the spawns in
-  `../how/references/claude-code.md`.
+- In the step 1 grounding, the how method's explorers and explainer use the spawns in how's own
+  adapter, which `SKILL.md` links.
 
 ## Side-by-side view
 

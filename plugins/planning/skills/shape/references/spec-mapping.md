@@ -21,8 +21,8 @@
 
 1. Create the spec document in the project, with the author's text verbatim and status Draft.
 2. Convert the ticket: move it back to the backlog, or keep it as the first build slice once the
-   spec is Confirmed. Never cancel it.
-3. Put the project in Demo (`phases.md`), and add the approval item.
+   spec is Confirmed. Never cancel it: a cancel reads as a verdict on the author.
+3. Put the project in Demo, and add the approval item.
 4. Split no build items until the spec is Confirmed.
 
 ## Translating an old epic, brief or plan

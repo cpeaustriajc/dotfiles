@@ -46,6 +46,7 @@ The skill then loads as `/visual:ketchup`.
 
 ## More
 
-- [SKILL.md](SKILL.md): the method and the reply layout.
+- [SKILL.md](SKILL.md): the steps and the reply layout.
 - [references/claude-code.md](references/claude-code.md): the read-only tools and the diagrams.
+- [references/reply.md](references/reply.md): the rules for each step, the pictures and the choices.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.

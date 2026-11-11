@@ -49,5 +49,7 @@ The scripts in `scripts/` handle model download, narration, music, formats and i
 
 ## More
 
-- [SKILL.md](SKILL.md): the workflow and the pre-handover checklist.
+- [SKILL.md](SKILL.md): the workflow.
+- [references/brief.md](references/brief.md): the copy rules, the brief questions, the capture and the storyboard.
+- [references/review.md](references/review.md) and [quicktime.md](references/quicktime.md): the review rounds and the checklist before each handover.
 - [references/hyperframes.md](references/hyperframes.md), [voice.md](references/voice.md), [music.md](references/music.md), [models.md](references/models.md) and [launch-kit.md](references/launch-kit.md): details per step.

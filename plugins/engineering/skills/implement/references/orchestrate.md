@@ -9,7 +9,7 @@ base branch and how many to run at a time.
 
 1. **Frame.** Read the spec and its items. Build the graph from the blocked-by links.
 2. **Frontier.** The frontier is every `ready-for-agent` item that passes the gate in step 3 of
-   `SKILL.md`. List each item that is not ready as a gate.
+   `SKILL.md` (`references/ticket.md`). List each item that is not ready as a gate.
 3. **Start.** Start one worker per frontier item, up to the adapter's cap. The brief's first
    line is `/implement <item link>`. The brief names the item's base branch.
 4. **Check.** A worker's report is a claim. Read its PR's verdict table. Rerun one check on its

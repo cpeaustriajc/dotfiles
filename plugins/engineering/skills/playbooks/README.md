@@ -61,4 +61,5 @@ The design playbook starts two read-only Sonnet subagents in parallel. Each writ
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/bug.md](references/bug.md), [refactor.md](references/refactor.md), [perf.md](references/perf.md), [feature.md](references/feature.md), [prototype.md](references/prototype.md) and [design.md](references/design.md): the six playbooks.
+- [references/evidence.md](references/evidence.md): what counts as proof in every playbook.
 - [references/claude-code.md](references/claude-code.md): how Claude Code runs the two design sketches.

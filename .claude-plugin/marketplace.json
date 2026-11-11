@@ -12,7 +12,7 @@
       "name": "design",
       "displayName": "Design",
       "description": "Sign off UI work and motion — check it against the design, add missing microinteractions, make launch videos.",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "author": {
         "name": "John Carlo Austria"
       },
@@ -75,7 +75,7 @@
       "name": "knowledge",
       "displayName": "Knowledge",
       "description": "Keep what the team learns — a decision log, research pages, lessons from past sessions, and a recap of recent work.",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "author": {
         "name": "John Carlo Austria"
       },
@@ -95,7 +95,7 @@
       "name": "writing",
       "displayName": "Writing",
       "description": "Write so people can read — docs in plain ASD-STE100 and AI tells cut.",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "author": {
         "name": "John Carlo Austria"
       },
@@ -114,7 +114,7 @@
       "name": "visual",
       "displayName": "Visual",
       "description": "Show it as a picture — paint scenes in code to a gallery standard, and re-pitch or catch up a chat in plain words with a picture.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "John Carlo Austria"
       },
