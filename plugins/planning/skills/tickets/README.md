@@ -64,7 +64,7 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
-- [references/item-template.md](references/item-template.md): the item template and the rules for each check.
+- [references/item-template.md](references/item-template.md): the parts of an item, and the rules for each check. The tracker's adapter says how each part lands.
 - [references/item-kinds.md](references/item-kinds.md): work types, the Chore's No-QA check, bugs and wide mechanical changes.
 - [references/sizing.md](references/sizing.md): how Claude estimates context per item, and the measured run behind the numbers.
 - [../shape/references/top-down.md](../shape/references/top-down.md): the five rules and the tracker lookup.

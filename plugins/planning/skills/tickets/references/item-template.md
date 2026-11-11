@@ -2,39 +2,18 @@
 
 Read this before you write an item. Step 5 of `SKILL.md` says when.
 
-Use the project's own work-item template and section names, read fresh as `top-down.md` says.
-With none, propose this one once and use it. The rules below hold under any section names.
+Use the project's own work-item template and its part names, read fresh as `top-down.md` says.
+With none, propose these parts once and use them. The tracker's adapter in `shape/references/`
+says how each part lands: a section, a checklist, a field or a link.
 
-```markdown
-## Context
+| Part | Holds |
+|---|---|
+| Context | Why this exists now, the evidence, and links that stop someone rediscovering it: 2–4 sentences. Probe data and architecture stay in the engineering document; link it. |
+| Outcome | The state that is true when this is done, from the user's side. One sentence. |
+| Checks | 3–5 observable end states, as the tracker's checklist. Each quotes the requirement it meets with its number (R3), and at least one is a **You see** line: the screen, message or state that proves it, how to reach it, and who proves it (`test`, `eye` or `engineer`). |
+| Out of scope | Only the boundaries that prevent a likely misunderstanding. Leave the part out if there are none. |
+| Budget | Estimate: low–high of the context budget, and its largest part. Proof: the pages, widths and crops, and the most fix rounds. Stop: past the limit, keep what passes, write a hand-over note on the item, and stop. |
 
-<Why this exists now, the evidence, and the links that stop someone rediscovering it.>
-
-## Outcome
-
-<The concrete state that is true when this is done. One sentence.>
-
-## Checks
-
-- [ ] R3: <the requirement, quoted word for word>
-- [ ] You see: <the screen, message or state that proves it>. Reach it with: <the account, data, switch or payment method that sets up that state>. (test | eye | engineer)
-- [ ] <Any finer condition the verifier needs.>
-
-## Out of Scope
-
-- <Only the boundaries that prevent a likely misunderstanding. Omit the section if none.>
-
-## Budget
-
-Estimate: <low–high>k of <budget>k, driven by <the largest part>. Proof: <pages, widths, crops>, at most <n> fix rounds. Stop: past <limit>k, commit what passes, write a hand-over note on this item, and stop.
-```
-
-- **Context:** 2–4 sentences plus links. Probe data and architecture go in the pull request or
-  the engineering document; link them.
-- **Outcome:** from the user's side.
-- **Checks:** 3–5, each an observable end state, with at least one **You see** line.
-- **Checkboxes.** Write each check as `- [ ]`. Use a numbered list instead when the adapter's
-  Checklist row says the tracker drops checkboxes, or the read-back shows them lost; say so once.
 - **Each check is reachable.** It names what puts the app in its starting state: the account type,
   the kind of data ("a cart with a premium name", not "a domain"), the test switch, the payment
   method ("bank transfer, left unpaid"). If the state needs a trigger the reader would not guess,
@@ -45,8 +24,8 @@ Estimate: <low–high>k of <budget>k, driven by <the largest part>. Proof: <page
   any of the four. Failure: "the panel offers nothing" meant `visible, refuses`; QA passed it as
   "hidden", and agents later treated both as true.
 - **Each check names who proves it.** Hand testing, by a person or an agent clicking through, is
-  the exception. `test` (the default): an end-to-end test drives it and records a video; the pull
-  request gives the one command and where the video and report land. The verifier watches the
+  the exception. `test` (the default): an end-to-end test drives it and records a video; the change's
+  review gives the one command and where the video and report land. The verifier watches the
   video, so look and wording checks are `test` too. `eye`: no automation can reach it (a real
   device, a third-party inbox); say why. `engineer`: it needs access
   the verifier lacks (a database, a server setting, a burst of requests, a secret key), so the
