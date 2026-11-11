@@ -35,10 +35,20 @@
 - Put a draft I must approve in the chat, not in a file.
 
 ## Commits, pushes and PRs
-- Commit each finished slice once its check passes, without asking, unless the project wants a
-  sign-off first.
-- Push and open the PR without asking, unless the project says to wait for approval. Then show
-  the draft in the chat and wait for my go.
+Follow this flow without asking, except where a node says to wait for my go.
+
+```mermaid
+flowchart TD
+  A["Slice finished"] --> B{"Check passes?"}
+  B -->|"no"| F["Fix it"] --> B
+  B -->|"yes"| C{"Project wants a sign-off?"}
+  C -->|"yes"| D["Show the change, wait for my go"] --> E
+  C -->|"no"| E["Commit"]
+  E --> G{"Project says to wait for PR approval?"}
+  G -->|"yes"| H["Show the PR draft, wait for my go"] --> I
+  G -->|"no"| I["Push and open the PR"]
+```
+
 - Ship one project's build tickets as a PR stack in blocked-by order, each branch off the last,
   unless the project sets its own branching. Branch other work off main. A restack costs more
   than the build.
