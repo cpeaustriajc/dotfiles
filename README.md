@@ -35,7 +35,36 @@ The skills ship in seven plugins. Install only the plugins that you need.
 | `writing` | Write docs in plain ASD-STE100, and cut the tells of AI-written prose. | technical-writing, unslop |
 | `visual` | Paint scenes in code to a gallery standard, and re-pitch or catch up a chat in plain words with a picture. | painting-craft, bro, ketchup |
 
-The engineering principles are prompts you paste, not a plugin: [PROMPTS.md](PROMPTS.md).
+The engineering principles are prompts you paste, not a plugin: see [Prompts](#prompts).
+
+### Prompts
+
+Engineering principles as prompts you paste into a session. Each link opens the prompt, ready to copy.
+
+| Prompt | What it finds |
+|---|---|
+| [Model the Domain](PROMPTS.md#model-the-domain) | All implicit state machines, booleans kept in sync, and branch chains that one table or union would replace. |
+| [Foundational Thinking](PROMPTS.md#foundational-thinking) | Logic written before its data shapes, and one capability spread as special cases across callers. |
+| [Type System Discipline](PROMPTS.md#type-system-discipline) | Interchangeable primitives, hand-copied schema types, casts on external data and non-exhaustive variants. |
+| [Boundary Discipline](PROMPTS.md#boundary-discipline) | Checks inside the system that belong at its boundary, and logic that cannot run without the framework. |
+| [Make Operations Idempotent](PROMPTS.md#make-operations-idempotent) | Steps that break when they run twice or after a crash at any point. |
+| [Separate Before Serializing Shared State](PROMPTS.md#separate-before-serializing-shared-state) | Two writers on one file, key or branch, to split before you add a lock. |
+| [Laziness Protocol](PROMPTS.md#laziness-protocol) | One decision made in two places, and parameters passed through untouched. |
+| [Subtract Before You Add](PROMPTS.md#subtract-before-you-add) | Dead code, stubs and guards that no spec or use needs. |
+| [Minimize Reader Load](PROMPTS.md#minimize-reader-load) | Wrappers with one caller, and state wider than it needs to be. |
+| [Redesign From First Principles](PROMPTS.md#redesign-from-first-principles) | A new flag beside an old path, and the design you would build from zero. |
+| [Outcome-Oriented Execution](PROMPTS.md#outcome-oriented-execution) | Shims that exist only to keep a middle step green. |
+| [Exhaust the Design Space](PROMPTS.md#exhaust-the-design-space) | The best of 2 or 3 small prototypes, for a decision with no precedent. |
+| [Experience First](PROMPTS.md#experience-first) | Options added because they were easy, and reports that list files instead of effects. |
+| [Build the Lever](PROMPTS.md#build-the-lever) | Hand edits that a script could do and prove. |
+| [Fix Root Causes](PROMPTS.md#fix-root-causes) | Guards for states that must never exist, and sibling copies of the same bug. |
+| [Attack the Premise](PROMPTS.md#attack-the-premise) | Fixes that share one untested premise, tested before the next fix. |
+| [Prove It Works](PROMPTS.md#prove-it-works) | "Done" that rests on a proxy: a cache, an old build or a self-report. |
+| [Test Behavior, Not Implementation](PROMPTS.md#test-behavior-not-implementation) | Tests that pass when behavior breaks, or fail on a refactor. |
+| [Explain the Number](PROMPTS.md#explain-the-number) | Numbers with no named limiter: the core, lock, disk or network that capped them. |
+| [Sequence Verifiable Units](PROMPTS.md#sequence-verifiable-units) | Checks against a stale base, and commit orders that prove nothing. |
+| [Find Implicit Invariants](PROMPTS.md#find-implicit-invariants) | Every invariant the code assumes but never enforces, with the path that breaks it. |
+| [Follow the Dependencies](PROMPTS.md#follow-the-dependencies) | Code bolted on against the dependency direction, and the simpler shape the dependencies imply. |
 
 ### Claude Code
 
