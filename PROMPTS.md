@@ -40,6 +40,11 @@ decision.
     that capped them.
 20. **Sequence Verifiable Units**: Find checks against a stale base, and commit orders that
     prove nothing.
+21. **Find Implicit Invariants**: List every invariant this code assumes but never enforces.
+    Show the path that breaks each one.
+22. **Follow the Dependencies**: Map what depends on what. Find code bolted on against that
+    direction (adapters, flags, special cases that exist only to make it work), and say the
+    simpler shape the dependencies already imply.
 
 Adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) by Lauren Tan, under
 the MIT licence: [PROMPTS.LICENSE](PROMPTS.LICENSE).

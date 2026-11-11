@@ -35,7 +35,7 @@ The skills ship in seven plugins. Install only the plugins that you need.
 | `writing` | Write docs in plain ASD-STE100, and cut the tells of AI-written prose. | technical-writing, unslop |
 | `visual` | Paint scenes in code to a gallery standard, and re-pitch or catch up a chat in plain words with a picture. | painting-craft, bro, ketchup |
 
-The 20 engineering principles are prompts you paste, not a plugin: [PROMPTS.md](PROMPTS.md).
+The engineering principles are prompts you paste, not a plugin: [PROMPTS.md](PROMPTS.md).
 
 ### Claude Code
 
