@@ -70,9 +70,9 @@
   that broke the purpose.
 - Take who counts as a user from the project, not from the request.
 - Use reviewers with different blind spots who know the purpose but not the work history.
-- Ask reviewers for every spec gap and user-facing defect, but no style: a reviewer asked for
-  problems always finds some, and fixing them all adds layers and tests for cases that can't
-  happen. Rank findings by user impact.
+- Ask reviewers for every spec gap and user-facing defect, but no style. One told to hold back
+  reports less, not better; one asked for style always finds some, and fixing it all adds layers
+  and tests for cases that can't happen. Rank findings by user impact.
 - When you can, prove a finding on the user's path — run-time bugs pass read-only reviews.
 - Report each kind of bug once, with its instances.
 - Stop when a pass finds nothing a user would hit. If findings continue, question the design.
