@@ -12,7 +12,8 @@ host's adapter (`references/github.md`) and the harness's (`references/claude-co
 
 1. Not signed in to the code host: stop. No remote: offer the matching repo, a private or a
    public one.
-2. On the default branch: branch by the project's rule.
+2. On the default branch: branch by the project's rule. An open blocker PR: stack on it
+   (`references/stacking.md`).
 3. Commit loose changes in small slices, in the repo's commit style. Keep existing commits.
 4. A fresh reader on the cheapest model lists each added comment except one-line trap warnings
    (the repo's comment rule wins). Cut each in its own commit; the list is final.

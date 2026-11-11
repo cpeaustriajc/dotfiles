@@ -59,7 +59,6 @@ Estimate: <low–high>k of <budget>k, driven by <the largest part>. Proof: <page
   same input: "the same name shows the same price on the shortlist, in the cart and at checkout".
 - **Bounded reads.** The item states the measured facts it needs (sizes, colours, copy). It
   links a large reference only as a narrow crop or excerpt.
-- **Stack:** an item in a stack ends with the `## Stack` section from `references/stacking.md`.
 - **Whole body:** under about 1,500 characters, a quick sign only; the estimate decides the size.
   Longer means split it. Quoted requirement lines do not count; the tree check subtracts them.
 - **Behaviour, not file paths or code**: paths go stale. A prototype's snippet that pins a

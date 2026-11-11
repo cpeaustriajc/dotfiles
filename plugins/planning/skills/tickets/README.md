@@ -38,9 +38,7 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 
 - Claude reads the spec first. If the spec is Draft, Claude cuts only prototype items for the Demo phase and says what would confirm it.
 - Claude cuts the next slice only, not the whole spec. Each item is a narrow path through every layer, not one layer.
-- When a project's Implementation slice has several items, Claude plans them as one chain of stacked PRs. A project is a Linear project, a Jira epic or a GitHub parent issue.
-- In a stack, the first item branches off main, and each next item branches off the item below it. Each item gets a Stack line with its branch and its base.
-- A lone backlog item, a small fix, and Demo, Launch and Post Launch items branch off main.
+- Each item names the items that block it. Branches and stacked PRs are left to `create-pr`.
 - Claude asks one question: are the size and the blocking right? Any other question goes up to `shape` as a spec change.
 - Each item's checks quote the requirement with its number and has a "You see" line that says what the verifier observes.
 - Each check names the account, data or switch that reaches its state.
@@ -69,7 +67,6 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 - [references/item-template.md](references/item-template.md): the item template and the rules for each check.
 - [references/item-kinds.md](references/item-kinds.md): work types, the Chore's No-QA check, bugs and wide mechanical changes.
 - [references/sizing.md](references/sizing.md): how Claude estimates context per item, and the measured run behind the numbers.
-- [references/stacking.md](references/stacking.md): commands for plain git, gh stack, Graphite and git-town.
 - [../shape/references/top-down.md](../shape/references/top-down.md): the five rules and the tracker lookup.
 - [../shape/references/tree-outline.md](../shape/references/tree-outline.md): the tree JSON that the check reads.
 

@@ -12,11 +12,10 @@ Read `../shape/references/top-down.md` first; its adapter rows say where each pa
 2. Read facts from the fetched trunk; search open and recent closed items. A branch
    behind the trunk files work already done.
 3. Cut the next slice only:
-   - vertical slices, prefactors first, blockers named, riskiest first;
-   - each fits one session of its cheapest builder: `references/sizing.md`;
-   - two or more code items in Implementation stack: `references/stacking.md`.
-4. Show the slice: title, requirements, what I see, blockers, builder, estimate, stack base.
+   - vertical slices, prefactors first, blockers named, riskiest first.
+   - each fits one session of its cheapest builder: `references/sizing.md`.
+4. Show the slice: title, requirements, what I see, blockers, builder, estimate.
    Iterate until I approve. Other questions are spec gaps for `shape`.
 5. Write each item per `references/item-template.md`; type, Bug or wide change per
    `references/item-kinds.md`.
-6. Write blockers first, a stack bottom first. Run the tree check (`--launch` at Launch).
+6. Write blockers first. Run the tree check (`--launch` at Launch).

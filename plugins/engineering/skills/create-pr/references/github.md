@@ -4,7 +4,8 @@
 
 - Sign-in: `gh auth status`. A matching repo: `gh repo list`.
 - Push: `git push -u`.
-- Open: `gh pr create`, `--draft` only when asked. Pass `--base` when a base was given, or the
+- Open: `gh pr create`, `--draft` only when asked. Metadata: `--reviewer`, `--label`,
+  `--assignee`, `--milestone`, `--project`, taken from the repo's rules or its recent PRs. Pass `--base` when a base was given, or the
   branch was cut from one that exists on origin (`git ls-remote --heads origin <base>`).
 
 ## Upload evidence
