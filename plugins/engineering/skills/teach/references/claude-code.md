@@ -13,11 +13,8 @@
 
 ## Sibling skills
 
-- `how` and `why` ship in the engineering plugin, with `teach`. `unslop` ships in the writing plugin. `/how` and `/unslop` are
-  slash-only, so read `../how/SKILL.md`, `../why/SKILL.md` and
-  `../../../writing/skills/unslop/SKILL.md` and follow them.
-- If that `unslop/SKILL.md` is missing, write plain English by `teaching.md` and say so
-  in one line at the end of the reply, never before the short answer.
+- `how` and `why` ship in the engineering plugin, with `teach`. `/how` is slash-only, so read
+  `../how/SKILL.md` and `../why/SKILL.md` and follow them.
 
 ## Diagram series
 

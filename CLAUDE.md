@@ -62,7 +62,7 @@ not make a claim true, and a source that was right before can be wrong now.
   `claude plugin test` reads no `userConfig` defaults (linear-gate failed 86 of 105 tests). With it,
   the entry's `userConfig` does not apply.
 - `plugins/<plugin>/skills/<skill>/`: the shipped skill plugins `design`, `engineering`,
-  `planning`, `knowledge` and `writing`.
+  `planning` and `knowledge`.
 - `mods/<mod>/`: one plugin for each mod.
 - To retire a skill or a mod, delete its folder in one commit. Write its name in the commit
   message, so that `git log --diff-filter=D` finds it.

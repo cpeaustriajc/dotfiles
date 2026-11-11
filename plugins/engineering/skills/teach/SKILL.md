@@ -17,7 +17,7 @@ Adapters: `references/claude-code.md`, `../how/references/claude-code.md`. Detai
    on, and follow their lead.
 5. Three or more moving parts: a build-up diagram series. One all-at-once diagram is reference.
 6. Keep `why`'s tier words and hedges as written: they are findings.
-7. Write through `../../../writing/skills/unslop/SKILL.md`.
+7. Write through `references/ai-tells.md`.
 
 Reply with the explanation and the threads worth chasing with `how` or `why`, never a report of
 what you did.

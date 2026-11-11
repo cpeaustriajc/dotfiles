@@ -22,6 +22,8 @@
 
 ## Scope
 - Change only what I asked. Report other problems; do not fix them.
+- Write a doc, README, spec, PR description or commit message by the repo's writing rules
+  first, then in ASD-STE100 Simplified Technical English.
 - Write in a shared place (a repo, tracker, wiki or channel) the way its existing items are
   written — you do not follow its conventions unless you look at them first.
 - When a fix grows far past its asked size (example: a one-line fix past about 100 lines), stop

@@ -10,8 +10,7 @@
 
 ## Sibling skills
 
-- `why` and `unslop` are slash-only, so the Skill tool cannot start them. Read
-  `../why/SKILL.md` and `../../../writing/skills/unslop/SKILL.md` and follow them.
+- `why` is slash-only, so the Skill tool cannot start it. Read `../why/SKILL.md` and follow it.
 - `interrogate` ships in dotfiles and the Skill tool starts it.
 
 ## Risk map

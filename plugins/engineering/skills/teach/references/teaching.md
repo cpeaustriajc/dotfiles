@@ -35,7 +35,7 @@ The detail behind each step of `SKILL.md`.
 
 ## Voice (step 7)
 
-These add to `unslop` for teaching.
+These add to `ai-tells.md` for teaching.
 
 - No em dashes.
 

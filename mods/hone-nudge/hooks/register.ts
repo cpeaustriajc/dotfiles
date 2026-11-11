@@ -11,7 +11,6 @@ const SHIPPED = new Map([
   ['playbooks', 'engineering'], ['break-it', 'engineering'], ['feature-files', 'engineering'],
   ['interrogate', 'engineering'], ['commit', 'engineering'], ['create-pr', 'engineering'],
   ['ui-polish', 'design'], ['painting-craft', 'visual'],
-  ['technical-writing', 'writing'], ['unslop', 'writing'],
 ])
 // Keep this detection in step with plugins/knowledge/skills/hone/scripts/corrections.py, which a separate plugin cannot import.
 const CORRECTION = /^\s*(no\b|nope|why\b|stop\b|don'?t\b|do not\b|i already|i said|i meant|that's not|wrong|huh|wait\b|actually\b|\?\?)/i

@@ -92,29 +92,10 @@
       ]
     },
     {
-      "name": "writing",
-      "displayName": "Writing",
-      "description": "Write so people can read — docs in plain ASD-STE100 and AI tells cut.",
-      "version": "1.2.1",
-      "author": {
-        "name": "John Carlo Austria"
-      },
-      "source": "./plugins/writing",
-      "strict": false,
-      "category": "productivity",
-      "keywords": [
-        "writing",
-        "docs",
-        "readme",
-        "ste100",
-        "style"
-      ]
-    },
-    {
       "name": "visual",
       "displayName": "Visual",
-      "description": "Show it as a picture — paint scenes in code to a gallery standard, and re-pitch or catch up a chat in plain words with a picture.",
-      "version": "1.0.1",
+      "description": "Show it as a picture — paint scenes in code to a gallery standard.",
+      "version": "2.0.0",
       "author": {
         "name": "John Carlo Austria"
       },
@@ -125,9 +106,7 @@
         "svg",
         "canvas",
         "illustration",
-        "painting",
-        "re-pitch",
-        "catch-up"
+        "painting"
       ]
     },
     {
@@ -145,7 +124,7 @@
       "name": "hone-nudge",
       "displayName": "Hone Nudge",
       "description": "Turn corrections into fixes — suggests /hone <skill> after you correct Claude during a dotfiles skill.",
-      "version": "0.1.7",
+      "version": "0.1.8",
       "author": {
         "name": "John Carlo Austria"
       },

@@ -32,14 +32,13 @@ The skills ship in seven plugins. Install only the plugins that you need.
 | `engineering` | Prove the work in the real app with playbooks, design-first builds, unattended loops, bug hunts, code history, review and PRs. | playbooks, break-it, feature-files, interrogate, commit, create-pr, architect, implement, drive, bug-hunt, blast-radius, self-verify, formal-verify, no-comments, cleanup, how, why, teach |
 | `planning` | Turn an idea into tickets. Find and test ideas, write the spec, cut thin slices, and triage them in any tracker. | vision, shape, tickets, grill, scout, triage |
 | `knowledge` | Keep what the team learns: a decision log, research pages, lessons from past sessions, and a recap of recent work. | project-knowledge, hone, recall |
-| `writing` | Write docs in plain ASD-STE100, and cut the tells of AI-written prose. | technical-writing, unslop |
-| `visual` | Paint scenes in code to a gallery standard, and re-pitch or catch up a chat in plain words with a picture. | painting-craft, bro, ketchup |
+| `visual` | Paint scenes in code to a gallery standard. | painting-craft |
 
 The engineering principles are prompts you paste, not a plugin: see [Prompts](#prompts).
 
 ### Prompts
 
-Engineering principles as prompts you paste into a session. Each link opens the prompt, ready to copy.
+Engineering principles and two rewrites, as prompts you paste into a session. Each link opens the prompt, ready to copy.
 
 | Prompt | What it finds |
 |---|---|
@@ -65,6 +64,8 @@ Engineering principles as prompts you paste into a session. Each link opens the 
 | [Sequence Verifiable Units](PROMPTS.md#sequence-verifiable-units) | Checks against a stale base, and commit orders that prove nothing. |
 | [Find Implicit Invariants](PROMPTS.md#find-implicit-invariants) | Every invariant the code assumes but never enforces, with the path that breaks it. |
 | [Follow the Dependencies](PROMPTS.md#follow-the-dependencies) | Code bolted on against the dependency direction, and the simpler shape the dependencies imply. |
+| [Re-pitch](PROMPTS.md#re-pitch) | Rewrite: your last message again, with the missing context first and one diagram. |
+| [Unslop](PROMPTS.md#unslop) | Rewrite: the same text without the tells of AI-written prose. |
 
 ### Claude Code
 
@@ -135,11 +136,7 @@ only when you call it by name.
 | [project-knowledge](plugins/knowledge/skills/project-knowledge/README.md) | knowledge | Keeps decision and research pages where the team writes, such as a GitHub wiki, Notion, Obsidian or Confluence. |
 | [hone](plugins/knowledge/skills/hone/README.md) | knowledge | Finds your repeated corrections in the transcripts on this machine, and proposes where each lesson goes. |
 | [recall](plugins/knowledge/skills/recall/README.md) | knowledge | Gives a brief of recent work from transcripts, git and PRs. |
-| [technical-writing](plugins/writing/skills/technical-writing/README.md) | writing | Typed. Writes, rewrites or reviews a doc, README, spec, PR description or commit message by the repo's rules, then by ASD-STE100. |
-| [unslop](plugins/writing/skills/unslop/README.md) | writing | Typed, with text. Gives the same text back without the common tells of AI-written prose. |
 | [painting-craft](plugins/visual/skills/painting-craft/README.md) | visual | Draws and paints in code to a gallery standard, with a screenshot review loop. It is not for UI icons, charts or diagrams. |
-| [bro](plugins/visual/skills/bro/README.md) | visual | Typed. Re-pitches the last message in plain words, with the missing context first and one picture. |
-| [ketchup](plugins/visual/skills/ketchup/README.md) | visual | Typed. Tells you what changed in this chat since your last message, and which calls you must make. |
 
 A skill holds no tool details and no project facts. The tool details go in the skill's
 `references/<tool>.md` adapters. A project's own facts stay in that project.
