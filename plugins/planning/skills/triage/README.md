@@ -55,4 +55,5 @@ The skill then loads as `/planning:triage`.
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/agent-brief.md](references/agent-brief.md): the brief and the triage notes.
+- [references/requests.md](references/requests.md): the "what needs attention" list and direct orders.
 - [references/github.md](references/github.md): the `gh` commands.

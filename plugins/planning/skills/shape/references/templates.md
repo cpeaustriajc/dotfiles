@@ -1,5 +1,8 @@
 # Templates
 
+Contents: Spec · Project (the project check, properties, description, internal tool) · Status
+update.
+
 Proposals, not a standard. The project's own templates and section names win. Where the project
 has none, propose these shapes once and use them; where its template lacks a section below, add
 the section's content under the project's nearest heading.
@@ -43,6 +46,12 @@ R2. <An empty, error or edge state, stated the same way.>
 - <Must be empty before the spec is Confirmed.>
 ```
 
+- **Requirements are statements, not tasks.** Each says who does what and what they see, for
+  the empty, error, slow and edge states too. None names a data source, vendor, endpoint, model
+  or timing budget: the product owner must be able to confirm it, and mechanism buries intent.
+  Mechanism goes in one line of the project How.
+- **Feasibility gate.** A requirement that needs a system the team neither owns nor has a
+  contract for gets a probe of that system first; the answer often removes the dependency.
 - **Requirements** are numbered once and never renumbered; a dropped one is struck through, so
   work items that cite it still resolve. A long list is fine: it should cover the feature.
 - **Out of scope** is never empty on a Confirmed spec. The things refused are the most useful
@@ -51,6 +60,10 @@ R2. <An empty, error or edge state, stated the same way.>
   (a state machine, a schema) may be inlined, marked as from a prototype.
 
 ## Project
+
+Before you draft or audit one, check it is a project at all: one outcome with an end and several
+work items. Flag a single ticket dressed up as a project, a permanent category posing as one, or
+two outcomes in one; say so rather than repair it silently.
 
 Return the properties separately from the description, because the properties go in the tracker's
 own fields:
@@ -69,7 +82,8 @@ Dependencies:
 Description:
 ```
 
-The description is a small, timeless spec of how the project works. It stays useful as the project
+The description uses a neutral present tense ("Buyers save names to a shortlist", not "will
+let"), so it stays true as the project moves. It is a small, timeless spec of how the project works. It stays useful as the project
 moves, so it holds no status narration, completed work, dated updates, migration history,
 temporary blockers or next steps; those go in status updates or native fields.
 

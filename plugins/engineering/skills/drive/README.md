@@ -57,4 +57,6 @@ The Claude Code adapter turns the exit check into a `/goal` condition. It can al
 ## More
 
 - [SKILL.md](SKILL.md): the method.
+- [references/run-files.md](references/run-files.md): the exit check template, and the plan, log and resume note each pass reads.
+- [references/audit.md](references/audit.md): the three flags the trail audit raises and the Attention line shape.
 - [references/claude-code.md](references/claude-code.md): how to run the loop with `/goal`, Stop hooks and `/loop`, and how to start the audit agent.

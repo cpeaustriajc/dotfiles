@@ -51,6 +51,8 @@ The skill then loads as `/engineering:no-comments`.
 
 - [SKILL.md](SKILL.md): the method.
 - [references/sweeper-prompt.md](references/sweeper-prompt.md): the brief the sweeper gets, with its keep list.
+- [references/steps.md](references/steps.md): how Claude prepares, reviews the sweeper's report, reshapes and lands the commits.
+- [references/report.md](references/report.md): the report and the inline view items.
 - [references/constraints.md](references/constraints.md): how a constraint comment is checked, encoded or deleted.
 - [references/claude-code.md](references/claude-code.md): the spawn call and the commit rules.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.

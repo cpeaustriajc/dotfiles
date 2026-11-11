@@ -40,16 +40,16 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 - Claude removes or shortens each comment that the reader lists, and commits that change as its own slice.
 - It runs the fast checks that the repo's `CLAUDE.md` names. If one fails, it stops and opens no PR.
 - If a PR is already open for the branch, it pushes and reports the URL. It does not open a duplicate.
-- The PR body follows the repo's template. Otherwise it holds a short summary, a `Related` line, an `Evidence` line, a `Merge danger` line and a `Test changes` line.
+- The PR body follows the repo's template. Without one, it follows the form of the repo's last few merged PRs. Without either, it holds a short summary, an `Evidence` line, a `Merge danger` line and a `Test changes` line.
 - Evidence videos and screenshots show each click and key press, play at a person's pace, and leave out sign-in and cleanup. They are attached to the PR with `gh --attach`.
-- It links the issue as related and never writes `Closes`, `Fixes` or `Resolves`.
+- It links the issue by its key and never writes `Closes`, `Fixes` or `Resolves`, which would close the issue on merge.
 - Before it opens the PR, Claude reads the title and body for AI-sounding prose, such as arrows and metaphor nouns, and rewrites it.
 
 ## Limits
 
 - It leaves out the `Evidence` line when no end-to-end run happened. It does not invent one.
-- It leaves out the `Related` line when it finds no issue.
-- It adds no AI attribution and no co-author trailer.
+- Reviewers, labels and the linked issue go in the PR's own fields, not the body. The issue key goes in the branch name or title.
+- AI attribution follows Claude Code's own setting.
 - It does not change the draft or ready state of an existing PR.
 - It has no settings. The arguments are `draft` and a base branch.
 
@@ -57,5 +57,13 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/claude-code.md](references/claude-code.md): how the comment reader runs in Claude Code.
+- [references/pr-body.md](references/pr-body.md): the PR title, body and metadata.
+- [references/stacking.md](references/stacking.md): stacked PRs on an open blocker, with commands for plain git, gh stack, Graphite and git-town.
 - [references/evidence.md](references/evidence.md): the rules for screenshots and videos in the Evidence line.
+- [references/plain-prose.md](references/plain-prose.md): the prose patterns Claude rewrites in the title and body.
 - [references/github.md](references/github.md): how to upload screenshots and videos to a GitHub PR or issue.
+
+### Sources and evidence
+
+- Source: Matt Pocock's `writing-for-agents` skill, from `mattpocock/skills` on `main`. Its rules: cut a sentence the model obeys by default, and point to a source of truth over a copy. It gives no measured result.
+- Evidence: on 2026-11-11, terse project skills in one product repo kept their exact steps in most runs. Those skills point to the tracker's templates and the repo's rules and copy none of them.

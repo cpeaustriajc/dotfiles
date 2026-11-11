@@ -1,6 +1,6 @@
 # Architect runner prompt
 
-The orchestrator passes this file to the Sonnet runner during Phase B and fills in the variable inputs around it: the task and the Phase A grounding artifacts. The session writes its own candidate from the same file. What matters is independence between candidates: neither runner sees the other's candidate.
+The orchestrator passes this file to the second runner during step 2 (Sketch) of `SKILL.md` and fills in the variable inputs around it: the task and the grounding from step 1. The session writes its own candidate from the same file. What matters is independence between candidates: neither runner sees the other's candidate.
 
 You are producing one candidate design in architect's parallel exploration. Output a candidate design package: type sketch, function signatures, module map, and prose rationale shaped per [`rationale-template.md`](rationale-template.md), without its Pick decision section. Return it in your final reply. Write no file; the owner has not picked a shape yet.
 
@@ -23,4 +23,11 @@ For a layout task, where code moves between files and folders and no behaviour c
 
 You are one of the parallel runners, each on a different model. Produce the best design your model can make. Don't hedge against the others. Differences between candidates are the signal the owner uses to pick. Converging on a safe-looking middle defeats the exploration.
 
-The principles named above are in the **principles** skill (`principles` plugin), one file per principle in its `references/`.
+The principles named above, one rule each:
+
+- **Separate Before Serializing Shared State**: give each writer its own target and merge on read; split two writers before you lock.
+- **Type System Discipline**: give distinct values distinct types, derive types from one schema, parse external data instead of casting it, and make variants exhaustive.
+- **Boundary Discipline**: check input once at the boundary and keep logic free of the framework.
+- **Make Operations Idempotent**: a step gives the same result when it runs twice or after a crash.
+- **Laziness Protocol**: make each decision in one place; a parameter a function only passes through does not belong there.
+- **Minimize Reader Load**: no wrapper with one caller, and no state wider than its users need.

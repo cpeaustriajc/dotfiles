@@ -1,6 +1,11 @@
 # Motion rules
 
-Check each rule against the change. A row in the report names the rule it breaks.
+Check each rule against the change. A row in the report names the rule it breaks. A tradeoff
+the code or design documents, such as a comment on a deliberately slow transition, is mentioned
+in its row but not flagged.
+
+Fix order: delete the animation, shorten it, fix the easing, fix the origin, make it
+interruptible, then move it to `transform` and `opacity`.
 
 **Duration bands**
 - Button press: 100-160ms.
@@ -11,6 +16,7 @@ Check each rule against the change. A row in the report names the rule it breaks
 - Stagger runs 30-80ms per item and never blocks input.
 - Once one tooltip is open, the next opens at once with no delay.
 - Feedback to a press, key or hover starts at once; only the duration follows the band.
+- One deliberate page-load or reveal sequence that the design asks for may run longer.
 
 **Easing**
 - Enter and exit use ease-out.
@@ -50,6 +56,8 @@ Check each rule against the change. A row in the report names the rule it breaks
 - Modals stay centred.
 - Expanded content grows from its source element.
 - Things leave the way they came.
+- Nothing grows from `scale(0)`; start near 0.95 with opacity.
+- One change moves for attention at a time; secondary motion stays smaller and quieter.
 
 **Feedback and hover**
 - `:active` scales the control to about 0.97.
@@ -58,6 +66,7 @@ Check each rule against the change. A row in the report names the rule it breaks
   than press.
 
 **Reduced motion and theme**
+- Every animation has a `prefers-reduced-motion` fallback.
 - Reduced motion keeps opacity and colour changes and drops movement. Crossfade instead of moving.
 - A crossfade that still shows both states at once gets a brief blur of about 2px to merge them.
 - A crossfade blur stays near 2px, never near 20px.
@@ -69,6 +78,7 @@ Check each rule against the change. A row in the report names the rule it breaks
 - Keyboard-initiated actions are never animated.
 
 **Implementation**
+- Animate `transform` and `opacity`, not `width`, `height`, `top`, `left` or `margin`.
 - Name the transitioned properties. `transition: all` is a mistake.
 - `will-change` appears only on elements that actually animate, and only to fix a problem seen
   in the browser, such as a 1px shift at the start or end. Added up front, it is a mistake.

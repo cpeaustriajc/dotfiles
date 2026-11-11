@@ -1,9 +1,9 @@
 # Pick
 
-Read this when the owner replies `Pick A` or `Pick B`. The phases are in `SKILL.md`.
+Read this when the owner replies `Pick A` or `Pick B` (step 4 of `SKILL.md`).
 
-1. Write the picked sketch as real stub files: its types, signatures and module map, with `not implemented` bodies and `// TODO` pseudocode as shown. Change only what the sketch names.
-2. Fill the rationale's "Pick decision" section: the picked candidate and its model, why it was picked (the owner's words if they gave a reason, else your recommendation line, marked as yours), the candidate not picked with its tradeoff line, and what was taken from it.
+1. Write the picked sketch as real stub files: its types, signatures and module map, with `not implemented` bodies and `// TODO` pseudocode as shown. Change only what the sketch names. A small change is one file of new types and signatures; larger work is a module map plus type definitions.
+2. Write the rationale per the rationale template and fill its "Pick decision" section: the picked candidate and its model, why it was picked (the owner's words if they gave a reason, else your recommendation line, marked as yours), the candidate not picked with its tradeoff line, and what was taken from it.
 3. The rationale, with the picked shape, its tradeoffs accepted and the alternatives not picked, is the body of the pull request for this work. Open the pull request with it as the body, or put it in the body of the one already open.
 
 A layout pick runs **Pick a layout** in `references/layout.md` instead of these steps.

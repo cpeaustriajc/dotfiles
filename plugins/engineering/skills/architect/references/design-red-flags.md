@@ -1,6 +1,8 @@
 # Design red flags
 
-Screen every candidate before the owner sees it. A red flag is a reason to revise or reject the shape.
+Screen every candidate before the owner sees it (step 2 of `SKILL.md`). A red flag is a reason to revise or reject the shape.
+
+Assume the next contributor is an agent that sees only the files it opened, copies the nearest example, and takes the shortest path that compiles. Prefer the design where a change that looks right from one file is right for the whole repo. Among viable candidates, prefer the one that hides more complexity behind a smaller public surface.
 
 ## Shallow module
 

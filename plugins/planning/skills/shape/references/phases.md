@@ -4,6 +4,9 @@ Every project gets a fixed set of phases, in order, and no others. Leave each ph
 empty: the same text on every project is noise, and the table below is the definition. Don't split
 phases into frontend and backend.
 
+Phases carry no target date unless someone asks, and then only Launch: a date on every phase
+turns the project into a waterfall.
+
 ## Product project
 
 | Phase | Holds | Exit check | Decides |

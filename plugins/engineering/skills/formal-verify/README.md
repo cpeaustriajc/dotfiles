@@ -60,5 +60,6 @@ The skill then loads as `/engineering:formal-verify`.
 
 - [SKILL.md](SKILL.md): the create mode.
 - [references/maintain.md](references/maintain.md): the maintain pass.
+- [references/verify-skill.md](references/verify-skill.md): what the project verify skill holds, and the hand-off.
 - Source: Lauren Tan's `create-formal-verification-skill` and `maintain-formal-verification-skill` in [cursor/plugins](https://github.com/cursor/plugins/tree/519d36aa98955bf680db01bcde5fdfba686dc901/pstack/skills), commit `519d36a`, MIT. Evidence: the eval scores in Limits, a tie so far.
 - Not adopted: Lauren Tan's `statechart` skill. A run without the plugin passed its checkout case (score 1.0), so it showed no gain.

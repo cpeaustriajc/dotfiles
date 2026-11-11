@@ -53,4 +53,6 @@ The skill then loads as `/engineering:bug-hunt`.
 ## More
 
 - [SKILL.md](SKILL.md): the method.
+- [references/hunter-brief.md](references/hunter-brief.md): the brief each reviewer gets.
+- [references/rounds.md](references/rounds.md): the checks between rounds and the final report.
 - [references/claude-code.md](references/claude-code.md): how Claude starts the reviewers in Claude Code.

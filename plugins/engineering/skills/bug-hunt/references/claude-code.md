@@ -1,5 +1,6 @@
 # Claude Code adapter
 
+- The ignored work folder is `.claude/work/<topic>/`.
 - Hunters are `Agent` calls with `model` one step cheaper than the session's and
   `effort: "high"`, unless I name another model: a fix needs design calls, so not the cheapest
   model. Send all three `Agent` calls in one message.

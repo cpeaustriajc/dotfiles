@@ -47,7 +47,10 @@ The skill then loads as `/design:microinteraction`.
 
 ## More
 
-- [SKILL.md](SKILL.md): the method, the gate and the output format.
+- [SKILL.md](SKILL.md): the steps Claude follows.
+- [references/gate.md](references/gate.md): the four questions that reject a candidate.
+- [references/hunt.md](references/hunt.md): the places to search, each with a starting recipe.
+- [references/output.md](references/output.md): the three-part output and the inline preview.
 - [references/claude-code.md](references/claude-code.md): the inline view and the pick in Claude Code.
 - [references/animation-vocabulary.md](references/animation-vocabulary.md): the glossary of effect names.
 - [library/index.md](library/index.md): the example library and the command that re-makes it.

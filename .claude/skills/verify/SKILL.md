@@ -10,53 +10,20 @@ user-invocable: false
 
 # Verify
 
-## Launch
-
-dotfiles has no app to launch. The project's run skill is `run-dotfiles`; its driver
-`.claude/skills/run-dotfiles/smoke.sh` is the only launch interface. Do not copy its steps here.
-
-## Doctor
-
-`command -v claude python3 bash git` must print four paths, and `python3 -c 'import yaml'` or
-`command -v uv` must succeed. A missing one is BLOCKED: name it.
-
-## Select
-
-Map the diff to features with `.claude/skills/verify/select.sh [base]` (default base
-`origin/main`). It prints `feature<TAB>command` lines from the **Code** lines in
-`references/features/`. In this repo Markdown is the product, so a docs-only diff is not skipped.
-
-## Drive
-
-Run the selected features in order:
-
-```
-.claude/skills/verify/select.sh [base] | .claude/skills/verify/drive.sh
-```
-
-`drive.sh` runs each command under bash with `tee` to `.claude/work/verify/<short sha>/<feature>.log`.
-It keeps the command's own exit code, and prints and logs one line per feature, such as
-`[3/8] ✔ skills (19s)` or `[4/8] ✘ manifests (12s, exit 1)`. It exits 1 if any command failed.
-
-- A mod's log must show `N pass` with N > 0 and `0 fail`; zero tests is NOT VERIFIED.
-- Then do the feature file's **Check** line by hand and note it in the log.
-
-## Evidence
-
-Logs go to `.claude/work/verify/<short sha>/`, which git ignores. Print that path.
-
-## Cleanup
-
-`smoke.sh` removes its own throwaway config directory. This run starts nothing else.
-
-## Full suite
-
-`.claude/skills/run-dotfiles/smoke.sh all` (about 20 s) before every push to `main`. Exit 2 is BLOCKED (the line says what is missing), not a pass.
-
-## Result line format
+1. **Launch**: no app. The run skill `run-dotfiles` owns the driver, `smoke.sh`.
+2. **Doctor**: `command -v claude python3 bash git`, then `python3 -c 'import yaml'` or
+   `command -v uv`. A missing one is BLOCKED: name it.
+3. **Select** and **Drive** (default base `origin/main`):
+   `.claude/skills/verify/select.sh [base] | .claude/skills/verify/drive.sh`.
+   Features live in `references/features/`. Markdown is the product, so a docs-only diff runs too.
+4. Zero tests run is NOT VERIFIED (mods: `references/features/mods.md`). Then do each feature's
+   **Check** line by hand and note it in its log.
+5. **Evidence**: print the log folder, `.claude/work/verify/<short sha>/`.
+6. **Cleanup**: none. `smoke.sh` removes its own config directory.
+7. **Full suite**: `.claude/skills/run-dotfiles/smoke.sh all` before every push to `main`. Exit 2
+   is BLOCKED, not a pass.
+8. **Result line**: one per feature, then the overall result, VERIFIED only when every feature is.
 
 ```
 <feature>: VERIFIED | NOT VERIFIED | BLOCKED  cmd: <re-run command>  evidence: <path>
 ```
-
-Print the overall result last. Overall is VERIFIED only when every selected feature is VERIFIED.

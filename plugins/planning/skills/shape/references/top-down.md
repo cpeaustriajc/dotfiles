@@ -21,7 +21,8 @@ Questions thin out going down, because each level inherits what the one above se
    asked for.
 3. **A level is built only from a confirmed parent.** A Draft product gets no projects beyond
    one-line placeholders; a Draft spec gets no build items. Building on an unconfirmed level means
-   rework when it changes, and it usually changes after a demo.
+   rework when it changes, and it usually changes after a demo. No work item is ready until
+   engineering confirms it names only systems the team owns or has a contract for.
 4. **Changes flow down, questions flow up.** A changed feature returns its project's spec to
    Draft; a changed requirement flags every item that cites it. A lower level never edits a
    higher one: a requirement found wrong while building comes to me as a question.

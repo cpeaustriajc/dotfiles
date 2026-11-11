@@ -26,6 +26,11 @@ moving a camera (translate/scale on the world) rather than cutting between slide
 nested sections "need sub-compositions"; that warning is about Studio's timeline view and can be
 ignored for a monolithic film.
 
+Choreograph instead of fading: elements become each other (scattered cards gather into the list),
+counts land on a beat, and energy varies (punchy entrances, calm settles, one playful spring at
+most). Build from the live site's screens rebuilt as HTML components, so a card can move, count up
+and scale per shape, and its copy and figures stay the product's own.
+
 ## Traps that cost a render each
 
 - **Initial hidden state:** set it with `gsap.set(...)` outside the timeline, not `tl.set(..., 0)`

@@ -1,11 +1,11 @@
 # Weekly audit
 
-Read this before you run or set up the weekly audit. The evidence rules in `SKILL.md` apply to it.
+Read this before you run or set up the weekly audit. The evidence rules that `SKILL.md` links apply to it.
 
 Run the verify skill on the default branch once a week, by a scheduled routine or a desktop
-scheduled task. Mechanics: `references/claude-code.md`. Do these steps in this order:
+scheduled task. Do these steps in this order:
 
-1. **Source wave.** Read `references/claude-code.md` first. Start one read-only reader on the
+1. **Source wave.** Using the adapter's reader call, start one read-only reader on the
    smallest model tier for each feature file, all at the same time. Each reader compares its
    feature file with the code on the **Code** line. It returns each drift
    as the code's `file:line` and the feature-file line that the code contradicts, or "no drift".

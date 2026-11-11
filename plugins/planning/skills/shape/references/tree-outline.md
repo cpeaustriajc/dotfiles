@@ -53,5 +53,6 @@ run includes its project and that project's items.
   subtracts the quoted lines of the cited requirements, computed from their `text`, before it
   compares against 1,500.
 
-Run it as `top-down.md` says; add `--launch` when the project is entering Launch, so a
+Run `python3 <shape>/scripts/check_tree.py <absolute path to the JSON>`, where `<shape>` is this
+skill's folder; add `--launch` when the project is entering Launch, so a
 requirement with no item fails instead of being listed as not yet sliced.

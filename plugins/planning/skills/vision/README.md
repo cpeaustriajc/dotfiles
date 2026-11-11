@@ -57,6 +57,9 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
+- [references/interview.md](references/interview.md): how the product interview differs from a grill.
+- [references/worth-it.md](references/worth-it.md): the worth-it questions and the four verdicts.
+- [references/product-template.md](references/product-template.md): the product page and its feature rules.
 - [references/personal-to-sellable.md](references/personal-to-sellable.md): the worth-it check for a tool you built for yourself.
 - [references/later.md](references/later.md): checks at each Launch, product updates and audits.
 - [../shape/references/top-down.md](../shape/references/top-down.md): the five planning rules and the tracker lookup.

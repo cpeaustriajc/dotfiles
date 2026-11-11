@@ -61,6 +61,9 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/github-wiki.md](references/github-wiki.md), [notion.md](references/notion.md), [linear.md](references/linear.md), [obsidian.md](references/obsidian.md) and [other-backends.md](references/other-backends.md): one adapter for each backend.
-- [references/operations.md](references/operations.md): supersede a decision, file research, move rationale out of a repo.
+- [references/locate.md](references/locate.md): the order in which Claude looks for your decision log.
+- [references/publish.md](references/publish.md): the review and the checks before a page is published.
+- [references/shape.md](references/shape.md): the page layout, the decision template and where dates come from.
+- [references/operations.md](references/operations.md): record or supersede a decision, file research, move rationale out of a repo.
 - [references/plain-prose.md](references/plain-prose.md): the prose patterns to rewrite before a page is published.
 - [scripts/ghwiki.sh](scripts/ghwiki.sh): the GitHub wiki helper.

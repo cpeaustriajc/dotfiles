@@ -35,7 +35,7 @@ The skill then loads as `/engineering:teach`.
 
 - Reads the code, the git history and the pull requests of the subject.
 - Uses only agents with read tools. A run changes no file.
-- Writes the answer by the `unslop` rules: plain sentences, no filler, no framing labels.
+- Writes the answer by the rules in `references/ai-tells.md`: plain sentences, no filler, no framing labels.
 - Shows the diagram series as a stepper in the desktop app. In a terminal, it prints one mermaid block per step.
 
 ## Limits
@@ -48,4 +48,6 @@ The skill then loads as `/engineering:teach`.
 
 - [SKILL.md](SKILL.md): the method.
 - [references/claude-code.md](references/claude-code.md): spawns, the diagram series and the text fallback.
+- [references/teaching.md](references/teaching.md): the detail behind each step: what to teach, sources, the build-up, confidence words and the voice rules on top of `ai-tells.md`.
+- [references/ai-tells.md](references/ai-tells.md): the numbered tells of AI-written prose, each with its fix. It was the `unslop` skill's list.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.

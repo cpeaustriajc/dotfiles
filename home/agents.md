@@ -23,6 +23,8 @@
 - Do only what I asked. Report other problems; don't fix them.
 - Before you write in a repo, tracker, wiki or channel, read its existing items and match them.
   In code, run the project's formatter and linter.
+- Write a doc, README, spec, PR description or commit message by the repo's writing rules,
+  then in ASD-STE100 Simplified Technical English.
 - Name a doc section by its title, not its number.
 - A fix far past its asked size (one line grown past about 100)? Stop and ask.
 

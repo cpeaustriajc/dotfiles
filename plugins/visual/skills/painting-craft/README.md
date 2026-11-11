@@ -46,7 +46,7 @@ The skill is a nine-step workflow: tradition, research, space and light, masses,
 - `paintpass.py` gives a painted picture one brushwork style. `shoot.mjs` and `crop.py` make the zoomed review shots.
 - Claude marks guessed facts UNVERIFIED and names proxy values in the commit message.
 
-Scripts need Python packages (numpy, scipy, pillow) and Playwright. `render3d.md` and `SKILL.md` give the exact commands.
+Scripts need Python packages (numpy, scipy, pillow) and Playwright. `render3d.md`, `code-techniques.md` and `review.md` give the exact commands.
 
 ## Limits
 
@@ -57,6 +57,10 @@ Scripts need Python packages (numpy, scipy, pillow) and Playwright. `render3d.md
 
 ## More
 
-- [SKILL.md](SKILL.md): the workflow and the review checklist.
+- [SKILL.md](SKILL.md): the nine-step workflow.
+- [references/taste.md](references/taste.md): the taste questions and the project note.
+- [references/aesthetic.md](references/aesthetic.md): what reads as amateur, and the fixes.
+- [references/review.md](references/review.md): the screenshot review loop and its checklist.
+- [references/claude-code.md](references/claude-code.md): how Claude Code views images and briefs research.
 - [references/recipes.md](references/recipes.md): how to build foliage, metal, cloth, faces, windows and water.
-- [references/anatomy.md](references/anatomy.md), [scale.md](references/scale.md), [armour.md](references/armour.md), [render3d.md](references/render3d.md) and [code-techniques.md](references/code-techniques.md): measurements and techniques.
+- [references/anatomy.md](references/anatomy.md), [scale.md](references/scale.md), [armour.md](references/armour.md), [render3d.md](references/render3d.md) and [code-techniques.md](references/code-techniques.md): measurements, space, accuracy and the paint pass.

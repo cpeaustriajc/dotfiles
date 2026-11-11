@@ -19,11 +19,11 @@ number:
 - **First body line, the tag line:** `**Status:** Accepted · **Kind:** Product · **Decided by:**
   <name or role> · **Date:** YYYY-MM-DD`. A search for "Decided by" finds every decision, including
   ones whose title was edited. `Kind` is Architecture, Product, Process or Business. Below it come
-  the template's Context, Decision and Consequences sections.
+  the Context, Decision and Consequences sections of the decision template.
 - **No `Decisions` index document.** If the team still keeps one, follow the team, and add the row.
 - **`Home`** stays: one paragraph, then the `Page | What it answers` table, listing research pages.
   Decisions don't need rows there, because search finds them.
-- **Research documents**: one topic each, as in SKILL.md.
+- **Research documents**: one topic each, as in the shared shape.
 
 If the team has a `Decision` document template in Linear, start from it: its title and sections
 win over the shape above. The project's facts can also name a different title format; follow them.
@@ -54,4 +54,4 @@ initiative when it spans that initiative's projects only.
   what replaced it and where that is recorded.
 
 Linear saves on write, and the whole team sees it at once. So the first write to a team's project
-follows "Writing safely" in SKILL.md: show the user the text first.
+follows step 5 of SKILL.md: show the user the text first.

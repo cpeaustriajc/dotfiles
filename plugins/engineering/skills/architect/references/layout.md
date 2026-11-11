@@ -1,8 +1,10 @@
 # Layout tasks
 
-Read this when Phase A names the task a layout task: it moves code between files and folders and changes no behaviour. It replaces parts of Phase C, the pick and Phase D in `SKILL.md`.
+Read this when step 1 (Ground) of `SKILL.md` names the task a layout task: it moves code between files and folders and changes no behaviour. It replaces parts of step 3 (Agree), the pick, and step 5 (Implement): a layout pick has none.
 
-## Phase C for a layout task
+A task that asks to make files thin, split, move or regroup them, and names no change in behaviour, is a layout task, even when the repo has open issues that would redesign the same code. Ground it on the files its words name and their line counts, not on `how`.
+
+## Agree on a layout
 
 For a layout re-architecture, where the task moves code between files and folders and changes no behaviour, show **Today** as today's file tree for the folders the task names, with the line count of each file, and mark each file the candidates move. Each candidate then has these sections instead of Usage, Public surface and Internals:
 
@@ -28,4 +30,4 @@ Before step 1, run `git status --porcelain`. If it prints anything, stop and tel
 7. Fill the rationale's "Pick decision" section and save the rationale as the pull request body to come.
 8. Stop. Report the two commits, the before and after results, the check's failing proof and the rationale path. Do not build other code and do not push: the owner reviews the moves first.
 
-If step 3 or step 4 fails, or typecheck passes only after an edit that step 2 does not allow (a changed route path, a renamed symbol, a body change, a broken import cycle), a move needs a logic edit. Undo every move: restore the tracked files to `HEAD` and delete the files the moves created. Commit nothing. Tell the owner which move needs which edit, then return to Phase B of `SKILL.md` with that edit as a constraint for both runners, and stop again at Phase C.
+If step 3 or step 4 fails, or typecheck passes only after an edit that step 2 does not allow (a changed route path, a renamed symbol, a body change, a broken import cycle), a move needs a logic edit. Undo every move: restore the tracked files to `HEAD` and delete the files the moves created. Commit nothing. Tell the owner which move needs which edit, then return to step 2 (Sketch) of `SKILL.md` with that edit as a constraint for both runners, and stop again at step 3 (Agree).

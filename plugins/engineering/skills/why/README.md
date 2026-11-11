@@ -47,7 +47,8 @@ The skill then loads as `/engineering:why`.
 
 ## More
 
-- [SKILL.md](SKILL.md): the method and the evidence tiers.
+- [SKILL.md](SKILL.md): the method.
+- [references/evidence.md](references/evidence.md): the evidence tiers, the rules and the answer sections.
 - [references/git.md](references/git.md): the git and `gh` commands.
 - [references/investigator.md](references/investigator.md): the brief each investigator gets.
 - [references/claude-code.md](references/claude-code.md): models and spawn mechanics.

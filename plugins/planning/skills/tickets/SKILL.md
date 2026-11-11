@@ -6,143 +6,17 @@ description: >
   long. It writes slices, or one bug or chore.
 ---
 
-# Tickets
+Read `../shape/references/top-down.md` first; its adapter rows say where each part lands.
 
-The work-item level of a top-down plan. Read `../shape/references/top-down.md` first: the five
-rules, finding the tracker, and how writes are made and checked. The adapter's Work item,
-Sub-item, Work type and Dependency rows say where each part below lands.
-
-## 1. Read the spec
-
-Open the project's spec. If it is Draft, stop: only prototype items for its Demo phase may be cut,
-and say what would confirm it. Otherwise list its requirements and which ones existing items
-already cite.
-
-Read the facts an item rests on from the trunk, not the current branch: fetch it first, and search
-open and recently closed items for the same work. A branch behind the trunk files work that is
-already done.
-
-## 2. Cut the next slice
-
-Cut the next slice only, not the whole spec: the spec lasts, while items are cut as the work
-moves and thrown away when direction changes.
-
-- **Vertical, not layered.** Each item cuts a narrow but complete path through every layer the
-  feature touches, and is demoable or verifiable on its own. A schema-only or API-only item is a
-  layer, not a slice.
-- **Sized for one session of its builder.** Name the builder: the cheapest model the project's
-  model picks give that kind of work, not the model that cuts the slice. One fresh session of it
-  finishes the item inside the context budget: the project's, or ask; until answered, 200k. Before
-  you show the slice, estimate each item: fixed session cost + reading + build + proof. With no
-  measure, count 85k fixed and about 10k for each image with its turns, in every round. Split each
-  item whose upper estimate is over the budget, and split a visual item with a review loop
-  smaller. More than five checks or test cases, or unrelated parts of the code, are quick signs to
-  split, not the test. `references/sizing.md` has the costs. Failure: six items passed those signs
-  and each needed 140k–400k.
-- **Prefactor first.** A change that makes the slice easy goes in its own item, before it.
-- **Order by what blocks.** Give each item the items that must finish before it starts; an item
-  with none can start now. The riskiest unknown goes first.
-- **Stack an Implementation slice.** Two or more items that ship code, under a project in the
-  Implementation phase, form one stacked-PR chain: read `references/stacking.md` before you list
-  the slice. Other items branch off the trunk.
-- **A wide mechanical change** (a rename whose call sites span the codebase) is the one exception
-  to vertical slicing: see `references/item-kinds.md`.
-
-Show me the slice as a list before writing anything: each item's title, the requirements it
-cites, what I would see when it is done, what blocks it, its builder, its context estimate and
-what drives it, and for a stack its position and the branch it builds on, bottom first. Ask
-whether the granularity and the blocking are right, and iterate until I approve. That is the only
-question at this level. Any other question means the spec is unclear, so it goes up to `shape` as
-a spec change rather than being settled inside a ticket, where nobody would find it again.
-
-## 3. Write each item
-
-Use the project's own work-item template and section names, read fresh as `top-down.md` says.
-With none, propose this one once and use it. The rules below hold under any section names.
-
-```markdown
-## Context
-
-<Why this exists now, the evidence, and the links that stop someone rediscovering it.>
-
-## Outcome
-
-<The concrete state that is true when this is done. One sentence.>
-
-## Checks
-
-- [ ] R3: <the requirement, quoted word for word>
-- [ ] You see: <the screen, message or state that proves it>. Reach it with: <the account, data, switch or payment method that sets up that state>. (test | eye | engineer)
-- [ ] <Any finer condition the verifier needs.>
-
-## Out of Scope
-
-- <Only the boundaries that prevent a likely misunderstanding. Omit the section if none.>
-
-## Budget
-
-Estimate: <low–high>k of <budget>k, driven by <the largest part>. Proof: <pages, widths, crops>, at most <n> fix rounds. Stop: past <limit>k, commit what passes, write a hand-over note on this item, and stop.
-```
-
-- **Context:** 2–4 sentences plus links. Probe data and architecture go in the pull request or
-  the engineering document; link them.
-- **Outcome:** one sentence, from the user's side, not a layer-by-layer task list.
-- **Checks:** 3–5. Every requirement the item meets is quoted with its number; at least
-  one **You see** line says what the verifier observes. No click-by-click steps, no "record only"
-  measurements, no "deliberately absent" lists.
-- **Checkboxes.** Write each check as `- [ ]`. Use a numbered list instead when the adapter's
-  Checklist row says the tracker drops checkboxes, or the read-back shows them lost; say so once.
-- **Each check is reachable.** It names what puts the app in its starting state: the account type,
-  the kind of data ("a cart with a premium name", not "a domain"), the test switch, the payment
-  method ("bank transfer, left unpaid"). If the state needs a trigger the reader would not guess,
-  name the trigger. A verifier who must ask how to reach a state cannot test it.
-- **A control's state is one exact word.** A check about a button, link or section says who sees
-  it and gives one state: `visible`, `visible, refuses` (quote the message), `disabled` or
-  `hidden`. Never "offers nothing", "does nothing", "unavailable" or "blocked": each reads as
-  any of the four. Failure: "the panel offers nothing" meant `visible, refuses`; QA passed it as
-  "hidden", and agents later treated both as true.
-- **Each check names who proves it.** Hand testing, by a person or an agent clicking through, is
-  the exception. `test` (the default): an end-to-end test drives it and records a video; the pull
-  request gives the one command and where the video and report land. The verifier watches the
-  video, so look and wording checks are `test` too. `eye`: no automation can reach it (a real
-  device, a third-party inbox); say why. `engineer`: it needs access
-  the verifier lacks (a database, a server setting, a burst of requests, a secret key), so the
-  engineer runs it and attaches the command and its evidence; the verifier reviews that evidence.
-- **Each check has an oracle the verifier can see.** Not "matches what the vendor does" without
-  the exact text or state; not a count the screen does not show. A setting that persists says
-  where it holds: this tab, this browser, any device.
-- **A value on several pages agrees.** When the item shows one value (a price, a total, a count)
-  on more than one page, one check names those pages and says each shows the same value for the
-  same input: "the same name shows the same price on the shortlist, in the cart and at checkout".
-- **Out of Scope:** 0–3 bullets.
-- **Budget:** the estimate, a fixed proof budget and a stop rule. Proof with no limit has no upper
-  estimate.
-- **No unbounded reads.** The item states the measured facts it needs (sizes, colours, copy). It
-  links a large reference only as a narrow crop or excerpt, never a whole large file or an
-  image-heavy source.
-- **Stack:** an item in a stack ends with a `## Stack` section that names its branch and its base;
-  `references/stacking.md` has its form. Omit it on an item that branches off the trunk.
-- **Whole body:** under about 1,500 characters, a quick sign only; the estimate decides the size.
-  Longer means split it. Quoted requirement lines do not count; the tree check subtracts them.
-- **No file paths or code**: they go stale. A prototype's snippet that pins a decision may be
-  inlined, marked as from a prototype.
-- **An item is self-contained**: someone who never saw the conversation can pick it up from the
-  item and the spec it links. It settles every design call, so a cheaper builder does not make one
-  and the result loses no quality.
-- **No "As a … I want … so that" line** unless the product owner asks for it. That sentence is
-  where mechanism and timing tend to sneak in.
-
-A **Bug** adds what was expected, what happened and the steps to reproduce it: see
-`references/item-kinds.md`.
-
-## 4. Work types and rules
-
-Before you give an item its work type (`Task`, `Bug` or `Chore`), read `references/item-kinds.md`:
-a Chore adds a No-QA check, and a bug found after Done is a new item. When unsure, it is a Task.
-
-## 5. Write and check
-
-Write as `top-down.md` says, creating blockers first so later items link to real ids. For a
-stack, write bottom first, so each Base names a branch that already has an item. Run the
-tree check with `--launch` when the project is entering Launch; before that, its notes list the
-requirements still waiting for a slice.
+1. Draft spec: cut only Demo prototypes. Else list its requirements and which items cite them.
+2. Fetch the trunk and read facts from it; search open and recent closed items. A branch
+   behind the trunk files work already done.
+3. Cut the next slice only:
+   - vertical slices, prefactors first, blockers named, riskiest first; a wide mechanical
+     change is the exception: `references/item-kinds.md`.
+   - each fits one session of its cheapest builder: `references/sizing.md`.
+4. Show the slice: title, requirements, what I see, blockers, builder, estimate.
+   Iterate until I approve. Other questions are spec gaps for `shape`.
+5. Write each item per `references/item-template.md`; type, Bug or wide change per
+   `references/item-kinds.md`.
+6. Write blockers first. Run the tree check (`--launch` at Launch).

@@ -11,6 +11,16 @@
   none, mine without it and say that `/insights` can give one.
 - Source: https://code.claude.com/docs/en/costs, section "Analyze your usage patterns".
 
+## Ask tool
+
+- Step 6: ask which proposals to apply with `AskUserQuestion`, one option per proposal
+  (`multiSelect: true`).
+
+## Layers
+
+- Hooks: write them with the `update-config` skill.
+- Agent definitions: `.claude/agents/*.md`, or a plugin's `agents/`.
+
 ## Instruction-file audit
 
 - `/doctor prompt-audit` audits CLAUDE.md, AGENTS.md, rules, skills, commands and

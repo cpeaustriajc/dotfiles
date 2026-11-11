@@ -1,6 +1,6 @@
 # Playwright
 
-Mechanics for the hero-script video in SKILL.md step 7. Read the current Playwright docs when a
+Mechanics for the hero-script video in `evidence.md`. Read the current Playwright docs when a
 detail matters, since these change.
 
 - **Click and key marks**: `screencast.show_actions(cursor="pointer", style={"title": "display:

@@ -55,5 +55,6 @@ Requirement: Claude must be able to start subagents.
 
 ## More
 
-- [SKILL.md](SKILL.md): the method and the reviewer prompt.
+- [SKILL.md](SKILL.md): the method.
+- [references/review.md](references/review.md): the three reviewers, their prompt, the proof levels and the four groups.
 - [references/claude-code.md](references/claude-code.md): how the reviewers and the quality pass run in Claude Code.

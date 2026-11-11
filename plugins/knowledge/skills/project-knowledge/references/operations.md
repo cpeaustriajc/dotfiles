@@ -1,6 +1,13 @@
 # Operations that change the record
 
-Read this before you supersede a decision, in full or in part, file research, or move rationale out of a repo. The other operations are in `SKILL.md`.
+Step 4 of SKILL.md uses these steps.
+
+**Record a decision.**
+1. Read the index and take the next number (skip this where the adapter has no numbers).
+2. Write the page from the decision template.
+3. Add its row to the top of the index, where there is one.
+4. Add or update the Home row, if the decision creates a page.
+5. Link the research pages it rests on.
 
 **Supersede a decision.**
 1. Record the new decision as a new page, and have its Context say what changed since the old one.

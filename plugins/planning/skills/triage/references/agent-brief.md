@@ -53,3 +53,8 @@ Add this section to the brief for `ready-for-human`:
 **We need from @<reporter>:**
 - <one specific question, with the example that shows why it matters>
 ```
+
+## Wontfix
+
+Built already: link where it lives, then close. Rejected: give the reason, then close, and record
+the decision in `project-knowledge` if it is installed.

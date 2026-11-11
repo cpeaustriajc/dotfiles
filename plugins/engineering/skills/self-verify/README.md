@@ -61,6 +61,8 @@ The skill then loads as `/engineering:self-verify`.
 
 - [SKILL.md](SKILL.md): the method.
 - [references/claude-code.md](references/claude-code.md): the pre-commit run, the weekly audit, the agent models and the stronger gates.
+- [references/setup.md](references/setup.md): the detail behind each setup and repair step.
+- [references/evidence.md](references/evidence.md): the evidence rules and the fake-test patterns every run rejects.
 - [references/weekly-audit.md](references/weekly-audit.md): the steps of the weekly audit.
 - [references/pr-verdict.md](references/pr-verdict.md): how a fresh agent gives the verdict on a PR.
 - [references/verify-template.md](references/verify-template.md): the template for the project's `verify` skill.

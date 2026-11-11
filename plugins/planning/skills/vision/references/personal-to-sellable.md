@@ -1,8 +1,8 @@
 # From personal to sellable
 
-Read this when something I built for myself might sell. The interview and the verdict are in `SKILL.md`.
+Read this when something I built for myself might sell. The steps are in `SKILL.md`.
 
-When something I built for myself might sell, run "Is it worth building" again for others. Two things differ
+When something I built for myself might sell, run the worth-it check again, for others. Two things differ
 from a fresh idea:
 
 - **I am user one, which is evidence and bias at once.** My weekly use proves it works for one

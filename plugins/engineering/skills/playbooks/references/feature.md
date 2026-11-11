@@ -9,7 +9,7 @@ no tool can find, or a call of taste or business.
    and a recorded decision conflict. For UI with no approved design, run the prototype playbook
    first, so I see the look before the build. If the change crosses a module boundary or is
    costly to undo, run `design.md` before the first slice.
-   Start from the base branch the ticket's Stack line names, else the trunk.
+   Start from the branch of the ticket's blocker while its PR is open, else the trunk.
 3. Cut the work into slices that each end in a state you can check in the running app, each
    touching about 2-3 files. Prefer more, smaller slices.
 4. Per slice: build it, run its end-to-end check, save the evidence, commit. Never commit
