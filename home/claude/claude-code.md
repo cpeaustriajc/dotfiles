@@ -10,4 +10,10 @@
 - A thread's report ends with what it ran and what the brief missed. Brief too small? Split the task
   by the project's workflow.
 
+### Questions
+- `~/.claude/hooks/deny-go-ahead-questions.sh` denies a question in `wrap_up` or
+  `AskUserQuestion` that only asks to commit, push or open a PR. A project that wants a sign-off
+  adds the file `.claude/wants-sign-off`. Failure: agents asked the owner to approve a commit or
+  push of work that the owner had already asked for.
+
 <!-- Sources: https://code.claude.com/docs/en/memory, https://code.claude.com/docs/en/best-practices -->

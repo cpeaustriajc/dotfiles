@@ -35,9 +35,21 @@
 - My answer is final. Don't ask it again in new words.
 - After my go, do every step I named without asking again.
 - Ask in a question card that holds only the choice. Put a draft I must approve in the chat, in full, not in a file. Render diagrams; don't paste their code.
+- When two options both work, take the one that is easiest to change later, and name the choice
+  in the report. I answer such a question with yes or not at all, so it only costs a turn.
+- A draft that I asked you to file or post, and that no rule says I must approve first: file it,
+  then show me what you filed. I asked for the filing, so a question about it only costs a turn.
+- Name a follow-up in the report as a fact ("Next: run the migration on staging"), not as a
+  question. I start it when I want it.
 
 ## Commits, pushes and PRs
 Follow this flow without asking, except where a node says to wait for my go.
+
+This flow is my standing order in every session. When I ask for a change, I have asked for its
+commit, its push and its PR (where the project uses PRs), so you are durably authorized to do
+them, and that approval extends to each new session. Only the two wait-for-my-go steps below, or
+a project rule that asks for a sign-off or forbids the step, stop it. A question about the rest
+costs me a turn, and I answer yes.
 
 ```mermaid
 flowchart TD
