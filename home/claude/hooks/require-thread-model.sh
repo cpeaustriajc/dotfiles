@@ -11,7 +11,7 @@ effort="$(printf '%s' "$input" | jq -r '.tool_input.effort // empty')"
 
 if [ -n "$prompt" ] && { [ -z "$model" ] || [ -z "$effort" ]; }; then
   cat <<'JSON'
-{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Thread start without model or effort, blocked by ~/.claude/hooks/require-thread-model.sh. Call start_session again with model: \"claude-opus-5-5\" and effort: \"medium\" (\"high\" only when the spec marks the thread hard)."}}
+{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"Thread start blocked by ~/.claude/hooks/require-thread-model.sh: start_session needs both `model` and `effort`. Without a model the thread inherits the default, opus[1m]. This hook checks only that both are set; the choice is yours. The \"Claude Code\" part of the global rules says how to choose."}}
 JSON
 fi
 
