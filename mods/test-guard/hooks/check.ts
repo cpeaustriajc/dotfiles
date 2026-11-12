@@ -4,8 +4,7 @@
 // and CONFIG_ADD. `shared`: files that also hold other settings, CONFIG_ADD only.
 export type Kind = 'test' | 'config' | 'shared'
 export type Change = { old_string: string; new_string: string; replace_all?: boolean }
-// `lost`: the HEAD-line rule found it; else a content rule (a rig).
-export type Finding = { what: string; line: string; lost?: true }
+export type Finding = { what: string; line: string; lost?: true } // `lost`: the HEAD-line rule found it; else a content rule (a rig)
 
 // Kept the same as TEST_NAME and TEST_DIR in review-loop's tests_kept.py; scripts/check_test_names.py fails on drift.
 const TEST_NAME = [/\.(test|spec)\.[^/]+$/, /(^|\/)test_[^/]*\.(py|sh)$/, /_test\.(py|go)$/, /(^|\/)conftest\.py$/, /\.(snap|golden)$/]
