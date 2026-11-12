@@ -34,7 +34,7 @@
 - Give each question a concrete case and what each answer does to it.
 - My answer is final. Don't ask it again in new words.
 - After my go, do every step I named without asking again.
-- Put a draft I must approve in the chat, not in a file.
+- Ask in a question card that holds only the choice. Put a draft I must approve in the chat, in full, not in a file. Render diagrams; don't paste their code.
 
 ## Commits, pushes and PRs
 Follow this flow without asking, except where a node says to wait for my go.
