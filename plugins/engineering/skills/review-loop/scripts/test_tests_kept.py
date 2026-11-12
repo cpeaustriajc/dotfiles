@@ -104,6 +104,10 @@ case("a hook bypass in a Markdown file passes", {}, {"README.md": L("Never pass 
 case("a bunfig preload is reported", {}, {"mods/x/bunfig.toml": L("[test]", "preload = ['./rig.ts']")}, "preloads code")
 case("a rig finding names the added line's number", B, bend(src=None, ts=JS + L("test.only('x', () => {})")), "src/add.test.ts:5: adds a skip")
 case("a rig on an even line names that line", {}, {"tests/test_s.py": L("def test_s():", "    pytest.skip()")}, "tests/test_s.py:2: adds a skip")
+for _x in ("raise SystemExit", "raise SystemExit()", "raise SystemExit(0)", "raise SystemExit(None)", "exit()", "exit(0)", "quit()", "quit(0)"):
+    case(f"{_x} in a Python test file is reported", {}, {"tests/test_r.py": L("def test_r():", "    assert 1", _x)}, "adds an early exit")
+for _x in ("raise SystemExit(1 if failed else 0)", "raise SystemExit(main())", "sys.exit(main())", "raise SystemExit(1)", "exit(1)", "MSG = 'raise SystemExit'"):
+    case(f"{_x} in a Python test file passes", {}, {"tests/test_r.py": L("def test_r():", "    assert 1", _x)}, None)
 case("an exit inside a string is data", {}, {"tests/test_q.py": L("MSG = 'sys.exit(0)'", "def test_q():", "    assert MSG")}, None)
 case("an __eq__ inside a string is data", {}, {"tests/test_w.py": L("DOC = 'def __eq__(self, o):'", "def test_w():", "    assert DOC")}, None)
 case("a per-file assertion drop names line 1", B, bend(ts=JS.replace("expect(add(1, 2)).toBe(3)", "add(1, 2)")), "src/add.test.ts:1: assertions dropped from 1 to 0")

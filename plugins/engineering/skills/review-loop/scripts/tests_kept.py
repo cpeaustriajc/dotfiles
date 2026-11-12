@@ -88,6 +88,7 @@ RIGS = [
        r"^\s*(?:xit|xtest|xdescribe|fit|fdescribe)\s*\(|\bt\.Skip(?:Now|f)?\(|#\[ignore\]"), "test", True),
     ("adds an early exit to a test file",
      C(r"\bos\._exit\(|\bsys\.exit\(\s*(?:0|None|True|False)?\s*\)|^\s*(?:exit|quit)\(\s*0?\s*\)|"
+       r"^\s*raise\s+SystemExit\b(?:\(\s*(?:0|None)?\s*\))?\s*(?:#.*)?$|"
        r"\bprocess\.exit\(\s*0?\s*\)|\bprocess\.exitCode\s*=\s*0\b|\bos\.Exit\(0\)"), "test", True),
     ("adds an early exit to a shell test", C(r"(?:^\s*|[;&|{]\s*|\b(?:then|do|else)\s+)exit\s+0\b"), "shtest", False),
     ("adds a pytest report or collection hook",

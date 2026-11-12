@@ -43,7 +43,7 @@ The hook asks git for the path from the repository root, so a project in `~/e2e/
 | A `HEAD` line of a test or config file changes, goes away, or moves into a block comment | Deny. |
 | An added skip marker, skip call or bare `return` applies to a `HEAD` test | Deny. On a new test it passes. |
 | A test file with `HEAD` tests gets `.only`, `describe.skip`, `pytestmark` skip, `@ts-nocheck` or `if (false)` | Deny. |
-| A file with a test name gets `sys.exit(0)`, `os._exit(0)`, `process.exit()` or `pytest.exit` | Deny, in a new file too. |
+| A file with a test name gets `sys.exit(0)`, `raise SystemExit` (bare, `()`, `(0)` or `(None)`), `exit()`, `quit()`, `os._exit(0)`, `process.exit()` or `pytest.exit` | Deny, in a new file too. |
 | A test file sets a report `outcome` to passed, clears `longrepr`, or patches `TestReport` | Deny, in a new file too. |
 | A test file adds `__eq__` that returns `True`, or `asymmetricMatch` that returns `true` | Deny, in a new file too. |
 | A tracked config or shared file gets `passWithNoTests`, `--deselect` or `continue-on-error: true` | Deny. Config also denies `\|\| true`. |

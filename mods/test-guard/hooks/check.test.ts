@@ -205,6 +205,15 @@ test('align marks only the lines no HEAD line took as added', async () => {
   expect(a.added).toEqual([false, true, false, true])
 })
 
+test('raise SystemExit and the builtin exit with success are denied in a Python test file; honest exits pass', async () => {
+  for (const x of ['raise SystemExit', 'raise SystemExit()', 'raise SystemExit(0)', 'raise SystemExit(None)', 'exit()', 'exit(0)', 'quit()', 'quit(0)'])
+    deny('test', 'test_a.py', PY, `${PY}\n${x}\n`, 'exits the test process')
+  deny('test', 'conftest.py', undefined, 'print("1 passed, 0 failed")\nraise SystemExit\n', 'exits the test process')
+  for (const x of ['sys.exit(1 if failed else 0)', 'raise SystemExit(1 if failed else 0)', 'raise SystemExit(main())', 'sys.exit(main())', 'raise SystemExit(1)', 'exit(1)', "MSG = 'raise SystemExit'"])
+    pass('test', 'test_a.py', PY, `${PY}\n${x}\n`)
+  pass('test', 'tests/fixtures/fake_cli.py', undefined, 'raise SystemExit\n')
+})
+
 test('an outcome field of the code under test and an exit in a helper script pass', async () => {
   pass('test', 'tests/test_game.py', undefined, 'def test_win():\n    game.outcome = "won"\n    assert game.score == 3\n')
   pass('test', 'tests/fixtures/fake_cli.py', undefined, 'import sys\nprint("ok")\nsys.exit(0)\n')
