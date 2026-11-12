@@ -1,7 +1,7 @@
 # dotfiles
 
-- Trunk-based development, no PRs: this overrides the global rules. `/verify` before each
-  push (`python3 -I scripts/check_trunk.py`).
+- Trunk-based development with short-lived PRs: merge each branch the day it opens. `/verify`
+  before each push (`python3 -I scripts/check_trunk.py`).
 - Each rule names its failure. When a frontier model or vendor best-practice post ships, audit and
   cut rules the model no longer needs.
 
