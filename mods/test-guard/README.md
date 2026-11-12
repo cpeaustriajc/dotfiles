@@ -53,7 +53,7 @@ To turn the mod off, run `claude plugin disable test-guard@dotfiles`.
 
 - It checks only Edit, MultiEdit and Write. A Bash command such as `sed -i` or `jest -u` passes, because Claude Code decides Bash.
 - A moved line or a changed indent counts as a change and gets a deny.
-- It compares with `HEAD`, not with the base branch. A weaker test that is already committed passes; the self-verify PR verdict checks that.
+- It compares with `HEAD`, not with the base branch. A weaker test that is already committed passes; a review of the diff must catch that.
 - The mod is always on. It is not the "careful mode" that `SCOPE.md` rejects, which runs hooks only while a skill runs.
 - If the hook fails, it denies. Retry, or allow the file.
 

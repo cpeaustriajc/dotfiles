@@ -6,9 +6,7 @@ A typed `/blast-radius` command that finds what a change can break outside its d
 
 Use it before you merge a change that you do not trust yet, even a small one. A list of callers is not enough: it looks for the breakage that a search does not show.
 
-- For how the code works today, use `how`.
-- For why code has its shape, use `why`.
-- For a full review of a risky diff, use `interrogate`.
+- For a full review of a risky diff, use `review-loop`.
 
 ## Example
 
@@ -44,7 +42,7 @@ The skill then loads as `/engineering:blast-radius`.
 
 - It does not fix the risks it finds.
 - It proves only the one or two facts that the change depends on, not every risk.
-- A wide change goes to `interrogate` for more reviewers.
+- A wide change also gets `review-loop`.
 
 ## More
 

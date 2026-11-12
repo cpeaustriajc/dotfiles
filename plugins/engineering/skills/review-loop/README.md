@@ -6,7 +6,7 @@ A skill that runs verify, code review and simplify on your change in rounds. It 
 
 Use it after a build or a fix, before you mark the PR ready. Claude also loads it when you say "run the review loop" or "is this ready for review".
 
-Do not use it for a review that waits for you to pick the fixes: use `interrogate`. Do not use it to open the PR: use `create-pr`.
+Do not use it to open the PR: use `create-pr`.
 
 ## Example
 

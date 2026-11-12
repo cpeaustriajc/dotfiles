@@ -8,7 +8,6 @@ Use it to review a screen against its design, to polish spacing, type, colour or
 
 - To test a flow as a careless user, use `break-it`.
 - To build a screen from a design, ask Claude directly. This skill only reviews.
-- To fix a bug, use `playbooks`.
 
 ## Example
 

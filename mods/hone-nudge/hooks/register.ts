@@ -8,8 +8,8 @@ const WEEK = 7 * 86_400_000
 const SHIPPED = new Map([
   ['vision', 'planning'], ['shape', 'planning'], ['tickets', 'planning'], ['grill', 'planning'],
   ['project-knowledge', 'knowledge'], ['hone', 'knowledge'],
-  ['playbooks', 'engineering'], ['break-it', 'engineering'], ['feature-files', 'engineering'],
-  ['interrogate', 'engineering'], ['commit', 'engineering'], ['create-pr', 'engineering'],
+  ['break-it', 'engineering'], ['review-loop', 'engineering'], ['commit', 'engineering'],
+  ['create-pr', 'engineering'],
   ['ui-polish', 'design'], ['painting-craft', 'visual'],
 ])
 // Keep this detection in step with plugins/knowledge/skills/hone/scripts/corrections.py, which a separate plugin cannot import.

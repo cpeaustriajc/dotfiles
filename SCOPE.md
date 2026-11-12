@@ -24,7 +24,7 @@ not add a new dated line.
   for the rest of the session after the skill starts. See "Hooks in skills and agents" in the
   [hooks docs](https://code.claude.com/docs/en/hooks). Also, a deny would override the
   permission mode, and a mod never does that.
-- **Multi-model panels** (arena, a model mix in interrogate, cross-family judges): they need
+- **Multi-model panels** (arena, a model mix in a review, cross-family judges): they need
   models from another vendor.
 - **Autopilot**: it needs a fleet of agents.
 - **Orchestrate at fleet scale** (pstack: hundreds of cloud subagents, verifiers from another

@@ -1,6 +1,6 @@
 # Writeup
 
-The reply of `SKILL.md`. Proof levels are the ones in the method reference. Write it through `../teach/references/ai-tells.md`, cite real
+The reply of `SKILL.md`. Proof levels are the ones in the method reference. Write it through `references/ai-tells.md`, cite real
 code, and strip anything private before it goes anywhere public.
 
 - **What it does**, including the part that isn't obvious.

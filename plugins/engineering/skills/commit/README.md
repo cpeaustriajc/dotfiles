@@ -6,7 +6,7 @@ A skill that commits your uncommitted changes in small logical commits, in the r
 
 Type `/commit` when you want your work saved as clean commits. The skill sets `disable-model-invocation`, so it runs only when you type the command. Claude never starts it alone.
 
-Do not use it to open a pull request: use `create-pr`. Do not use it to review changes: use `interrogate`.
+Do not use it to open a pull request: use `create-pr`. Do not use it to review changes: use `review-loop`.
 
 ## Example
 

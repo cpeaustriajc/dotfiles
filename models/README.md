@@ -11,7 +11,7 @@ T3 counts below are history.
             implement            review                 scout / research
  Codex      GPT-6 luna (Codex) ──▶ Codex · GPT-6.1 sol ──▶ fix ──▶ merge
             Opus 5.5 (main)      on every PR
- no Codex   Opus 5.5 (main)  ──▶ interrogate: fresh Claude reviewers (no GPT sub)
+ no Codex   Opus 5.5 (main)  ──▶ review-loop: Claude code review (no GPT sub)
  any day    builder by task: mechanical Haiku 5.5 · specced Sonnet 5.5 · design Opus 5.5
             researcher: Sonnet 5.5 · Explore: Haiku 5.5 · Fable: hardest calls only
 ```
@@ -34,7 +34,7 @@ PRs in one project, 39 got a Codex review. 38 were written by Claude (one by T3)
 39 had at least one finding: 162 findings in total, with 32 on #401 alone.
 
 The catch: it needs a GPT subscription, which I don't have everywhere. Without it, review
-falls back to `interrogate` with fresh Claude reviewers.
+falls back to `review-loop` with Claude code review.
 
 ## Picks
 
@@ -46,12 +46,12 @@ falls back to `interrogate` with fresh Claude reviewers.
 | Code that needs design calls | Opus 5.5 builder |
 | Find files and call sites | Haiku 5.5 (Explore) |
 | Read the web and weigh sources | Sonnet 5.5 (researcher) |
-| Final PR review | GPT-6.1 sol with Codex; Claude-only `interrogate` otherwise |
+| Final PR review | GPT-6.1 sol with Codex; Claude-only `review-loop` otherwise |
 
 A task that proves bigger than its brief is split, not moved to a bigger model.
 
 Subagents run at `medium` effort (`CLAUDE_CODE_SUBAGENT_EFFORT`); an adapter asks for `high` only
-where the job needs it, as `bug-hunt` does. Failure: `high` on every subagent cost about 1.4× for a
+where the job needs it. Failure: `high` on every subagent cost about 1.4× for a
 few points (Opus 5.5 on SWE-bench Pro: medium is ~2.5 points under high at ~70% of the cost).
 `ANTHROPIC_DEFAULT_HAIKU_MODEL` pins `haiku` to Haiku 5.5. Failure: on Bedrock, Google Cloud,
 Foundry, Claude Platform on AWS or Claude Code before v2.1.293, the alias still means Haiku 4.5.

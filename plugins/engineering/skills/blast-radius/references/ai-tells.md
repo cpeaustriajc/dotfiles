@@ -1,6 +1,6 @@
 # Patterns to detect and fix
 
-Rule numbers are stable ids that `teach` and `blast-radius` cite. A removed rule leaves a gap.
+Rule numbers are stable ids that `blast-radius` cites. A removed rule leaves a gap.
 
 ## Content
 

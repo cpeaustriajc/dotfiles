@@ -29,7 +29,7 @@ The skills ship in seven plugins. Install only the plugins that you need.
 | Plugin | What it is for | Skills |
 |---|---|---|
 | `design` | Sign off UI work and motion. Check it against the design, add missing microinteractions, and make launch videos. | ui-polish, microinteraction, launch-video |
-| `engineering` | Prove the work in the real app with playbooks, design-first builds, unattended loops, bug hunts, code history, review and PRs. | playbooks, break-it, feature-files, interrogate, review-loop, commit, create-pr, architect, implement, drive, bug-hunt, blast-radius, self-verify, formal-verify, no-comments, cleanup, how, why, teach |
+| `engineering` | Prove the work in the real app with unattended builds and loops, user-style testing, change risk, review and PRs. | break-it, review-loop, commit, create-pr, implement, drive, blast-radius, cleanup |
 | `planning` | Turn an idea into tickets. Find and test ideas, write the spec, cut thin slices, and triage them in any tracker. | vision, shape, tickets, grill, scout, triage |
 | `knowledge` | Keep what the team learns: a decision log, research pages, lessons from past sessions, and a recap of recent work. | project-knowledge, hone, recall |
 | `visual` | Paint scenes in code to a gallery standard. | painting-craft |
@@ -109,25 +109,14 @@ only when you call it by name.
 | [ui-polish](plugins/design/skills/ui-polish/README.md) | design | Reviews a UI and its motion against the design and a list of common mistakes. It gives a Before/After/Why table. |
 | [microinteraction](plugins/design/skills/microinteraction/README.md) | design | Typed, with an area of a web UI. Finds the places that should animate, and plays each proposal before you pick one. It builds nothing. |
 | [launch-video](plugins/design/skills/launch-video/README.md) | design | Makes a narrated launch video from a live site or a brief, with a voiceover, music, thumbnails, captions and post copy. |
-| [playbooks](plugins/engineering/skills/playbooks/README.md) | engineering | Gives the playbook for a bug, refactor, performance problem, feature, prototype or design. Each playbook has its own proof, such as a reproduced bug. |
 | [break-it](plugins/engineering/skills/break-it/README.md) | engineering | Drives the app as a careless, impatient or confused user with worst-case data. Reports ranked bugs with screenshots, video and repro steps. |
-| [feature-files](plugins/engineering/skills/feature-files/README.md) | engineering | Keeps one short file for each feature that says how to reach, drive and check it. An E2E check reads only the file that it needs. |
-| [interrogate](plugins/engineering/skills/interrogate/README.md) | engineering | Reviews a diff with fresh reviewers, each on a different slice. Sorts the findings into act on, consider, noted and dismissed. |
 | [review-loop](plugins/engineering/skills/review-loop/README.md) | engineering | Runs verify, code review and simplify on a change in rounds, until a round changes no code. |
 | [commit](plugins/engineering/skills/commit/README.md) | engineering | Typed. Commits the changes in small slices in the repo's style, then pushes. With `local`, it does not push. |
 | [create-pr](plugins/engineering/skills/create-pr/README.md) | engineering | Commits, runs the fast checks, pushes, and opens a PR that links the issue and the evidence. |
-| [architect](plugins/engineering/skills/architect/README.md) | engineering | Typed, with a task. Sketches the types, signatures and module structure before the code, then stays in the loop while the build fills them in. |
-| [implement](plugins/engineering/skills/implement/README.md) | engineering | Typed, with a ticket or a spec. Builds each ready ticket without supervision, with the feature playbook, a review and a PR. |
+| [implement](plugins/engineering/skills/implement/README.md) | engineering | Typed, with a ticket or a spec. Builds each ready ticket without supervision, with checked slices, `review-loop` and a PR. |
 | [drive](plugins/engineering/skills/drive/README.md) | engineering | Writes the exit check first, then makes one change for each pass and keeps or reverts it. It stops when progress stops. |
-| [bug-hunt](plugins/engineering/skills/bug-hunt/README.md) | engineering | Hunts bugs across a codebase in rounds, and fixes each bug test-first. It stops when a round finds no bug. |
 | [blast-radius](plugins/engineering/skills/blast-radius/README.md) | engineering | Typed, with a change. Finds what the change can break outside its diff, and runs code to prove the fact that makes it safe. |
-| [self-verify](plugins/engineering/skills/self-verify/README.md) | engineering | Sets up and audits the repo's verify skill, so that agents prove "done" with a verdict for each PR. |
-| [formal-verify](plugins/engineering/skills/formal-verify/README.md) | engineering | Model-checks a race, retry, lease or state machine that tests miss. Writes or maintains a project verify skill for the model. |
-| [no-comments](plugins/engineering/skills/no-comments/README.md) | engineering | Typed, with a folder. Removes stale comments and suppressions in separate commits, with the same test results. |
 | [cleanup](plugins/engineering/skills/cleanup/README.md) | engineering | Removes what a session left, such as dev servers, stale branches and the session itself, when it is safe. It does not tidy code. |
-| [how](plugins/engineering/skills/how/README.md) | engineering | Typed, with a question. Explains how a part of the code works, and where a new piece should go. |
-| [why](plugins/engineering/skills/why/README.md) | engineering | Explains why code is like it is, where a number came from, or if a guard can go. Labels the evidence from git, PRs and docs. |
-| [teach](plugins/engineering/skills/teach/README.md) | engineering | Typed, with a subject. Runs `how` and `why`, and gives one plain explanation of what they find. |
 | [vision](plugins/planning/skills/vision/README.md) | planning | Asks you about a product idea, first whether it is worth building. Then writes the plan for the product. It does not find ideas. |
 | [shape](plugins/planning/skills/shape/README.md) | planning | Writes the spec, milestones and status updates for one project in any tracker, such as Linear, Jira or GitHub. |
 | [tickets](plugins/planning/skills/tickets/README.md) | planning | Cuts a spec into thin slices that each cite their requirements, or writes one bug or chore. |

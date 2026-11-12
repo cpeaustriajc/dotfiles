@@ -10,8 +10,7 @@
 
 ## Sibling skills
 
-- `why` is slash-only, so the Skill tool cannot start it. Read `../why/SKILL.md` and follow it.
-- `interrogate` ships in dotfiles and the Skill tool starts it.
+- `review-loop` ships in dotfiles and the Skill tool starts it.
 
 ## Risk map
 

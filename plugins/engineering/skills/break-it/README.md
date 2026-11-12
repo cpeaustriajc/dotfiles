@@ -10,8 +10,7 @@ Say "break it", "monkey test", "bug bash", "dogfood" or "QA this like a user".
 
 - To see a change work on the happy path, run the built-in `/run` or `/verify` command.
 - For visual sign-off against a design, use `ui-polish`.
-- For a security or logic review of a diff, use `interrogate`.
-- To fix a known bug, use `playbooks`.
+- For a review of a diff, use `review-loop`.
 
 ## Example
 

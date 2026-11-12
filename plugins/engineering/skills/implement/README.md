@@ -18,7 +18,7 @@ You type `/implement SHOP-42`.
 1. Claude finds the tracker that the project uses, reads SHOP-42 and says its title.
 2. Claude checks that the ticket is `ready-for-agent` and that its blockers are closed.
 3. Claude builds the ticket in slices and commits each slice with its check.
-4. Fresh reviewers read the commits, and Claude fixes what they find.
+4. Claude runs `review-loop` on the commits and fixes what it finds.
 5. Claude opens a pull request that closes SHOP-42 when you merge it.
 
 You get the pull request. It has a verdict and evidence for each criterion of the ticket.
@@ -40,7 +40,7 @@ The skill then loads as `/engineering:implement`.
 - It never reads the ticket from a list in the conversation.
 - It asks you no design questions. An easy choice follows the closest pattern in the code, and the pull request lists it.
 - A costly question stops the run. Claude moves the ticket to `needs-info` and adds a note.
-- Reviewers that did not write the code check the commits.
+- `review-loop` checks the commits: verify, code review and simplify.
 - For a spec or several tickets, one parallel worker builds each ready ticket. Each worker opens its own pull request.
 - It starts a ticket only after each blocker is closed, or is pushed as the base of its stack.
 

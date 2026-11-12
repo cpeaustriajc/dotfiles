@@ -54,7 +54,6 @@ PY
   say "script tests"
   run python3 -I plugins/planning/skills/shape/scripts/test_check_tree.py
   run bash plugins/knowledge/skills/hone/scripts/test_corrections.sh
-  run python3 -I plugins/engineering/skills/architect/scripts/test_moves_only.py
 }
 
 doctor() {

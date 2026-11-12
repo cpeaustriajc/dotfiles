@@ -10,7 +10,7 @@ Use it when you tell Claude the same thing in many sessions and want a fix that 
 - A session had several corrections.
 - You type `/hone <skill>` to review only the corrections you made while one skill ran.
 
-Do not use it to update `CLAUDE.md` from one session. A correction from a single run does not qualify. Do not use it to review a diff: use `interrogate`. For a general report on how you use Claude Code, run the built-in `/insights` command.
+Do not use it to update `CLAUDE.md` from one session. A correction from a single run does not qualify. Do not use it to review a diff: use `review-loop`. For a general report on how you use Claude Code, run the built-in `/insights` command.
 
 The optional [hone-nudge](../../../../mods/hone-nudge/) mod suggests `/hone <skill>` after you correct Claude during a dotfiles skill run.
 

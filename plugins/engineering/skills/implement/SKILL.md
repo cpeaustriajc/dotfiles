@@ -3,7 +3,7 @@ name: implement
 description: >
   This skill should be used when the user types "/implement" with a ticket or a spec. It builds
   one ready ticket without supervision: it gets the ticket from the tracker, trusts its answers,
-  builds it with the feature playbook, reviews after the commit and opens a PR that closes it.
+  builds it in checked slices, runs review-loop on the commits and opens a PR that closes it.
   With a spec or several tickets, it starts one parallel worker per ready ticket.
 disable-model-invocation: true
 argument-hint: "<ticket | spec>"
@@ -21,7 +21,7 @@ not a question.
 4. **Trust the ticket**: open questions per `references/ticket.md`.
 5. **Build** per `references/ticket.md`. Each criterion becomes a check, end-to-end when a user
    sees it. Commit each green slice; Out of Scope stays out.
-6. **Review**: `interrogate` on the commits since the base; the builder never grades itself.
-   One commit per Act on fix; Consider rows go in the PR.
+6. **Review**: run `review-loop` on the commits since the base. One commit per fix; each
+   finding that is not fixed goes in the PR.
 7. **PR** with `create-pr`, body per `references/ticket.md`. Report the link, Decided and Needs
    you.

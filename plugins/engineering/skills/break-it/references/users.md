@@ -13,7 +13,7 @@ Steps 2, 3, 5 and 6 of `SKILL.md`.
 
 ## Scope
 
-- The area's feature file comes from the `feature-files` skill's layout, if the project has one.
+- Read the area's feature file first, if the project has one.
 - A difference from the spec or design is a bug. Confusing behaviour the spec asks for is a
   decision for me.
 
