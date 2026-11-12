@@ -10,7 +10,7 @@ diff against the base branch (default `main`) with the working tree. The sweeper
 session judges and lands. Detail per step: `references/steps.md`. Adapter:
 `references/claude-code.md`.
 
-1. **Prepare.** Uncommitted work outside the work folder: stop for the owner. Save the baseline:
+1. **Prepare.** Uncommitted work: stop for the owner. Save the baseline:
    each exit code and failing check of the typecheck, lint and tests.
 2. **Sweep** with a read-only sweeper and `references/sweeper-prompt.md`. Defer to its fresh
    perspective.

@@ -17,7 +17,7 @@ A move changes no line except import statements, export keywords and import path
 
 ## Pick a layout
 
-The owner replies `Pick A` or `Pick B` on layout candidates. Work on a branch, never the trunk. Save every output below to the project's work folder.
+The owner replies `Pick A` or `Pick B` on layout candidates. Work on a branch, never the trunk. Save every output below to the work folder.
 
 Before step 1, run `git status --porcelain`. If it prints anything, stop and tell the owner to commit their own work first: step 3 stages everything and the undo restores tracked files to `HEAD`, so uncommitted edits would be lost.
 

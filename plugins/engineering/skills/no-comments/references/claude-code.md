@@ -1,5 +1,8 @@
 # Claude Code
 
+- The work folder is the session's scratchpad directory. A later session cannot find it, so it
+  never reads an old baseline as current.
+
 ## Sweeper
 
 | Role | `Agent` call |

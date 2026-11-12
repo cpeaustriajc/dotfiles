@@ -38,7 +38,7 @@ The skill then loads as `/engineering:no-comments`.
 
 - Keeps license headers, `prettier-ignore`, public API doc comments, issue links, and notes about a vendor or protocol we cannot change.
 - Marks code that a comment excused as `MUST KILL`, with the rename, extract or type that would make the comment unneeded.
-- Writes only on a branch. It stops if you have uncommitted work outside the project's work folder.
+- Writes only on a branch. It stops if you have uncommitted work.
 - Undoes any change that alters a check result, and reports that change as open.
 
 ## Limits

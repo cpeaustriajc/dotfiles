@@ -4,9 +4,6 @@ The detail behind steps 1, 3 and 5 of `SKILL.md`.
 
 ## Prepare (step 1)
 
-- If git doesn't ignore the project's work folder, add it to `.git/info/exclude`. Never edit
-  `.gitignore`: a sweep commits only in-scope files, so that edit stays behind and stops the next
-  sweep.
 - Take the typecheck, lint and test commands from the repo's README, package scripts or
   instructions. Save the baseline to the work folder.
 
@@ -35,8 +32,7 @@ shapes; this run builds no shape.
 ## Land (step 5)
 
 - From the trunk, branch by the repo's branch rule, else `no-comments/<folder>`.
-- Commit in this order, one kind per commit, staging only in-scope files you changed and never
-  the work folder:
+- Commit in this order, one kind per commit, staging only in-scope files you changed:
   1. **Comments**: delete each accepted comment. Change no code token.
   2. **Reshapes**: per Reshapes above.
   3. **Suppressions**: delete each accepted suppression.

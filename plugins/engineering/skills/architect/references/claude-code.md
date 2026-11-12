@@ -1,5 +1,8 @@
 # Claude Code
 
+- The work folder is the session's scratchpad directory. A later session cannot find it, so it
+  never reads an old rationale as current.
+
 ## Runners
 
 | Runner | How it runs |
