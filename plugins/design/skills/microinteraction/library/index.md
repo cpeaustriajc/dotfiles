@@ -1,6 +1,6 @@
 # Motion example library
 
-Each effect is named by its term in Emil Kowalski's animation-vocabulary skill (<https://github.com/emilkowalski/skill>) and has a good and a
+Each effect is named by its term in Emil Kowalski's animation-vocabulary skill (<https://github.com/emilkowalski/skills>) and has a good and a
 bad version. For each version:
 
 - `<version>.html`: the demo page. Its CSS is the recipe.
@@ -20,14 +20,12 @@ bad version. For each version:
 bash plugins/design/skills/microinteraction/library/remake.sh [effect ...]
 ```
 
-It needs node, the `playwright` npm package with its Chromium, and ffmpeg. It re-records every
-demo (or the effects named), writes the GIF, the frame sheet and the samples next to it, and fails
-when a GIF is wider than 480px or larger than 150 KB.
+It re-records every demo (or the effects named) and fails when a GIF is wider than 480px or larger
+than 150 KB. Needs and options: the header of `remake.sh`.
 
 ## Add an effect
 
-1. Make a folder named after the glossary term, in lower case with dashes.
+1. Make a folder named after the animation-vocabulary term, in lower case with dashes.
 2. Write `good.html` and `bad.html` at 480x270. Copy a demo here as the start.
-3. Give the moving element `data-measure` (x, y, w, h or o), `data-duration` and `data-easing`.
-4. Define `window.play()` to start the motion with one class change.
-5. Run `remake.sh <folder>` and add a row to the table above.
+3. Mark up the demo as the header of `record.cjs` says.
+4. Run `remake.sh <folder>` and add a row to the table above.

@@ -5,7 +5,7 @@
 # The master's root must carry: data-width="1080" data-height="1920" data-format="9x16", and its CSS
 # "html, body { margin: 0; width: 1080px; height: 1920px;". See references/hyperframes.md.
 set -e
-[ -n "$1" ] || { sed -n 2,6p "$0"; exit 1; }
+case "${1:-}" in -h|--help) sed -n 2,6p "$0"; exit 0;; "") sed -n 2,6p "$0"; exit 1;; esac
 M="$(cd "$1" && pwd)"
 for spec in 1x1:1080:1080 16x9:1920:1080; do
   f=${spec%%:*}; rest=${spec#*:}; w=${rest%%:*}; h=${rest#*:}

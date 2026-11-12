@@ -23,12 +23,13 @@ Airbnb and others). Name the product and screen; never copy its brand.
   footer). A treatment the design system does not describe is new: show it as an option first.
 
 **Grid.** One column grid, one gutter, one row gap; 8-point vertical, 4-point inside components. Grid
-rows have fixed height; no masonry. Measure against the guides, never by eye.
+rows have fixed height; no masonry.
 
 **Layers.** Content people return to or share gets a page with its own address, not an overlay. A
 layer shows feedback; a destination is a page. A scrim only behind a modal.
 
-**States.** Hover never carries information. Each state has two cues (WCAG 1.4.1).
+**States.** Hover never carries information. Each state has two cues (WCAG 1.4.1). No heavy
+borders or edge rails; no same-hue glow shadows under coloured buttons.
 
 **Components.** Use the project's kit; never hand-draw a button, chip, card or menu. A part the kit
 lacks goes into the kit first. Open each menu, select and popover on the board. A ported prototype
@@ -43,20 +44,10 @@ with the date opened. Write the new rule into the design system in the same chan
 decision replaces part of it, add a dated "Superseded in part" banner and keep the old text.
 
 **Definition of done**
-1. Open each changed artboard or page in a browser; code and style strings are not enough.
-2. Light and dark at 375, 768 and 1440 px.
-3. Grid guides on; measure against columns and rows.
-4. Each touch target 44x44 or more.
-5. Open each menu, select and popover.
-6. Accessibility: contrast, keyboard, focus ring, zoom, forced colours, reduced motion.
-7. Hand over: what changed, which artboards, which rules applied, which treatments are new, what was
+1. Open each changed artboard or page in a browser; code and style strings are not enough. Screenshots
+   are large enough to show the grid guides.
+2. Measure, do not eyeball: columns and rows against the guides, each touch target at 44x44 or more
+   (`interaction.md`), contrast. A clipped glyph is measured before the font is blamed.
+3. Keyboard, focus ring, zoom, forced colours, reduced motion.
+4. Hand over: what changed, which artboards, which rules applied, which treatments are new, what was
    not checked.
-
-**Known failures**
-- Several screens or states in one artboard; a larger redesign than asked for.
-- Hand-drawn components, or colours and materials the design system does not specify.
-- "Done" reported before the board was opened; screenshots too small to show the guides.
-- Boards empty at rest because they draw from timers; a prototype port that changed the design.
-- A lesson left in a case study and not written into the design system.
-- Heavy borders or edge rails; same-hue glow shadows under coloured buttons.
-- A clipped glyph blamed on the font before anyone measured it.

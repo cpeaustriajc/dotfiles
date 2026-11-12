@@ -1,7 +1,7 @@
 # Music: a local bed under the voice
 
-MusicGen (`facebook/musicgen-medium`) through `transformers` on Apple MPS: about 30 s per
-generation, ignores BPM and key (put the mood in the prompt). The loader needs `pytorch_model.bin`
+MusicGen (`facebook/musicgen-medium`) on Apple MPS: about 30 s per generation, ignores BPM and key
+(put the mood in the prompt). The loader needs `pytorch_model.bin`
 (8 GB) plus config and tokenizer; `state_dict.bin` is not needed. Mirror: `models.md`.
 
 1. Two or three candidates with `scripts/musicgen.py`: one matching the voice's tone (a quirky

@@ -33,7 +33,7 @@ The skill then loads as `/design:microinteraction`.
 ## What it does
 
 - Reads the area you name and its styles. It writes no file in your project.
-- Names each proposal's effect with a term from the glossary, such as Scale in or Stagger.
+- Names each proposal's effect with a term from Emil Kowalski's animation vocabulary, such as Scale in or Slide in.
 - Gives each proposal a purpose, a frequency, and exact values: property, duration and curve.
 - Plays each proposal inline in the Claude app, with Pick, Skip and a Send button.
 - Prints the proposals as text in a terminal, and waits for your reply.

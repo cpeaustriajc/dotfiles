@@ -1,7 +1,7 @@
 # Where to hunt
 
 Step 2 of `SKILL.md`. Sweep these seams, with recipes from Emil Kowalski's skills
-(https://github.com/emilkowalski/skill); take values from the project's tokens first.
+(https://github.com/emilkowalski/skills); take values from the project's tokens first.
 
 - Feedback gaps: pressables with no `:active`; destructive plain clicks (hold-to-confirm).
 - Teleporting state: conditional renders, route content, accordions that snap, list adds and

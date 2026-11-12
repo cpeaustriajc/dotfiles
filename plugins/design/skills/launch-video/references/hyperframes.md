@@ -1,19 +1,19 @@
 # HyperFrames: composing and rendering
 
 Install it as a Claude Code plugin (`claude plugin marketplace add heygen-com/hyperframes`, then
-`claude plugin install hyperframes@hyperframes`) and read its `hyperframes-core` skill before writing
-a composition. In a plugin install, run the CLI through the bundled launcher, not `npx`:
+`claude plugin install hyperframes@hyperframes`) and read its `hyperframes-core` skill and
+`hyperframes/references/plugin-installation.md` before writing a composition. `hf` below is that
+file's launcher, `node <PLUGIN_ROOT>/skills/hyperframes/scripts/plugin-cli.mjs`, never `npx`:
 
 ```sh
-printf '#!/bin/sh\nexec node %s/skills/hyperframes/scripts/plugin-cli.mjs "$@"\n' \
-  "$(ls -d ~/.claude/plugins/cache/hyperframes/hyperframes/* | tail -1)" > hf && chmod +x hf
-./hf init videos/<project> --non-interactive --example=blank --skill=product-launch-video
-./hf lint · ./hf snapshot --at 2.4,8.1,12.6 · ./hf render --quality high --output renders/<name>.mp4
+hf init videos/<project> --non-interactive --example=blank --skill=product-launch-video
+hf check · hf snapshot --at 2.4,8.1,12.6 · hf render --quality high --output renders/<name>.mp4
 ```
 
-Spine: its `product-launch-video` workflow; `./hf capture <url> -o ./capture --json` for brand
+Spine: its `product-launch-video` workflow; `hf capture <url> -o ./capture --json` for brand
 tokens, fonts, text and screenshots. Its audio script only retrieves music, never generates: use
-`music.md` and `voice.md`. Every `<audio>` needs an `id` or it is silently not mixed.
+`music.md` and `voice.md`. `check` runs lint first; fix what it reports (hidden-state, `fromTo`,
+`<audio>` id and root-composition errors are all lint codes).
 
 ## One composition, one timeline
 
@@ -24,11 +24,7 @@ fades; one playful spring at most.
 
 ## Traps that cost a render each
 
-- Initial hidden state: `gsap.set(...)` outside the timeline, not `tl.set(..., 0)`. Include
-  `opacity: 0` with any `yPercent` hide (`check` counts moved text as visible).
-- `fromTo` on a hidden element puts `opacity: 1` in the destination, or a cold-seeking worker never
-  shows it (`gsap_cold_seek_hidden_fromto_missing_reveal`). A second `fromTo` on the same element
-  needs `immediateRender: false`.
+- Include `opacity: 0` with any `yPercent` hide (`check` counts moved text as visible).
 - Text that changes over time is a pure function of a tweened proxy (`onUpdate` reading
   `proxy.v`), never `tl.call(...)`: calls do not undo when the renderer seeks backwards.
 - `tl.shiftChildren(amount, false, after)` moves every earlier-authored tween that starts after
@@ -57,6 +53,6 @@ One master `index.html` at 1080x1920; the other shapes are generated, so every e
 3. Per-shape layout in CSS keyed on the attribute (`#root[data-format="16x9"] .headline`); wide:
    words left, world right. Choreography that depends on space gets a per-format table.
 4. Generate siblings with `scripts/build_formats.sh` (copies the project minus renders, snapshots,
-   capture; rewrites root size, `data-format`, body size, viewport). Never keep two root
-   compositions in one folder (`multiple_root_compositions`), backups included.
+   capture; rewrites root size, `data-format`, body size, viewport). Backups
+   count as root compositions: keep none in the folder.
 5. Snapshot each shape at the moments that matter before rendering it.

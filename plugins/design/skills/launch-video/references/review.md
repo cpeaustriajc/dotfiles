@@ -19,6 +19,6 @@ In every shape:
 - No text under another element, off canvas, or outside the safe zones (top 10%, bottom 18% of 9:16).
 - Alignments measured, not eyeballed.
 - One voice, brand and domain pronounced right, every line ends before the next starts.
-- Music under the voice; the mix peaks below 0 dB.
+- Music under the voice; the mix peaks below 0 dB (`music.md` step 3).
 - Every claim, on screen or spoken, passes the project's copy rules.
 - Files are where the person asked, not only in scratch.

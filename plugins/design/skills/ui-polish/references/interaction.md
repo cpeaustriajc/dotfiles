@@ -1,11 +1,12 @@
 # Interaction rules
 
-A row names the rule it breaks. Follow Vercel's Web Interface Guidelines
-(https://github.com/vercel-labs/web-interface-guidelines), Rauno Freiberg's "Interaction design"
-(https://rauno.me/craft/interaction-design), Emil Kowalski's mobile-native skill
-(https://github.com/emilkowalski/skill), Apple HIG and WWDC18 "Designing Fluid Interfaces"
-(https://developer.apple.com/videos/play/wwdc2018/803/), and WCAG 2.2 (https://www.w3.org/TR/WCAG22/)
-for press and release, drag and hover, loading, focus, forms, navigation and accessible text.
+A row names the rule it breaks. Sources: Vercel's Web Interface Guidelines
+(https://github.com/vercel-labs/web-interface-guidelines); Rauno Freiberg, "Invisible Details of
+Interaction Design", 2023 (https://rauno.me/craft/interaction-design); Emil Kowalski's
+`mobile-native` skill (https://github.com/emilkowalski/skills); Apple HIG and WWDC18 "Designing
+Fluid Interfaces" (https://developer.apple.com/videos/play/wwdc2018/803/); WCAG 2.2
+(https://www.w3.org/TR/WCAG22/). Measure what can be measured (target sizes with
+`getBoundingClientRect`, contrast with axe-core or computed colours); judge only the rest.
 
 Our choices:
 - Hit targets are 44x44 CSS px at every viewport, not only on touch. A row a person selects is at

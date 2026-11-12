@@ -11,8 +11,8 @@ One row per proposal, ordered by leverage:
 
 | # | Location | Today | Purpose | Frequency | Suggested motion |
 | --- | --- | --- | --- | --- | --- |
-| 1 | `Toast.tsx:41` | New toasts appear at once | Preventing a jarring change | Occasional | Enter via `@starting-style`: `opacity: 0; translateY(100%)` to settled, `transition: 400ms ease`, exit by the same edge |
-| 2 | `Button.tsx:18` | No press feedback | Feedback | Tens a day | `:active { transform: scale(0.97) }`, `transition: transform 160ms ease-out`, subtle enough for its frequency |
+| 1 | `Toast.tsx:41` | New toasts appear at once | Preventing a jarring change | Occasional | Enter via `@starting-style`: `opacity: 0; translateY(100%)` to settled, `transition: 400ms cubic-bezier(0.23, 1, 0.32, 1)`, exit by the same edge |
+| 2 | `Button.tsx:18` | No press feedback | Feedback | Tens a day | `:active { transform: scale(0.97) }`, `transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1)`, subtle enough for its frequency |
 
 - "Suggested motion" gives exact values (curve, duration, properties). Curves from the project's
   tokens, else Emil Kowalski's (`--ease-out: cubic-bezier(0.23, 1, 0.32, 1)`).
