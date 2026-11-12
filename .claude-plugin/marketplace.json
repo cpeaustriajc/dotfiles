@@ -93,7 +93,7 @@
       "name": "visual",
       "displayName": "Visual",
       "description": "Show it as a picture — paint scenes in code to a gallery standard.",
-      "version": "2.0.1",
+      "version": "2.0.0",
       "author": {
         "name": "John Carlo Austria"
       },
