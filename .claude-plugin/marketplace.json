@@ -110,17 +110,6 @@
       ]
     },
     {
-      "name": "linear-gate",
-      "displayName": "Linear Gate",
-      "description": "Stop Linear writes off shift — on shift, your permission mode decides; a delete or cancel asks you first.",
-      "version": "0.3.0",
-      "author": {
-        "name": "John Carlo Austria"
-      },
-      "source": "./mods/linear-gate",
-      "category": "productivity"
-    },
-    {
       "name": "hone-nudge",
       "displayName": "Hone Nudge",
       "description": "Turn corrections into fixes — suggests /hone <skill> after you correct Claude during a dotfiles skill.",

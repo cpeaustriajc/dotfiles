@@ -38,9 +38,9 @@ This guide removes the old names and installs the new plugins. It also fixes the
 | `git-guard@cj-stack`, `kill-guard@cj-stack` | Nothing. The auto-mode classifier blocks destructive git commands and kills of processes that the session did not start. |
 | `bash-trim@cj-stack` | Nothing. The `bashOutputMaxChars` setting caps Bash output. |
 | `secret-guard@cj-stack` | Nothing. The marketplace has no replacement. |
+| `linear-gate@cj-stack` | Nothing. A connector in the Claude desktop app sets its own tool permissions. |
 
-The mods `linear-gate`, `hone-nudge`, `memory-lint`, `work-folder` and
-`test-guard` keep their names. Do not change them.
+The mods `hone-nudge`, `memory-lint`, `work-folder` and `test-guard` keep their names. Do not change them.
 
 ## Remove the old names
 
