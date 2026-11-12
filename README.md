@@ -29,7 +29,7 @@ The skills ship in seven plugins. Install only the plugins that you need.
 | Plugin | What it is for | Skills |
 |---|---|---|
 | `design` | Sign off UI work and motion. Check it against the design, add missing microinteractions, and make launch videos. | ui-polish, microinteraction, launch-video |
-| `engineering` | Prove the work in the real app with unattended builds and loops, user-style testing, change risk, review and PRs. | break-it, review-loop, commit, create-pr, implement, drive, blast-radius, cleanup |
+| `engineering` | Prove the work in the real app with unattended builds and loops, user-style testing, change risk, review and PRs. | break-it, review-loop, commit, create-pr, implement, blast-radius, cleanup |
 | `planning` | Turn an idea into tickets. Find and test ideas, write the spec, cut thin slices, and triage them in any tracker. | vision, shape, tickets, grill, scout, triage |
 | `knowledge` | Keep what the team learns: a decision log, research pages, lessons from past sessions, and a recap of recent work. | project-knowledge, hone, recall |
 | `visual` | Paint scenes in code to a gallery standard. | painting-craft |
@@ -114,7 +114,6 @@ only when you call it by name.
 | [commit](plugins/engineering/skills/commit/README.md) | engineering | Typed. Commits the changes in small slices in the repo's style, then pushes. With `local`, it does not push. |
 | [create-pr](plugins/engineering/skills/create-pr/README.md) | engineering | Commits, runs the fast checks, pushes, and opens a PR that links the issue and the evidence. |
 | [implement](plugins/engineering/skills/implement/README.md) | engineering | Typed, with a ticket or a spec. Builds each ready ticket without supervision, with checked slices, `review-loop` and a PR. |
-| [drive](plugins/engineering/skills/drive/README.md) | engineering | Writes the exit check first, then makes one change for each pass and keeps or reverts it. It stops when progress stops. |
 | [blast-radius](plugins/engineering/skills/blast-radius/README.md) | engineering | Typed, with a change. Finds what the change can break outside its diff, and runs code to prove the fact that makes it safe. |
 | [cleanup](plugins/engineering/skills/cleanup/README.md) | engineering | Removes what a session left, such as dev servers, stale branches and the session itself, when it is safe. It does not tidy code. |
 | [vision](plugins/planning/skills/vision/README.md) | planning | Asks you about a product idea, first whether it is worth building. Then writes the plan for the product. It does not find ideas. |
