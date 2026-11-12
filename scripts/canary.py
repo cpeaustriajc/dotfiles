@@ -55,7 +55,8 @@ def inject(path, text, name):
         for i in range(len(lines) - 1, -1, -1):
             m = re.match(r'echo "\$\w+ passed, \$(\w+) failed"', lines[i])
             if m:
-                lines[i:i] = [f'{m.group(1)}=$(({m.group(1)} + 1)); echo "FAIL {name}"']
+                # `cat` reads all of stdin: a runner that feeds its file list through stdin loses the files after this one.
+                lines[i:i] = [f'cat > /dev/null; {m.group(1)}=$(({m.group(1)} + 1)); echo "FAIL {name}"']
                 return "\n".join(lines)
     return None
 

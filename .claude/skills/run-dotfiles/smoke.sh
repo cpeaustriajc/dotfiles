@@ -51,10 +51,11 @@ PY
   local pyt=(python3)
   python3 -c 'import hypothesis' 2>/dev/null || ! command -v uv >/dev/null || pyt=(uv run --quiet --no-project --with hypothesis python3)
   local t
-  while IFS= read -r t; do
+  # The list comes on fd 3: a test that reads stdin (ffmpeg does) would swallow the file names after it.
+  while IFS= read -r t <&3; do
     [[ -f "$t" && "$t" != tests/claude-owned/* ]] || continue
     if [[ "$t" == *.py ]]; then run "${pyt[@]}" -I "$t"; else run bash "$t"; fi
-  done < <(git ls-files --cached --others --exclude-standard -- ':(glob)**/test_*.py' ':(glob)**/test_*.sh' ':(glob)**/*.test.sh')
+  done 3< <(git ls-files --cached --others --exclude-standard -- ':(glob)**/test_*.py' ':(glob)**/test_*.sh' ':(glob)**/*.test.sh')
 }
 
 # Proves the graders go red: a failing test in every file, rigged copies, decoy mods.
