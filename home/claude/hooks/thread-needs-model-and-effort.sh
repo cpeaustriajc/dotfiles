@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# A thread started without a model inherits the settings default, which is opus[1m].
-
 set -u
 
 input="$(cat)"
