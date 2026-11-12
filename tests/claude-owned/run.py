@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Proves no dotfiles mod denies or approves an action Claude Code owns (AGENTS.md, Tool-neutral).
+"""Proves no dotfiles mod denies or approves an action Claude Code owns (AGENTS.md, "Don't fight the harness").
 
 Usage: python3 tests/claude-owned/run.py [--mods DIR] [--self-test]
 

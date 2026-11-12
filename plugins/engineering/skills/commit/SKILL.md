@@ -1,12 +1,6 @@
 ---
 name: commit
-description: >
-  This skill should be used when the user asks to commit their work: "commit", "commit and push",
-  "make commits in the repo's style" or "split these changes into commits". It commits the
-  uncommitted changes in small logical slices with messages in the repo's style, then pushes the
-  current branch ("local" skips the push). The terminal version of the desktop Commit and push
-  button. Not for PR bodies or reviews.
-disable-model-invocation: true
+description: Trigger when the user says along the lines of 'commit'
 argument-hint: "[local]"
 ---
 
