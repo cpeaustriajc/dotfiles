@@ -13,11 +13,12 @@ To open the PR, use `create-pr`.
 You say: "run the review loop".
 
 1. Claude runs the project's verify skill for the issue.
-2. Claude runs a code review with the issue and the project's users as the purpose.
-3. Claude fixes each finding that a user would hit, then runs a simplify pass.
-4. If any step changed code, Claude runs one more round.
+2. Claude runs `tests_kept.py`, which flags a test that was weakened, skipped or removed, and a rigged test runner.
+3. Claude runs a code review with the issue and the project's users as the purpose.
+4. Claude fixes each finding that a user would hit, then runs a simplify pass.
+5. If any step changed code, Claude runs one more round.
 
-You get the verify lines, the review result and each finding that is not fixed.
+You get the verify lines, the `tests_kept.py` line, the review result and each finding that is not fixed.
 
 ## Install
 
@@ -47,6 +48,7 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/claude-code.md](references/claude-code.md): the commands for each step in Claude Code.
+- [references/tests.md](references/tests.md): the test tiers and the proof rule that `implement`, `create-pr` and `break-it` also use.
 
 ### Sources and evidence
 
