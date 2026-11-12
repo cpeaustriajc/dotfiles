@@ -1,6 +1,5 @@
 # Claude Code adapter
 
-- Branch name with no project rule: `claude/<short-topic>`.
 - The comment reader is one `Agent` call with `model` set to the cheapest model the session
   can pick: it only matches comments against one rule. Paste the output of
   `git diff <base>...HEAD` and the comment rule into its prompt, so it needs no tools and sees

@@ -34,7 +34,7 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 - It stages files by path and never stages everything blindly.
 - It never commits `.env`, credentials or ignored files.
 - It adds no AI attribution and no co-author trailer.
-- If you are on the default branch, it creates a `claude/<short-topic>` branch first.
+- If you are on the default branch, it creates a branch first. The name follows the project's rule, else the tracker's branch name for the issue, else a short topic.
 - It pushes with `-u`, unless you pass `local`.
 - If the remote moved and the push fails, it pulls with rebase only when the rebase applies cleanly.
 
@@ -49,4 +49,3 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/git.md](references/git.md): the git commands for each step.
-- [references/claude-code.md](references/claude-code.md): the branch prefix in Claude Code.
