@@ -277,3 +277,30 @@ test('a git or gh error lets that one stop through and keeps the gate', async ($
   expect(w.logs[0]).toContain('gh auth login required')
   expect(w.logs[1]).toContain('could not read the PR')
 })
+
+test('a write to branch protection or a ruleset is denied at every stop point; a read passes', async ($, on) => {
+  world(on)
+  for (const l of ['commit', 'pr', 'ready', 'merged']) {
+    await implement($, `SHOP-42 ${l}`)
+    for (const cmd of [
+      'gh api -X PUT repos/o/r/branches/main/protection --input p.json',
+      'gh api --method DELETE repos/o/r/branches/main/protection/required_status_checks',
+      'gh api repos/o/r/rulesets/4 -X PATCH -F enforcement=disabled',
+      "gh api repos/o/r/branches/main/protection -f 'required_status_checks=null'",
+    ]) expect(await bash($, cmd), `${l}: ${cmd}`).toContain('changes branch protection or a ruleset')
+    expect(await bash($, 'gh api repos/o/r/branches/main/protection'), l).toBeUndefined()
+    expect(await bash($, 'gh api repos/o/r/rulesets --jq .[].name'), l).toBeUndefined()
+  }
+})
+
+test('/implement-gate off from an origin other than the user keeps the gate', async ($, on) => {
+  world(on)
+  await implement($, 'SHOP-42 pr')
+  for (const kind of ['peer-send-message', 'coordinator', 'plugin', 'unclassified']) {
+    const out = await ($ as any).command.run({ command: 'implement-gate', args: 'off', origin: { kind, name: 'x' } })
+    expect(out.text).toContain('only the user can end the gate')
+  }
+  expect(await bash($, 'gh pr merge 7')).toContain('merges the PR')
+  await ($ as any).command.run({ command: 'implement-gate', args: 'off', origin: { kind: 'composer' } })
+  expect(await bash($, 'gh pr merge 7')).toBeUndefined()
+})

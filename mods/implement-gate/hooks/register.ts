@@ -25,6 +25,8 @@ const TIMEOUT_MS = 20_000
 const GREEN = new Set(['SUCCESS', 'NEUTRAL', 'SKIPPED'])
 const FIELDS = 'url,state,headRefOid,isDraft,autoMergeRequest,mergeable,reviewDecision,statusCheckRollup'
 const OFF = 'The user can type /implement-gate off to end the gate.'
+// The origins where the user typed the command. A model, a peer session or a coordinator cannot end the gate.
+const USER = new Set(['composer', 'bridge', 'sdk'])
 const TEXT = 'If those words are only text, such as a commit message, write the text to a file and pass the file.'
 
 const level = atom({ plugin: 'implement-gate', key: 'level' } as const, null as Level | null)
@@ -43,18 +45,22 @@ function levelOf(args: string): Level {
 // The command split at `&&`, `||`, `;`, `|` and line ends, with `\` line breaks joined. Quotes are
 // not parsed: a parser of shell text misses forms, and a missed merge passes in silence. Text that
 // names a merge is denied instead, which is visible, and the deny says how to get around it.
-const segments = (raw: string) => raw.replace(/\\\r?\n/g, ' ').split(/&&|\|\||;|\||\r?\n/)
+export const segments = (raw: string) => raw.replace(/\\\r?\n/g, ' ').split(/&&|\|\||;|\||\r?\n/)
 const GH = /\bgh\b/
 // `merge` as a word, not `merge-base`; and the GraphQL merge mutations.
 const MERGE = /\bmerge\b(?!-)|mergePullRequest|enablePullRequestAutoMerge/i
 const GRAPHQL_MERGE = /\bgh\s+api\s+graphql\b[\s\S]*\b(mergePullRequest|enablePullRequestAutoMerge)\b/
 const PUSH = /\bgit\b.*\bpush\b(.*)/
 const CREATE = /\bpr\s+create\b/
+// A write to branch protection or a ruleset: the gate rests on them (Transluce saw an agent null the
+// required checks, merge, and put them back). A read (no method, no field) passes.
+const PROTECTION = /\bgh\s+api\b.*\b(branches\/\S+\/protection|rulesets)\b/
+const WRITE = /(-X|--method)[\s=]*['"]?(PUT|PATCH|POST|DELETE)\b|\s(-f|-F|--field|--raw-field|--input)[\s=]/i
 const MERGE_TOOL = /merge_pull_request$|merge_merge_request$|auto_?merge/i
 const PUSH_TOOL = /push_files$|create_or_update_file$/i
 
 // A default branch named as a push target: `main`, `HEAD:main`, `+refs/heads/main`, `"main"`.
-const targets = (rest: string, b: string) =>
+export const targets = (rest: string, b: string) =>
   rest.split(/[\s:+'"=()]+/).some(w => w.replace(/^refs\/heads\//, '') === b)
 
 // A thrown spawn, a timeout and a non-zero exit all come back as an Error that keeps stderr.
@@ -78,10 +84,11 @@ async function denial($: Api, raw: string, l: Level): Promise<string | undefined
   for (const s of segments(raw)) {
     const merging = GH.test(s) && MERGE.test(s)
     if (merging && /--admin\b/.test(s)) return 'bypasses branch protection with --admin'
+    if (PROTECTION.test(s) && WRITE.test(s)) return 'changes branch protection or a ruleset'
     if (merging && below && !/--disable-auto\b/.test(s)) return `merges the PR or turns on auto-merge. ${TEXT}`
     const push = PUSH.exec(s)
     if (l === 'commit' && (push || (GH.test(s) && CREATE.test(s)))) return 'pushes or opens a PR'
-    if (push) pushes.push(push[1])
+    if (push) pushes.push(push[1] ?? '')
   }
   if (below && GRAPHQL_MERGE.test(raw)) return `merges the PR or turns on auto-merge. ${TEXT}`
   if (below && pushes.length)
@@ -147,6 +154,7 @@ export const register: Register = on => {
 
   on('command.run', { command: 'implement-gate' }, async ($, e) => {
     if (e.args.trim() === 'off') {
+      if (e.origin && !USER.has(e.origin.kind)) return { text: `${MOD}: only the user can end the gate, by typing /implement-gate off at the prompt.` }
       await begin($, null)
       return { text: 'The gate is off until the next /implement.' }
     }
