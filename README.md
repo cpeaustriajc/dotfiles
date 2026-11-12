@@ -29,7 +29,7 @@ The skills ship in seven plugins. Install only the plugins that you need.
 | Plugin | What it is for | Skills |
 |---|---|---|
 | `design` | Sign off UI work and motion. Check it against the design, add missing microinteractions, and make launch videos. | ui-polish, microinteraction, launch-video |
-| `engineering` | Prove the work in the real app with playbooks, design-first builds, unattended loops, bug hunts, code history, review and PRs. | playbooks, break-it, feature-files, interrogate, commit, create-pr, architect, implement, drive, bug-hunt, blast-radius, self-verify, formal-verify, no-comments, cleanup, how, why, teach |
+| `engineering` | Prove the work in the real app with playbooks, design-first builds, unattended loops, bug hunts, code history, review and PRs. | playbooks, break-it, feature-files, interrogate, review-loop, commit, create-pr, architect, implement, drive, bug-hunt, blast-radius, self-verify, formal-verify, no-comments, cleanup, how, why, teach |
 | `planning` | Turn an idea into tickets. Find and test ideas, write the spec, cut thin slices, and triage them in any tracker. | vision, shape, tickets, grill, scout, triage |
 | `knowledge` | Keep what the team learns: a decision log, research pages, lessons from past sessions, and a recap of recent work. | project-knowledge, hone, recall |
 | `visual` | Paint scenes in code to a gallery standard. | painting-craft |
@@ -113,6 +113,7 @@ only when you call it by name.
 | [break-it](plugins/engineering/skills/break-it/README.md) | engineering | Drives the app as a careless, impatient or confused user with worst-case data. Reports ranked bugs with screenshots, video and repro steps. |
 | [feature-files](plugins/engineering/skills/feature-files/README.md) | engineering | Keeps one short file for each feature that says how to reach, drive and check it. An E2E check reads only the file that it needs. |
 | [interrogate](plugins/engineering/skills/interrogate/README.md) | engineering | Reviews a diff with fresh reviewers, each on a different slice. Sorts the findings into act on, consider, noted and dismissed. |
+| [review-loop](plugins/engineering/skills/review-loop/README.md) | engineering | Runs verify, code review and simplify on a change in rounds, until a round changes no code. |
 | [commit](plugins/engineering/skills/commit/README.md) | engineering | Typed. Commits the changes in small slices in the repo's style, then pushes. With `local`, it does not push. |
 | [create-pr](plugins/engineering/skills/create-pr/README.md) | engineering | Commits, runs the fast checks, pushes, and opens a PR that links the issue and the evidence. |
 | [architect](plugins/engineering/skills/architect/README.md) | engineering | Typed, with a task. Sketches the types, signatures and module structure before the code, then stays in the loop while the build fills them in. |

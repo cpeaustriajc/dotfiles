@@ -42,6 +42,7 @@ in
     ".claude/output-styles".source = link "claude/output-styles";
     # One link per hook: the live hooks folder also holds machine-only hooks.
     ".claude/hooks/deny-1m-subagent.sh".source = link "claude/hooks/deny-1m-subagent.sh";
+    ".claude/hooks/deny-max-effort.sh".source = link "claude/hooks/deny-max-effort.sh";
     ".claude/hooks/deny-linear-engineering-text.sh".source = link "claude/hooks/deny-linear-engineering-text.sh";
     ".claude/hooks/deny-migrations.sh".source = link "claude/hooks/deny-migrations.sh";
     ".claude/hooks/deny-go-ahead-questions.sh".source = link "claude/hooks/deny-go-ahead-questions.sh";
