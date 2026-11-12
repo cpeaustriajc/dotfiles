@@ -33,7 +33,7 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 
 - It needs `gh` signed in. If `gh auth status` fails, it stops.
 - If there is no GitHub remote, it asks whether to link a matching repo, create a private repo, or create a public one.
-- If you are on the default branch, it creates a `claude/<short-topic>` branch first, because a hook requires the prefix.
+- If you are on the default branch, it creates a `claude/<short-topic>` branch first.
 - It keeps your existing commits and never squashes them.
 - It commits loose changes in small slices, in the repo's message style.
 - Before the checks, a separate reader reads the diff for comments only. It keeps a comment only if the comment warns about a trap: something that breaks if the next person edits the code blindly.

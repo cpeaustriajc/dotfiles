@@ -34,7 +34,7 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 - It stages files by path and never stages everything blindly.
 - It never commits `.env`, credentials or ignored files.
 - It adds no AI attribution and no co-author trailer.
-- If you are on the default branch, it creates a `claude/<short-topic>` branch first, because a hook requires the prefix.
+- If you are on the default branch, it creates a `claude/<short-topic>` branch first.
 - It pushes with `-u`, unless you pass `local`.
 - If the remote moved and the push fails, it pulls with rebase only when the rebase applies cleanly.
 

@@ -44,7 +44,6 @@ in
     ".claude/hooks/deny-1m-subagent.sh".source = link "claude/hooks/deny-1m-subagent.sh";
     ".claude/hooks/deny-linear-engineering-text.sh".source = link "claude/hooks/deny-linear-engineering-text.sh";
     ".claude/hooks/deny-migrations.sh".source = link "claude/hooks/deny-migrations.sh";
-    ".claude/hooks/deny-unprefixed-branch.py".source = link "claude/hooks/deny-unprefixed-branch.py";
     ".claude/hooks/require-thread-model.sh".source = link "claude/hooks/require-thread-model.sh";
     ".claude/hooks/settings-drift.sh".source = link "claude/hooks/settings-drift.sh";
 
