@@ -31,7 +31,7 @@
       "name": "engineering",
       "displayName": "Engineering",
       "description": "Prove the work in the real app — unattended builds and loops, user-style testing, change risk, review and PRs.",
-      "version": "3.0.0",
+      "version": "3.1.0",
       "author": {
         "name": "John Carlo Austria"
       },

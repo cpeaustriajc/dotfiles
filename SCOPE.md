@@ -30,7 +30,8 @@ not add a new dated line.
 - **Orchestrate at fleet scale** (pstack: hundreds of cloud subagents, verifiers from another
   model family): it needs a fleet and other vendors. `implement` hands a spec to Claude Code
   Projects, a few threads at a time.
-- **Babysit's watcher**: it needs a fleet of agents that watch pull requests.
+- **Babysit's watcher**: Claude Code's auto-fix watches a PR and fixes CI failures and review
+  comments. `implement until-merged` hands off to it.
 - **Cursor automations**, **Bugbot** and **Grok Bot UI**: they work only in Cursor.
 - **Cloud agents** from pstack: they need Cursor's cloud agents.
 - **setup-pstack's model map**: it maps models from other vendors.

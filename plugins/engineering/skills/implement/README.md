@@ -47,7 +47,9 @@ The skill then loads as `/engineering:implement`.
 ## Limits
 
 - It runs only when you type it. Claude never starts it alone.
-- It never merges a pull request. You merge it.
+- It merges a pull request only when you type `/implement <ticket> until-merged`. Otherwise you merge it.
+- With `until-merged`, Claude Code's auto-fix handles CI failures and review comments. `references/merge.md` sets the fix budget.
+- It turns on GitHub auto-merge only when its proof covers every changed file and each bot finding has an answer.
 - It never closes a ticket by hand. The merge closes the ticket.
 - A spec or several tickets need a harness that runs parallel workers. In Claude Code, this is Projects. `references/claude-code.md` lists the plans that have it.
 
@@ -55,4 +57,8 @@ The skill then loads as `/engineering:implement`.
 
 - [SKILL.md](SKILL.md) is the method that Claude follows.
 - [references/orchestrate.md](references/orchestrate.md) is the coordinator method for a spec or several tickets.
-- [references/claude-code.md](references/claude-code.md) covers the Projects setup, the thread briefs and `/batch`.
+- [references/merge.md](references/merge.md) is the `until-merged` method: the grant, the fix budget, the merge gate and when to ask.
+- [references/claude-code.md](references/claude-code.md) covers the Projects setup, auto-fix and merging, the thread briefs and `/batch`.
+- `until-merged` comes from the `full-send` skill in [t3dotgg/tstack](https://github.com/t3dotgg/tstack/blob/main/skills/full-send/SKILL.md), read in November 2026. That skill shows no measured results.
+- Its `babysit-pr` watcher is replaced here by Claude Code's auto-fix and GitHub auto-merge.
+- The fix budget is new here. It stops an unattended run from spending tokens on a pull request that keeps failing.
