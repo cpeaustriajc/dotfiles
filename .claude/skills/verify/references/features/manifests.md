@@ -5,7 +5,7 @@ tables, and a README per skill and mod.
 
 - **Code:** `**/.claude-plugin/**`, `README.md`, `**/README.md`, `scripts/check_readmes.py`,
   `scripts/test_check_readmes.py`
-- **Tests:** `python3 -I scripts/check_readmes.py` prints `readmes ok`;
-  `python3 -I scripts/test_check_readmes.py` prints `OK`.
+- **Tests:** `claude plugin validate .`; `smoke.sh tests` runs `scripts/check_readmes.py` and its
+  tests.
 - **Check:** `claude plugin validate .` exits 0; each changed manifest parses with
   `python3 -c 'import json,sys; json.load(open(sys.argv[1]))' <file>`.

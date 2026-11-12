@@ -14,14 +14,16 @@ The product is the marketplace as Claude Code installs it. From the repo root, w
 `python3`, `bash`, and PyYAML or `uv`:
 
 ```bash
-.claude/skills/run-dotfiles/smoke.sh all       # about 20 s; exit 0 pass, 1 fail, 2 blocked
+.claude/skills/run-dotfiles/smoke.sh all       # about 5 min; exit 0 pass, 1 fail, 2 blocked
 .claude/skills/run-dotfiles/smoke.sh validate  # claude plugin validate .
-.claude/skills/run-dotfiles/smoke.sh tests     # each mod's hook tests and the skill script tests
+.claude/skills/run-dotfiles/smoke.sh tests     # mod tests, scripts/check_*.py, tests_kept.py, every test file
+.claude/skills/run-dotfiles/smoke.sh selftest  # about 4 min; canaries: each runner goes red on a failing test
 .claude/skills/run-dotfiles/smoke.sh details   # skills and token cost, always-on and on-invoke
 .claude/skills/run-dotfiles/smoke.sh doctor    # /skill-doctor with the skill plugins installed
 claude plugin test mods/<mod>                  # one mod
 python3 -I plugins/planning/skills/shape/scripts/test_check_tree.py  # one script
 bash plugins/knowledge/skills/hone/scripts/test_corrections.sh
+python3 -I plugins/engineering/skills/review-loop/scripts/tests_kept.py [--base <ref>]  # tests weakened?
 ```
 
 `details` and `doctor` install the working tree into a temporary config, so `~/.claude` stays

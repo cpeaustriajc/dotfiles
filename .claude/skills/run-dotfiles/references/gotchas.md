@@ -10,3 +10,7 @@
   run `claude -p "/skill-doctor"` with your own config.
 - Write a description as a `>` block scalar. An unquoted one that contains `": "` is invalid
   YAML that `claude plugin validate` misses.
+- `tests_kept.py` has no allow file. When it flags a test that is truly wrong, stop and tell the
+  owner which test and why; the owner merges past it.
+- `selftest` copies only the files git lists (`git ls-files -co --exclude-standard`), so a runner
+  rigged through an ignored file shows up in CI, not here.

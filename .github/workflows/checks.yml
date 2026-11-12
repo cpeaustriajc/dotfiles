@@ -1,0 +1,47 @@
+# The checks: smoke.sh validate, tests (with tests_kept.py) and selftest (the canaries).
+# On a pull request this file and the graders it runs come from the PR, so they are trusted only
+# while the "graders unchanged" job in graders.yml passes. That job runs from the base branch.
+name: checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  checks:
+    name: checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      DISABLE_AUTOUPDATER: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # tests_kept.py and check_trunk.py read origin/main and every branch
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
+      - name: Install the tools
+        run: |
+          python -m pip install --quiet pyyaml==6.0.3 hypothesis==6.170.13
+          npm install --global --silent @anthropic-ai/claude-code@2.1.322
+      - name: Make a local main for check_trunk.py
+        run: git show-ref --quiet --verify refs/heads/main || git branch main origin/main
+      - name: Install ffmpeg and rsync for the script tests
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg rsync
+      - name: smoke.sh validate
+        run: .claude/skills/run-dotfiles/smoke.sh validate
+      - name: smoke.sh tests
+        run: .claude/skills/run-dotfiles/smoke.sh tests
+      - name: tests kept since the last push to main
+        if: github.event_name == 'push'
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: python3 -I plugins/engineering/skills/review-loop/scripts/tests_kept.py --base "$BEFORE"
+      - name: smoke.sh selftest
+        run: .claude/skills/run-dotfiles/smoke.sh selftest

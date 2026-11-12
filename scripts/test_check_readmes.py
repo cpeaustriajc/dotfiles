@@ -6,6 +6,16 @@ import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from check_readmes import banned  # noqa: E402
+import contextlib  # noqa: E402
+import io  # noqa: E402
+import tempfile  # noqa: E402
+
+import check_readmes  # noqa: E402
+from check_readmes import MOD_HEADINGS, SKILL_HEADINGS, check, folders, main  # noqa: E402
+import subprocess  # noqa: E402
+
+# The limits from .claude/rules/wiki.md, pinned here so a changed limit fails a test.
+MAX_LINES, MAX_WORDS, MAX_STEP_WORDS = 100, 25, 20
 
 
 def hits(text):
@@ -73,6 +83,110 @@ class Banned(unittest.TestCase):
 
     def test_emoji_presentation_selector(self):
         self.assertEqual(hits("Warn ⚠️ here."), [(1, "⚠️")])
+
+
+class Check(unittest.TestCase):
+    """check(), prose(), folders() and main() on a temp root, each limit at its edge."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = pathlib.Path(self.tmp.name)
+        self.old_root, check_readmes.ROOT = check_readmes.ROOT, self.root
+        self.skill = self.root / "plugins" / "p" / "skills" / "s"
+        self.skill.mkdir(parents=True)
+
+    def tearDown(self):
+        check_readmes.ROOT = self.old_root
+        self.tmp.cleanup()
+
+    HEAD_LINES = 1 + 3 * len(SKILL_HEADINGS)  # "# s", then "## h", "", "Text." per heading
+
+    def readme(self, body="", heads=SKILL_HEADINGS, first="# s"):
+        lines = [first] + [x for h in heads for x in (f"## {h}", "", "Text.")] + body.splitlines()
+        (self.skill / "README.md").write_text("\n".join(lines) + "\n")
+        return check(self.skill, SKILL_HEADINGS)
+
+    def test_good_readme(self):
+        self.assertEqual(self.readme(), [])
+
+    def test_no_readme(self):
+        self.assertEqual(check(self.skill, SKILL_HEADINGS), ["plugins/p/skills/s: no README.md (see .claude/rules/wiki.md)"])
+
+    def test_first_line(self):
+        for first in ("# other", "# z"):
+            self.assertEqual(self.readme(first=first), ["plugins/p/skills/s/README.md:1: first line must be '# s'"])
+
+    def test_headings_in_order(self):
+        for heads in (list(reversed(SKILL_HEADINGS)), SKILL_HEADINGS + ["Extra"], SKILL_HEADINGS[:-1]):
+            errors = self.readme(heads=heads)
+            self.assertEqual(len(errors), 1, heads)
+            self.assertIn("## headings are", errors[0])
+
+    def test_line_limit_edge(self):
+        room = MAX_LINES - self.HEAD_LINES
+        self.assertEqual(self.readme("x\n" * room), [])
+        self.assertEqual(self.readme("x\n" * (room + 1)),
+                         [f"plugins/p/skills/s/README.md: {MAX_LINES + 1} lines, at most {MAX_LINES}"])
+
+    def test_sentence_word_limit_edge(self):
+        self.assertEqual(self.readme(" ".join(["w"] * MAX_WORDS) + ".\n"), [])
+        sentence = " ".join(["word"] * (MAX_WORDS + 1)) + "."
+        self.assertEqual(self.readme(sentence + "\n"), [f"plugins/p/skills/s/README.md:{self.HEAD_LINES + 1}: "
+                                                         f"{MAX_WORDS + 1} words, at most {MAX_WORDS}: {sentence[:60]}..."])
+
+    def test_step_word_limit_edge(self):
+        self.assertEqual(self.readme("1. " + " ".join(["w"] * MAX_STEP_WORDS) + ".\n"), [])
+        errors = self.readme("1. " + " ".join(["w"] * (MAX_STEP_WORDS + 1)) + ".\n")
+        self.assertEqual(len(errors), 1)
+        self.assertIn(f"{MAX_STEP_WORDS + 1} words, at most {MAX_STEP_WORDS}", errors[0])
+
+    def test_code_span_is_one_word_and_link_counts_its_text(self):
+        words = " ".join(["w"] * (MAX_WORDS - 4))
+        self.assertEqual(self.readme(f"{words} `a b c` [x y z](u v).\n"), [])
+        self.assertEqual(len(self.readme(f"w {words} `a b c` [x y z](u v).\n")), 1)
+
+    def test_table_cell_limit_and_rule_row(self):
+        cell = " ".join(["w"] * (MAX_WORDS + 1))
+        self.assertEqual(self.readme("| a | b |\n|---|---|\n| x | y |\n"), [])
+        self.assertEqual(len(self.readme(f"| a | {cell} |\n")), 1)
+
+    def test_fenced_lines_and_headings_are_not_prose(self):
+        long = " ".join(["w"] * (MAX_WORDS + 5))
+        self.assertEqual(self.readme(f"```\n{long}\n```\n### {long}\n"), [])
+
+    def test_prose_after_a_fence_and_a_table_is_checked(self):
+        long = " ".join(["w"] * (MAX_WORDS + 1)) + "."
+        self.assertEqual(len(self.readme(f"```\nx\n```\n{long}\n")), 1)
+        self.assertEqual(len(self.readme(f"| a | b |\n|---|---|\n| c | {long} |\n")), 1)
+        self.assertEqual(len(self.readme(f"| a | b |\n{long}\n")), 1)
+
+    def test_run_as_a_script(self):
+        r = subprocess.run([sys.executable, "-I", "-B", str(pathlib.Path(check_readmes.__file__))],
+                           capture_output=True, text=True)
+        self.assertIn(r.returncode, (0, 1))
+        self.assertTrue(r.stdout.strip(), "the script printed nothing")
+
+    def test_banned_word_names_path_and_line(self):
+        errors = self.readme("You just run it.\n")
+        self.assertEqual(errors, [f'plugins/p/skills/s/README.md:{self.HEAD_LINES + 1}: banned "just" (see .claude/rules/wiki.md)'])
+
+    def test_folders_lists_skills_then_mods(self):
+        (self.root / "mods" / "m").mkdir(parents=True)
+        self.assertEqual([(d.name, h) for d, h in folders()], [("s", SKILL_HEADINGS), ("m", MOD_HEADINGS)])
+
+    def test_main_exit_and_output(self):
+        (self.root / "mods" / "m").mkdir(parents=True)
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.assertEqual(main(), 1)
+        self.assertEqual(out.getvalue().splitlines(), ["plugins/p/skills/s: no README.md (see .claude/rules/wiki.md)",
+                                                       "mods/m: no README.md (see .claude/rules/wiki.md)"])
+        self.readme()
+        (self.root / "mods" / "m").rmdir()
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            self.assertEqual(main(), 0)
+        self.assertEqual(out.getvalue(), "readmes ok\n")
 
 
 if __name__ == "__main__":
