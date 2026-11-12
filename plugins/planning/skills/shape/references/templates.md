@@ -39,12 +39,14 @@ R2. <An empty, error or edge state, stated the same way.>
 
 ## Out of scope
 
-- <What was asked for or obvious, and deliberately left out.>
+- <What was asked for or obvious, and deliberately left out. Not empty once Confirmed.>
 
 ## Open questions
 
-- <Must be empty before the spec is Confirmed.>
+- <Empty once Confirmed.>
 ```
+
+`scripts/check_tree.py` rejects a Confirmed spec that breaks either.
 
 - **Requirements are statements, not tasks.** Each says who does what and what they see, for
   the empty, error, slow and edge states too. None names a data source, vendor, endpoint, model
@@ -54,10 +56,8 @@ R2. <An empty, error or edge state, stated the same way.>
   contract for gets a probe of that system first; the answer often removes the dependency.
 - **Requirements** are numbered once and never renumbered; a dropped one is struck through, so
   work items that cite it still resolve. A long list is fine: it should cover the feature.
-- **Out of scope** is never empty on a Confirmed spec. The things refused are the most useful
-  lines on the page.
-- The spec cites no file paths or code; they go stale. A prototype's snippet that pins a decision
-  (a state machine, a schema) may be inlined, marked as from a prototype.
+- No file paths or code (`top-down.md`, Text others read). A prototype's snippet that pins a
+  decision (a state machine, a schema) may be inlined, marked as from a prototype.
 
 ## Project
 

@@ -10,6 +10,7 @@ from check_tree import check  # noqa: E402
 GOOD = {
     "product": {
         "status": "Confirmed",
+        "out_of_scope": ["A marketplace for other TLDs"],
         "worth_it": "build: shop owners lose domains monthly; two weeks to a first version",
         "features": [
             {"id": "F1", "title": "Buy", "project": "Checkout"},
@@ -99,6 +100,16 @@ case("an unsliced requirement fails at Launch",
      lambda t: P(t)["items"].pop(), "no item yet for R2", launch=True)
 case("a deferred requirement passes at Launch",
      lambda t: (P(t)["items"].pop(), P(t)["requirements"][1].update(deferred=True)), None, launch=True)
+
+case("a Confirmed product with an empty Out of scope fails",
+     lambda t: t["product"].update(out_of_scope=[]), "product: Confirmed with Out of scope empty")
+case("a product status other than Draft or Confirmed fails",
+     lambda t: t["product"].update(status="confirmed"), "status confirmed is not Draft or Confirmed")
+case("a spec status other than Draft or Confirmed fails",
+     setp(spec_status="Approved"), "spec status Approved is not Draft or Confirmed")
+case("an unknown item kind fails", seti(kind="story"), "kind story is not build, bug, chore or prototype")
+case("a non-numeric checks count is a problem, not a crash", seti(checks="3"), "checks is not a whole number")
+case("zero checks fail", seti(checks=0), "no checks")
 
 print(f"{passed} passed, {failed} failed")
 sys.exit(1 if failed else 0)

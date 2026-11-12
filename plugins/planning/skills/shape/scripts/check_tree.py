@@ -9,6 +9,8 @@ import sys
 
 MAX_CHARS = 1500
 CHECKS = range(1, 6)
+STATUSES = ("Draft", "Confirmed")
+KINDS = ("build", "bug", "chore", "prototype")
 
 
 def quoted_len(rid, req):
@@ -21,8 +23,13 @@ def check(tree, launch=False):
     features = {}
     if product:
         features = {f["id"]: f for f in product.get("features", [])}
-        if product.get("status") == "Confirmed" and not str(product.get("worth_it", "")).strip():
-            problems.append("product: Confirmed with Worth it blank")
+        if product.get("status") not in STATUSES:
+            problems.append(f"product: status {product.get('status')} is not Draft or Confirmed")
+        if product.get("status") == "Confirmed":
+            if not str(product.get("worth_it", "")).strip():
+                problems.append("product: Confirmed with Worth it blank")
+            if not product.get("out_of_scope"):
+                problems.append("product: Confirmed with Out of scope empty")
         waiting = [f["id"] for f in features.values() if not f.get("project") and not f.get("deferred")]
         if waiting:
             notes.append(f"product: not yet shaped: {', '.join(waiting)}")
@@ -40,6 +47,8 @@ def check(tree, launch=False):
             if product.get("status") != "Confirmed" and p.get("spec_status") == "Confirmed":
                 problems.append(f"{where}: spec is Confirmed under a Draft product")
 
+        if p.get("spec_status") not in STATUSES:
+            problems.append(f"{where}: spec status {p.get('spec_status')} is not Draft or Confirmed")
         reqs = {r["id"]: r for r in p.get("requirements", [])}
         live = {k for k, r in reqs.items() if not r.get("dropped")}
         confirmed = p.get("spec_status") == "Confirmed"
@@ -56,6 +65,8 @@ def check(tree, launch=False):
             iid = f"{where}, item {item.get('id', '?')}"
             kind = item.get("kind", "build")
             cited = item.get("requirements", [])
+            if kind not in KINDS:
+                problems.append(f"{iid}: kind {kind} is not build, bug, chore or prototype")
             if kind == "prototype":
                 continue
             if not confirmed:
@@ -70,8 +81,11 @@ def check(tree, launch=False):
             covered.update(cited)
             if kind in ("build", "bug") and not str(item.get("you_see", "")).strip():
                 problems.append(f"{iid}: no 'you see' line")
-            if item.get("checks") is not None and item["checks"] not in CHECKS:
-                problems.append(f"{iid}: {item['checks']} checks; at most 5, so split it")
+            n = item.get("checks")
+            if n is not None and (not isinstance(n, int) or isinstance(n, bool)):
+                problems.append(f"{iid}: checks is not a whole number ({n!r})")
+            elif n is not None and n not in CHECKS:
+                problems.append(f"{iid}: no checks" if n < 1 else f"{iid}: {n} checks; at most 5, so split it")
             body = item.get("chars", 0)
             quoted = sum(quoted_len(r, reqs[r]) for r in set(cited) if r in reqs)
             if body - quoted > MAX_CHARS:

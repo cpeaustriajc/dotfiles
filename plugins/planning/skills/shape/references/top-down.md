@@ -66,13 +66,18 @@ or list them as open questions.
 
 ## Write, then check the tree
 
-Drafting, auditing or translating never authorises a write. Before any write, state the exact
-item and change; afterwards, read it back and report what the tracker now holds. Show me the
-first write to a shared tracker before making it: the whole team sees it at once, and many
-trackers notify a channel on every save, so batch related changes into one write.
+Drafting, auditing or translating never authorises a write, and a PR, issue or comment is a
+write: the default is a draft in chat. Before any write, state the exact item and change;
+afterwards, read it back and report what the tracker now holds. Show me the first write to a
+shared tracker before making it: the whole team sees it at once, and many trackers notify a
+channel on every save, so batch related changes into one write. Edit only what this run created
+or I name: another person's ticket or an epic is read-only, so a finding goes in a comment I
+approve.
 
-After writing, read the tree back from the tracker into the outline in `tree-outline.md`, save it
-as a scratch JSON file, and run `python3 <shape>/scripts/check_tree.py <path to the JSON>`, where
-`<shape>` is the parent of this file's folder. Use absolute paths: the session's working
-directory is the project, not the skill. Fix every line it prints before handing back, or say
-why one stays.
+**Text others read** (spec, item, update): no file paths, code, project terms or
+engineering jargon. Paths go stale, and the product owner, QA and other teams have no repo access
+or engineering background; a technical question goes to me, not to them.
+
+After writing, read the tree back from the tracker and run the check per `tree-outline.md`. Use
+absolute paths: the session's working directory is the project, not the skill. Fix every line it
+prints before handing back, or say why one stays.

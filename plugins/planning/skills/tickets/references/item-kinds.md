@@ -5,7 +5,7 @@ Read this when an item is a Bug or a Chore, when you pick its work type, or when
 ## A wide mechanical change
 
 A rename whose call sites span the codebase is the one exception to vertical slicing: parallel
-change, each phase its own item.
+change (Danilo Sato, martinfowler.com, 2014), each phase its own item.
 
 ## A Bug
 

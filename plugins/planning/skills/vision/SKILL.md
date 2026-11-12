@@ -15,8 +15,8 @@ Read `../shape/references/top-down.md` and its adapter's Product row.
    `references/personal-to-sellable.md`.
 3. Instead of grill's step 7: once each branch is settled, out of scope or not yet specified,
    post the ledger as the draft product and ask if it is right.
-4. On yes, write it per `references/product-template.md`. Confirmed needs Worth it and Out of
-   scope; a test-first product stays Draft until the test result is in.
+4. On yes, write it per `references/product-template.md`. A test-first product stays Draft until
+   the test result is in.
 5. Once Confirmed, create one project per feature in the Sequence's first step, linked to
    the product and holding only its line. Hand the first to `shape`; shape the next when the
    one before reaches Launch, or when I say.

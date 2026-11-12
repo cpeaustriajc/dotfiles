@@ -5,10 +5,13 @@ builds it. Name the builder: the cheapest model the project's model picks give t
 (a mid-size model for code with design calls, a small one only for mechanical, fully specced
 work). Estimate the context a fresh session of that builder uses to finish the item, and
 compare the upper estimate with the budget. More than five checks, more than five test cases, a
-body over about 1,500 characters and unrelated parts of the code are quick signs to split. A slice that passes all of them can still be too big.
+body over 1,500 characters and unrelated parts of the code are quick signs to split; the checks
+count and the body length are enforced by `check_tree.py`. A slice that passes all of them can still be too big.
 
-Failure: six stacked items passed every quick sign. The user had to ask if they fit 200–400k with
-exploration and proof. Measured, each item needed 140k–400k, and one did not fit 200k.
+Failure (8ebccc9; one measured run, 2026-11-07, a blog redesign cut into six stacked items): six
+items passed every quick sign. The user had to ask if they fit 200–400k with exploration and
+proof. Measured, each needed 140k–400k, and one did not fit 200k. Measure again when the harness
+or the model changes its fixed or image cost.
 
 ## The budget
 
@@ -28,9 +31,9 @@ part as the driver.
 | Build | The files it changes, read again and edited | The size of those files, times the edit rounds. |
 | Proof | Test runs, screenshots, crops, and each fix round | Each image about 10k again, in every round. Long test output in full. |
 
-- **Count every image at about 10k.** The image alone costs 1.5–2.5k; in the measured run about
-  15 images came with about 150k of messages. 3 widths, a screenshot and a crop each, 3 rounds
-  is 18 images, about 180k, before the fixed cost.
+- **Count every image at about 10k.** The image alone costs 1.5–2.5k; in the run about 15 images
+  came with about 150k of messages. 3 widths, a screenshot and a crop each, 3 rounds is 18
+  images, about 180k, before the fixed cost.
 - **Reading is the hidden part.** One earlier thread used 17 turns reading templates, content, a
   design board, crops and a skill, and wrote no code.
 - **A review loop multiplies proof.** A visual item with a screenshot-crop-fix loop (a painted
@@ -42,7 +45,7 @@ Shrink the item first. Split it when it is still over the budget.
 
 - **Facts, not sources**, and **narrow references**: see the item template. A file with
   built-in images is never read whole: one shell print of a 3.8 MB reference filled the context.
-- **A fixed proof budget** (pages, widths, crops, most fix rounds); with no limit there is no
+- **A fixed proof budget** (pages, widths, crops, most fix rounds); proof with no limit has no
   upper estimate.
 - **Split a visual item with a review loop smaller.** One element or one page for each item, so its
   loop fits with room left.
@@ -60,7 +63,3 @@ Each item shows its estimate and its driver, so the user does not have to ask:
 ```
 3. Painted initial, one width (R4). Builder: mid-size. ~150–190k of 200k: fixed 85k, 2 images, 3 rounds.
 ```
-
-Source: one measured run on 2026-11-07, a blog redesign cut into six stacked items. Its numbers
-(fixed cost, image cost, item estimates) are above. Measure again when the harness or the model
-changes its fixed cost or image cost.

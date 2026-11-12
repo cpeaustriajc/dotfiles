@@ -14,6 +14,6 @@ Read this when a project reaches Launch, a feature changes after its project exi
 
 - **A product update** is one line per project with its own health and phase, then the
   product's health as my call, proposed if the facts don't settle it.
-- **An audit** checks Worth it against the latest launch, then the five rules: every feature has
-  a project or waits its turn, every project serves a feature, nothing is built under a Draft
-  level, and Not yet specified holds nothing that has since sharpened.
+- **An audit** checks Worth it against the latest launch, then the five rules of
+  `../shape/references/top-down.md`, and that Not yet specified holds nothing that has since
+  sharpened.

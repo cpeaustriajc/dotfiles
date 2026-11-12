@@ -6,10 +6,12 @@ description: >
   long. It writes slices, or one bug or chore.
 ---
 
-Read `../shape/references/top-down.md` first; its adapter rows say where each part lands.
+Read `../shape/references/top-down.md` first: its adapter rows say where each part lands, and
+"Write, then check the tree" says when you may write.
 
 1. Draft spec: cut only Demo prototypes. Else list its requirements and which items cite them.
-2. Fetch the trunk and read facts from it; search open and recent closed items. A branch
+2. Fetch the trunk and read facts from it; search open and recent closed items for
+   one that already covers or supersedes this. A branch
    behind the trunk files work already done.
 3. Cut the next slice only:
    - vertical slices, prefactors first, blockers named, riskiest first; a wide mechanical

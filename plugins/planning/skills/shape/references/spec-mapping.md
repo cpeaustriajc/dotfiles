@@ -23,7 +23,6 @@
 2. Convert the ticket: move it back to the backlog, or keep it as the first build slice once the
    spec is Confirmed. Never cancel it: a cancel reads as a verdict on the author.
 3. Put the project in Demo, and add the approval item.
-4. Split no build items until the spec is Confirmed.
 
 ## Translating an old epic, brief or plan
 

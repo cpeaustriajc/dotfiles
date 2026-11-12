@@ -38,5 +38,3 @@ and don't use an `Epic` project template if the workspace has one: the word pull
 - **An issue in progress is often frozen** by team convention: put new findings in a comment or a
   new issue. Check the project's facts.
 - **Documents have search but no sorted views**, so a hand-kept index rots; find by title search.
-- **Done is usually set by the verifier**, sometimes by an integration on merge or review
-  request. Don't mark an issue Done for them.

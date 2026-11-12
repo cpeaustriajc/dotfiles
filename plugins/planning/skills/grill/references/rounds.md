@@ -4,7 +4,6 @@ Read this before the first round of a grill. The steps are in `SKILL.md`.
 
 ## Facts
 
-- Sources: code, specs, mockups, the tracker, docs, past transcripts, the live app.
 - Read-only subagents only for parallel searches too large for your context. While a lookup
   runs, ask the questions that do not depend on it.
 - A probe is a spike, not a write: a short script in the ignored scratchpad, the vendor's code or
@@ -34,7 +33,7 @@ checked. A part of the source I named (a repo to port, a list I pasted) is a que
   consequence. Each question carries a concrete scenario.
 - Plain words: no section numbers, internal IDs or letter codes.
 - A layout, look or feel question shows each option as a mockup, or offers "show me a mockup
-  first". A flow, state change or structure comes as a diagram.
+  first"; a flow, state change or structure comes as a diagram (widgets: `SKILL.md`).
 - A decision that touches other people (PO, QA, another team) is worded blamelessly, as they
   would read it.
 - Done is recommended from what you looked up; "what are the success criteria?" hands your job
@@ -43,10 +42,8 @@ checked. A part of the source I named (a repo to port, a list I pasted) is a que
 ## Reading my answers
 
 - **A note or "Other"** reframes the question or adds a requirement: fold it into the tree and
-  recompute the frontier. **A counter-question** means I lacked context: answer in 1-2 lines,
-  then ask again next round.
+  recompute the frontier. **A counter-question** means I lacked context: answer it, then ask
+  again next round.
 - **"Up to you" or "not sure"**: log your recommendation under Assumed. **"You research it"**:
   look it up and treat the result as a fact.
-- **A skipped or partial answer** leaves that question open. **"Handle Q1 first"** reorders.
 - **A dismissed or rejected form** means stop and follow what I type next; never resend it.
-- **Bulk replies** ("yes to all", "1 yes, 2 the second one") settle everything they name.

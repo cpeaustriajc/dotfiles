@@ -46,7 +46,7 @@ The skill then loads as `/planning:triage`.
 
 ## Limits
 
-- It writes no label and no comment before you say go.
+- It writes no label and no comment before you say go. A direct order counts as the go.
 - It does not run on a schedule. You start it.
 - It does not answer design questions. It hands them to `grill`.
 - It supports GitHub with commands. Other trackers use their own MCP server or CLI.

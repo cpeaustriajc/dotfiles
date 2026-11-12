@@ -10,6 +10,7 @@ run includes its project and that project's items.
   "product": {
     "name": "Domain marketplace",
     "status": "Confirmed",
+    "out_of_scope": ["A marketplace for other TLDs"],
     "worth_it": "build: buyers abandon at register today; about three weeks to a first version",
     "features": [
       { "id": "F1", "title": "Buy a domain", "project": "Checkout" },
@@ -35,8 +36,7 @@ run includes its project and that project's items.
           "requirements": ["R1"],
           "you_see": "The register page with the domain listed in the cart.",
           "checks": 3,
-          "chars": 1180,
-          "blocked_by": []
+          "chars": 1180
         }
       ]
     }
@@ -44,14 +44,14 @@ run includes its project and that project's items.
 }
 ```
 
-- `status` and `spec_status`: `Draft` or `Confirmed`.
+- `status` and `spec_status`: `Draft` or `Confirmed`; the script rejects anything else.
 - `project`: the project's name, or `null` while the feature waits its turn (listed as not yet
   shaped); `deferred: true` marks a feature or requirement consciously left out of this round.
 - `kind`: `build`, `bug`, `chore` or `prototype`. A prototype item may sit under a Draft spec and
   cites no requirement.
-- `checks`: the number of checks; `chars`: the whole body's length. The check
-  subtracts the quoted lines of the cited requirements, computed from their `text`, before it
-  compares against 1,500.
+- `checks`: the number of checks; `chars`: the whole body's length. The script subtracts the
+  quoted lines of the cited requirements, computed from their `text`, before it applies the
+  1,500 limit.
 
 Run `python3 <shape>/scripts/check_tree.py <absolute path to the JSON>`, where `<shape>` is this
 skill's folder; add `--launch` when the project is entering Launch, so a

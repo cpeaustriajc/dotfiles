@@ -46,7 +46,7 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 - Claude names the builder model for each item, from your model picks, and settles every design call so a cheaper builder loses no quality.
 - Claude estimates the context each item uses in a fresh builder session: fixed session cost, reading, building and proof, with every image counted.
 - Claude splits an item whose upper estimate is over the context budget. The budget is the project's, or Claude asks; the default is 200k tokens.
-- Three to five checks and a body under about 1,500 characters are quick signs only. A short item with a screenshot review loop can still be too big.
+- The tree check fails more than five checks or a body over 1,500 characters. A short item with a screenshot review loop can still be too big.
 - Each item names its proof budget and a stop rule: past a limit, the agent commits what passes, writes a hand-over note and stops.
 - Items state the measured facts they need, and link a large reference only as a crop or an excerpt.
 - Claude labels each item Task, Bug or Chore. A Chore adds a No-QA check and cites no requirement.

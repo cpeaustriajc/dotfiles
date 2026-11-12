@@ -1,7 +1,6 @@
 # GitHub adapter
 
-`gh auth status` first; if it fails, ask the person to sign in. Commands: `gh issue`, `gh pr`,
-`gh label`, `gh search issues --help`.
+Commands: `gh issue`, `gh pr`, `gh label`, `gh search issues --help`.
 
 - Open PRs with author association: `gh api 'repos/{owner}/{repo}/pulls?state=open&per_page=100'`
   (`author_association`, `user.login`). An outside author is not `OWNER`, `MEMBER` or

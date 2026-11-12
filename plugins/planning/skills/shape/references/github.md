@@ -1,7 +1,7 @@
 # GitHub adapter
 
-Use `gh` (2.94 or later for sub-issues, types and dependencies); `gh auth status` first, and ask
-the person to sign in if it fails. Flags: `gh issue create --help`, `gh project --help`.
+Use `gh` (2.94 or later for sub-issues, types and dependencies). Flags: `gh issue create --help`,
+`gh project --help`.
 
 ## Objects
 
@@ -13,7 +13,7 @@ uses, and offer to note the answer in the project's facts; don't edit the projec
 | Product | A Projects board (Projects v2) for the whole product, or a pinned issue |
 | Project | A **parent issue** whose sub-issues are its work items, with the project template as its body. On a team that plans in Projects boards, a board per project instead. |
 | Spec, engineering document | A wiki page or a pinned issue linked from the parent issue's How. Not a file in the repo: the product owner reads it, and edits shouldn't need a pull request. |
-| Decision | Follows the `dossier` skill if installed; otherwise a wiki page per decision |
+| Decision | `dossier` if installed, else a wiki page (`levels.md`) |
 | Phase | A milestone per project phase, titled `<Project> — <Phase>`, with no due date. On a board, a single-select `Phase` field instead. |
 | Work item | Issue |
 | Sub-item | Sub-issue (`--parent`) |
@@ -30,7 +30,5 @@ uses, and offer to note the answer in the project's facts; don't edit the projec
 - **No `gh milestone` command:** `gh api --method POST repos/{owner}/{repo}/milestones -f title="<Project> — Demo"`.
 - **Milestones belong to one repository.** A project spanning repositories uses a Projects board
   with a `Phase` field instead.
-- **Closing an issue is not the verifier's Done** unless the team agrees it is. If a pull request
-  closes issues on merge (`Closes #n`), say so in the project's facts, and use a label or board
-  status for "verified".
-- **Every write can notify** watchers and linked channels; batch edits to one issue.
+- **Done:** a pull request that closes issues on merge (`Closes #n`) is not the verifier's Done;
+  say so in the project's facts, and use a label or board status for "verified".

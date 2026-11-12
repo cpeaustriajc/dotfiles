@@ -14,7 +14,6 @@ tool's own MCP server or CLI to see what it can create, then map the levels onto
 | Dependency | A native "blocked by" | A line in the item's Context with a link |
 | Checklist | Native checkboxes, or `- [ ]` rendering | A numbered list |
 
-- **Keep the method, bend the container.**
 - **A markdown file as the tracker** (`TODO.md`, `ROADMAP.md`): one heading per project, the spec
   linked rather than inlined, phases as subheadings, work items as checkboxes with the template's
   Outcome as the line and its checks nested beneath.
