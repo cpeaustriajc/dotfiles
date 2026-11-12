@@ -13,7 +13,6 @@
 **Randomness and iteration**
 - Seed every random stream. New elements draw from a new seeded stream, so approved ones don't
   move; never insert calls into an old stream or reorder them.
-- Magic numbers as named constants in real units (px per metre, floor pitch, heights).
 
 **Animated and multi-state scenes:** test the in-between frames; shoot movers several times a
 fraction of a second apart.
@@ -22,6 +21,5 @@ fraction of a second apart.
 - Scene in 2D, posed figures in 3D, one stylisation pass over both. Preview a figure at final
   scale over a cached scene before the full pipeline.
 - Render at 2× display size (3200 × 2000 for 1600 × 1000).
-- Painted traditions (oil, gouache): `scripts/paintpass.py <src> <dst> --width 3200 --brush 0.5
-  --focus x,y,w,h` (`--depth <mask>` if you have one) over the composed PNG for one shared
-  brushwork. It unifies; it can't rescue a weak drawing. Flat-vector and graphic styles skip it.
+- Painted traditions (oil, gouache): `scripts/paintpass.py --help` (`--width 3200` for a 1600 × 1000 page) over the composed PNG for one
+  shared brushwork. It unifies; it can't rescue a weak drawing. Flat-vector and graphic styles skip it.

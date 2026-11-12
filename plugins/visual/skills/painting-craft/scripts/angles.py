@@ -2,13 +2,13 @@ import argparse, importlib, math, os, sys
 import numpy as np
 from PIL import Image
 
-ap = argparse.ArgumentParser()
+ap = argparse.ArgumentParser(description='Render a mesh builder from several yaw angles: for cloth that seems to vanish, armour that clips, or a helmet to check against front, three-quarter and side references. Needs numpy, scipy, pillow.')
 ap.add_argument('--art', default=os.path.dirname(os.path.abspath(__file__)), help='folder holding render3d.py and the figure module')
 ap.add_argument('--module', required=True, help='figure module name, e.g. knight')
 ap.add_argument('--code', required=True, help='python run inside the module namespace; must assign `mesh`')
 ap.add_argument('--yaws', default='0,-50,90', help='degrees about the vertical axis')
-ap.add_argument('--ppcm', type=float, default=7)
-ap.add_argument('--out', required=True)
+ap.add_argument('--ppcm', type=float, default=7, help='pixels per centimetre')
+ap.add_argument('--out', required=True, help='PNG to write')
 a = ap.parse_args()
 
 sys.path.insert(0, os.path.abspath(a.art))

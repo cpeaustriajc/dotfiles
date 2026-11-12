@@ -2,10 +2,15 @@
 // Playwright resolves from the current directory, so run this from a folder where `npm i playwright` has been done.
 // usage: node shoot.mjs --url http://127.0.0.1:8765/portfolio.html --out shots/city [--size 1600x1000 --size 390x844]
 //        [--section '#games' --at 0.5 | --y 2400] [--wait 5000] [--dpr 2] [--repeat 3 --every 700]
+// --size defaults to 1600x1000 and 390x844, at DPR 2. --section scrolls a sticky section (--at 0..1 through it), --y scrolls to a pixel,
+// --repeat N --every ms catches movers. A printed PAGEERROR means the picture is not the one you think.
 import { createRequire } from 'node:module';
+import { readFileSync } from 'node:fs';
+const args = process.argv.slice(2);
+if (args.includes('--help') || args.includes('-h')) { console.log(readFileSync(new URL(import.meta.url), 'utf8').split('\n').filter((l) => l.startsWith('//')).map((l) => l.slice(3)).join('\n')); process.exit(0); }
 const { chromium } = createRequire(process.cwd() + '/')('playwright');
 
-const args = process.argv.slice(2), opt = { size: [] };
+const opt = { size: [] };
 for (let i = 0; i < args.length; i += 2) { const k = args[i].replace(/^--/, ''), v = args[i + 1]; k === 'size' ? opt.size.push(v) : (opt[k] = v); }
 if (!opt.url || !opt.out) { console.error('need --url and --out'); process.exit(2); }
 const sizes = opt.size.length ? opt.size : ['1600x1000', '390x844'];

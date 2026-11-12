@@ -10,20 +10,14 @@ source when one exists.
 - **Hands have mass.** About 40 px at painting scale: one mass, fingers touching, a clear cuff;
   thin separate fingers read as claws.
 - **Reach:** target closer than 59 (upper arm + forearm). Two-bone IK with a pole vector: out and
-  down for an arm across a knee, out and back for a hand on the thigh. Guessed angles left Henry's
+  down for an arm across a knee, out and back for a hand on the thigh. Guessed angles leave the
   arm horizontal.
 - **Sleeping head:** yaw within 5° of the torso, chin down 10-15°, loll 15-20°. Less looks awake;
   more sinks a helmet rim into the shoulder.
-- **Seated Henry** (against a trunk): hip joint 9.5 above the seat, shoulder joint 58-60, crown
-  92-95; raised thigh at 45° puts the knee centre 31 above the hip.
-- **Pebbles**, a 150 cm mare: body length ≈ withers height (longer reads as a dachshund), head 0.4
-  of the height.
-- **Mutt**, a medium dog, 52 cm withers: body 1.1 × withers. A face under 25 px doesn't read: use
-  silhouette and coat pattern.
-- **Cars** are judged as fast as a face; a body on two circles with no arches or shadow reads as
-  a toy. Los Santos coupe (2013): 450 long, 130 tall, wheelbase 245, wheels 66. Night City wedge
-  (2077): 470 long, 115 tall, wheelbase 270, wheels 72. Arch radius 1.2 × wheel radius, dark
-  wheel well, flat contact shadow.
+- **Cars** are judged as fast as a face; a body on two circles with no arches or shadow reads as a toy.
+  Arch radius 1.2 × wheel radius, dark wheel well, flat contact shadow.
+
+Past pictures' measurements: `worked-example.md`.
 
 Ratios to measure at review, in pixels: helmet ÷ seated height 0.35 with a bascinet, 0.25 bare;
 horse body ÷ withers 1.0; dog body ÷ withers 1.1; car length ÷ height about 3.5 (coupe), 4 (wedge).

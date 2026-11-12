@@ -1,8 +1,7 @@
 # Recipes for the parts that fail at 2× zoom
 
 A reviewer reads structure at zoom, not colour. Build each hero element as a study at its zoomed
-size. Use standard craft for cloth, small faces and hands, glow and lamps, atmosphere and light
-direction (one key, written down before shading).
+size.
 
 ## Foliage and tree crowns
 

@@ -7,13 +7,9 @@ zoomed.
    `mkdir -p <scratch>/shot && cd <scratch>/shot && npm i playwright && npx playwright install chromium`.
    Run the scripts from there by their path in this skill; `shoot.mjs` loads Playwright from the
    current directory.
-2. Serve the page on a free port; `scripts/shoot.mjs --url <url> --out <prefix>` shoots each
-   `--size` (default `1600x1000` and `390x844`) at DPR 2. `--section '#id' --at 0..1` scrolls a
-   sticky section, `--y` scrolls to a pixel, `--repeat N --every ms` catches movers. A printed page
-   error means the picture is not the one you think.
+2. Serve the page on a free port and shoot it: `scripts/shoot.mjs --help`.
 3. Whole frame first: tradition, value plan, space.
-4. 2× crops of every element: `uv run --with pillow python scripts/crop.py SHOT OUT x,y,w,h:name ...`
-   (CSS pixels). Check each crop.
+4. 2× crops of every element (`scripts/crop.py --help`, boxes in CSS pixels). Check each crop.
 5. Fix, re-shoot, compare. Keep before/after shots and exact commands for the commit message.
 
 Checklist: proportion (every reach works); pose; grounding; depth order along every mover's path;

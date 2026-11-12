@@ -62,4 +62,5 @@ Scripts need Python packages (numpy, scipy, pillow) and Playwright. `render3d.md
 - [references/aesthetic.md](references/aesthetic.md): what reads as amateur, and the fixes.
 - [references/review.md](references/review.md): the screenshot review loop and its checklist.
 - [references/recipes.md](references/recipes.md): how to build foliage, metal, cloth, faces, windows and water.
+- [references/worked-example.md](references/worked-example.md): the knight's kit and the sizes of past pictures' horse, dog and cars.
 - [references/anatomy.md](references/anatomy.md), [scale.md](references/scale.md), [armour.md](references/armour.md), [render3d.md](references/render3d.md) and [code-techniques.md](references/code-techniques.md): measurements, space, accuracy and the paint pass.
