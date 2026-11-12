@@ -29,7 +29,7 @@ Search replaces the index and the number; a hand-kept index goes stale here.
 
 - **Find.** Search for the topic, `Decision:` and "Decided by", across the team and candidate
   projects.
-- **Supersede.** Create the new document. In the old one change only the tag line's Status to
+- **Supersede.** Create the new document. In the old one change only the first body line's Status to
   `Superseded by <link>` or `Partly superseded by <link>: <the part>`.
 - **A stale detail, not a stale decision.** Strike it in place with `~~…~~` and add a document
   comment saying what replaced it and where that is recorded.

@@ -7,9 +7,9 @@ Step 5 of SKILL.md.
   routine new decision is published and then reported.
 - **Save after every change**, as the adapter says (a wiki is a git repo and needs a push).
 - **Parallel writers**: give each agent its own working copy, or keep a single writer.
-- **Before publishing, check that:**
-  - no page mentions Claude or agents;
-  - every internal link resolves;
-  - Home lists every page;
-  - the index, where there is one, is newest first;
-  - every pattern in the plain-prose list is rewritten.
+- **Before publishing**, for a log held as files (GitHub wiki, Obsidian) run
+  `python3 -I <this skill's base directory>/scripts/check_pages.py <folder>`: it checks names,
+  Status and Date, sections, links, Home, index order and mentions of Claude or agents. Fix each
+  line it prints, or say why one stays (a `check:` line, such as a support agent, is a
+  judgment). On Notion, Linear or Confluence check those by hand. Then rewrite every pattern in
+  `references/plain-prose.md`.

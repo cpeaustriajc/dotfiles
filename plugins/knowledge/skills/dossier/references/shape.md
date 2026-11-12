@@ -18,8 +18,9 @@ no convention for something, use this page.
 - **Decisions index.** A table, newest first by date, with columns `# | Decision | Status | Date |
   Issue`. A new row goes at the top. Sort by date, not by number: numbers follow the order
   decisions were recorded, and they can be out of date order.
-- **`Decision NNN <Topic>`.** One page per decision, numbered with zero padding (`001`). Immutable ADR (Nygard,
-  "Documenting Architecture Decisions", 2011): facts and wording stay as decided.
+- **`Decision NNN <Topic>`.** One page per decision, numbered with zero padding (`001`). Immutable ADR (Michael Nygard,
+  "Documenting Architecture Decisions", 2011, https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions):
+  facts and wording stay as decided.
 - **Backends with search but no sorted views** (Linear) drop the number and the index: each
   decision is titled `Decision: <Topic>` and found by search. Their adapter gives the shape that
   replaces the two items above.

@@ -2,12 +2,6 @@
 
 Docs: https://code.claude.com/docs/en/costs, "Analyze your usage patterns" (`/insights`).
 
-## Usage report
-
-- I type `/insights`; Claude does not run it. Read the newest `~/.claude/usage-data/report.html`
-  (or its timestamped copies). None: mine without it and say `/insights` can give one.
-- Files older than `cleanupPeriodDays` (30 default) are deleted.
-
 ## Ask tool
 
 Step 6: `AskUserQuestion`, one option per proposal, `multiSelect: true`.
@@ -15,6 +9,11 @@ Step 6: `AskUserQuestion`, one option per proposal, `multiSelect: true`.
 ## Layers
 
 Hooks: write them with the `update-config` skill.
+
+## Usage report
+
+- I type `/insights`; Claude does not run it. Read the newest `~/.claude/usage-data/report.html`
+  (or its timestamped copies). None: mine without it and say `/insights` can give one.
 
 ## Instruction-file audit
 
@@ -24,19 +23,18 @@ Hooks: write them with the `update-config` skill.
 - It reports installed plugin skills without proposing edits: audit the skill's source path.
 - `claude-md-improver` (claude-md-management): stale commands and paths are prune candidates; its
   additions still pass step 2.
-- Keep each always-loaded file under 200 lines.
+- An always-loaded file over 200 lines loses adherence (docs: "Memory", `code.claude.com/docs/en/memory`).
 - `/revise-claude-md` output is single-run corrections until they recur.
 
 ## Lens pass
 
-- `python3 -I scripts/corrections.py --turns --out <file>` with the same `--project` and `--since`
-  as the correction run. It refuses `--skill`: for `/hone <skill>`, run without and keep only
+- `scripts/corrections.py --turns` with the same `--project` and `--since` as the correction run
+  (`--help` has the flags). It takes no `--skill`: for `/hone <skill>`, run without and keep only
   that skill's findings. The file is about 6 times the corrections file.
-- `--chunk-lines 1500` on both runs (chunks `<out>.NN.md`, cut between sessions). Tell each miner
-  to read its chunk in 500-line parts: a cheap-model miner given more stops early and reports a
-  partial read as whole.
+- `--chunk-lines 1500` on both runs. Tell each miner to read its chunk in 500-line parts: a
+  cheap-model miner given more stops early and reports a partial read as whole.
 - Start lens subagents and correction miners in one message, one `Agent` per chunk on the
-  cheapest model, read-only. Move up one model when an eval shows a miner misreads a lens.
+  cheapest model, read-only. Move up one model when a miner misreads a lens.
 - Missed-trigger lens skill list: this session's skills listing plus each
   `.claude/skills/*/SKILL.md` frontmatter in the project.
 

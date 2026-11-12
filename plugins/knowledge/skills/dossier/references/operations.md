@@ -11,9 +11,8 @@ without its context, and it came from a real trade-off between alternatives.
 4. Add or update the Home row, if the decision creates a page.
 5. Link the research pages it rests on.
 
-**Supersede a decision** (Nygard, "Documenting Architecture Decisions", 2011,
-https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions: take the immutable ADR with
-a Status chain): the old page stays immutable except its Status.
+**Supersede a decision** (immutable ADR with a Status chain, `shape.md`): the old page stays
+immutable except its Status.
 1. Record the new decision as a new page, and have its Context say what changed since the old one.
 2. On the old page, change the Status line to `Superseded by [[Decision NNN …]]`.
 3. In the index, update the old row's Status and add the new row at the top.

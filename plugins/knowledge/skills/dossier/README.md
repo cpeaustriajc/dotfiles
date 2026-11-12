@@ -11,7 +11,7 @@ Use it when a decision or a finding must outlive the chat.
 - You ask Claude to record research or a finding.
 - A decision made in conversation will matter to others.
 
-Do not use it for instructions to an agent. Those belong in `CLAUDE.md`. It never stores the log in your code repository.
+Do not use it for instructions to an agent. Those belong in `CLAUDE.md`. It starts no log in your code repository, but follows an existing `docs/adr/`.
 
 ## Example
 
@@ -48,6 +48,7 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 - Research pages carry a date, and Claude marks unconfirmed facts UNVERIFIED. Replaced findings move under a `## History` heading.
 - A decision date comes from a commit, an issue or your word. If none exists, Claude writes the month only.
 - Claude does not invent a reason. If the record does not say why, the page says so and Claude asks you.
+- For a log held as files, `scripts/check_pages.py` checks names, Status, sections, links and index order.
 - Before it publishes, Claude reads each page for AI-sounding prose, such as arrows and metaphor nouns, and rewrites it.
 - For a GitHub wiki, `scripts/ghwiki.sh` keeps one managed clone under `~/.cache/dossier/github/<owner>/<repo>`.
 
@@ -68,5 +69,6 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 - [references/shape.md](references/shape.md): the page layout, the decision template and where dates come from.
 - [references/operations.md](references/operations.md): record or supersede a decision, file research, move rationale out of a repo.
 - [references/plain-prose.md](references/plain-prose.md): the prose patterns to rewrite before a page is published.
-- [scripts/ghwiki.sh](scripts/ghwiki.sh): the GitHub wiki helper.
+- [scripts/ghwiki.sh](scripts/ghwiki.sh) and [scripts/test_ghwiki.sh](scripts/test_ghwiki.sh): the GitHub wiki helper and its test.
+- [scripts/check_pages.py](scripts/check_pages.py) and [scripts/test_check_pages.py](scripts/test_check_pages.py): the page-shape check and its test.
 - Source: Matt Pocock's `domain-modeling` and `chief-of-staff` skills, from `mattpocock/skills` on `main`. Their rules: offer an ADR only when it passes three tests, and follow an existing wiki's conventions. They give no measured result.

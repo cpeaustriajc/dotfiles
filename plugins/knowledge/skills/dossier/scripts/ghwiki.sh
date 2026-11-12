@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 # One managed clone per GitHub wiki, shared by every session and agent.
 # Usage: ghwiki.sh <detect|path|list|save|push|status> [owner/repo] [-m message]
+#   detect  prints exists | missing (wiki enabled, no first page) | disabled
+#   path    prints the clone's path, cloning or pulling first
+#   list    page names, one per line
+#   save    commit every local change, no push (needs -m)
+#   push    commit, pull --rebase, push (needs -m)
+#   status  uncommitted files and ahead/behind counts
 # GHWIKI_REMOTE overrides the wiki URL (a local bare repo, for tests).
 set -euo pipefail
+
+case ${1:-} in -h|--help) sed -n '2,/^# GHWIKI_REMOTE/p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;; esac
 
 cmd=${1:?usage: ghwiki.sh <detect|path|list|save|push|status> [owner/repo] [-m msg]}
 shift

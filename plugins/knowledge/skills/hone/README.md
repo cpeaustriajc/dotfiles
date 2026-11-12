@@ -66,7 +66,7 @@ To turn the plugin off, run `claude plugin disable knowledge@dotfiles`. This als
 - [references/claude-code.md](references/claude-code.md): the Claude Code commands it uses: the `/insights` report, the instruction-file audit, the lens pass and the trigger proof.
 - [references/sources.md](references/sources.md): the four places it gathers from, and the scope flags.
 - [references/miners.md](references/miners.md): the rules each transcript reader gets, and the five lenses.
+- [references/github.md](references/github.md): where the inline PR review comments are.
 - [references/layers.md](references/layers.md): the seven places a lesson can live, strongest first.
-- [references/github.md](references/github.md): the `git` and `gh` commands for reverts and review comments.
 - [scripts/corrections.py](scripts/corrections.py) and [scripts/test_corrections.sh](scripts/test_corrections.sh): the extractor and its test.
 - [mods/hone-nudge](../../../../mods/hone-nudge/): the optional mod that suggests `/hone <skill>`.

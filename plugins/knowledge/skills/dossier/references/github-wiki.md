@@ -8,15 +8,7 @@ never `curl`.
 `${XDG_CACHE_HOME:-~/.cache}/dossier/github/<owner>/<repo>`, the single source of truth for every
 session and agent. It uses `gh auth`. `owner/repo` defaults to the current directory's `origin`.
 
-```bash
-S=<this skill's base directory>/scripts/ghwiki.sh
-$S detect [owner/repo]     # "exists" | "missing" (wiki enabled but no first page) | "disabled"
-$S path   [owner/repo]     # print the clone's path, cloning or pulling first
-$S list   [owner/repo]     # page names, one per line
-$S save   [owner/repo] -m "message"   # commit every local change (no push)
-$S push   [owner/repo] -m "message"   # commit, pull --rebase, push
-$S status [owner/repo]     # uncommitted files and ahead/behind counts
-```
+`S=<this skill's base directory>/scripts/ghwiki.sh`; `$S --help` lists the subcommands.
 
 Edit files under `$($S path)` with the file tools, then `save` straight away. `push` only after
 the user has seen the change (SKILL.md step 5).

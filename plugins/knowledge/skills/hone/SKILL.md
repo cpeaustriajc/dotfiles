@@ -6,8 +6,7 @@ description: >
   corrections. Not for one CLAUDE.md edit.
 ---
 
-A correction I made twice is a missing mechanism: propose its cheapest durable fix. Commands:
-`references/claude-code.md` (harness) and `references/github.md` (code host).
+A correction I made twice is a missing mechanism: propose its cheapest durable fix. Commands: `references/claude-code.md` (harness) and `references/github.md` (code host).
 
 1. Gather from each source in `references/sources.md`, the lens pass included. Brief each miner
    with `references/miners.md`.
