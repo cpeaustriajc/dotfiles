@@ -1,6 +1,6 @@
-# project-knowledge
+# dossier
 
-A skill that keeps a decision log and research pages for your team. The pages live in the place your team already writes, such as a wiki or Notion, and they are written for people.
+A skill that keeps a decision log and research pages for your team. The pages live in the place your team already writes, such as a wiki or Notion, and Claude writes them for people.
 
 ## When to use it
 
@@ -11,7 +11,7 @@ Use it when a decision or a finding must outlive the chat.
 - You ask Claude to record research or a finding.
 - A decision made in conversation will matter to others.
 
-Do not use it for instructions to an agent: those belong in `CLAUDE.md`. It never stores the log in your code repository.
+Do not use it for instructions to an agent. Those belong in `CLAUDE.md`. It never stores the log in your code repository.
 
 ## Example
 
@@ -38,23 +38,25 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 
 ## What it does
 
-- It finds the log in this order: a pointer line in your project `CLAUDE.md`, `~/.claude/project-knowledge.json`, GitHub wiki detection, then a question to you.
-- It saves your answer to `~/.claude/project-knowledge.json`, so it asks once.
-- Backends: GitHub wiki, Notion, Linear documents, Obsidian vault, and Confluence or Google Docs through MCP.
+- It finds the log in this order: a pointer line in your project `CLAUDE.md`, `~/.claude/dossier.json`, GitHub wiki detection, then a question to you.
+- It saves your answer to `~/.claude/dossier.json`, so it asks once.
+- It supports these backends: GitHub wiki, Notion, Linear documents, Obsidian vault, and Confluence or Google Docs through MCP.
+- Before its first write, Claude reads your log's newest pages and copies their template, numbering and status words.
+- Claude offers a decision page unasked only for a choice that is hard to undo, surprising, and a real trade-off.
 - A decision page is never rewritten. To supersede it, Claude changes only the Status line and adds a new page.
 - When it answers "what did we decide", it follows each "Superseded by" link to the current decision.
-- Research pages carry a date, and unconfirmed facts are marked UNVERIFIED. Replaced findings move under a `## History` heading.
+- Research pages carry a date, and Claude marks unconfirmed facts UNVERIFIED. Replaced findings move under a `## History` heading.
 - A decision date comes from a commit, an issue or your word. If none exists, Claude writes the month only.
 - Claude does not invent a reason. If the record does not say why, the page says so and Claude asks you.
 - Before it publishes, Claude reads each page for AI-sounding prose, such as arrows and metaphor nouns, and rewrites it.
-- For a GitHub wiki, `scripts/ghwiki.sh` keeps one managed clone under `~/.cache/project-knowledge/github/<owner>/<repo>`.
+- For a GitHub wiki, `scripts/ghwiki.sh` keeps one managed clone under `~/.cache/dossier/github/<owner>/<repo>`.
 
 ## Limits
 
 - It does not write agent instructions.
 - It does not fake a write. If a backend has no create tool, Claude gives you the page text to paste.
 - It never force-pushes a wiki.
-- A GitHub wiki that was never initialised needs a first page, created in the web UI.
+- A GitHub wiki that was never initialised needs a first page, which you create in the web UI.
 - It has no settings.
 
 ## More
@@ -67,3 +69,4 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 - [references/operations.md](references/operations.md): record or supersede a decision, file research, move rationale out of a repo.
 - [references/plain-prose.md](references/plain-prose.md): the prose patterns to rewrite before a page is published.
 - [scripts/ghwiki.sh](scripts/ghwiki.sh): the GitHub wiki helper.
+- Source: Matt Pocock's `domain-modeling` and `chief-of-staff` skills, from `mattpocock/skills` on `main`. Their rules: offer an ADR only when it passes three tests, and follow an existing wiki's conventions. They give no measured result.

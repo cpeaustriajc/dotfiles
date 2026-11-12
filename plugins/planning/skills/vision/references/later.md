@@ -6,7 +6,7 @@ Read this when a project reaches Launch, a feature changes after its project exi
 
 - **At each Launch, check Worth it again** against what the launch showed and the time it really
   took; for personal software, whether I used it this week. Say in a line whether the verdict
-  holds; if not, recommend shrinking or stopping rather than carrying on by momentum.
+  holds; if not, recommend shrinking or stopping, not carrying on from sunk cost.
 - A change to a feature after its project exists returns that project's spec to Draft; say so
   and what it touches.
 

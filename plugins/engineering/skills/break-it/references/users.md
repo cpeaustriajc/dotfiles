@@ -28,12 +28,5 @@ Steps 2, 3, 5 and 6 of `SKILL.md`.
 - Record each whole run as a video or GIF when the tool supports it. Screenshot what is off.
 - Stop each user at the goal, a dead end or about 40 steps.
 
-| User | Does |
-|---|---|
-| Skimmer | Reads nothing, clicks the biggest button, ignores helper text and warnings |
-| Impatient | Double- and triple-clicks submit, clicks again while loading, reloads mid-request |
-| Wanderer | Back button mid-flow, opens the same flow in two tabs, deep-links into step 3, comes back after the session expired |
-| Literal | Types exactly what the placeholder says, pastes with leading and trailing spaces, uses the wrong case |
-| Junk input | Empty, 300-character, emoji, RTL, `<b>`, `' OR 1=1`, negative, zero, decimals, wrong date format |
-| Thumb | 320px wide, 200% zoom, slow 3G, offline mid-flow, landscape |
-| Nosy | Edits IDs in the URL, tries another account's resource, replays a finished step |
+Pick from the careless-user personas: skimmer, impatient, wanderer, literal, junk input, thumb,
+nosy (IDOR and replay on a finished step).

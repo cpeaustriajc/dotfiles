@@ -1,12 +1,12 @@
 # commit
 
-A skill that commits your uncommitted changes in small logical commits, in the repo's message style, then pushes the branch. It is the terminal version of the desktop Commit and push button.
+A skill that commits your uncommitted changes as atomic commits, in the repo's message style, then pushes the branch. It is the terminal version of the desktop Commit and push button.
 
 ## When to use it
 
 Type `/commit` when you want your work saved as clean commits. The skill sets `disable-model-invocation`, so it runs only when you type the command. Claude never starts it alone.
 
-Do not use it to open a pull request: use `create-pr`. Do not use it to review changes: use `review-loop`.
+To open a pull request, use `create-pr`. To review changes, use `review-loop`.
 
 ## Example
 
@@ -31,7 +31,7 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 
 ## What it does
 
-- It stages files by path and never stages everything blindly.
+- It stages files by path and never stages all files at once.
 - It never commits `.env`, credentials or ignored files.
 - It adds no AI attribution and no co-author trailer.
 - If you are on the default branch, it creates a branch first. The name follows the project's rule, else the tracker's branch name for the issue, else a short topic.
@@ -48,4 +48,3 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
-- [references/git.md](references/git.md): the git commands for each step.

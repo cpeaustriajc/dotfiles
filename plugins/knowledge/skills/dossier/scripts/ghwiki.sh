@@ -21,7 +21,7 @@ fi
 case $repo in */*) ;; *) echo "expected owner/repo, got '$repo'" >&2; exit 2 ;; esac
 
 remote=${GHWIKI_REMOTE:-https://github.com/$repo.wiki.git}
-dir=${XDG_CACHE_HOME:-$HOME/.cache}/project-knowledge/github/$repo
+dir=${XDG_CACHE_HOME:-$HOME/.cache}/dossier/github/$repo
 [ -n "${GHWIKI_REMOTE:-}" ] && dir=$dir-test
 
 git_auth() {

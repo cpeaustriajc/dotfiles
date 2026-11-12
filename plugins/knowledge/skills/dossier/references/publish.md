@@ -6,7 +6,7 @@ Step 5 of SKILL.md.
   Notion, Confluence or public wiki is visible to everyone. After I approve the shape once, a
   routine new decision is published and then reported.
 - **Save after every change**, as the adapter says (a wiki is a git repo and needs a push).
-- **Parallel writers**: give each agent its own working copy, or make one agent own the writes.
+- **Parallel writers**: give each agent its own working copy, or keep a single writer.
 - **Before publishing, check that:**
   - no page mentions Claude or agents;
   - every internal link resolves;

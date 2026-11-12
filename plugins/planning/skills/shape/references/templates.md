@@ -82,9 +82,8 @@ Dependencies:
 Description:
 ```
 
-The description uses a neutral present tense ("Buyers save names to a shortlist", not "will
-let"), so it stays true as the project moves. It is a small, timeless spec of how the project works. It stays useful as the project
-moves, so it holds no status narration, completed work, dated updates, migration history,
+The description is evergreen: a neutral present tense ("Buyers save names to a shortlist", not
+"will let") and no status narration, completed work, dated updates, migration history,
 temporary blockers or next steps; those go in status updates or native fields.
 
 ```markdown
@@ -148,6 +147,7 @@ Risks:
 Next:
 ```
 
-Health is the project lead's judgement: if the facts given don't settle it, propose one and say it needs their confirmation. Only rate health when an update was asked for. Read what changed since the previous update first. Report changed scope, dates, lead, dependencies
-or phases. Counting finished items does not replace the lead's judgement: a project with most items
-done can still be at risk if the remaining one is blocked on another team.
+Health is the project lead's judgement: propose one and say it needs their confirmation. Rate it
+only when an update was asked for. Read what changed since the previous update first, and report
+changed scope, dates, lead, dependencies or phases. Finished-item counts do not replace the lead's
+judgement: most items done can still be at risk if the remaining one is blocked on another team.

@@ -15,7 +15,7 @@ host's adapter (`references/github.md`) and the harness's (`references/claude-co
 2. On the default branch: branch by the project's rule, else the tracker's branch name for the
    issue, else a short topic, with no prefix. An open blocker PR: stack on it
    (`references/stacking.md`).
-3. Commit loose changes in small slices, in the repo's commit style, with no secrets.
+3. Commit loose changes as atomic commits, in the repo's commit style, with no secrets.
    Keep existing commits.
 4. A fresh reader on the cheapest model reads only added or changed comments. A comment stays
    when it names a trap (what breaks if the next reader edits blindly) in at most two sentences

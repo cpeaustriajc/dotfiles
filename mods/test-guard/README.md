@@ -4,7 +4,7 @@ A mod (a plugin that adds a hook to Claude Code) that stops Claude from making a
 
 ## Why
 
-An agent with a red test sometimes changes the test instead of the code. It turns `toHaveBeenCalledTimes(1)` into `toHaveBeenCalled()`, and the test goes green while the bug stays.
+An agent with a red test sometimes games it instead of fixing the code (reward hacking). It turns `toHaveBeenCalledTimes(1)` into `toHaveBeenCalled()`, and the test goes green while the bug stays.
 
 test-guard denies that edit and tells Claude to add a test or to explain the change to you. Only you can let one test file change.
 
@@ -15,7 +15,7 @@ test-guard denies that edit and tells Claude to add a test or to explain the cha
 /plugin install test-guard@dotfiles
 ```
 
-To see that it is on, run `claude plugin list` and look for `test-guard`. The mod is optional: `dotfiles` does not install it.
+To see that it is on, run `claude plugin list` and look for `test-guard`. The mod is optional. `dotfiles` does not install it.
 
 ## Example
 
@@ -34,10 +34,10 @@ The hook checks every Edit, MultiEdit and Write to a test file. A test file is a
 | The file is not a test file | Pass. |
 | The test file is new or not in `HEAD` | Pass. |
 | The folder is not in a git repository, or the repository has no commit | Pass. |
-| Every non-blank `HEAD` line stays, in the same order | Pass: only additions. |
+| Every non-blank `HEAD` line stays, in the same order | Pass. The edit only adds lines. |
 | A `HEAD` line changes or goes away | Deny. The text names the first such line and `/test-guard allow`. |
 | You ran `/test-guard allow <path>` for this file in this session | Pass. |
-| `git show` fails for another reason, or the hook fails | Deny with "could not check". |
+| `git show` fails for another reason, or the hook fails | Fail closed. Deny with "could not check". |
 
 A line that Claude added in this session is not in `HEAD`, so Claude can change it.
 
@@ -55,7 +55,7 @@ To turn the mod off, run `claude plugin disable test-guard@dotfiles`.
 - A moved line or a changed indent counts as a change and gets a deny.
 - It compares with `HEAD`, not with the base branch. A weaker test that is already committed passes; a review of the diff must catch that.
 - The mod is always on. It is not the "careful mode" that `SCOPE.md` rejects, which runs hooks only while a skill runs.
-- If the hook fails, it denies. Retry, or allow the file.
+- The hook fails closed. Retry, or allow the file.
 
 ## More
 

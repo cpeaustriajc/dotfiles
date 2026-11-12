@@ -1,6 +1,6 @@
 # Sources
 
-The stack audit (root `CLAUDE.md`) starts when one of these blogs publishes a best-practice
+The stack audit (root `AGENTS.md`) starts when one of these blogs publishes a best-practice
 article on coding agents, or when a frontier model ships from a vendor the stack runs on.
 
 This list is only where to look for leads. Being on it is not a reason to trust a claim.
@@ -9,17 +9,15 @@ This list is only where to look for leads. Being on it is not a reason to trust 
 
 The level belongs to each claim and the evidence it shows, never to a site or a person.
 
-- **Primary**: the claim shows its own evidence: code you can read or run, a measured result, a
+- **Primary**: first-hand evidence, such as code you can read or run, a measured result, or a
   failure it names and reproduces. Cite it with that evidence.
-- **Secondary**: the claim reports someone else's evidence (a summary of a study, a talk about
-  another team's work). Cite it only with the primary evidence it rests on, or mark it
-  UNVERIFIED.
-- **Tertiary**: the claim shows no evidence and points to none you can reach (an aggregator
-  list, a newsletter roundup, a generated overview). Never cite it. Use it only to find primary
-  evidence.
+- **Secondary**: a report of someone else's evidence (a summary of a study, a talk about another
+  team's work). Cite it only with its primary source, or mark it UNVERIFIED.
+- **Tertiary**: no evidence and no pointer to any you can reach (an aggregator list, a newsletter
+  roundup, a generated overview). Never cite it. Use it only to find a primary source.
 
-A claim from a known name with no evidence is tertiary. A claim that was right before is checked
-again: the evidence may no longer hold.
+A claim from a known name with no evidence is tertiary. Check a claim that was right before
+again, because the evidence may no longer hold.
 
 ## Vendor engineering blogs
 
@@ -44,7 +42,8 @@ again: the evidence may no longer hold.
 
 ## Tool docs
 
-How each tool behaves today: read these before you trust an adapter in `references/<tool>.md`.
+These docs say how each tool behaves today. Read them before you trust an adapter in
+`references/<tool>.md`.
 
 - code.claude.com/docs (Claude Code)
 - developers.openai.com/codex (Codex)

@@ -8,8 +8,8 @@ description: >
 
 Read `../shape/references/top-down.md` and its adapter's Product row.
 
-1. Grill the idea: steps 2 to 6 of `../grill/SKILL.md`, with `../grill/references/rounds.md`,
-   `../grill/references/claude-code.md` and the changes in `references/interview.md`. A `scout`
+1. Grill the idea: steps 2 to 6 of `../grill/SKILL.md`, with `../grill/references/rounds.md`
+   and the changes in `references/interview.md`. A `scout`
    idea's filter scores answer Real, Reach and copies; ask only what scored unknown.
 2. Settle worth it first: `references/worth-it.md`; for a tool of mine that might sell,
    `references/personal-to-sellable.md`.

@@ -28,26 +28,22 @@ part as the driver.
 | Build | The files it changes, read again and edited | The size of those files, times the edit rounds. |
 | Proof | Test runs, screenshots, crops, and each fix round | Each image about 10k again, in every round. Long test output in full. |
 
-- **Count every image at about 10k.** The image alone costs 1.5–2.5k; the turns around it cost
-  more. In the measured run, about 15 images came with about 150k of messages. Example: 3 widths,
-  a screenshot and a crop each, 3 rounds is 18 images, about 180k, before the fixed cost.
-- **Reading is the hidden part.** A thread can spend its whole context on reading: one earlier
-  thread used 17 turns to read templates, content, a design board, crops and a skill, and wrote no
-  code.
-- **A review loop multiplies proof.** Screenshot, crop, fix, screenshot again: each round adds its
-  images and its edits. A visual item with such a loop (a painted initial) measured 250–400k.
+- **Count every image at about 10k.** The image alone costs 1.5–2.5k; in the measured run about
+  15 images came with about 150k of messages. 3 widths, a screenshot and a crop each, 3 rounds
+  is 18 images, about 180k, before the fixed cost.
+- **Reading is the hidden part.** One earlier thread used 17 turns reading templates, content, a
+  design board, crops and a skill, and wrote no code.
+- **A review loop multiplies proof.** A visual item with a screenshot-crop-fix loop (a painted
+  initial) measured 250–400k.
 
 ## Make it fit
 
 Shrink the item first. Split it when it is still over the budget.
 
-- **Facts, not sources.** The item states the measured facts it needs: sizes, colours, spacing,
-  copy. No thread then reads the large source to find them.
-- **Narrow references.** Link a large reference only as a crop or an excerpt, never whole. A file
-  with built-in images is never read whole: one shell print of a 3.8 MB reference fills the
-  context.
-- **A fixed proof budget.** Name the pages, the widths, the crops and the most fix rounds. Proof
-  with no limit has no upper estimate.
+- **Facts, not sources**, and **narrow references**: see the item template. A file with
+  built-in images is never read whole: one shell print of a 3.8 MB reference filled the context.
+- **A fixed proof budget** (pages, widths, crops, most fix rounds); with no limit there is no
+  upper estimate.
 - **Split a visual item with a review loop smaller.** One element or one page for each item, so its
   loop fits with room left.
 

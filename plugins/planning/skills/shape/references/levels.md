@@ -29,12 +29,11 @@ it:
 A small project with nothing to agree skips it; the project How carries the mechanism. "Spec"
 means the product side only, so none of these is called a tech spec or PRD.
 
-**Decisions** don't count toward that limit. If `project-knowledge` is installed, it owns them.
+**Decisions** don't count toward that limit. If `dossier` is installed, it owns them.
 Otherwise file one document per decision titled `Decision: <Topic>` in its project; superseding
 changes only the old one's status line.
 
 ## Cycles
 
-Cycles or sprints choose what matters next; they are not project containers or release
-promises. Assign them to work items, not to project descriptions, and let unfinished items roll
-forward.
+Cycles choose what matters next; they are not project containers or release promises. Assign
+them to work items, not project descriptions; unfinished items roll forward.

@@ -1,6 +1,6 @@
 # Motion example library
 
-Each effect is named by its term in `../references/animation-vocabulary.md` and has a good and a
+Each effect is named by its term in Emil Kowalski's animation-vocabulary skill (<https://github.com/emilkowalski/skill>) and has a good and a
 bad version. For each version:
 
 - `<version>.html`: the demo page. Its CSS is the recipe.
@@ -12,7 +12,7 @@ bad version. For each version:
 | Term | Good | Bad |
 |---|---|---|
 | Scale in | [good](scale-in/good.html): a popover grows from its trigger, `scale(0.95)` and opacity, 200ms `cubic-bezier(0.23, 1, 0.32, 1)` | [bad](scale-in/bad.html): grows from `scale(0)` at its own centre, 400ms `ease-in` |
-| Slide in | [good](slide-in/good.html): a toast rises from the bottom edge with opacity, 400ms `cubic-bezier(0.23, 1, 0.32, 1)` | [bad](slide-in/bad.html): the same path on 500ms `ease-in`, so it crawls, then stops dead |
+| Slide in | [good](slide-in/good.html): a toast rises from the bottom edge with opacity, 400ms `cubic-bezier(0.23, 1, 0.32, 1)` | [bad](slide-in/bad.html): the same path on 500ms `ease-in`, so it starts slow, then stops abruptly |
 
 ## Re-make
 

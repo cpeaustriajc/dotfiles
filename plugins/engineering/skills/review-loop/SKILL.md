@@ -18,7 +18,7 @@ One round, in order:
    rule says; with no rule, list it in the report.
 4. Run a simplify pass on the diff and apply its fixes.
 
-A round that changed code needs one more round. Stop after a round where verify passes, the
+Repeat to a fixed point: stop after a round where verify passes, the
 review finds nothing a user would hit, and no step changed the code.
 
 Report the last round: the verify lines as printed, the review result, and each finding that is

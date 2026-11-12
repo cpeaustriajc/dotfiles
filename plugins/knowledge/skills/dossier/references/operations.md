@@ -2,16 +2,20 @@
 
 Step 4 of SKILL.md uses these steps.
 
-**Record a decision.**
+**Record a decision.** When I ask, record it. Offer one unasked, for example while moving
+rationale out of a repo, only when all three hold: it is a one-way door, it surprises a reader
+without its context, and it came from a real trade-off between alternatives.
 1. Read the index and take the next number (skip this where the adapter has no numbers).
 2. Write the page from the decision template.
 3. Add its row to the top of the index, where there is one.
 4. Add or update the Home row, if the decision creates a page.
 5. Link the research pages it rests on.
 
-**Supersede a decision.**
+**Supersede a decision** (Nygard, "Documenting Architecture Decisions", 2011,
+https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions: take the immutable ADR with
+a Status chain): the old page stays immutable except its Status.
 1. Record the new decision as a new page, and have its Context say what changed since the old one.
-2. On the old page, change **only** the Status line to `Superseded by [[Decision NNN …]]`.
+2. On the old page, change the Status line to `Superseded by [[Decision NNN …]]`.
 3. In the index, update the old row's Status and add the new row at the top.
 
 **When only part of it is replaced**, the rest still stands, so the old decision stays in force.

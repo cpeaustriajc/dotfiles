@@ -7,7 +7,7 @@ A skill that writes a short brief of where your work stands: recent threads, the
 Use it at the start of a session that resumes work, or when you lose track of what is in flight. It reads past transcripts and the live git and pull request state.
 
 - For corrections to learn from, use `hone`.
-- For a recorded decision, use `project-knowledge`.
+- For a recorded decision, use `dossier`.
 
 ## Example
 

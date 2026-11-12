@@ -1,31 +1,27 @@
 # Painting in code
 
-These techniques recur whatever the subject.
-
 **SVG**
-- Document order is z-order. Build each depth plane as its own group, in back-to-front order, and insert moving elements at the depth they travel at.
-- `mix-blend-mode: multiply` on overlapping same-colour shapes darkens every overlap. Put each tint in one group and blend the group, so shapes merge instead of stacking.
-- Tile windows, bricks or halftone with a `<pattern>` anchored to one global origin, and snap shapes' edges to its grid. Otherwise the pattern cuts its cells in half at every edge.
-- Filters and gradients must be defined in the same document that renders them. A layer rasterised separately does not see the page's defs, and the page does not see the rasterised layer's.
-- Use `clipPath` to stop a shape at a horizon or region instead of trusting its outline.
-- Fit text to a box with `textLength` and `lengthAdjust="spacingAndGlyphs"`. Glyph-width estimates overflow.
-- Put labels and signs with a placement pass. Collect obstacle boxes for every placed item and every occluder (trunks, crowns, frames), then try several positions per anchor and keep the first one that is clear.
+- One group per depth plane, back to front; movers inserted at their travel depth.
+- `mix-blend-mode: multiply` darkens every overlap; blend one group per tint so shapes merge.
+- Tile windows, bricks or halftone with a `<pattern>` on one global origin and snap edges to its
+  grid, or cells split at every edge.
+- Defs live in the document that renders them; a separately rasterised layer doesn't share them.
+- Fit text with `textLength` and `lengthAdjust="spacingAndGlyphs"`; glyph-width estimates overflow.
+- Labels by a placement pass: obstacle boxes for every item and occluder, several candidate
+  positions per anchor, first clear one wins.
 
 **Randomness and iteration**
-- Seed every random stream, so a picture is reproducible.
-- To add random elements without moving the ones the user already approved, draw from a new seeded stream. Never insert calls into the old one. When you reorder code, keep the old stream's call order unchanged.
-- Keep magic numbers as named constants in real units (px per metre, floor pitch, heights), so the next edit can reason about them.
+- Seed every random stream. New elements draw from a new seeded stream, so approved ones don't
+  move; never insert calls into an old stream or reorder them.
+- Magic numbers as named constants in real units (px per metre, floor pitch, heights).
 
-**Animated and multi-state scenes**
-- Test the in-between frames, not only the end states. Widths, heights and positions should interpolate cleanly.
-- For moving objects, take several screenshots a fraction of a second apart, so each one is caught passing something.
+**Animated and multi-state scenes:** test the in-between frames; shoot movers several times a
+fraction of a second apart.
 
 **Raster passes and 3D figures**
-- Paint the scene in 2D, where you control the style. Model posed figures in 3D, where proportion and foreshortening must be right. Then run one stylisation pass over everything.
-- Preview a figure at final scale over a cached scene before running the full pipeline.
-- Render the final picture at twice its display size (3200 × 2000 for 1600 × 1000). A picture
-  rendered at display size and scaled up goes soft where the viewer looks.
-- For a painted tradition (oil, gouache), run `scripts/paintpass.py <src> <dst> --width 3200
-  --brush 0.5 --focus x,y,w,h` over the composed PNG (`--depth <mask>` when you have one), so every
-  part shares one brushwork and the extra pixels become finer strokes. The pass unifies; it cannot
-  rescue a weak drawing. Flat-vector and graphic styles skip it: brushwork smears their crisp edges.
+- Scene in 2D, posed figures in 3D, one stylisation pass over both. Preview a figure at final
+  scale over a cached scene before the full pipeline.
+- Render at 2× display size (3200 × 2000 for 1600 × 1000).
+- Painted traditions (oil, gouache): `scripts/paintpass.py <src> <dst> --width 3200 --brush 0.5
+  --focus x,y,w,h` (`--depth <mask>` if you have one) over the composed PNG for one shared
+  brushwork. It unifies; it can't rescue a weak drawing. Flat-vector and graphic styles skip it.

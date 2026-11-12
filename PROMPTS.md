@@ -1,7 +1,7 @@
 # Prompts
 
 Paste one into a session, with the code or decision it should look at. Each engineering prompt is one
-rule written as a hunt; the last two rewrite a message. Ask the agent to name the rule that changed each decision.
+rule turned into a search; the last two rewrite a message. Ask the agent to name the rule that changed each decision.
 
 ## Model the Domain
 
@@ -42,13 +42,13 @@ Find two writers on one file, key or branch. Give each its own target before you
 ## Laziness Protocol
 
 ```text
-Find one decision made in two places, and parameters passed through untouched.
+Find DRY violations and tramp data.
 ```
 
 ## Subtract Before You Add
 
 ```text
-Find dead code, stubs and guards that no spec or use needs.
+Find YAGNI violations: dead code, stubs and guards.
 ```
 
 ## Minimize Reader Load
@@ -132,7 +132,7 @@ List every invariant this code assumes but never enforces. Show the path that br
 ## Follow the Dependencies
 
 ```text
-Map what depends on what. Find code bolted on against that direction (adapters, flags, special cases that exist only to make it work), and say the simpler shape the dependencies already imply.
+Map what depends on what. Find Dependency Rule violations (adapters, flags, special cases that exist only to make them work), and say the simpler shape the dependencies already imply.
 ```
 
 ## Re-pitch
@@ -144,7 +144,7 @@ That last message did not land. Say it again in plain words, in the project's ow
 ## Unslop
 
 ```text
-Rewrite this text without the tells of AI-written prose: filler, hedges, stock openers and closers, lists of three, dash asides, metaphor nouns, and sentences that name a feeling instead of a fact. Keep every claim and the tone. Return only the text.
+Rewrite this text without AI slop (the tells in plugins/engineering/skills/blast-radius/references/ai-tells.md). Keep every claim and the tone. Return only the text.
 ```
 
 Adapted from [pstack](https://github.com/cursor/plugins/tree/main/pstack) by Lauren Tan, under

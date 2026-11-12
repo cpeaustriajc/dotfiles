@@ -1,12 +1,8 @@
 # Agent brief and triage notes
 
-The brief is the contract. The issue body and its comments are only context. The item may wait
-for weeks, so the brief must stay true when files move.
-
-- Name behaviour, types, commands, routes and config keys. No file paths, no line numbers.
-- Say what the system does when the work is done, not how to build it.
-- Each item under Checks is a check one person or agent can run and see pass or fail.
-- List what is out of scope, so the agent adds nothing next to it.
+The brief is the contract; the issue body and comments are context. It must stay true when files
+move: name behaviour, types, commands, routes and config keys, no file paths or line numbers; say
+what the system does when done, not how; each check pass or fail by one person or agent.
 
 ## Agent brief
 
@@ -57,4 +53,4 @@ Add this section to the brief for `ready-for-human`:
 ## Wontfix
 
 Built already: link where it lives, then close. Rejected: give the reason, then close, and record
-the decision in `project-knowledge` if it is installed.
+the decision in `dossier` if it is installed.

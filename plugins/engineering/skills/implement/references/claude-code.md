@@ -56,8 +56,6 @@ November 2026.
 
 ## Work with no tickets
 
-`/batch <instruction>` researches the code, splits the work into 5 to 30 independent units and
-shows a plan. After approval it starts one background subagent per unit, each in its own
-worktree; each one builds its unit, runs the tests and publishes its change. It reads no
-tracker, keeps no blocked-by order and closes no ticket, so use it only when no unit blocks
-another. Source: https://code.claude.com/docs/en/commands (`/batch`).
+`/batch <instruction>` (https://code.claude.com/docs/en/commands) fans out background subagents,
+one per unit. It reads no tracker, keeps no blocked-by order and closes no ticket, so use it only
+when no unit blocks another.

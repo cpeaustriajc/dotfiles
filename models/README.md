@@ -1,7 +1,7 @@
 # Models
 
-Which model does what in this stack, from my Claude Code transcripts (July–October 2026), T3 Code
-delegations and Codex reviews on GitHub. Re-check when a new model ships or a tool changes; the picks below are
+This page says which model does what in this stack. It draws on my Claude Code transcripts
+(July–October 2026), T3 Code delegations and Codex reviews on GitHub. Re-check when a new model ships or a tool changes; the picks below are
 dated by the models they name. T3 Code is retired, so GPT work now runs in Codex directly and the
 T3 counts below are history.
 
@@ -31,9 +31,9 @@ T3 counts below are history.
 
 Where I have Codex, every PR gets a Codex review, because sol catches what Opus misses. Of the last 60
 PRs in one project, 39 got a Codex review. 38 were written by Claude (one by T3), and all
-39 had at least one finding: 162 findings in total, with 32 on #401 alone.
+39 had at least one finding. In total there were 162 findings, with 32 on #401 alone.
 
-The catch: it needs a GPT subscription, which I don't have everywhere. Without it, review
+The catch is that it needs a GPT subscription, which I don't have everywhere. Without it, review
 falls back to `review-loop` with Claude code review.
 
 ## Picks
@@ -48,7 +48,7 @@ falls back to `review-loop` with Claude code review.
 | Read the web and weigh sources | Sonnet 5.5 (researcher) |
 | Final PR review | GPT-6.1 sol with Codex; Claude-only `review-loop` otherwise |
 
-A task that proves bigger than its brief is split, not moved to a bigger model.
+Split a task that proves bigger than its brief. Do not move it to a bigger model.
 
 Subagents run at `medium` effort (`CLAUDE_CODE_SUBAGENT_EFFORT`); an adapter asks for `high` only
 where the job needs it. Failure: `high` on every subagent cost about 1.4× for a
@@ -66,13 +66,13 @@ just defer:
   then the next model at a *lower* effort (Opus `high` → Fable `medium`). I keep `high` on the
   FrontierCode 2.0 numbers above. Drop to `medium` if a score-vs-spend run on my tickets shows no gap.
 
-Evidence: the guide's SWE-bench Pro, FrontierCode 2.0 and Terminal-Bench 3.0 figures, and its Claude
+The evidence is the guide's SWE-bench Pro, FrontierCode 2.0 and Terminal-Bench 3.0 figures, and its Claude
 Code docs on the `haiku` alias and Explore.
 
 ### Picking a thread's model by complexity (Nov 12 2026)
 
 A thread gets the cheapest model that fits its task: mechanical work on Haiku 5.5, specced work on
-Sonnet 5.5, design on Opus 5.5. Fable 5.2 only on my word. Evidence:
+Sonnet 5.5, design on Opus 5.5. Fable 5.2 runs only on my word. Evidence:
 
 - Prices per million tokens, input/output (platform.claude.com/docs/en/about-claude/pricing):
   Haiku 5.5 $0.10/$0.50 for a prompt up to 100,000 tokens and $0.50/$2.50 over it; Sonnet 5.5
@@ -104,15 +104,15 @@ Each call reads the whole context again. Cached input is cheap, but it is not fr
 
 - In a subagent brief, put the stable part first and the variable part last. Then parallel agents of
   the same type share a cached prefix up to the first difference.
-- To start new work, start a fresh thread with a short spec. Do not revive a long thread: each of
-  its calls reads all of its history again.
+- To start new work, start a fresh thread with a short spec. Do not revive a long thread, because each
+  of its calls reads all of its history again.
 - A thread that waits on a background run ends its turn once. A turn that only reports progress
   reads the whole context again and does no work.
 - Use one subagent per independent concern, not many small ones. Each subagent loads its own system
   prompt and tools again.
-- Switch models at a natural break: run `/compact` first, or start fresh with a short plan. The
+- Switch models at a natural break. Run `/compact` first, or start fresh with a short plan. The
   cache belongs to the model that wrote it, so the first turn on the new model pays the cache-write
   price on the whole conversation. Opus 5.5 → Fable 5.2 keeps the earlier thinking; Fable 5.2 → any
   other model drops it.
 - Where outcomes check themselves (tests, builds), run at `low` and re-run only the failures at
-  `high`: Opus 5.5 did that at ~97% for $0.17 a task, against 95.3% for $0.29 with every task at `high`.
+  `high`. Opus 5.5 did that at ~97% for $0.17 a task, against 95.3% for $0.29 with every task at `high`.

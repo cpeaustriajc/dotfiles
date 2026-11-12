@@ -7,7 +7,7 @@ description: >
 ---
 
 "Clean up" is the go: remove each proven item without asking; ask only in the repo sweep.
-Commands: `references/git.md`, `references/shell.md`; harness: `references/claude-desktop.md`
+Commands: `references/git.md`; harness: `references/claude-desktop.md`
 or `references/claude-code.md`. `/cleanup repo`: `references/repo-sweep.md` with
 `references/checks.md`.
 

@@ -4,13 +4,13 @@ A skill that checks an issue or pull request before anyone builds it. It gives t
 
 ## When to use it
 
-Use it before an agent starts on an issue, and when you want to know what waits on you. It stops two things: building what exists already, and handing an agent work it cannot prove done.
+Use it before an agent starts on an issue, and when you want to know what waits on you. It stops two things, building what exists already and handing an agent work it cannot prove done.
 
 - You say "triage #42", "what needs my attention" or "can an agent take this?".
 - You say "move #42 to ready-for-agent" or "write an agent brief".
 - An idea from an article becomes an issue, and you want a check before the build.
 
-Do not use it for open design questions: use `grill`. Do not use it to cut a spec into tickets: use `tickets`.
+Do not use it for open design questions. Use `grill`. Do not use it to cut a spec into tickets. Use `tickets`.
 
 ## Example
 

@@ -45,6 +45,6 @@ says how each part lands: a section, a checklist, a field or a link.
 - **An item is self-contained**: someone who never saw the conversation can pick it up from the
   item and the spec it links. It settles every design call, so a cheaper builder does not make one
   and the result loses no quality.
-- **No "As a … I want … so that" line** unless the product owner asks for it. That sentence is
-  where mechanism and timing tend to sneak in.
+- **No "As a … I want … so that" line** unless the product owner asks: mechanism and timing
+  sneak in there.
 

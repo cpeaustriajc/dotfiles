@@ -6,7 +6,7 @@ A mod (a plugin that adds a hook to Claude Code) that suggests `/hone <skill>` a
 
 You correct Claude during a skill run, and the same correction comes back next week. The skill needs a fix, but you forget to run hone.
 
-hone-nudge reads the session transcript when a turn ends. If you corrected Claude during a dotfiles skill, it prints one log line (a line in the session output) that names the skill.
+hone-nudge reads the session transcript when a turn ends. If you corrected Claude during a dotfiles skill, it prints one log line that names the skill.
 
 ## Install
 
@@ -15,7 +15,7 @@ hone-nudge reads the session transcript when a turn ends. If you corrected Claud
 /plugin install hone-nudge@dotfiles
 ```
 
-To see that it is on, run `claude plugin list` and look for `hone-nudge`. The mod is optional: no skill plugin installs it.
+To see that it is on, run `claude plugin list` and look for `hone-nudge`. The mod is optional. No skill plugin installs it.
 
 ## Example
 
@@ -40,7 +40,7 @@ A correction is one of these:
 - A message that starts with a word such as "no", "stop", "wrong", "wait" or "actually".
 - An interrupt of Claude, or a rejected tool call.
 
-The mod credits a correction to the last dotfiles skill that started before it. A skill starts by the Skill tool or by a slash command. The skill names are in `hooks/register.ts`. A name with another prefix, such as `other:ui-polish`, does not count.
+The mod credits a correction to the last dotfiles skill that started before it. A skill starts when Claude calls the Skill tool or you run a slash command. The skill names are in `hooks/register.ts`. A name with another prefix, such as `other:ui-polish`, does not count.
 
 The mod writes `{ "v": 1, "nudged": ["ui-polish"] }` to `~/.claude/mod-state/<session id>.hone-nudge.json`. If `CLAUDE_CONFIG_DIR` is set, the file goes to `$CLAUDE_CONFIG_DIR/mod-state`.
 

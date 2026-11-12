@@ -6,7 +6,7 @@ A skill that commits your work, runs the fast checks, pushes, and opens a GitHub
 
 Type `/create-pr`, or ask Claude to open a PR, when a branch is ready for review. Claude also loads it on a request such as "push it and open the PR".
 
-Do not use it for commits alone: use `commit`. Do not use it to review the diff: use `review-loop`.
+For commits alone, use `commit`. To review the diff, use `review-loop`.
 
 ## Example
 
@@ -36,12 +36,12 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 - If you are on the default branch, it creates a branch first. The name follows the project's rule, else the tracker's branch name for the issue, else a short topic.
 - It keeps your existing commits and never squashes them.
 - It commits loose changes in small slices, in the repo's message style.
-- Before the checks, a separate reader reads the diff for comments only. It keeps a comment only if the comment warns about a trap: something that breaks if the next person edits the code blindly.
+- Before the checks, a separate reader reads the diff for comments only. It keeps a comment only if the comment warns about a trap. A trap is code that breaks when the next person edits it unaware.
 - Claude removes or shortens each comment that the reader lists, and commits that change as its own slice.
 - It runs the fast checks that the repo's `CLAUDE.md` names. If one fails, it stops and opens no PR.
 - If a PR is already open for the branch, it pushes and reports the URL. It does not open a duplicate.
-- The PR body follows the repo's template. Without one, it follows the form of the repo's last few merged PRs. Without either, it holds a short summary, an `Evidence` line, a `Merge danger` line and a `Test changes` line.
-- Evidence videos and screenshots show each click and key press, play at a person's pace, and leave out sign-in and cleanup. They are attached to the PR with `gh --attach`.
+- The PR body follows the repo's template. Without one, it follows the form of the repo's last few merged PRs. Without either, it has a short summary, an `Evidence` line, a `Merge danger` line and a `Test changes` line.
+- Evidence videos and screenshots show each click and key press, play at a person's pace, and leave out sign-in and cleanup. Claude attaches them to the PR with `gh --attach`.
 - It links the issue by its key and never writes `Closes`, `Fixes` or `Resolves`, which would close the issue on merge.
 - Before it opens the PR, Claude reads the title and body for AI-sounding prose, such as arrows and metaphor nouns, and rewrites it.
 

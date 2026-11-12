@@ -10,7 +10,7 @@ Use it when a spec is confirmed and you need the next piece of work. Use it also
 - You say "file these bugs as issues" or "rewrite this ticket".
 - A ticket does two things and needs a split.
 
-Do not use it to write the spec or the milestones: use `shape`. Do not use it to plan a whole product: use `vision`. Do not use it to ask questions about an approach: use `grill`. Do not use it to fix the ticket's code.
+Do not use it to write the spec or the milestones. Use `shape`. Do not use it to plan a whole product. Use `vision`. Do not use it to ask questions about an approach. Use `grill`. Do not use it to fix the ticket's code.
 
 ## Example
 
@@ -37,10 +37,10 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 ## What it does
 
 - Claude reads the spec first. If the spec is Draft, Claude cuts only prototype items for the Demo phase and says what would confirm it.
-- Claude cuts the next slice only, not the whole spec. Each item is a narrow path through every layer, not one layer.
-- Each item names the items that block it. Branches and stacked PRs are left to `create-pr`.
+- Claude cuts the next slice only, not the whole spec. Each item is a vertical slice, a narrow path through every layer.
+- Each item names the items that block it. `create-pr` handles branches and stacked PRs.
 - Claude asks one question: are the size and the blocking right? Any other question goes up to `shape` as a spec change.
-- Each item's checks quote the requirement with its number and has a "You see" line that says what the verifier observes.
+- Each item's checks quote the requirement with its number and include a "You see" line that says what the verifier observes.
 - Each check names the account, data or switch that reaches its state.
 - Each check names who proves it: a one-command test, a person's eye, or the engineer.
 - Claude names the builder model for each item, from your model picks, and settles every design call so a cheaper builder loses no quality.

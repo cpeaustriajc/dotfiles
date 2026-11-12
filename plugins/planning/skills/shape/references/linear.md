@@ -1,6 +1,6 @@
 # Linear adapter
 
-Use the Linear MCP server. If the only Linear tools listed are `authenticate` and
+Use the Linear MCP server (tool list). If the only Linear tools listed are `authenticate` and
 `complete_authentication`, ask the person to connect Linear first.
 
 ## Objects
@@ -23,34 +23,20 @@ Coming from Jira: a Story is an Issue, an Epic is a Project, and an Epic descrip
 PRD is the project's spec Document. Never file a spec as an issue, never title a project "Epic 1",
 and don't use an `Epic` project template if the workspace has one: the word pulls Jira habits back.
 
-## Templates
-
-List the team's templates (`list_templates`) and read the one you need (`get_template`) before
-writing. Pass the template's name when creating, so Linear applies its labels and fields. A form
-template's questions are not answered by passing a description: fill its headings in the body
-instead. Common project templates are a product one and an internal-tool one; check which exist.
-
-## Tools
-
-- Issues: `save_issue` (create, or update with `id`), `get_issue`, `list_issues`, `save_comment`.
-- Projects: `save_project`, `get_project`, `save_milestone`, `save_status_update`.
-- Initiatives: use the server's initiative tools if it lists any. If it lists none, draft the
-  initiative text for the person to paste, and say so; never file the product as a project.
-- Documents: `save_document`, `get_document`, `list_documents`.
-- Relations: `blockedBy`, `relatedTo` and `parentId` on `save_issue`. They only add; removing
-  needs the matching `remove…` field.
-- Prefer `patch` over a full `description` when changing part of an existing body.
-- Files (screenshots, videos): `prepare_attachment_upload`, then PUT the file to the URL it
-  returns, then `create_attachment_from_upload`. A Linear asset URL needs a Linear sign-in:
-  never embed one in GitHub; upload the file there with the GitHub adapter instead.
-
 ## Things to know
 
-- **Every write notifies.** Linear posts each save to the team's integrations, so batch changes to
-  one issue into a single `save_issue`.
+- **Templates:** read the team's template before writing and pass its name on create, so Linear
+  applies its labels and fields. A form template's questions are not answered by a description:
+  fill its headings in the body. Common ones are a product and an internal-tool project template.
+- **No initiative tool listed:** draft the initiative text for the person to paste, and say so;
+  never file the product as a project.
+- **Relations** (`blockedBy`, `relatedTo`, `parentId` on `save_issue`) only add; removing needs
+  the matching `remove…` field. Prefer `patch` over a full `description` for a partial change.
+- **Files:** a Linear asset URL needs a Linear sign-in: never embed one in GitHub; upload the
+  file there with the GitHub adapter instead.
+- **Every write notifies.** Batch changes to one issue into a single `save_issue`.
 - **An issue in progress is often frozen** by team convention: put new findings in a comment or a
-  new issue instead of editing the body. Check the project's facts.
-- **Documents have search but no sorted views**, so a hand-kept index of documents rots. Find
-  documents by title search instead.
-- **Done is usually set by the verifier**, sometimes by an integration that moves issues on merge
-  or review request. Don't mark an issue Done for them.
+  new issue. Check the project's facts.
+- **Documents have search but no sorted views**, so a hand-kept index rots; find by title search.
+- **Done is usually set by the verifier**, sometimes by an integration on merge or review
+  request. Don't mark an issue Done for them.

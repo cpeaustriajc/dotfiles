@@ -1,34 +1,14 @@
 # GitHub adapter
 
-Run `gh auth status` first. If it fails, ask the person to sign in.
+`gh auth status` first; if it fails, ask the person to sign in. Commands: `gh issue`, `gh pr`,
+`gh label`, `gh search issues --help`.
 
-## Read
-
-```bash
-gh label list --limit 100 --json name --jq '.[].name'
-gh issue list --state open --limit 100 --json number,title,labels,createdAt,author
-gh api 'repos/{owner}/{repo}/pulls?state=open&per_page=100' \
-  --jq '.[] | "\(.number) \(.author_association) \(.user.login) \(.created_at) \(.title)"'
-gh issue view <n> --comments
-gh pr view <n> --comments
-gh pr diff <n>
-gh pr checkout <n>
-gh search issues --repo <owner/repo> --state closed --label <wontfix label> "<concept>"
-```
-
-- An outside author: `author_association` is not `OWNER`, `MEMBER` or `COLLABORATOR`.
-- A bare `#42` can be an issue or a PR: `gh issue view <n> --json url` also answers for a PR; the URL says `/pull/` or `/issues/`.
-- "A reply after the last triage note": compare the dates of the last comment with the
-  disclaimer and the reporter's last comment.
-
-## Write
-
-```bash
-gh label create "<name>" --description "<state>"        # only after the person says yes
-gh issue edit <n> --add-label "<state>,<category>" --remove-label "<old state>"
-gh pr edit <n> --add-label "<state>,<category>" --remove-label "<old state>"
-gh issue comment <n> --body-file brief.md
-gh issue close <n> --reason "not planned" --comment "<reason>"
-```
-
-Every write notifies the watchers. Put the labels and the comment in one pass per item.
+- Open PRs with author association: `gh api 'repos/{owner}/{repo}/pulls?state=open&per_page=100'`
+  (`author_association`, `user.login`). An outside author is not `OWNER`, `MEMBER` or
+  `COLLABORATOR`.
+- A bare `#42` can be an issue or a PR: `gh issue view <n> --json url` answers for both; the URL
+  says `/pull/` or `/issues/`.
+- "A reply after the last triage note": compare the last comment's date with the disclaimer's and
+  the reporter's last comment.
+- `gh label create` only after the person says yes. Close with `gh issue close <n> --reason "not planned"`.
+- Every write notifies the watchers: labels and comment in one pass per item.

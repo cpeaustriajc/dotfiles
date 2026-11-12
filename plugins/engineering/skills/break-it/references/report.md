@@ -6,7 +6,7 @@ Step 7 of `SKILL.md`.
 
 Write `break-it-<date>-<flow>/` in a folder the project ignores, with `report.md`, numbered
 screenshots and the video. `report.md` opens with the exact URL, the commit and the users run, so
-someone else can run it again.
+the run is reproducible.
 
 ## Chat report
 
@@ -20,7 +20,7 @@ Plain words, no internal jargon:
    sent, file written).
    Each Broken finding also gets an end-to-end test in the project's suite that drives the repro
    and asserts the expected result. It is a bug only when that test fails for the stated reason;
-   otherwise mark it UNPROVEN. Keep the test out of the merge gate (the suite's skip or tag) until
+   otherwise mark it UNPROVEN. Quarantine the test (the suite's skip or tag) until
    the fix; then it stays as a regression test. A filed Bug links its test.
 2. **Decisions for me**: behaviour that is odd but matches the spec, or whose fix is a product
    call. Each gets a recommended answer.

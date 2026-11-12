@@ -30,7 +30,7 @@ The `design` plugin ships this skill. Add the marketplace, then install the plug
 
 To turn the plugin off, run `claude plugin disable design@dotfiles`. This also turns off every other skill in `design`.
 
-Requirement: a browser that Claude can drive, so it sees the real screen.
+The skill needs a browser that Claude can drive, so it sees the real screen.
 
 ## What it does
 
@@ -43,7 +43,7 @@ Requirement: a browser that Claude can drive, so it sees the real screen.
 
 - It reviews and reports. It changes nothing until you name the rows to fix.
 - If no design exists, Claude says so and judges against the existing screens.
-- A tradeoff that the code or design documents is mentioned in the row but not flagged as a mistake.
+- When the code or design documents a tradeoff, the row mentions it and does not flag it as a mistake.
 - It does not test a flow with bad input or odd user behavior.
 - It has no settings.
 

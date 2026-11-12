@@ -10,7 +10,7 @@ Use it when you tell Claude the same thing in many sessions and want a fix that 
 - A session had several corrections.
 - You type `/hone <skill>` to review only the corrections you made while one skill ran.
 
-Do not use it to update `CLAUDE.md` from one session. A correction from a single run does not qualify. Do not use it to review a diff: use `review-loop`. For a general report on how you use Claude Code, run the built-in `/insights` command.
+Do not use it to update `CLAUDE.md` from one session. A correction from a single run does not qualify. Do not use it to review a diff. Use `review-loop`. For a general report on how you use Claude Code, run the built-in `/insights` command.
 
 The optional [hone-nudge](../../../../mods/hone-nudge/) mod suggests `/hone <skill>` after you correct Claude during a dotfiles skill run.
 
@@ -48,7 +48,7 @@ To turn the plugin off, run `claude plugin disable knowledge@dotfiles`. This als
 - A lesson qualifies when it shows up in 2 or more sessions, or once with an obvious cost.
 - Each proposal names a place, from strongest to weakest: code, lint, hook, test, skill, agent definition, instruction file. It says why each stronger place cannot hold the lesson.
 - A skill that should have loaded gets a description edit and a trigger case, proven with `claude plugin eval`.
-- A lint for a pattern that is already common fails only on a change that adds more.
+- A lint for an already common pattern is a ratchet: it fails only on a change that adds more.
 - A proposed lint, test or hook must first fail on a real past instance of the mistake.
 - It also proposes lines to remove, starting from `/doctor prompt-audit` for Claude Code.
 

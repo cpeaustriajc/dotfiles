@@ -17,7 +17,7 @@ A correction I made twice is a missing mechanism: propose its cheapest durable f
 3. Prune: the harness's instruction-file audit, lines that changed nothing, repeated wasted tool
    calls, unwired checks. A real rule in the wrong file moves, never drops.
 4. Route each lesson to the strongest layer that holds it: `references/layers.md`. A proposed
-   lint, test or hook first fails on a real past instance, or it stays out.
+   lint, test or hook starts red on a real past instance, or it stays out.
 5. Propose, then stop: **Accept?** (quotes, session count, layer, why each stronger layer
    fails, the diff with its removed lines), **Backlog** (needs real work), **Rejected** (one-line
    why).

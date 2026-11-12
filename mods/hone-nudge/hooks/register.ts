@@ -7,7 +7,7 @@ const WEEK = 7 * 86_400_000
 // Keep SHIPPED in step with the skills of the skill plugins in plugins/<plugin>/skills/.
 const SHIPPED = new Map([
   ['vision', 'planning'], ['shape', 'planning'], ['tickets', 'planning'], ['grill', 'planning'],
-  ['project-knowledge', 'knowledge'], ['hone', 'knowledge'],
+  ['dossier', 'knowledge'], ['hone', 'knowledge'],
   ['break-it', 'engineering'], ['review-loop', 'engineering'], ['commit', 'engineering'],
   ['create-pr', 'engineering'],
   ['ui-polish', 'design'], ['painting-craft', 'visual'],

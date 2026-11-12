@@ -60,8 +60,8 @@ solo project one person holds every role:
 - **Verifier**: marks work done. QA if the team has it, otherwise the product owner.
 - **Engineering**: decomposition, work types, feasibility and the shape of the work.
 
-Use the team's own templates in the tracker when it has them, read fresh each time; copied into
-files they go stale. Don't invent owners, dates, measurements or dependencies: leave them blank
+When the tracker has the team's own templates, they are the single source of truth: read them
+fresh each time, never copy them into files. Don't invent owners, dates, measurements or dependencies: leave them blank
 or list them as open questions.
 
 ## Write, then check the tree

@@ -1,79 +1,29 @@
 # Interaction rules
 
-Check each rule against the change. A row in the report names the rule it breaks.
+A row names the rule it breaks. Follow Vercel's Web Interface Guidelines
+(https://github.com/vercel-labs/web-interface-guidelines), Rauno Freiberg's "Interaction design"
+(https://rauno.me/craft/interaction-design), Emil Kowalski's mobile-native skill
+(https://github.com/emilkowalski/skill), Apple HIG and WWDC18 "Designing Fluid Interfaces"
+(https://developer.apple.com/videos/play/wwdc2018/803/), and WCAG 2.2 (https://www.w3.org/TR/WCAG22/)
+for press and release, drag and hover, loading, focus, forms, navigation and accessible text.
 
-**Press and release**
-- The control responds on press (`pointerdown` or an `:active` highlight) and confirms on release.
-- Dragging off the control cancels the action.
-- No double-tap delay; set `touch-action: manipulation`.
+Our choices:
+- Hit targets are 44x44 CSS px at every viewport, not only on touch. A row a person selects is at
+  least 44 tall. Below 24x24 also fails WCAG 2.2 SC 2.5.8 unless an exception applies; name which in
+  the row.
+- Draw the control at its full target size: no invisible hit area (at a card edge it covers a
+  neighbour).
+- Destructive actions get a confirmation or an undo window.
+- Loading: no spinner under 1s; show after 500ms, keep at least 200ms; over 10s a percent bar and
+  Cancel.
 
-**Hit targets**
-- At least 44x44 CSS px at every viewport, not only on touch (the Apple HIG minimum). A row a person selects is at least 44 tall.
-- Below 24x24 is also a WCAG 2.2 failure (SC 2.5.8) unless the spacing, equivalent, inline, user-agent or essential exception applies; say which in the row.
-- Draw the control at its full target size. No invisible hit area around a small control: at a card edge it covers a neighbour.
-- A checkbox or radio and its label form one target.
-
-**Drag and hover**
-- A drag follows the pointer 1:1 from the grab point.
-- A destructive swipe commits on release, not mid-swipe.
-- A slider keeps its drag when the pointer leaves it.
-- A hover menu closes after about 300ms so the cursor can cross a gap.
-- Hover triggers sit on a stable parent so the menu doesn't flicker.
-
-**Loading**
-- No spinner for a wait under 1s. Show it after 500ms and keep it at least 200ms.
-- A wait over 10s shows a percent bar and a Cancel button.
-- An empty state shows only after loading stops, with one next action.
-- Use optimistic UI where a failure is safe to roll back.
-
-**Focus**
-- Focus rings use `:focus-visible`. An outline is never removed without a replacement.
-- Compound controls use `:focus-within`.
-- Sticky headers don't cover the focused element.
-- Anchors carry `scroll-margin-top`.
-
-**Forms**
-- Mobile inputs are 16px or larger so iOS doesn't zoom, and zoom is never disabled.
-- Paste is never blocked.
-- Each input has the right `type`, `inputmode` and `autocomplete`.
-- Submit stays enabled until the request starts.
-- Errors appear inline, say the fix, and focus moves to the first error.
-- Unsaved changes trigger a warning before leaving.
-
-**Destructive actions**
-- Each gets a confirmation or an undo window.
-
-**Navigation**
-- The URL reflects filters, tabs and pagination.
-- Links open in a new tab with Cmd or Ctrl-click.
-
-**Accessible text and contrast (WCAG 2.2)**
-- Normal text has at least 4.5:1 contrast against its background (SC 1.4.3).
-- Large text, 18pt or 14pt bold and up, has at least 3:1 (SC 1.4.3).
-- UI component boundaries, states and meaningful graphics have at least 3:1 (SC 1.4.11).
-- Icon-only buttons have an `aria-label`.
-- Toasts use `aria-live="polite"`.
-- Every gesture has a tap or keyboard alternative.
-
-**Scroll and screen edges**
-- Modals and drawers use `overscroll-behavior: contain`.
-- Full-bleed layouts respect `env(safe-area-inset-*)`.
-
-**Mobile web**
-- App shells use `100dvh` and full-screen heroes use `100svh`, never `100vh`, which jumps when
-  the mobile browser bars move.
-- `-webkit-tap-highlight-color: transparent` only when the control has its own visible pressed
-  state.
-- A `theme-color` meta for each colour scheme, light and dark, using its `media` attribute.
-- A `color-scheme` meta (or CSS property) names the schemes the page supports, so native controls
-  and scrollbars match.
-- The viewport meta has `viewport-fit=cover` wherever `env(safe-area-inset-*)` is used; without
-  it the insets are 0. Add `interactive-widget=resizes-content` when inputs sit at the bottom, so
-  the Android keyboard resizes the layout as iOS does.
-- `-webkit-touch-callout: none` on links and images that act as controls, never on content.
-- A horizontal carousel or swipe surface sets `touch-action: pan-y`, so the page still scrolls
-  vertically through it. `touch-action: none` only where the element owns every axis.
-- `user-select: none` only on controls such as buttons, tabs and drag handles, never on content.
+Mobile web gotchas:
+- `100dvh` for app shells, `100svh` for full-screen heroes, never `100vh`.
+- `viewport-fit=cover` wherever `env(safe-area-inset-*)` is used; without it the insets are 0. Add
+  `interactive-widget=resizes-content` when inputs sit at the bottom (Android keyboard).
+- A `theme-color` meta per colour scheme (`media` attribute); a `color-scheme` meta or property.
+- A horizontal carousel sets `touch-action: pan-y`; `touch-action: none` only where the element owns
+  every axis.
+- `user-select: none`, `-webkit-touch-callout: none` and `-webkit-tap-highlight-color: transparent`
+  only on controls (the last only with a visible pressed state), never on content.
 - Check on a real phone, not only a narrow desktop window.
-
-Sources: https://vercel.com/design/guidelines, https://github.com/vercel-labs/web-interface-guidelines, https://rauno.me/craft/interaction-design, https://raw.githubusercontent.com/emilkowalski/skill/main/skills/mobile-native/SKILL.md, https://developer.apple.com/videos/play/wwdc2018/803/, https://www.joshwcomeau.com/animation/css-transitions/, https://www.w3.org/TR/WCAG22/, https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html

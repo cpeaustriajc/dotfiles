@@ -10,7 +10,7 @@ Use it before you build, when a design or change has decisions nobody made yet. 
 - You say "poke holes in this" or "plan and ask me".
 - A change touches 3 or more files, has several approaches or has unclear scope.
 
-Do not use it for a whole product idea or for "is this worth building?": use `vision`. Do not use it to write a spec: use `shape`. Do not use it to cut tickets: use `tickets`.
+Do not use it for a whole product idea or for "is this worth building?". Use `vision`. Do not use it to write a spec. Use `shape`. Do not use it to cut tickets. Use `tickets`.
 
 ## Example
 
@@ -40,7 +40,7 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 - Claude looks up code, specs, the tracker and docs before it asks you a fact. When a recommendation depends on a fact, Claude runs a small probe first.
 - Each round opens with a ledger: Settled, Assumed, Out of scope and the count of open decisions. You can veto any Assumed or Out of scope item, and each cut has a reason that Claude checked.
 - Claude asks through the `AskUserQuestion` form, with a concrete scenario in each question.
-- A flow, a state change or a structure comes as a diagram: an inline widget where the visualize tools exist, else a mermaid block.
+- A flow, a state change or a structure comes as a diagram. It is an inline widget where the visualize tools exist, else a mermaid block.
 - Round 1 settles what "done" looks like as something you can observe.
 - Claude never re-asks a Settled item. If new evidence conflicts with one, it asks about that conflict only.
 - Claude recommends the smallest version that ships.
@@ -56,4 +56,3 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/rounds.md](references/rounds.md): the ledger, how Claude asks, and how it reads your answers.
-- [references/claude-code.md](references/claude-code.md): the Claude Code tools for the form and the diagrams.

@@ -1,6 +1,14 @@
 # Shape of the knowledge
 
-Step 2 of SKILL.md reads this. Where a backend's adapter gives its own shape, the adapter wins.
+Step 2 of SKILL.md reads this. It is the default for a new log.
+
+## An existing log
+
+The project's own conventions win, then the adapter's shape, then this page. Before the first
+write, read the log's index or home page and its two newest decision pages. Match their template,
+numbering, title pattern, status words, link syntax and language. A repo whose
+`docs/adr/` holds MADR files (https://adr.github.io/madr/) gets a MADR file, not a `Decision NNN` page. Where the log has
+no convention for something, use this page.
 
 ## Pages
 
@@ -10,16 +18,15 @@ Step 2 of SKILL.md reads this. Where a backend's adapter gives its own shape, th
 - **Decisions index.** A table, newest first by date, with columns `# | Decision | Status | Date |
   Issue`. A new row goes at the top. Sort by date, not by number: numbers follow the order
   decisions were recorded, and they can be out of date order.
-- **`Decision NNN <Topic>`.** One page per decision, numbered with zero padding (`001`). Its facts
-  and wording stay as they were decided, so a reader can trust any old decision page as a record
-  of what was known then.
+- **`Decision NNN <Topic>`.** One page per decision, numbered with zero padding (`001`). Immutable ADR (Nygard,
+  "Documenting Architecture Decisions", 2011): facts and wording stay as decided.
 - **Backends with search but no sorted views** (Linear) drop the number and the index: each
   decision is titled `Decision: <Topic>` and found by search. Their adapter gives the shape that
   replaces the two items above.
 - **Research pages.** One topic each. Date the research, and mark anything not confirmed on a
-  primary source as **UNVERIFIED**. When newer facts replace what a page describes, rewrite the
-  page to describe the current state, and move the old description under `## History` at the
-  foot, saying what replaced it. Deleting it would erase the evidence behind older decisions.
+  primary source as **UNVERIFIED**. A research page is a living document: when newer facts replace what it describes, rewrite it
+  for the current state, and move the old description under `## History` at the foot, saying what
+  replaced it. Deleting it would erase the evidence behind older decisions.
 
 ## Decision template
 

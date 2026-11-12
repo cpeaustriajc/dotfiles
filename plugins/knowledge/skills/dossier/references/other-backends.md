@@ -1,26 +1,14 @@
 # Other backends
 
-The conventions in SKILL.md and the shared shape do not change. Map the four operations — find, read, record,
-supersede — onto whatever the backend's MCP server or CLI offers.
+SKILL.md and `shape.md` conventions hold. Map find, read, record and supersede onto the backend's
+MCP server or CLI.
 
-## Confluence
-
-Use the Atlassian MCP (or `twg confluence` where installed). A space or parent page is Home; its
-child pages are the research pages; a `Decisions` child page holds the index table, and each
-decision is a child page of it titled `Decision NNN: <Topic>`. Confluence keeps page history, so a
-superseded page still carries only a Status change — history is not a licence to rewrite it.
-Confluence page properties (the "Page Properties" macro) can hold Status and Date for a report
-view; keep the hand-written table too.
-
-## Google Docs / Drive
-
-Use the Drive MCP. A folder is Home; `Decisions` is one Google Doc holding the index table; each
-decision is its own Doc in a `Decisions` subfolder. Drive has no wiki links, so link with the Doc
-URL.
-
-## Anything else
-
-Before writing, tell the user which tool you will use for each operation and how a superseded
-decision will be marked, and get a yes. Then record the mapping in the user-level map
-(`~/.claude/project-knowledge.json`, a `"notes"` field on that entry) so the next session does not
-re-derive it.
+- **Confluence** (Atlassian MCP, or `twg confluence` where installed): a space or parent page is
+  Home; a `Decisions` child page holds the index table; each decision is its child page titled
+  `Decision NNN: <Topic>`. Page history is no licence to rewrite a superseded page: Status only.
+  Keep the hand-written table even if Page Properties hold Status and Date.
+- **Google Docs / Drive** (Drive MCP): a folder is Home; `Decisions` is one Doc holding the index
+  table; each decision is a Doc in a `Decisions` subfolder. Link with the Doc URL.
+- **Anything else:** before writing, tell the user which tool serves each operation and how a
+  superseded decision will be marked, and get a yes. Record the mapping in the `"notes"` field of
+  that entry in `~/.claude/dossier.json`.

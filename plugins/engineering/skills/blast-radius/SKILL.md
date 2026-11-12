@@ -11,7 +11,7 @@ uncommitted edits). Callers are one grep away; find the breakage grep won't show
 `references/claude-code.md`.
 
 1. Read the change and what it now does that the diff doesn't spell out. Pull its PR and commits:
-   the commits that last touched and first added its lines, and their PR and ticket IDs.
+   `git blame` and pickaxe (`git log -S`) for its lines, then their PR and ticket IDs.
 2. Find the one fact it's safe because of; most risks clear when it holds.
 3. Look where grep stops: library source, run timing, data formats, flags.
 4. Rate each risk by real chance and cost. Cite real lines; never invent a caller or an API.
