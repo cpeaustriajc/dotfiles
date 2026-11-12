@@ -41,5 +41,18 @@ case("the CLI passes a list with no grader", cli("README.md\nmods/x/hooks/regist
 case("the CLI names each grader and exits 1", cli("README.md\nscripts/canary.py\n"),
      (1, "scripts/canary.py: changes a grader; the owner reviews the diff and merges past this check"))
 
+case("a dotfile sorting before .gitattributes is not a grader", graders([".editorconfig", ".git", ".gitattr"]), [])
+case("each grader prefix is a grader", graders([g + "x" for g in (".github/", "scripts/", ".claude/skills/verify/",
+                                                                   ".claude/skills/run-dotfiles/", "tests/claude-owned/")]),
+     [g + "x" for g in (".github/", "scripts/", ".claude/skills/verify/", ".claude/skills/run-dotfiles/",
+                         "tests/claude-owned/")])
+case("hits keep the list's order", graders(["scripts/b.py", "README.md", ".gitattributes", ".github/a.yml"]),
+     ["scripts/b.py", ".gitattributes", ".github/a.yml"])
+case("the CLI skips blank lines and trims", cli("\n  README.md  \n\n"), (0, "graders unchanged: 1 files checked"))
+case("the CLI names every grader in order", cli("scripts/a.py\nREADME.md\n.gitattributes\n"),
+     (1, "scripts/a.py: changes a grader; the owner reviews the diff and merges past this check\n"
+         ".gitattributes: changes a grader; the owner reviews the diff and merges past this check"))
+case("the CLI with no paths passes", cli(""), (0, "graders unchanged: 0 files checked"))
+
 print(f"{passed} passed, {failed} failed")
 sys.exit(1 if failed else 0)

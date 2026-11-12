@@ -22,7 +22,7 @@ UNITTEST_FAILED = re.compile(r"^FAILED \(([^)]*)\)$")
 PYTEST = re.compile(r"^=+ (.*\b(?:passed|failed|error|errors)\b.*) in [\d.]+s")
 STEP = re.compile(r"^\[\d+/\d+\] (✔|✘) ")  # tests/claude-owned/run.py
 SELF_TEST = re.compile(r"^SELF-TEST PASSED: all (\d+) ")
-CHECK_OK = re.compile(r"^(?:[\w-]+(?: [\w-]+)* ok|PASSED: .+|✔ Validation passed.*|tests kept: \d+ tests.*)$")
+CHECK_OK = re.compile(r"^(?:[\w-]+(?: [\w-]+)* ok|PASSED: .+|✔ Validation passed.*|tests kept: \d+ tests.*|canary ok: \d+ test files went red)$")
 CHECK_FAILED = re.compile(r"^(?:[\w-]+(?: [\w-]+)* FAILED|FAILED\b.*|SELF-TEST FAILED.*|✘ Validation failed.*)$")
 
 

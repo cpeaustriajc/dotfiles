@@ -14,7 +14,9 @@ printf '%s\n' "$files" | grep -q -E '^mods/|^tests/claude-owned/' && printf 'cla
 printf '%s\n' "$files" | grep -q -E '^home/claude/hooks/' && printf 'home hooks\tfor t in home/claude/hooks/tests/*.test.sh; do bash "$t" || exit 1; done\n'
 printf '%s\n' "$files" | grep -q -E '\.claude-plugin/|README\.md$|^scripts/(test_)?check_readmes\.py$' && printf 'manifests\tclaude plugin validate .\n'
 # Graders: the files that judge a change (scripts/graders_changed.py). Prove they still go red.
+# A changed test file alone still runs the canary: a forged result line fools results.py, not the canary.
 printf '%s\n' "$files" | grep -q -E '^\.github/|^scripts/|^\.claude/skills/(verify|run-dotfiles)/|^plugins/engineering/skills/review-loop/scripts/|^tests/claude-owned/' \
-  && printf 'graders\t.claude/skills/run-dotfiles/smoke.sh selftest\n'
+  && printf 'graders\t.claude/skills/run-dotfiles/smoke.sh selftest\n' \
+  || { printf '%s\n' "$files" | grep -q -E '(^|/)test_[^/]*\.(py|sh)$|\.test\.(sh|ts)$' && printf 'canary\tpython3 -I scripts/canary.py\n'; }
 printf '%s\n' "$files" | grep -q -E '^\.github/' && printf 'ci\tcommand -v actionlint >/dev/null || { echo "BLOCKED: actionlint is not installed (brew install actionlint)"; exit 2; }; actionlint .github/workflows/*.yml && echo "actionlint ok" && python3 -m json.tool .github/rulesets/main.json >/dev/null && echo "ruleset ok"\n'
 exit 0
