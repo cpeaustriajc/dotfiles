@@ -10,6 +10,7 @@ import tempfile
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from check_test_names import GUARD, KEPT, ROOT, compare  # noqa: E402
+from check_test_names import block, guard, kept  # noqa: E402
 
 passed = failed = 0
 
@@ -57,6 +58,28 @@ with tempfile.TemporaryDirectory() as tmp:
     case("the CLI on a changed copy exits 1 and names the folder", (code, out.startswith(f"{KEPT}:43: folder missing") and "folder missing" in out and "e2e" in out), (1, True))
 code, out = run(ROOT)
 case("the CLI on the real files exits 0", (code, out), (0, "test names ok"))
+
+
+case("block returns the line and text from start through end", block("\n\nab]x", "a", "]"), (3, "ab"))
+case("block is None when the start is missing, even if the text ends with the end", block("a]", "zz", "]"), None)
+case("block is None when the end is missing", block("abc", "a", "]"), None)
+case("block finds a start at the very beginning", block("abc]", "a", "]"), (1, "abc"))
+case("block accepts an end found where the start is", block("a", "a", "a"), (1, ""))
+case("a guard with only TEST_NAME is no definition", guard("const TEST_NAME = [/a/]\n"), None)
+case("a guard with only TEST_DIR is no definition", guard("const TEST_DIR = new Set(['a'])"), None)
+case("a tests_kept with only TEST_NAME is no definition", kept('TEST_NAME = [r"a")]\n'), None)
+case("a tests_kept with only TEST_DIR is no definition", kept('TEST_DIR = {"a"}'), None)
+case("the guard's TEST_DIR line is reported", guard(guard_text)[1][0], guard_text[:guard_text.index("const TEST_DIR")].count("\n") + 1)
+case("a folder only tests_kept has is named once, on the guard side",
+     compare(guard_text, kept_text.replace('"testdata"', '"testdata", "zzz"')),
+     [f"{GUARD}:{guard_text[:guard_text.index('const TEST_DIR')].count(chr(10)) + 1}: folder missing, {KEPT} has zzz"])
+case("a reorder in the guard is named", [e.split(": ", 1)[1] for e in compare(guard_text.replace(
+    r"/(^|\/)conftest\.py$/, /\.(snap|golden)$/", r"/\.(snap|golden)$/, /(^|\/)conftest\.py$/"), kept_text)],
+    [f"name patterns are in a different order than {GUARD}"])
+case("one changed pattern in tests_kept is two errors, not a reorder",
+     len(compare(guard_text, kept_text.replace(r'r"\.(snap|golden)$"', r'r"\.snap$"'))), 2)
+r = subprocess.run([sys.executable, "-I", os.path.join(HERE, "check_test_names.py")], capture_output=True, text=True)
+case("the CLI with no root argument checks the real files", (r.returncode, r.stdout.strip()), (0, "test names ok"))
 
 print(f"{passed} passed, {failed} failed")
 sys.exit(1 if failed else 0)
