@@ -20,7 +20,7 @@ You say: "Try to break the signup flow like a careless user before I send it to 
 2. Claude picks two to four user types and says why. It drives the app as each one.
 3. Claude writes a report folder and a short summary in chat.
 
-You get three groups: Broken, Ugly and Fragile. Each bug has a title, repro steps, expected versus actual, and a screenshot or video timestamp. Each Broken bug also has an end-to-end test that fails. Without that test, Claude marks the finding UNPROVEN.
+You get three groups: Broken, Ugly and Fragile. Each bug has a title, repro steps, expected versus actual, and a screenshot or video timestamp. Each Broken bug also has a failing test, kept uncommitted in the run folder until the fix. Without that test, Claude marks the finding UNPROVEN.
 
 ## Install
 

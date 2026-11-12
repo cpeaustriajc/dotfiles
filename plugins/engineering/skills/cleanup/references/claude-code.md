@@ -9,4 +9,4 @@
   `~/.claude/projects/<cwd with / replaced by ->/<session id>.jsonl`; grep it for
   `run_in_background`, `docker run`, `git switch -c` and `git stash push`.
 - Auto mode blocks a destructive git command and a kill of a process this session did not start.
-  Do not work around a block: the item goes under Run yourself.
+  The item goes under Run yourself.

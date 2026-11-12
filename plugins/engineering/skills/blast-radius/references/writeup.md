@@ -9,7 +9,7 @@ anything private before it goes anywhere public. Proof levels: `references/metho
 - **Risks**: each names how it breaks, the `file:line`, how likely and how bad, its proof level,
   and how to check. Paste the proof for the ones that matter.
 - **Cleared**: what you checked and why it's fine.
-- **Before you merge**: the cheapest test or repro that catches the real bug, including the
-  script you wrote.
+- **Before you merge**: the test at the lowest tier that catches the real bug
+  (`../../review-loop/references/tests.md`), including the script you wrote.
 
 Then the risk map, per the adapter.

@@ -18,12 +18,14 @@ Plain words, no internal jargon:
    Each gets a one-line title, the user who found it, numbered repro steps, expected versus
    actual, the screenshot or video timestamp, and any side effect checked (stored value, request
    sent, file written).
-   Each Broken finding also gets an end-to-end test in the project's suite that drives the repro
-   and asserts the expected result. It is a bug only when that test fails for the stated reason;
-   otherwise mark it UNPROVEN. Quarantine the test (the suite's skip or tag) until
-   the fix; then it stays as a regression test. A filed Bug links its test.
+   Each Broken finding also gets a test at the lowest tier that reproduces it
+   (`../../review-loop/references/tests.md`). It is a bug only when that test fails for the stated
+   reason; otherwise mark it UNPROVEN. Run it in the suite, then move it to the run folder
+   uncommitted: a committed skip is a `tests_kept.py` finding. Each finding names its test's path
+   there, a filed Bug carries the test, and the fix commits it, red first.
 2. **Decisions for me**: behaviour that is odd but matches the spec, or whose fix is a product
-   call. Each gets a recommended answer.
+   call. Each gets a recommended answer. A difference from the spec or design is a bug, not a
+   decision.
 3. **What held up**: one line listing the attacks that did nothing.
 4. **Not tested**: each user, board or attack not run, each UNPROVEN finding, and each finding not
    re-run after its fix. Never call a run clean or ask for sign-off while a Broken finding is

@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 # Checks a PR or bug video before it is attached. Needs ffmpeg and ffprobe.
-# FAIL (exit 1): file over the upload limit, or the page fills only part of the frame.
+# FAIL (exit 1): file over the upload limit, the page fills only part of the frame, or the clip is
+# frozen for more than STILL_FRAC (default half) of its length.
 # WARN: each stretch where nothing on screen changes for longer than STILL_S seconds.
 set -euo pipefail
 f="${1:?usage: check-video.sh <video> [limit_mb]}"
 limit_mb="${2:-10}"
 still_s="${STILL_S:-3}"
+still_frac="${STILL_FRAC:-0.5}"
 fail=0
 
 read -r w h fps < <(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,avg_frame_rate \
@@ -27,10 +29,18 @@ if [ "$n" -gt 0 ] && [ $((g * 2)) -gt "$n" ]; then
   echo "FAIL fill: ${g} of ${n} sampled frames have grey padding; another screencast (tracing?) set the frame size"; fail=1
 fi
 
+# A clip that is frozen for most of its length shows nothing happening (a recording of a still page).
+frozen=$(ffmpeg -hide_banner -i "$f" -map 0:v:0 -vf "freezedetect=n=0.003:d=1" -f null - 2>&1 \
+  | awk -v end="$dur" '/freeze_start:/{s=$NF; open=1} /freeze_end:/{t+=$NF-s; open=0}
+      END { if (open) t+=end-s; printf "%.1f", t+0 }')
+if awk -v t="$frozen" -v d="$dur" -v r="$still_frac" 'BEGIN { exit !(d > 0 && t > d * r) }'; then
+  echo "FAIL still: ${frozen} of ${dur%.*} s show no change; record the steps, not a still page"; fail=1
+fi
+
 ffmpeg -hide_banner -i "$f" -vf "mpdecimate=hi=768:lo=320:frac=0.1,showinfo" -f null - 2>&1 \
   | grep -o "pts_time:[0-9.]*" | cut -d: -f2 \
   | awk -v end="$dur" -v s="$still_s" '{ if (NR>1 && $1-p>s) printf "WARN still %.1f-%.1f s (%.1f s)\n", p, $1, $1-p; p=$1 }
       END { if (end-p>s) printf "WARN still %.1f-%.1f s (%.1f s) at the end\n", p, end, end-p }'
 
-[ "$fail" -eq 0 ] && echo "PASS size and fill; read each WARN still: a chapter card is fine, a frozen step is not"
+[ "$fail" -eq 0 ] && echo "PASS size, fill and motion; read each WARN still: a chapter card is fine, a frozen step is not"
 exit "$fail"

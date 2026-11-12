@@ -7,4 +7,4 @@
 - Delete the local branch with `git branch -d` while its remote branch still exists: git allows
   `-d` for a branch merged into its upstream, so a squash merge passes. Then
   `git push origin --delete <branch>`. If GitHub already deleted the remote branch and `-d`
-  refuses, put `git branch -D <branch>` under Run yourself; never force it.
+  refuses, put `git branch -D <branch>` under Run yourself.

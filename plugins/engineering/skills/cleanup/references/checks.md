@@ -7,7 +7,7 @@ Steps 1 to 3 of `SKILL.md`, and the checks the repo sweep reuses. Commands: `ref
 What this session made, from this conversation: background processes and their PIDs, dev
 servers, containers and volumes, local and remote branches, stashes, edits to tool config
 (including `.claude/launch.json`), evidence (videos, screenshots, `test-results/`, `artifacts/`,
-the work folder, the session's scratchpad directory) and temp files.
+the session's scratchpad directory) and temp files.
 
 ## Checks (step 2)
 
@@ -32,5 +32,5 @@ So one step does not block the next:
 4. Restore config edits by path.
 5. Delete the evidence paths.
 6. Leave the branch.
-7. Delete the local branch while its remote branch still exists, so a squash merge passes.
-8. Delete the remote branch. A delete git refuses goes under Run yourself; never force it.
+7. Delete the local branch, then the remote branch (`references/git.md`). A delete git refuses
+   goes under Run yourself.
