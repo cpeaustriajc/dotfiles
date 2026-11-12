@@ -132,17 +132,6 @@
       "category": "productivity"
     },
     {
-      "name": "work-folder",
-      "displayName": "Work Folder",
-      "description": "Keep agent files out of the repo — denies new plans or evidence outside .claude/work/ and clears old ones.",
-      "version": "0.2.2",
-      "author": {
-        "name": "John Carlo Austria"
-      },
-      "source": "./mods/work-folder",
-      "category": "productivity"
-    },
-    {
       "name": "test-guard",
       "displayName": "Test Guard",
       "description": "Stop tests changed to pass — denies an edit that changes or removes a test line at HEAD; additions pass.",

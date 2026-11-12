@@ -39,8 +39,9 @@ This guide removes the old names and installs the new plugins. It also fixes the
 | `bash-trim@cj-stack` | Nothing. The `bashOutputMaxChars` setting caps Bash output. |
 | `secret-guard@cj-stack` | Nothing. The marketplace has no replacement. |
 | `linear-gate@cj-stack` | Nothing. A connector in the Claude desktop app sets its own tool permissions. |
+| `work-folder@cj-stack` | Nothing. The marketplace has no replacement. |
 
-The mods `hone-nudge`, `memory-lint`, `work-folder` and `test-guard` keep their names. Do not change them.
+The mods `hone-nudge`, `memory-lint` and `test-guard` keep their names. Do not change them.
 
 ## Remove the old names
 
