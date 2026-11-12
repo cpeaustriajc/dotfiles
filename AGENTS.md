@@ -1,6 +1,6 @@
 # dotfiles
 
-- Trunk-based development, short-lived PRs. `/verify` before push.
+- GitHub flow. `/verify` before push.
 - Don't fight the harness. No Not-Invented-Here. YAGNI. Single source of truth.
 - No AI slop. Known terms over explanations. Audit on each frontier model release.
 - Prior art: evidence over authority (`SOURCES.md`).

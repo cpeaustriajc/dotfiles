@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Checks that the repo follows trunk-based development (AGENTS.md).
+"""Checks that the repo keeps GitHub flow branches short (AGENTS.md).
 
 A branch other than main may hold commits that main lacks for less than a day. Older, it is a
 side branch that drifts, and its merge or restack redoes work. Local and origin branches count;
