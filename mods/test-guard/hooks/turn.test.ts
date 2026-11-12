@@ -144,3 +144,14 @@ test("another hook's block stands alone, and the loss is reported at the next st
   r.below = {}
   expect(await stop($)).toContain('/repo/tests/a.test.ts')
 })
+
+test('a loss through Bash still blocks the stop when no approved Edit lost that line', async ($, on) => {
+  const r = repo(on)
+  on('tool.check', () => ({ decision: 'allow' }) as never)
+  await start($)
+  const input = { file_path: '/repo/tests/a.test.ts', old_string: 'toHaveBeenCalledTimes(1)', new_string: 'toHaveBeenCalled()' }
+  await ($ as any).tool.check({ tool: 'Edit', input, tool_use_id: 'u1', approver: 'person' })
+  await bash($, "sed -i 's/Times(1)/()/' tests/a.test.ts")
+  r.disk[T] = T_HEAD.replace('toHaveBeenCalledTimes(1)', 'toHaveBeenCalled()')
+  expect(await stop($)).toContain('/repo/tests/a.test.ts: `expect(send).toHaveBeenCalledTimes(1)`')
+})

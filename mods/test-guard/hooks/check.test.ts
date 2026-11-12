@@ -1,5 +1,6 @@
 import { expect, test } from 'claude-code/testing'
 import { align, apply, findings, firstLost, hidden, kindOf, maybeGuarded } from './check'
+import { lostLines, minus } from './check'
 
 // A seeded generator (mulberry32): a failure prints the seed, and SEED below reruns it.
 const SEED = Date.now() % 2 ** 31
@@ -254,4 +255,72 @@ test('a bare return added to a HEAD helper, not a test, passes', async () => {
 test('kinds: test_*.sh is a test name, like test_*.py', async () => {
   for (const p of ['test_build.sh', 'scripts/test_check_video.sh']) expect(kindOf(p), p).toBe('test')
   expect(kindOf('scripts/test_build.shx')).toBeUndefined()
+})
+
+const VERIFY = '    "verify": "tsr generate && npm run --silent migrations:check && oxfmt --check && effect-tsgo oxlint --type-aware && effect-tsgo tsc -p tsconfig.json && effect-tsgo tsrs -p tsconfig.json && vitest run --passWithNoTests"'
+
+test('a pass-anyway word counts as added only when the file holds more of it than at HEAD', async () => {
+  const pkg = `{\n  "scripts": {\n${VERIFY},\n    "test": "vitest run"\n  }\n}\n`
+  pass('shared', 'package.json', pkg, pkg.replace('--passWithNoTests"', '--passWithNoTests && npm run build"'))
+  deny('shared', 'package.json', pkg, pkg.replace('"test": "vitest run"', '"test": "vitest run --passWithNoTests"'), 'stops tests from running')
+  const py = '[tool.pytest.ini_options]\naddopts = "--deselect tests/test_a.py::test_x"\n'
+  pass('shared', 'pyproject.toml', py, py.replace('addopts = "', 'addopts = "-q '))
+  deny('shared', 'pyproject.toml', py, py.replace('test_x"', 'test_x --deselect tests/test_b.py::test_y"'), 'stops tests')
+  const ci = 'jobs:\n  lint:\n    continue-on-error: true\n'
+  deny('config', '.github/workflows/ci.yml', ci, `${ci}  test:\n    continue-on-error: true\n`, 'stops tests from running')
+  deny('config', '.husky/pre-commit', 'npm run lint || true\n', 'npm run lint || true\nnpm test || true\n', 'stops tests from running')
+})
+
+test('lostLines names every HEAD line an edit loses, and minus takes lines out as a multiset', async () => {
+  const head = 'a\nb\nc\nd\n'
+  expect(lostLines(head, 'a\nc\n')).toEqual(['b', 'd'])
+  expect(lostLines(head, `${head}e\n`)).toEqual([])
+  expect(minus(lostLines(head, 'a\nc\n'), { b: 1, d: 1 })).toEqual([])
+  expect(minus(lostLines(head, 'a\nc\n'), { b: 1 })).toEqual(['d'])
+  expect(minus(['x', 'x', 'y'], ['x'])).toEqual(['x', 'y'])
+})
+
+test('an approved loss of a repeated line leaves no loss, where removing it from HEAD would report one', async () => {
+  const head = 'A\n})\nB\n})\n'
+  const now = 'A\n})\nB\n'
+  expect(minus(align(head, now).gone, { '})': 1 })).toEqual([])
+  expect(minus(align(head, 'A\nB\n').gone, { '})': 1 })).toEqual(['})'])
+})
+
+test('the HEAD-line rule judges only what this edit loses, counting a repeated line', async () => {
+  const head = 'x()\nx()\ny()\n'
+  expect(findings('test', 'a.test.ts', head, 'x()\ny()\nz()\n', false, ['x()'])).toBeUndefined()
+  expect(findings('test', 'a.test.ts', head, 'y()\n', false, ['x()'])?.line).toBe('x()')
+  expect(findings('test', 'a.test.ts', head, 'x()\n', false, ['x()'])?.line).toBe('y()')
+  expect(findings('test', 'a.test.ts', head, 'x()\n', false, ['x()'])?.what).toContain('changes or removes')
+})
+
+test('an opened path skips the HEAD-line rule and keeps every content rule', async () => {
+  const changed = PY.replace('    assert send() == 1', '    assert send() == 2')
+  expect(findings('test', 'test_a.py', PY, changed, true)).toBeUndefined()
+  expect(findings('test', 'test_a.py', PY, changed)?.what).toContain('changes or removes')
+  expect(findings('test', 'test_a.py', PY, changed.replace('def test_mute', '@pytest.mark.skip\ndef test_mute'), true)?.what).toContain('skips the HEAD test `def test_mute():`')
+  expect(findings('test', 'test_a.py', PY, `${changed}\nsys.exit(0)\n`, true)?.what).toContain('exits the test process')
+  const ci = 'jobs:\n  test:\n    steps:\n      - run: npm test\n'
+  expect(findings('config', '.github/workflows/ci.yml', ci, ci.replace('npm test', 'npm test || true'), true)?.what).toContain('stops tests from running')
+  expect(findings('test', 'test_a.py', PY, PY.replace('def test_sends():\n    assert send() == 1\n', ''), true)).toBeUndefined()
+})
+
+test('a skip marker below a lost line still applies to its HEAD test', async () => {
+  const next = PY.replace('    assert send() == 1', '    assert send() == 2').replace('def test_mute', '@pytest.mark.skip\ndef test_mute')
+  expect(findings('test', 'test_a.py', PY, next, true)?.what).toContain('skips the HEAD test')
+})
+
+const WF = 'jobs:\n  test:\n    steps:\n      - uses: actions/checkout@v3\n      - uses: pnpm/action-setup@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3.0.0\n      - run: npm test\n'
+test('a workflow step that only changes its action ref keeps the HEAD line', async () => {
+  pass('config', '.github/workflows/ci.yml', WF, WF.replace('checkout@v3', 'checkout@v4'))
+  pass('config', '.github/workflows/ci.yml', WF, WF.replace('@a3252b78c470c02df07e9d59298aecedc3ccdd6d # v3.0.0', '@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0'))
+  pass('config', '/repo/.github/workflows/ci.yml', WF, WF.replace('checkout@v3', 'checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2'))
+})
+
+test('a workflow step with a new action name, or a removed step, is refused; a ref change outside workflows is refused', async () => {
+  deny('config', '.github/workflows/ci.yml', WF, WF.replace('actions/checkout@v3', 'evil/checkout@v3'), 'changes or removes a line')
+  deny('config', '.github/workflows/ci.yml', WF, WF.replace('      - uses: actions/checkout@v3\n', ''), 'changes or removes a line')
+  deny('config', '.pre-commit-config.yaml', WF, WF.replace('checkout@v3', 'checkout@v4'), 'changes or removes a line')
+  deny('config', '.husky/pre-commit', WF, WF.replace('checkout@v3', 'checkout@v4'), 'changes or removes a line')
 })
