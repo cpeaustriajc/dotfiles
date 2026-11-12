@@ -36,7 +36,7 @@ The skill then loads as `/engineering:blast-radius`.
 ## What it does
 
 - Reads the change: a pull request, a branch, a commit or a diff. With no argument, it reads the current branch and your uncommitted edits.
-- Writes proof scripts in `.claude/work/blast-radius/` and runs them. It does not edit the change's own files.
+- Writes proof scripts in the session's scratchpad directory, runs them, and pastes each script in the writeup so you can run it again. It does not edit the change's own files.
 - Marks the safety fact unproven when no proof holds.
 - Shows the risk map in the desktop app. A click on a risk asks how to check it. In a terminal, it prints the map as a mermaid flowchart.
 

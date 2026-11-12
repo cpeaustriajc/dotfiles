@@ -20,8 +20,9 @@ For branches and worktrees from many sessions.
 - PRs: `gh pr list --state all --limit 500 --json number,state,headRefName,headRefOid,author`.
   Use `gh`, not `git branch --merged`: it misses squash merges.
 - Unique commits of an Ask row: `git log --oneline origin/main..<branch>`.
-- Backup before a delete: `git bundle create .claude/work/cleanup/<date>.bundle <branches>`, and
-  a `restore.sh` with one `git branch <name> <sha>` line per branch.
+- Backup before a delete: `git bundle create "$(git rev-parse --git-common-dir)/cleanup/<date>.bundle"
+  <branches>`, and a `restore.sh` beside it with one `git branch <name> <sha>` line per branch.
+  The backup must outlive the session, so it goes in the git folder, not the scratchpad.
 - Leave a checked-out branch: `git switch --detach origin/main`.
 - Delete a branch: `git branch -d <branch>` while its remote branch exists, then
   `git push origin --delete <branch>`. If `-d` refuses, put `git branch -D <branch>` under Run

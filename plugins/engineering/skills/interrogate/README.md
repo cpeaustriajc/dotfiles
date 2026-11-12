@@ -43,7 +43,7 @@ Requirement: Claude must be able to start subagents.
 - Claude verifies each finding itself. A reviewer can be confidently wrong.
 - Each finding has a proof level: stated, pointed at the line, walked through or run. Act on takes only walked through or run. A real finding with less proof goes to Consider, with a note on what would raise it.
 - Dismissed findings stay visible with a one-line reason, so you can override them.
-- Claude saves the bundle and the raw reviews in the ignored work folder (`.claude/work/<topic>/` in Claude Code) and tells you where they are.
+- Claude saves the bundle and the raw reviews in the session's scratchpad directory (in Claude Code) and tells you where they are.
 - If you ask for a quality pass, a fresh reviewer reads the diff for reuse, quality and efficiency after your fixes. In Claude Code, this pass is the built-in `/simplify` skill.
 
 ## Limits

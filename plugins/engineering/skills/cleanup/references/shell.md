@@ -7,4 +7,4 @@ Commands for the process and container steps of `SKILL.md`.
 - Stop it by its PID: `kill <pid>`, never by name or port.
 - Containers and volumes this session named: `docker rm -f <name>` and `docker volume rm <name>`.
 - Tool config to inventory includes `.claude/launch.json`; evidence includes `test-results/`,
-  `artifacts/` and `.claude/work/<topic>/`.
+  `artifacts/` and the session's scratchpad directory.

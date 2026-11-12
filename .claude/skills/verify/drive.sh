@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Runs feature<TAB>command lines from stdin, one log each, and prints `[i/n] ✔|✘ feature (Ns)`.
+# Usage: drive.sh [log root]. Pass the session's scratchpad; the default is under $TMPDIR.
 set -uo pipefail
 cd "$(git rev-parse --show-toplevel)"
-dir=".claude/work/verify/$(git rev-parse --short HEAD)"
+dir="${1:-${TMPDIR:-/tmp}/claude-verify-$(basename "$PWD")}/$(git rev-parse --short HEAD)"
 mkdir -p "$dir"
 rows=()
 while IFS= read -r row; do [[ "$row" == *$'\t'* ]] && rows+=("$row"); done

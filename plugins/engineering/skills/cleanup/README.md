@@ -38,7 +38,7 @@ The skill then loads as `/engineering:cleanup`.
 - Deletes a remote branch only when you opened its pull request.
 - Keeps unpushed commits, uncommitted edits and things another session made, and says why.
 - Archives the session only when you say "archive" or "close".
-- In `/cleanup repo`, saves every branch to a bundle in `.claude/work/cleanup/` and asks once.
+- In `/cleanup repo`, saves every branch to a bundle in the repo's `.git/cleanup/` folder and asks once. The bundle stays after the session, and git ignores it.
 
 ## Limits
 

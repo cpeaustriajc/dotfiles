@@ -35,7 +35,7 @@
    Before the commit, clean up:
    - `grep` the debug prefix: no tagged log is left.
    - Code that a refuted hypothesis caused is reverted. Every line that is left has evidence.
-   - Throwaway scripts and harnesses are deleted or moved to `.claude/work/`.
+   - Throwaway scripts and harnesses are deleted or moved to the session's scratchpad directory.
    - The commit message names the hypothesis that proved true.
 7. Report: the root cause, the fix, the evidence path, and the command to re-run it. Add the
    case to the feature file's "What tends to break" if it isn't there.

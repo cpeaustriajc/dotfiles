@@ -9,7 +9,8 @@
   the purpose of the change, so it stays blind. Its findings have no proof level; the judge step
   sets one. Source: https://code.claude.com/docs/en/code-review-local.
 - Ask which findings to fix with `AskUserQuestion`.
-- The ignored work folder is `.claude/work/<topic>/`.
+- The work folder is the session's scratchpad directory. A later session cannot find it, so it
+  never reads an old bundle as current.
 - For a quick single-pass review, point me to `/code-review` instead of this skill.
 - The quality pass is the bundled `/simplify` skill (`Skill` tool, `skill: "simplify"`), with
   the diff target as its argument. It runs its own cleanup agents and applies the fixes. Do not

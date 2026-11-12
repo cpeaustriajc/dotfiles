@@ -2,10 +2,10 @@
 
 ## Proof scripts
 
-- Write each proof script in the project's gitignored work folder, `.claude/work/blast-radius/`,
-  never beside the code. Run it from the project root so it imports the code the app ships.
-- Paste the command, its exit code and its output in the writeup. Leave the script there, so the
-  owner can run it again.
+- Write each proof script in the session's scratchpad directory, never beside the code. Run it
+  from the project root so it imports the code the app ships.
+- Paste the script, the command, its exit code and its output in the writeup. The OS empties the
+  scratchpad, so the writeup is the copy the owner runs again.
 - Never edit the change's own files to prove a fact.
 
 ## Sibling skills

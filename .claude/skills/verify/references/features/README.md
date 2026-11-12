@@ -7,4 +7,5 @@ by these paths. **Tests** and **Check** are the commands that prove it.
 |---|---|---|
 | Skills | [skills.md](skills.md) | `plugins/**`, `.claude/skills/**` |
 | Mods | [mods.md](mods.md) | `mods/<mod>/**`, `tests/claude-owned/**` |
+| Home hooks | [home-hooks.md](home-hooks.md) | `home/claude/hooks/**` |
 | Manifests and READMEs | [manifests.md](manifests.md) | `**/.claude-plugin/**`, `README.md`, `**/README.md`, `scripts/check_readmes.py` |
