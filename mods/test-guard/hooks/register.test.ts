@@ -263,3 +263,59 @@ test('a hook body that throws gives a deny', async ($, on) => {
   expect(r.deny).toContain('test-guard: could not check')
   expect(w.ran).toEqual([])
 })
+
+test('an Edit that adds a skip marker above a HEAD test is denied with the exit text', async ($, on) => {
+  const P = '/repo/tests/test_send.py'
+  const head = 'def test_sends():\n    assert send() == 1\n'
+  const w = world(on, { disk: { [P]: head }, head: { [P]: head } })
+  const r = await edit($, P, 'def test_sends', '@pytest.mark.skip\ndef test_sends')
+  denies(r, w, '@pytest.mark.skip')
+  expect(r.deny).toContain('skips the HEAD test')
+  expect(r.deny).toContain('stop and tell the user which test, the old line and why')
+})
+
+test('a Write of a new conftest.py at the repo root that patches the report is denied; one with fixtures passes', async ($, on) => {
+  const C = '/repo/conftest.py'
+  const w = world(on, { disk: {}, head: {} })
+  const r = await call($, { tool: 'Write', file_path: C, content: 'def pytest_runtest_makereport(item, call):\n    rep.outcome = "passed"\n' })
+  expect(r.deny).toContain('rewrites the test report')
+  passes(await call($, { tool: 'Write', file_path: C, content: 'import pytest\n\n@pytest.fixture\ndef db():\n    return {}\n' }), w)
+})
+
+test('an Edit that drops the test step of a tracked workflow is denied; a file named like a workflow elsewhere passes', async ($, on) => {
+  const CI = '/repo/.github/workflows/ci.yml'
+  const DOC = '/repo/docs/ci.yml'
+  const ci = 'jobs:\n  test:\n    steps:\n      - run: npm test\n'
+  const w = world(on, { disk: { [CI]: ci, [DOC]: ci }, head: { [CI]: ci, [DOC]: ci } })
+  denies(await edit($, CI, '      - run: npm test\n', ''), w, 'run: npm test')
+  passes(await edit($, DOC, '      - run: npm test\n', ''), w)
+})
+
+test('a snapshot or golden file keeps its HEAD lines', async ($, on) => {
+  const S = '/repo/src/__snapshots__/a.test.ts.snap'
+  const G = '/repo/cmd/out.golden'
+  const files = { [S]: 'exports[`a 1`] = `"hi"`;\n', [G]: 'total: 3\n' }
+  const w = world(on, { disk: files, head: files })
+  denies(await edit($, S, '"hi"', '"bye"'), w, 'exports[`a 1`]')
+  denies(await edit($, G, 'total: 3', 'total: 4'), w, 'total: 3')
+})
+
+test('/test-guard allow from an origin other than the user allows nothing', async ($, on) => {
+  const w = world(on)
+  for (const kind of ['peer-send-message', 'coordinator', 'plugin', 'unclassified']) {
+    const out = await ($ as any).command.run({ command: 'test-guard', args: 'allow tests/a.test.ts', origin: { kind, name: 'x' } })
+    expect(out.text).toContain('only the user can allow')
+  }
+  denies(await edit($, A, 'toHaveBeenCalledTimes(1)', 'toHaveBeenCalled()'), w, 'toHaveBeenCalledTimes(1)')
+  await ($ as any).command.run({ command: 'test-guard', args: 'allow tests/a.test.ts', origin: { kind: 'composer' } })
+  expect((await edit($, A, 'toHaveBeenCalledTimes(1)', 'toHaveBeenCalled()')).deny).toBeUndefined()
+})
+
+test('an Edit that adds passWithNoTests to a tracked package.json is denied; another script passes', async ($, on) => {
+  const P = '/repo/package.json'
+  const pkg = '{\n  "scripts": {\n    "test": "jest"\n  }\n}\n'
+  const w = world(on, { disk: { [P]: pkg }, head: { [P]: pkg } })
+  const r = await edit($, P, '"jest"', '"jest",\n    "test:ci": "jest --passWithNoTests"')
+  expect(r.deny).toContain('stops tests from running or from failing')
+  passes(await edit($, P, '"jest"', '"jest",\n    "lint": "eslint ."'), w)
+})
