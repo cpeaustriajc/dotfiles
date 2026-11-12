@@ -12,8 +12,8 @@ description: >
 
 Parts fail at 2× zoom while the composition passes. Read first: taste
 (`references/taste.md`); `references/recipes.md` for foliage, grass, metal, cloth, faces,
-windows, lights or water; `references/code-techniques.md` before coding. Harness:
-`references/claude-code.md`. Skip only inapplicable steps, and say so.
+windows, lights or water; `references/code-techniques.md` before coding. Brief research (step 2) to
+a subagent on a cheaper model. Python scripts run as `uv run --with numpy --with scipy --with pillow python scripts/<name>.py` (`node` for `shoot.mjs`); each prints its usage with `--help`. Skip only inapplicable steps, and say so.
 
 1. **Tradition:** two or three named works, plus one reference per hero element
    (`scripts/refs.py`). An era names a subject, not a style (`references/aesthetic.md`).

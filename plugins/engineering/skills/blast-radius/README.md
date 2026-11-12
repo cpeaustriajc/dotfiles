@@ -4,7 +4,7 @@ A typed `/blast-radius` command that finds what a change can break outside its d
 
 ## When to use it
 
-Use it before you merge a change that you do not trust yet, even a small one. A list of callers is not enough: it looks for the breakage that a search does not show.
+Use it before you merge a change that you do not trust yet, even a small one. A list of callers is not enough. It looks for the breakage that a search does not show.
 
 - For a full review of a risky diff, use `review-loop`.
 

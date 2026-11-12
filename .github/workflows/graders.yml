@@ -1,0 +1,32 @@
+# Fails a pull request that changes a grader (scripts/graders_changed.py lists them).
+# pull_request_target runs this file and the script from the base branch, so the PR cannot edit
+# them. The job never checks out or runs the PR's code: it reads the PR's file list from the API.
+# Keep it that way: no PR checkout, no secrets, no write permission.
+name: graders
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, edited]
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  graders:
+    name: graders unchanged
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1, the base branch
+        with:
+          persist-credentials: false
+      - name: Fail on a changed grader
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          CHANGED: ${{ github.event.pull_request.changed_files }}
+        run: |
+          set -euo pipefail
+          # The files API lists at most 3000 files; fail closed above that.
+          if (( CHANGED > 3000 )); then echo "$CHANGED files: too many to list; the owner reviews"; exit 1; fi
+          gh api --paginate "repos/$REPO/pulls/$PR/files" --jq '.[] | .filename, (.previous_filename // empty)' > "$RUNNER_TEMP/files"
+          python3 -I scripts/graders_changed.py < "$RUNNER_TEMP/files"

@@ -7,7 +7,7 @@ description: >
 ---
 
 Act as users who don't read, don't wait and don't do what the designer pictured. Report only.
-Safety, scope and users: `references/users.md`. Launch: `references/claude-code.md`.
+Safety and users: `references/users.md`. Launch: `references/claude-code.md`.
 
 1. Say whether you drive the running app or a design prototype, from my words; ask if unclear
    ("break the redesign" can mean a canvas board).
@@ -20,6 +20,5 @@ Safety, scope and users: `references/users.md`. Launch: `references/claude-code.
 6. Give each user one goal; after each step note expected versus actual, the console and failed
    requests. A finding needs the trigger and the stable end state, not a flash. Getting stuck is a
    finding.
-7. Report per `references/report.md`. A Broken finding without a failing end-to-end test is
-   UNPROVEN. Never call a run clean while a Broken finding is open.
+7. Report per `references/report.md`. A Broken finding without a failing test is UNPROVEN.
 8. Stop. Fix only what I name; file only reproduced findings, via `tickets`.

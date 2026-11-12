@@ -1,41 +1,15 @@
 # App UI rules
 
-For dashboards, admin, settings and other dense screens. Check each rule against the change. A row in the report names the rule it breaks.
+For dashboards, admin, settings and other dense screens. A row names the rule it breaks.
 
-**Spacing and depth**
-- One spacing base, 4 or 8px, with multiples only. Flag off-grid values such as 14px.
-- One depth strategy per product, borders or shadows, and not both on the same surface.
-- Density is decided up front, for example a named control height of 32px dense or 40px roomy, and applied everywhere.
+Sources for type, number, radius, shadow and image details: Vercel's Web Interface Guidelines
+(https://vercel.com/design/guidelines); Jakub Krehel, "Details that make interfaces feel better"
+(https://jakub.kr/writing/details-that-make-interfaces-feel-better); Josh Comeau, "Designing
+Beautiful Shadows in CSS" (https://www.joshwcomeau.com/css/designing-shadows/);
+`Dammyjay93/interface-design` (https://github.com/Dammyjay93/interface-design).
 
-**Radius**
-- A small, medium and large scale: inputs and buttons, cards, modals.
-- Nested radius is concentric: outer radius = inner radius + padding.
-- A child's radius is never larger than its parent's.
-
-**Shadows**
-- Layered, and tinted rather than pure black.
-- One light direction across the product.
-- Offset and blur grow with elevation.
-- A layered shadow is never animated.
-- In dark mode, use a faint light ring instead of a shadow.
-
-**Colour**
-- Colour signals state. Grey carries structure.
-
-**Numbers**
-- `tabular-nums` on numbers that change or sit in columns.
-- Dates, numbers and currency go through `Intl`.
-- Non-breaking spaces in "10 MB" and "⌘ K".
-
-**Text**
-- `text-wrap: balance` on headings and `pretty` on paragraphs.
-- `…` instead of `...`.
-- Flex children that truncate carry `min-width: 0`.
-- Button labels are specific: "Save changes", not "Continue".
-
-**Images and lists**
-- Images have width and height, so nothing shifts as they load.
-- A faint inner outline separates an image from its background.
-- Lists over about 50 items are virtualized.
-
-Sources: https://vercel.com/design/guidelines, https://jakub.kr/writing/details-that-make-interfaces-feel-better, https://www.joshwcomeau.com/css/designing-shadows/, https://github.com/Dammyjay93/interface-design
+Our choices:
+- One 4- or 8-point grid; flag off-grid values such as 14px (grep the CSS for them).
+- One depth strategy per product, borders or shadows, not both on one surface.
+- Density decided up front as a named control height (32px dense, 40px roomy), applied everywhere.
+- Colour signals state; grey carries structure.

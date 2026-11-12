@@ -12,7 +12,7 @@ says how each part lands: a section, a checklist, a field or a link.
 | Outcome | The state that is true when this is done, from the user's side. One sentence, not a layer-by-layer task list. |
 | Checks | 3–5 observable end states, as the tracker's checklist. Every requirement the item meets is quoted with its number (R3), and at least one is a **You see** line: the screen, message or state that proves it, how to reach it, and who proves it (`test`, `eye` or `engineer`). No click-by-click steps, no "record only" measurements, no "deliberately absent" lists. |
 | Out of scope | 0–3 boundaries that prevent a likely misunderstanding. Leave the part out if there are none. |
-| Budget | Estimate: low–high of the context budget, and its largest part. Proof: the pages, widths and crops, and the most fix rounds. Stop: past the limit, keep what passes, write a hand-over note on the item, and stop. Proof with no limit has no upper estimate. |
+| Budget | Estimate (low–high, largest part), proof limit and stop limit, per `sizing.md`. |
 
 - **Each check is reachable.** It names what puts the app in its starting state: the account type,
   the kind of data ("a cart with a premium name", not "a domain"), the test switch, the payment
@@ -38,13 +38,13 @@ says how each part lands: a section, a checklist, a field or a link.
   same input: "the same name shows the same price on the shortlist, in the cart and at checkout".
 - **Bounded reads.** The item states the measured facts it needs (sizes, colours, copy). It
   links a large reference only as a narrow crop or excerpt.
-- **Whole body:** under about 1,500 characters, a quick sign only; the estimate decides the size.
-  Longer means split it. Quoted requirement lines do not count; the tree check subtracts them.
-- **Behaviour, not file paths or code**: paths go stale. A prototype's snippet that pins a
-  decision may be inlined, marked as from a prototype.
+- **Whole body:** `check_tree.py` enforces the 1,500-character limit and at most 5 checks; the
+  estimate in `sizing.md` decides the size.
+- **Behaviour, not file paths or code**, and plain words (`../shape/references/top-down.md`). A
+  prototype's snippet that pins a decision may be inlined, marked as from a prototype.
 - **An item is self-contained**: someone who never saw the conversation can pick it up from the
   item and the spec it links. It settles every design call, so a cheaper builder does not make one
   and the result loses no quality.
-- **No "As a … I want … so that" line** unless the product owner asks for it. That sentence is
-  where mechanism and timing tend to sneak in.
+- **No "As a … I want … so that" line** unless the product owner asks: mechanism and timing
+  sneak in there.
 

@@ -12,7 +12,7 @@ base branch and how many to run at a time.
    `SKILL.md` (`references/ticket.md`). List each item that is not ready as a gate.
 3. **Start.** Start one worker per frontier item, up to the adapter's cap. The brief's first
    line is `/implement <item link>`. The brief names the item's base branch.
-4. **Check.** A worker's report is a claim. Read its PR's verdict table. Rerun one check on its
+4. **Check.** Trust but verify: read the PR's verdict table and rerun one check on the worker's
    branch.
 5. **Advance.** When a PR merges or a stack base is pushed, recompute the frontier and start its
    new items. Never start an item whose blocker has no pushed branch: it builds on code that is

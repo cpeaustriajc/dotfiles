@@ -2,15 +2,17 @@
 
 usage: uv run --with pillow python compare.py OUT.png REF.png[:x,y,w,h] MINE.png[:x,y,w,h] [--height 700]
 
-Boxes are in each image's own pixels. Look at the result with the Read tool and name every
+Boxes are in each image's own pixels. Look at the result and name every
 difference in structure (edges, values, shapes), not just colour.
 """
 import argparse
 from PIL import Image, ImageDraw
 
-ap = argparse.ArgumentParser()
-ap.add_argument('out'); ap.add_argument('ref'); ap.add_argument('mine')
-ap.add_argument('--height', type=int, default=700)
+ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+ap.add_argument('out', help='PNG to write')
+ap.add_argument('ref', help='reference image, optionally :x,y,w,h in its own pixels')
+ap.add_argument('mine', help='your render, optionally :x,y,w,h in its own pixels')
+ap.add_argument('--height', type=int, default=700, help='height both sides are scaled to')
 a = ap.parse_args()
 
 

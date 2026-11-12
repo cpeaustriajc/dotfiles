@@ -20,8 +20,8 @@ tense: "Buyers find and buy a domain in one visit".>
 F1. <Outcome in one line.> → <project, or "not yet shaped">
 
 ## Sequence
-<The order features are shaped and built, and what each waits on. Start with the thinnest
-version of the whole product that works end to end and answers the riskiest unknown.>
+<The order features are shaped and built, and what each waits on. Start with a walking
+skeleton that answers the riskiest unknown.>
 
 ## Not yet specified
 - <What is surely coming but can't yet be stated sharply.>
@@ -30,6 +30,7 @@ version of the whole product that works end to end and answers the riskiest unkn
 - <What this product deliberately is not.>
 ```
 
+- **Confirmed** needs Worth it and Out of scope filled; `check_tree.py` rejects it otherwise.
 - **Features are outcomes**, one line each, not screens or components. Numbers never change; a
   dropped feature is struck through, so projects citing it still resolve.
 - **Feature or not yet specified?** The test is whether it can be stated sharply now, not

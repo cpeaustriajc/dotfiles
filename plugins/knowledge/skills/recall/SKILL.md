@@ -6,7 +6,7 @@ description: >
   transcripts, git and PRs.
 ---
 
-Commands: `references/claude-code.md` (harness) and `references/github.md` (code host).
+Commands: `references/claude-code.md`.
 
 1. Scope: this project, the last 7 days, my topic. A window I name replaces the 7 days; the
    brief's first line states the scope and any cut to it.

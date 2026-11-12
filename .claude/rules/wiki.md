@@ -22,7 +22,7 @@ to learn what the thing is, whether they need it, and how to turn it on.
   exist in that source today. Never write a command you have not seen there or run.
 - Do not copy the steps of `SKILL.md` into the README. Say what happens in terms the reader
   sees (files written, questions asked, actions blocked), then link to `SKILL.md` for the method.
-- A value that changes often (a cap, a version, a count) stays in its source. Name the file.
+- A value that changes often (a cap, a version, a count) has a single source of truth. Name the file.
 
 ## Structure
 
@@ -48,11 +48,8 @@ Keep the README under 100 lines. Use `###` headings inside a section only when i
 - A step in a numbered list: at most 20 words, one instruction, imperative ("Run", "Open").
 - Any other sentence, list item or table cell: at most 25 words. A paragraph: at most 6
   sentences, about one topic.
-- Active voice, present tense, "you" for the reader. Keep the articles ("the", "a").
-- Put a condition before the instruction: "If the hook denies a write, read the toast."
-- Use common words. Define a dotfiles or Claude Code term at its first use, or link it.
-- One word keeps one meaning in the whole README: do not change between "mod", "plugin" and
-  "hook" for the same thing. No noun cluster longer than three words.
+- Address the reader as "you". Keep the articles ("the", "a").
+- Define a dotfiles or Claude Code term at its first use, or link it.
 - No abbreviations such as "e.g." or "i.e.". No filler ("simply", "just", "powerful",
   "seamless"), no hedging, no marketing tone, no emoji.
 - Lead each heading, bullet and paragraph with the word that carries the information.

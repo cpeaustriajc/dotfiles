@@ -7,14 +7,15 @@ description: >
 ---
 
 "Clean up" is the go: remove each proven item without asking; ask only in the repo sweep.
-Commands: `references/git.md`, `references/shell.md`; harness: `references/claude-desktop.md`
+Commands: `references/git.md`; harness: `references/claude-desktop.md`
 or `references/claude-code.md`. `/cleanup repo`: `references/repo-sweep.md` with
 `references/checks.md`.
 
 1. **Inventory** what this session made, per `references/checks.md`. An item you cannot tie to
    this session is Keep: another session may own it.
 2. **Prove** each item with a live check from `references/checks.md`, never from memory.
-3. **Remove** in the order in `references/checks.md`, processes by PID. Never force a delete.
+3. **Remove** in the order in `references/checks.md`, processes by PID. Never force a delete: a
+   forced delete is how unpushed work gets lost.
 4. **Keep** each item that failed, with a one-line reason: unpushed commits (count), uncommitted
    edits, an open PR, not this session's.
 5. **Report** before archiving: Removed (each with the output that proves it, and size freed),

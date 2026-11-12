@@ -15,7 +15,7 @@ memory-lint checks each memory write. If the note holds one of these, the mod de
 /plugin install memory-lint@dotfiles
 ```
 
-To see that it is on, run `claude plugin list` and look for `memory-lint`. The mod is optional: `dotfiles` does not install it.
+To see that it is on, run `claude plugin list` and look for `memory-lint`. The mod is optional. `dotfiles` does not install it.
 
 ## Example
 
@@ -41,7 +41,7 @@ The mod checks the Write and Edit tools on Markdown files in the memory director
 | Dated status | `since 2026-09-04`, `as of 2026` |
 | Size | a topic file or a `MEMORY.md` line over a set length |
 
-The size limits are in `hooks/register.ts`. A Write is checked whole, without its frontmatter. An Edit is checked only on the lines it adds, so removing or shortening memory always passes.
+The size limits are in `hooks/register.ts`. The mod checks a Write whole, without its frontmatter. It checks an Edit only on the lines it adds, so removing or shortening memory always passes.
 
 The default memory directory is `~/.claude/projects/<project>/memory`. A file outside the memory directory passes.
 
@@ -59,7 +59,7 @@ To turn the mod off, run `claude plugin disable memory-lint@dotfiles`.
 
 - It checks word patterns. A harmless note can match, and a stale note in other words can pass.
 - It checks the Write and Edit tools only. A shell command that writes a memory file passes.
-- If the check itself throws an error, the write passes.
+- The check fails open. If it throws an error, the write passes.
 
 ## More
 

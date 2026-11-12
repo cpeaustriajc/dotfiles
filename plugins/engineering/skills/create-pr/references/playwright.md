@@ -1,12 +1,8 @@
 # Playwright
 
-Mechanics for the hero-script video in `evidence.md`. Read the current Playwright docs when a
-detail matters, since these change.
+Mechanics for the hero-script video in `evidence.md`; read the current Playwright docs for the
+`screencast` API (`show_actions`, `show_chapter`).
 
-- **Click and key marks**: `screencast.show_actions(cursor="pointer", style={"title": "display:
-  none", "point": "width: 28px; height: 28px; border: 3px solid red; border-radius: 50%"})`, plus
-  a key label of your own. Playwright draws no click mark unless `point` is styled.
-- **Pace**: the `duration` option of `show_actions` pauses before each action.
-- **Chapter cards**: `screencast.show_chapter(title, description=...)`.
-- If `screencast` is missing, the installed Playwright is older than these calls: upgrade it or
-  use the project's own helper.
+- Playwright draws no click mark unless `show_actions` is given a styled `point`. The repo's
+  style: `cursor="pointer"`, `title` hidden, `point` a 28px circle with a 3px red border. Add a key
+  label of your own.

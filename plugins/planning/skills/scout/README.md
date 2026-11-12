@@ -8,12 +8,12 @@ Claude loads this skill when you say "find me an idea", "what should I build", "
 
 It guards against four failures:
 
-- An idea the model labs will ship next.
-- A problem nobody pays to solve.
-- A product with no way to reach a buyer.
-- A tool a buyer builds alone in a weekend.
+- A model lab ships the idea next.
+- Nobody pays to solve the problem.
+- The product has no way to reach a buyer.
+- A buyer builds the tool alone in a weekend.
 
-Do not use it to grill an idea you already have: use `vision`.
+Do not use it to grill an idea you already have. Use `vision`.
 
 ## Example
 

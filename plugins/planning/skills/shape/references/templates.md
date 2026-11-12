@@ -39,12 +39,14 @@ R2. <An empty, error or edge state, stated the same way.>
 
 ## Out of scope
 
-- <What was asked for or obvious, and deliberately left out.>
+- <What was asked for or obvious, and deliberately left out. Not empty once Confirmed.>
 
 ## Open questions
 
-- <Must be empty before the spec is Confirmed.>
+- <Empty once Confirmed.>
 ```
+
+`scripts/check_tree.py` rejects a Confirmed spec that breaks either.
 
 - **Requirements are statements, not tasks.** Each says who does what and what they see, for
   the empty, error, slow and edge states too. None names a data source, vendor, endpoint, model
@@ -54,10 +56,8 @@ R2. <An empty, error or edge state, stated the same way.>
   contract for gets a probe of that system first; the answer often removes the dependency.
 - **Requirements** are numbered once and never renumbered; a dropped one is struck through, so
   work items that cite it still resolve. A long list is fine: it should cover the feature.
-- **Out of scope** is never empty on a Confirmed spec. The things refused are the most useful
-  lines on the page.
-- The spec cites no file paths or code; they go stale. A prototype's snippet that pins a decision
-  (a state machine, a schema) may be inlined, marked as from a prototype.
+- No file paths or code (`top-down.md`, Text others read). A prototype's snippet that pins a
+  decision (a state machine, a schema) may be inlined, marked as from a prototype.
 
 ## Project
 
@@ -82,9 +82,8 @@ Dependencies:
 Description:
 ```
 
-The description uses a neutral present tense ("Buyers save names to a shortlist", not "will
-let"), so it stays true as the project moves. It is a small, timeless spec of how the project works. It stays useful as the project
-moves, so it holds no status narration, completed work, dated updates, migration history,
+The description is evergreen: a neutral present tense ("Buyers save names to a shortlist", not
+"will let") and no status narration, completed work, dated updates, migration history,
 temporary blockers or next steps; those go in status updates or native fields.
 
 ```markdown
@@ -148,6 +147,7 @@ Risks:
 Next:
 ```
 
-Health is the project lead's judgement: if the facts given don't settle it, propose one and say it needs their confirmation. Only rate health when an update was asked for. Read what changed since the previous update first. Report changed scope, dates, lead, dependencies
-or phases. Counting finished items does not replace the lead's judgement: a project with most items
-done can still be at risk if the remaining one is blocked on another team.
+Health is the project lead's judgement: propose one and say it needs their confirmation. Rate it
+only when an update was asked for. Read what changed since the previous update first, and report
+changed scope, dates, lead, dependencies or phases. Finished-item counts do not replace the lead's
+judgement: most items done can still be at risk if the remaining one is blocked on another team.

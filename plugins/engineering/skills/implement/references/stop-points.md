@@ -40,7 +40,7 @@ The code host checks required CI and branch protection. The gate also needs, on 
 - each review-bot finding is fixed, or answered on the PR with a reason;
 - no human review requests changes, and the PR is not a draft.
 
-Never bypass branch protection (`--admin` or the like).
+Never bypass branch protection (`--admin` or the like): the gate rests on it.
 
 ## Ask
 

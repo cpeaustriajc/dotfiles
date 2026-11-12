@@ -52,6 +52,5 @@ The skill then loads as `/engineering:cleanup`.
 - [references/checks.md](references/checks.md): what to list, how to prove each item safe, and the removal order.
 - [references/repo-sweep.md](references/repo-sweep.md): the `/cleanup repo` sweep and its commands.
 - [references/git.md](references/git.md): the git and `gh` commands for branches, stashes and config edits.
-- [references/shell.md](references/shell.md): the commands for processes and Docker containers.
 - [references/claude-desktop.md](references/claude-desktop.md): archive and worktree tools in the desktop app.
-- [references/claude-code.md](references/claude-code.md): the terminal.
+- [references/claude-code.md](references/claude-code.md): how the skill runs in the terminal.

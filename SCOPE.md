@@ -1,7 +1,7 @@
 # Scope
 
 dotfiles is a skill stack for one developer. Its skills hold methods that work on any tool. A
-fan-out runs each agent on the cheapest model that can do its job: see
+fan-out runs each agent on the cheapest model that can do its job. See
 [models/README.md](models/README.md).
 
 ## Success
@@ -15,8 +15,8 @@ harness where the user runs agents:
 
 ## Rejected
 
-An idea goes on this list only with a reason. If you change your mind later, edit its line. Do
-not add a new dated line.
+An idea goes on this list only with a reason. Keep the list current, and edit each
+line in place.
 
 - **Skill-fire log mod**: `/skill-doctor` already reports the uses, the last-used date and the
   7-day tokens of each skill.

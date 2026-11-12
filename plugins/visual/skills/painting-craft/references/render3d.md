@@ -1,6 +1,6 @@
 # render3d: the numpy figure renderer
 
-`scripts/render3d.py` renders a figure in 3D and returns an RGBA image. A scene file embeds that image in its SVG. Use it for any figure whose pose foreshortens: a seated or turned body, limbs toward the viewer, armour or cloth that has to wrap a body. Flat 2D paths can't fake that. Figures drawn in 2D in such poses drew "the proportions are off" in review. `scripts/knight.py` (a seated knight in plate) is the worked example: copy both files into the project's art folder and build a new figure module on its structure. They need numpy and scipy (`uv run --with numpy --with scipy --with pillow python …`).
+`scripts/render3d.py` renders a figure in 3D and returns an RGBA image. A scene file embeds that image in its SVG. Use it for any figure whose pose foreshortens: a seated or turned body, limbs toward the viewer, armour or cloth that has to wrap a body. Flat 2D paths can't fake that. `scripts/knight.py` (a seated knight in plate; measurements in `worked-example.md`) is the worked example: copy both files into the project's art folder and build a new figure module on its structure. They need numpy and scipy (`uv run --with numpy --with scipy --with pillow python …`).
 
 ## Contents
 - Conventions
@@ -17,7 +17,7 @@
 - Units are centimetres. World axes are x right, y down, z toward the viewer. That is a left-handed frame, so a cross product points the opposite way from what you'd guess. Build body frames from explicit vectors, as knight.py does. Its `F_` is forward, `R_` is his right and `U_` is up. `B(f, u, r)` and `Tp(h, f, r)` map body-frame coordinates to world.
 - The camera is orthographic and pitched down by `PITCH` (14°). `project(P)` returns screen xy (cm) and depth (larger is nearer). `VIEW` is the direction toward the camera.
 - `SUN` is the light direction. Set it to the painted scene's light for every new figure: its default in render3d.py (from the right, slightly toward the viewer) fits only the knight.py example.
-- A figure's origin is its hip midpoint. The scene file pins that origin to a scene point (a constant such as `SCN`) at `S_H` scene units per cm. Real proportions come from real measurements: thigh 44, shin 42, upper arm 33, forearm 26, hip joint to shoulder joint about 50, for a 180 cm man.
+- A figure's origin is its hip midpoint. The scene file pins that origin to a scene point (a constant such as `SCN`) at `S_H` scene units per cm. For a 180 cm man: thigh 44, shin 42, upper arm 33, forearm 26, hip joint to shoulder joint about 50.
 
 ## Building a mesh
 
@@ -41,7 +41,7 @@ Materials are registered with `@mat` in render3d.py and take `ctx` (P, N, uv, su
 - `steel(tint, gain, base, rough, spec)` reflects the scene through `env(R)`. `env()` is a hand-made environment: canopy above, trunk to the left, sunlit fields to the right, meadow below. **Rewrite `env()` for each era.** Steel only looks right when it reflects the world it stands in, such as an ink-wash void, neon streets or an alien sky.
 - `cloth(albedo, shade)` uses wrap-diffuse with sky and ground ambient.
 - `leather(albedo, shade, gloss)` is cloth with a sheen.
-- `mail(tint, pitch, ring, wire, gap)` draws procedural rings from uv. Make rings big enough (pitch about 0.86 cm) and contrasty, or the stylization pass smears them into a flat grey slab. The user zoomed in and caught exactly that.
+- `mail(tint, pitch, ring, wire, gap)` draws procedural rings from uv. Make rings big enough (pitch about 0.86 cm) and contrasty, or the stylization pass smears them into a flat grey slab.
 - `void()` is near-black. Put it inside helmets so slits and breaths read as dark.
 - `cloth`, `void`, `mail` and `leather` are two-sided (the `TWO` set). Steel backfaces render as dark interiors.
 
@@ -55,7 +55,7 @@ Materials are registered with `@mat` in render3d.py and take `ctx` (P, N, uv, su
 
 Recipes that worked:
 - **Trace, then relax.** Build `X0` by marching each column out from its pin and calling `push_out` at every step. Follow the surface when the column hits something; otherwise drift toward gravity. Then run a short sim with high friction (0.97) and full bending. Starting from a hanging pose and animating the legs into place let the thighs pass through the cloth.
-- **Colliders must match what the viewer sees.** The aventail slid under a padded shoulder until the shoulder's own ellipsoid became a collider.
+- **Colliders must match what the viewer sees.** Add the padded shoulder's own ellipsoid as a collider, or the aventail slides under it.
 - **Layer cloth along `VIEW`, not along the normal.** For mail under a dagged skirt, offset the mail backward along `VIEW`. Draped normals flip at folds and would put the mail on top.
 - **Read physics as a design choice.** With a knee raised 45°, a skirt cannot climb the thigh; it covers the hip and falls aside. Accept that, or change the pose, instead of fighting the sim.
 
@@ -67,11 +67,7 @@ Head pose: `head_frame` has yaw, droop and loll. A sleeping head turns with the 
 
 ## Rendering and embedding
 
-`render(mesh, ppcm, origin, size, ss=2, lines=.85, light=None)` returns `(premultiplied rgb, alpha, info)`. It:
-- supersamples by `ss` and z-buffers the triangles
-- applies cuts and bumps
-- lights with a shadow map plus screen-space occlusion, and runs the optional `light(P)` multiplier (leaf dapples)
-- draws ink outlines at object and depth edges
+`render(mesh, ppcm, origin, size, ss=2, lines=.85, light=None)` returns `(premultiplied rgb, alpha, info)`: z-buffered, shadow map plus screen-space occlusion, ink outlines at object and depth edges; `light(P)` is an optional multiplier (leaf dapples).
 
 `ground_shadow(info, ppcm, origin, size, G)` gives the alpha of the cast and contact shadow on the ground plane.
 
@@ -83,14 +79,14 @@ Render at device resolution: `ppcm = S_H * ZOOM * SCALE`, using the scene file's
 
 ## Debugging
 
-- `scripts/angles.py` renders any mesh builder from three yaw angles, for example `uv run --with numpy --with scipy --with pillow python <skill>/scripts/angles.py --module knight --code 'mesh = build()' --out angles.png`. `--module` is a module in the folder given by `--art` (where you copied render3d.py), and `--code` runs in its namespace and must assign `mesh`. Use it for cloth that seems to vanish, armour that clips, or a helmet you want to check against front, three-quarter and side references.
+- `scripts/angles.py --help` renders any mesh builder from several yaw angles.
 - Preview at final scale: render the scene once with the figure stubbed out (swap the figure's layer function for one returning `''`), composite the figure render over it, and crop. One full pipeline run costs about a minute. A preview costs about five seconds.
 - Assume the viewer zooms in on the final image. Check a zoomed crop of the stylized output, not only the raw render.
 
 ## Pitfalls that cost hours
 
 - **Normal signs.** Flipping per vertex (`np.sign(..., keepdims=True)`) breaks orientation. Use one global sign per sheet.
-- **Angle origins.** Any uv-dependent cut or bump on a tube has to use the tube's angle origin, which runs from -π to π starting at `hint`. A mismatch put a gauntlet's cuff point on the wrong side and sabaton lames on the sole.
+- **Angle origins.** Any uv-dependent cut or bump on a tube has to use the tube's angle origin, which runs from -π to π starting at `hint`. A mismatch puts a gauntlet's cuff point on the wrong side and sabaton lames on the sole.
 - **Small triangles.** The rasterizer buckets triangles by bounding box, so keep grids fine enough that triangles stay under about 16 px. Huge triangles still work, only slowly.
 - **Skin inside armour.** If the cloth sleeve's radius is larger than the plate over it, the plate disappears. Keep cloth under plate radii where they overlap.
 - **Cloth under an IK limb.** When the hips move, re-trace the skirt; the old drape won't follow.

@@ -5,7 +5,7 @@ This repo holds CJ's home folder config and CJ's skills and mods for coding agen
 - The home folder config is a [home-manager](https://nix-community.github.io/home-manager/)
   config. [`flake.nix`](flake.nix) and [`home/`](home/README.md) put the Claude Code, Codex,
   zsh, nvim and tmux config in `~`.
-- The skills are in `plugins/`, in seven plugins. The mods are in `mods/`.
+- The skills are in `plugins/`, in five plugins. The mods are in `mods/`.
   [`marketplace.json`](.claude-plugin/marketplace.json) lists both for Claude Code.
 
 A skill is a method that an agent reads when a task needs it. Each skill must work in each
@@ -24,21 +24,23 @@ set of hooks for Claude Code only.
 
 ## Install
 
-The skills ship in seven plugins. Install only the plugins that you need.
+The skills ship in five plugins. Install only the plugins that you need.
 
 | Plugin | What it is for | Skills |
 |---|---|---|
 | `design` | Sign off UI work and motion. Check it against the design, add missing microinteractions, and make launch videos. | ui-polish, microinteraction, launch-video |
 | `engineering` | Prove the work in the real app with unattended builds and loops, user-style testing, change risk, review and PRs. | break-it, review-loop, commit, create-pr, implement, blast-radius, cleanup |
 | `planning` | Turn an idea into tickets. Find and test ideas, write the spec, cut thin slices, and triage them in any tracker. | vision, shape, tickets, grill, scout, triage |
-| `knowledge` | Keep what the team learns: a decision log, research pages, lessons from past sessions, and a recap of recent work. | project-knowledge, hone, recall |
+| `knowledge` | Keep what the team learns: a decision log, research pages, lessons from past sessions, and a recap of recent work. | dossier, hone, recall |
 | `visual` | Paint scenes in code to a gallery standard. | painting-craft |
 
-The engineering principles are prompts you paste, not a plugin: see [Prompts](#prompts).
+No plugin holds the engineering principles. They are prompts that you paste into a session, in
+[Prompts](#prompts).
 
 ### Prompts
 
-Engineering principles and two rewrites, as prompts you paste into a session. Each link opens the prompt, ready to copy.
+This table lists the engineering principles and two rewrite prompts. Each link opens a prompt
+that you can copy into a session.
 
 | Prompt | What it finds |
 |---|---|
@@ -64,8 +66,8 @@ Engineering principles and two rewrites, as prompts you paste into a session. Ea
 | [Sequence Verifiable Units](PROMPTS.md#sequence-verifiable-units) | Checks against a stale base, and commit orders that prove nothing. |
 | [Find Implicit Invariants](PROMPTS.md#find-implicit-invariants) | Every invariant the code assumes but never enforces, with the path that breaks it. |
 | [Follow the Dependencies](PROMPTS.md#follow-the-dependencies) | Code bolted on against the dependency direction, and the simpler shape the dependencies imply. |
-| [Re-pitch](PROMPTS.md#re-pitch) | Rewrite: your last message again, with the missing context first and one diagram. |
-| [Unslop](PROMPTS.md#unslop) | Rewrite: the same text without the tells of AI-written prose. |
+| [Re-pitch](PROMPTS.md#re-pitch) | A rewrite of your last message, with the missing context first and one diagram. |
+| [Unslop](PROMPTS.md#unslop) | A rewrite of the same text without the tells of AI-written prose. |
 
 ### Claude Code
 
@@ -122,7 +124,7 @@ only when you call it by name.
 | [grill](plugins/planning/skills/grill/README.md) | planning | Sizes a change, then asks you rounds of questions with a recommended answer each, until no decision is open. |
 | [scout](plugins/planning/skills/scout/README.md) | planning | Finds an idea worth building, or checks a niche, when apps are cheap to copy. It gives the best idea to `vision`. |
 | [triage](plugins/planning/skills/triage/README.md) | planning | Sets one state on an issue, for "what needs my attention" or "can an agent take this". Writes an agent brief. |
-| [project-knowledge](plugins/knowledge/skills/project-knowledge/README.md) | knowledge | Keeps decision and research pages where the team writes, such as a GitHub wiki, Notion, Obsidian or Confluence. |
+| [dossier](plugins/knowledge/skills/dossier/README.md) | knowledge | Keeps decision and research pages where the team writes, such as a GitHub wiki, Notion, Obsidian or Confluence. |
 | [hone](plugins/knowledge/skills/hone/README.md) | knowledge | Finds your repeated corrections in the transcripts on this machine, and proposes where each lesson goes. |
 | [recall](plugins/knowledge/skills/recall/README.md) | knowledge | Gives a brief of recent work from transcripts, git and PRs. |
 | [painting-craft](plugins/visual/skills/painting-craft/README.md) | visual | Draws and paints in code to a gallery standard, with a screenshot review loop. It is not for UI icons, charts or diagrams. |
@@ -165,12 +167,12 @@ three values with broken edges. The original skill piled up round blobs.
 
 ![Night street, 2x crop of a tree: before and after](docs/images/street-zoom.jpg)
 
-These changes to painting-craft made the difference:
+These changes to painting-craft made the right-hand pictures better:
 
 - Build recipes for the parts that fail up close, in
   [`references/recipes.md`](plugins/visual/skills/painting-craft/references/recipes.md).
-- A study of each hero element against fetched public-domain references before the composition,
-  with `scripts/refs.py` and `scripts/compare.py`.
+- Before the composition, a study of each main subject against public-domain references that
+  `scripts/refs.py` fetches and `scripts/compare.py` compares.
 - The bundled 3D figure renderer.
 - A paint pass that unifies the painted styles, with `scripts/paintpass.py`.
 - Delivery at twice the display size.

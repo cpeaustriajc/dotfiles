@@ -1,6 +1,7 @@
 # Method
 
-The detail behind steps 1 to 5 of `SKILL.md`.
+Adapted from pstack's `blast-radius` (Lauren Tan, MIT; see `LICENSE`). Take from it: the one fact a
+change is safe because of, proven by running real code.
 
 ## Proof levels
 
@@ -13,27 +14,8 @@ stopped.
 4. You ran it: a script or test that calls the real code and fails loud if you're wrong.
 5. You reproduced it in the running app.
 
-Level 4 is usually one small script that imports the same library the app ships and calls the
-exact function you're worried about. Paste its output.
-
-## Read the change (step 1)
-
-The diff, and the symbols it adds, changes and deletes.
-
-## The one fact (step 2)
-
-Most changes that look risky are safe because of a single fact, like "this call only drops
-already-dead cache entries and does nothing else". Spend your time here, not on a long list of
-maybes.
-
-## Where grep stops (step 3)
-
-- The source of the library you call, at its pinned version, and any local patch.
-- When things run: microtasks, unmount and teardown, framework lifecycles (Solid versus React).
-- What a symbol search misses: the JSON an API returns, a DB column, a wire format, another
-  language reading the same bytes, a feature flag, code three hops downstream.
-
-## Each risk (step 4)
+Level 4 is usually one small script that imports the library the app ships and calls the exact
+function you're worried about. Paste its output.
 
 Keep the risks you confirmed; list the ones you checked and cleared separately. A search that
 finds nothing is still an answer.

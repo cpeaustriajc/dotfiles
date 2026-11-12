@@ -1,12 +1,12 @@
 # test-guard
 
-A mod (a plugin that adds a hook to Claude Code) that stops Claude from making a failing test pass by changing the test. Claude can add tests, but it cannot change or remove a line that a test file has at `HEAD`.
+A mod (a plugin that adds a hook to Claude Code) that stops Claude from passing a failing test by changing the test or runner. Claude can add tests, but it cannot change or remove a line that a test file has at `HEAD`.
 
 ## Why
 
-An agent with a red test sometimes changes the test instead of the code. It turns `toHaveBeenCalledTimes(1)` into `toHaveBeenCalled()`, and the test goes green while the bug stays.
+An agent with a red test sometimes games it instead of fixing the code (reward hacking). It turns `toHaveBeenCalledTimes(1)` into `toHaveBeenCalled()`, skips the test, or patches the pytest report. The test goes green while the bug stays.
 
-test-guard denies that edit and tells Claude to add a test or to explain the change to you. Only you can let one test file change.
+test-guard denies that edit and tells Claude to fix the code, or to stop and explain to you which test is wrong. Only you can let one test file change.
 
 ## Install
 
@@ -15,33 +15,47 @@ test-guard denies that edit and tells Claude to add a test or to explain the cha
 /plugin install test-guard@dotfiles
 ```
 
-To see that it is on, run `claude plugin list` and look for `test-guard`. The mod is optional: `dotfiles` does not install it.
+To see that it is on, run `claude plugin list` and look for `test-guard`. The mod is optional. `dotfiles` does not install it.
 
 ## Example
 
 1. A test fails, and Claude edits `tests/notify.test.ts` to change `toHaveBeenCalledTimes(1)` to `toHaveBeenCalled()`.
 2. The hook reads the file at `HEAD` with `git show` and finds that the old line is gone.
 3. The hook denies the edit. Claude reads: "test-guard: this changes or removes a line that tests/notify.test.ts has at HEAD".
-4. Claude fixes the code, or tells you which test is wrong and why.
+4. Claude fixes the code, or stops and tells you which test, the old line and why.
 5. If you agree, run `/test-guard allow tests/notify.test.ts`. Claude can then change that file for the rest of the session.
 
 ## What it does
 
-The hook checks every Edit, MultiEdit and Write to a test file. A test file is a name like `*.test.*`, `*.spec.*`, `test_*.py`, `*_test.py` or `*_test.go`. A file in a `test`, `tests`, `__tests__`, `e2e` or `__snapshots__` folder inside the repository is also a test file. The hook asks git for the path from the repository root, so a project in `~/e2e/demo/` does not make every file a test file.
+The hook checks every Edit, MultiEdit and Write to a guarded file:
+
+- A test file: `*.test.*`, `*.spec.*`, `test_*.py`, `test_*.sh`, `*_test.py`, `*_test.go`, `conftest.py`, `*.snap` or `*.golden`.
+- A file in a `test`, `tests`, `__tests__`, `e2e`, `__snapshots__` or `testdata` folder.
+- Runner and CI config: `jest`, `vitest` and `playwright` config files, `pytest.ini`, `.pre-commit-config.yaml`, and the `.github/workflows` and `.husky` folders.
+- A shared file: `package.json`, `pyproject.toml`, `setup.cfg` or `tox.ini`.
+
+The hook asks git for the path from the repository root, so a project in `~/e2e/demo/` does not make every file a test file.
 
 | Case | Decision |
 |---|---|
-| The file is not a test file | Pass. |
-| The test file is new or not in `HEAD` | Pass. |
-| The folder is not in a git repository, or the repository has no commit | Pass. |
-| Every non-blank `HEAD` line stays, in the same order | Pass: only additions. |
-| A `HEAD` line changes or goes away | Deny. The text names the first such line and `/test-guard allow`. |
+| The file is not guarded, or the folder has no git repository or commit | Pass. |
+| A test or config file keeps every non-blank `HEAD` line, in the same order | Pass. |
+| A `HEAD` line of a test or config file changes, goes away, or moves into a block comment | Deny. |
+| An added skip marker, skip call or bare `return` applies to a `HEAD` test | Deny. On a new test it passes. |
+| A test file with `HEAD` tests gets `.only`, `describe.skip`, `pytestmark` skip, `@ts-nocheck` or `if (false)` | Deny. |
+| A file with a test name gets `sys.exit(0)`, `raise SystemExit` (bare, `()`, `(0)` or `(None)`), `exit()`, `quit()`, `os._exit(0)`, `process.exit()` or `pytest.exit` | Deny, in a new file too. |
+| A test file sets a report `outcome` to passed, clears `longrepr`, or patches `TestReport` | Deny, in a new file too. |
+| A test file adds `__eq__` that returns `True`, or `asymmetricMatch` that returns `true` | Deny, in a new file too. |
+| A tracked config or shared file gets `passWithNoTests`, `--deselect` or `continue-on-error: true` | Deny. Config also denies `\|\| true`. |
 | You ran `/test-guard allow <path>` for this file in this session | Pass. |
-| `git show` fails for another reason, or the hook fails | Deny with "could not check". |
+| `git show` fails for another reason, or the hook fails | Fail closed. Deny with "could not check". |
+| A turn ends, and a `HEAD` line of a tracked test or config file is gone | Block the stop once and write a log line. |
 
-A line that Claude added in this session is not in `HEAD`, so Claude can change it.
+Each deny tells Claude to fix the code or add a test. If a test contradicts the spec, Claude must stop and tell you which test, the old line and why.
 
-`/test-guard allow <path>` allows one file until the session ends. `/test-guard` alone lists the allowed files. Claude has no tool to allow a file.
+The turn check covers changes that Bash, an MCP tool or a subagent made. At the start of each turn, the hook notes `HEAD` and the lines already gone, so your own edits are not blamed on Claude.
+
+`/test-guard allow <path>` allows one file until the session ends. `/test-guard` alone lists the allowed files. The hook takes `allow` only when you type it. A model, a peer session or a coordinator gets a refusal.
 
 ## Settings
 
@@ -51,15 +65,21 @@ To turn the mod off, run `claude plugin disable test-guard@dotfiles`.
 
 ## Limits
 
-- It checks only Edit, MultiEdit and Write. A Bash command such as `sed -i` or `jest -u` passes, because Claude Code decides Bash.
+- It never denies Bash, because Claude Code decides Bash. A `sed -i`, `rm` or `jest -u` runs, and the turn check reports it at the turn's end.
+- The turn check compares with the `HEAD` of the turn's start. A weaker test committed in an earlier turn passes; the base-branch check and CI must catch that.
+- A `git pull` in a turn can report lines that other people removed.
+- Content rules match plain text. A skip under another name, an exit with another code, or a wildcard object passes.
+- A hardcoded result in a source file passes. Property tests and mutation testing must catch that.
+- The comment scanner reads quotes and comments, not regular expressions. A regular expression that holds `/*` or a backtick can cause a false deny.
+- A `fixtures` folder outside a test folder is not guarded.
 - A moved line or a changed indent counts as a change and gets a deny.
-- It compares with `HEAD`, not with the base branch. A weaker test that is already committed passes; a review of the diff must catch that.
 - The mod is always on. It is not the "careful mode" that `SCOPE.md` rejects, which runs hooks only while a skill runs.
-- If the hook fails, it denies. Retry, or allow the file.
+- The edit check fails closed: retry, or allow the file. The turn check fails open, and writes a debug log line.
 
 ## More
 
-- [hooks/register.ts](hooks/register.ts): the hook source.
-- [hooks/register.test.ts](hooks/register.test.ts): the tests.
+- [hooks/register.ts](hooks/register.ts): the hooks. [hooks/check.ts](hooks/check.ts): the guarded paths and the rules.
+- [hooks/register.test.ts](hooks/register.test.ts), [hooks/check.test.ts](hooks/check.test.ts) and [hooks/turn.test.ts](hooks/turn.test.ts): the tests, with seeded property tests.
 - [marketplace.json](../../.claude-plugin/marketplace.json): the manifest, in this mod's entry.
 - [nizos/tdd-guard](https://github.com/nizos/tdd-guard): the prior art. It blocks code without a failing test and asks a model; test-guard protects old test lines with a fixed check.
+- [ImpossibleBench](https://arxiv.org/abs/2510.20270) and [MacDiarmid et al.](https://arxiv.org/abs/2511.18397): the cheats the content rules name.

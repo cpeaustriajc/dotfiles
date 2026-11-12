@@ -21,4 +21,4 @@ Review the UI against its design. Change nothing until I name the rows to fix.
    or prototype.
 4. Report one Before/After/Why table and a verdict per `references/verdict.md`.
 5. Fix only the rows I name. "Run until clean" names every row: fix all, then repeat steps 1–4.
-   Ask for sign-off once, after a pass with no rows.
+   A pass with no rows is the end; sign-off is the PR review (`references/verdict.md`).

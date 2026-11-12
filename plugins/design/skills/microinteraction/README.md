@@ -33,7 +33,7 @@ The skill then loads as `/design:microinteraction`.
 ## What it does
 
 - Reads the area you name and its styles. It writes no file in your project.
-- Names each proposal's effect with a term from the glossary, such as Scale in or Stagger.
+- Names each proposal's effect with a term from Emil Kowalski's animation vocabulary, such as Scale in or Slide in.
 - Gives each proposal a purpose, a frequency, and exact values: property, duration and curve.
 - Plays each proposal inline in the Claude app, with Pick, Skip and a Send button.
 - Prints the proposals as text in a terminal, and waits for your reply.
@@ -52,6 +52,5 @@ The skill then loads as `/design:microinteraction`.
 - [references/hunt.md](references/hunt.md): the places to search, each with a starting recipe.
 - [references/output.md](references/output.md): the three-part output and the inline preview.
 - [references/claude-code.md](references/claude-code.md): the inline view and the pick in Claude Code.
-- [references/animation-vocabulary.md](references/animation-vocabulary.md): the glossary of effect names.
 - [library/index.md](library/index.md): the example library and the command that re-makes it.
 - [LICENSE](LICENSE): adapted from Emil Kowalski's skills, under the MIT licence.

@@ -14,7 +14,8 @@ Failures, cheap to prevent early and costly late: flat motion (one fade curve), 
 gives itself away, off-message copy, broken frames, and a video with nowhere to go (no covers,
 captions or post copy; files left in scratch).
 
-Skip a step only when it does not apply, and say so. Scripts: `scripts/` (`--help`).
+Skip a step only when it does not apply, and say so. Scripts: `scripts/`; each prints its usage with
+`--help` (the Python ones inside the env `references/models.md` names).
 
 1. Rules, brief, capture and storyboard per `references/brief.md`. Get the storyboard approved.
 2. Build the master per `references/hyperframes.md`. Lint, snapshot, look at each.

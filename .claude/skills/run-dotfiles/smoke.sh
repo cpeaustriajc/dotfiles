@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Drives the dotfiles marketplace the way a user's Claude Code sees it.
-# Usage (from the repo root): .claude/skills/run-dotfiles/smoke.sh [validate|tests|doctor|details|all]
+# Usage (from the repo root): .claude/skills/run-dotfiles/smoke.sh [validate|tests|selftest|doctor|details|all]
 set -uo pipefail
 root="$(cd "$(dirname "$0")/../../.." && pwd)"; cd "$root"
 step="${1:-all}"; failed=0; blocked=0
@@ -26,15 +26,10 @@ tests() {
   done
   say "claude-owned: no mod denies or approves what Claude Code decides"
   run python3 tests/claude-owned/run.py
-  say "READMEs"
-  run python3 -I scripts/check_readmes.py
-  run python3 -I scripts/test_check_readmes.py
-  say "typed skills: agents/openai.yaml keeps them typed in Codex"
-  run python3 -I scripts/check_typed_skills.py
-  say "tracker terms: no tracker section names such as Done When"
-  run python3 -I scripts/check_tracker_terms.py
-  say "trunk: no branch older than a day with commits not on main (AGENTS.md)"
-  run python3 -I scripts/check_trunk.py
+  say "checks: READMEs, typed skills, tracker terms, trunk (scripts/check_*.py)"
+  for c in scripts/check_*.py; do run python3 -I "$c"; done
+  say "tests kept: no base test line changed or removed, no count dropped, no rig added"
+  run python3 -I plugins/engineering/skills/review-loop/scripts/tests_kept.py
   say "skill descriptions: valid YAML, at most 500 characters, third person (plugin-dev's rules)"
   local py=(python3 -)
   python3 -c 'import yaml' 2>/dev/null || py=(uv run --quiet --no-project --with pyyaml python3 -)
@@ -51,9 +46,25 @@ for f in sorted(glob.glob("plugins/*/skills/*/SKILL.md") + glob.glob(".claude/sk
 print("descriptions ok" if not bad else "descriptions FAILED")
 sys.exit(bad)
 PY
-  say "script tests"
-  run python3 -I plugins/planning/skills/shape/scripts/test_check_tree.py
-  run bash plugins/knowledge/skills/hone/scripts/test_corrections.sh
+  # Every test file by name, so a new one runs without an edit here; scripts/canary.py proves each goes red.
+  say "script tests: every test_*.py, test_*.sh and *.test.sh"
+  local pyt=(python3)
+  python3 -c 'import hypothesis' 2>/dev/null || ! command -v uv >/dev/null || pyt=(uv run --quiet --no-project --with hypothesis python3)
+  local t
+  # The list comes on fd 3: a test that reads stdin (ffmpeg does) would swallow the file names after it.
+  while IFS= read -r t <&3; do
+    [[ -f "$t" && "$t" != tests/claude-owned/* ]] || continue
+    if [[ "$t" == *.py ]]; then run "${pyt[@]}" -I "$t"; else run bash "$t"; fi
+  done 3< <(git ls-files --cached --others --exclude-standard -- ':(glob)**/test_*.py' ':(glob)**/test_*.sh' ':(glob)**/*.test.sh')
+}
+
+# Proves the graders go red: a failing test in every file, rigged copies, decoy mods.
+selftest() {
+  say "canary: every test file goes red in smoke.sh tests"; run python3 -I scripts/canary.py
+  say "canary self-test: a rigged run() and early exits are caught"; run python3 -I scripts/canary.py --self-test
+  # Only the summary: the decoys' own ✘ lines are the expected red, not failures.
+  say "claude-owned self-test: decoy mods are caught"
+  run bash -c "set -o pipefail; python3 tests/claude-owned/run.py --self-test | tail -1"
 }
 
 doctor() {
@@ -70,9 +81,9 @@ doctor() {
 details() { say "plugin details"; installed; for p in "${plugins[@]}"; do run env CLAUDE_CONFIG_DIR="$cfg" claude plugin details "$p@dotfiles"; done; }
 
 case "$step" in
-  validate|tests|doctor|details) "$step" ;;
-  all) validate; tests; details; doctor ;;
-  *) echo "usage: $0 [validate|tests|doctor|details|all]" >&2; exit 64 ;;
+  validate|tests|selftest|doctor|details) "$step" ;;
+  all) validate; tests; selftest; details; doctor ;;
+  *) echo "usage: $0 [validate|tests|selftest|doctor|details|all]" >&2; exit 64 ;;
 esac
 find plugins -name __pycache__ -prune -exec rm -rf {} +
 (( failed )) && exit 1

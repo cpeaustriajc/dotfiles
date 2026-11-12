@@ -19,10 +19,11 @@ not a question. A stop point word (default `pr`) sets how far it goes: `referenc
    wait for my go.
 3. **Gate** and branch per `references/ticket.md`.
 4. **Trust the ticket**: open questions per `references/ticket.md`.
-5. **Build** per `references/ticket.md`. Each criterion becomes a check, end-to-end when a user
-   sees it. Commit each green slice; Out of Scope stays out.
-6. **Review**: run `review-loop` on the commits since the base. One commit per fix; each
-   finding that is not fixed goes in the PR.
+5. **Build** per `references/ticket.md`. Each criterion becomes a test at the tier in
+   `../review-loop/references/tests.md`. Commit each green slice. Out of Scope and side
+   discoveries go in the report, not the change.
+6. **Review**: run `review-loop` on the commits since the base. One commit per fix, with the
+   checks it touches run again; each finding that is not fixed goes in the PR.
 7. **PR** with `create-pr`, body per `references/ticket.md`. Report the link, Decided and Needs
    you.
 8. **Stop point**: `commit` ends after step 6 with no push; `ready` and `merged` go on per

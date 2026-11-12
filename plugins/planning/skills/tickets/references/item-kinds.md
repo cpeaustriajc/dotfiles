@@ -4,9 +4,8 @@ Read this when an item is a Bug or a Chore, when you pick its work type, or when
 
 ## A wide mechanical change
 
-- **A wide mechanical change** (a rename whose call sites span the codebase) is the one exception
-  to vertical slicing: add the new form beside the old, migrate callers in batches, then remove
-  the old form, each its own item.
+A rename whose call sites span the codebase is the one exception to vertical slicing: parallel
+change (Danilo Sato, martinfowler.com, 2014), each phase its own item.
 
 ## A Bug
 

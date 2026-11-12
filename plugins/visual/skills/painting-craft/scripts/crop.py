@@ -5,6 +5,9 @@ Boxes are in CSS pixels of the page (what you read off a downscaled view); --css
 Each box is written as OUT_PREFIX-<name or index>.png, upscaled by --scale with nearest-neighbour so pixels stay honest.
 """
 import sys
+if '--help' in sys.argv[1:] or '-h' in sys.argv[1:]:
+    print(__doc__)
+    sys.exit(0)
 from PIL import Image
 
 args, scale, css = [], 2.0, 2.0

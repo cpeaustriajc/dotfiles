@@ -7,7 +7,7 @@ A skill that writes a short brief of where your work stands: recent threads, the
 Use it at the start of a session that resumes work, or when you lose track of what is in flight. It reads past transcripts and the live git and pull request state.
 
 - For corrections to learn from, use `hone`.
-- For a recorded decision, use `project-knowledge`.
+- For a recorded decision, use `dossier`.
 
 ## Example
 
@@ -53,4 +53,3 @@ The skill then loads as `/knowledge:recall`.
 - [SKILL.md](SKILL.md): the method.
 - [references/claude-code.md](references/claude-code.md): where Claude Code keeps transcripts, the desktop app's session search and the subagent models.
 - [references/miners.md](references/miners.md): how the wide-window subagents split the sessions and what each returns.
-- [references/github.md](references/github.md): the `git` and `gh` commands for the issue sweep and the live state.

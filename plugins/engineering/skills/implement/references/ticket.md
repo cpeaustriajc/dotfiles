@@ -14,8 +14,8 @@ Check each line. If one fails, stop and name it.
 3. Every item that blocks it is closed, or has a pushed branch with an open PR. Without the
    second case, a stack never builds past its first item.
 
-Then start from the branch of the ticket's blocker while its PR is open, else a fresh trunk. Skip this only if the current branch is already for this
-item. Never build on the trunk.
+Then branch per `../../create-pr/references/stacking.md`, unless the current branch is already for
+this item.
 
 ## Open questions (step 4)
 
@@ -24,29 +24,21 @@ answer:
 
 | The answer is | Do |
 |---|---|
-| Easy to undo | Follow the closest existing pattern. Add it to Decided. |
-| Costly to undo, or against the spec or a recorded decision | Stop. Post triage notes on the item, move it to `needs-info`, report. |
+| A two-way door | Follow the closest existing pattern. Add it to Decided. |
+| A one-way door, or against the spec or a recorded decision | Stop. Post triage notes on the item, move it to `needs-info`, report. |
 
-A criterion that cannot be met as written is a costly question.
+A criterion that cannot be met as written, or a test that contradicts the spec, is a one-way door.
 
 ## Build (step 5)
 
-1. Follow the spec, the design and the closest existing pattern in the app. Cut the work into
-   slices that each end in a state you can check in the running app. Per slice: build it, run
-   its end-to-end check, commit. Take each expected value from the spec, never from the code.
-   A bug item first reproduces the bug as an end-to-end check that fails, then fixes its cause.
-2. Save each check's command and evidence. Never commit red.
-3. Put a side discovery in the report, not in the change.
-
-## Review (step 6)
-
-Commit each `review-loop` fix on its own, and rerun the checks it touches.
+Cut the work into vertical slices that each end in a state you can check in the running app. Per
+slice: write its test per `../../review-loop/references/tests.md`, see it fail, build, see it pass,
+commit. Never commit red.
 
 ## PR body (step 7)
 
-1. The tracker's close word or link for the item, so the merge closes it. Never close it by
-   hand.
-2. One row per criterion: the criterion, the command, the evidence path, and VERIFIED, NOT
-   VERIFIED or INCONCLUSIVE. INCONCLUSIVE is not a pass.
+1. The item's key as a link; `create-pr` rejects a closing keyword.
+2. One row per criterion: the criterion and the verify skill's line for it as printed, with its
+   log path. Any result but a pass is not a pass.
 3. **Decided:** each answer from step 4 that the ticket did not give.
 4. **Needs you:** each line only a person can check.

@@ -9,13 +9,11 @@ tool's own MCP server or CLI to see what it can create, then map the levels onto
 | Project | A project, list, board or epic | A parent item with child items |
 | Spec, engineering document | A doc or page attached to the project | A page in the team's wiki, linked from the project |
 | Phase | A milestone or section | A single-select "Phase" field, or a section per phase |
-| Work item | Task, card or item | — |
+| Work item | Task, card or item | none |
 | Work type | An item type or template | A label: `Task`, `Bug`, `Chore` |
 | Dependency | A native "blocked by" | A line in the item's Context with a link |
 | Checklist | Native checkboxes, or `- [ ]` rendering | A numbered list |
 
-- **Keep the method, bend the container.** The rules about statements, confirmation before
-  splitting, one engineering document and fixed phases hold whatever the tool calls things.
 - **A markdown file as the tracker** (`TODO.md`, `ROADMAP.md`): one heading per project, the spec
   linked rather than inlined, phases as subheadings, work items as checkboxes with the template's
   Outcome as the line and its checks nested beneath.

@@ -23,14 +23,12 @@
 2. Convert the ticket: move it back to the backlog, or keep it as the first build slice once the
    spec is Confirmed. Never cancel it: a cancel reads as a verdict on the author.
 3. Put the project in Demo, and add the approval item.
-4. Split no build items until the spec is Confirmed.
 
 ## Translating an old epic, brief or plan
 
-Treat an old source as evidence of the problem someone wanted solved, not as a technical spec. Its
-architecture, named services, data flows, estimates and implementation criteria are hypotheses
-unless current code, tests, contracts or a newer decision confirm them. Current decisions and
-current code outrank a stale plan.
+An old source is evidence of the problem, not a technical spec: its architecture, services,
+estimates and implementation criteria are hypotheses until current code, tests, contracts or a
+newer decision confirm them, and those outrank it.
 
 - Keep the source's key or link as provenance, recover the intent, and draft from the present state.
 - When sources conflict on a product choice, ask the product owner. Don't ask them to settle a

@@ -6,7 +6,10 @@ description: >
   is worth building, goes to vision.
 ---
 
-Facts are your job, decisions are mine. Tools: `references/claude-code.md`.
+Facts are your job, decisions are mine. Ask with `AskUserQuestion`.
+A layout option is a mockup widget (an ASCII `preview` without the visualize tools); a diagram
+is an inline widget (a mermaid block when headless). The work folder is the session's scratchpad;
+a later session never reads an old probe as current.
 
 1. Look the work up; name its size in one line (I can change it):
    - trivial (1-2 files, one obvious approach): your plan, then "go?";
@@ -22,5 +25,5 @@ Facts are your job, decisions are mine. Tools: `references/claude-code.md`.
 6. Recommend the smallest version that ships and costs least to run; cut gold-plating; flag
    scope drift in one line.
 7. Write nothing (code, tracker, docs, pushes). Frontier empty: post the final ledger and ask
-   if we share an understanding; on yes, offer `shape`, `tickets` or `project-knowledge`, then
+   if we share an understanding; on yes, offer `shape`, `tickets` or `dossier`, then
    wait.
