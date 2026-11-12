@@ -3,12 +3,12 @@ paths:
   - "plugins/**"
   - "mods/**"
   - "**/.claude-plugin/*.json"
-  - "CLAUDE.md"
+  - "AGENTS.md"
 ---
 
 # Claude Code commands for the authoring steps
 
-The section "Authoring" in `CLAUDE.md` names each step. This file gives the Claude Code command
+The section "Authoring" in `AGENTS.md` names each step. This file gives the Claude Code command
 for it. Use what Claude Code ships before writing your own checks.
 
 ## Validate the manifests
