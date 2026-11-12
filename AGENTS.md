@@ -19,6 +19,8 @@
 
 - No Not-Invented-Here: read the harness, code host, CI and tracker docs and changelog first;
   build only the missing part. Failure: `hone` re-mined what `/insights` and auto memory mine.
+- Don't fight the harness: take its defaults (branches, PRs, permissions) and bend the repo to
+  them. Failure: a no-PR rule that the harness's branch-first default kept overriding.
 - Hand off only to stable features; a guard only to one that always holds.
 - Prior art: evidence over authority. Cite source and evidence in the README. `SOURCES.md` holds
   leads.

@@ -31,7 +31,7 @@
       "name": "engineering",
       "displayName": "Engineering",
       "description": "Prove the work in the real app — unattended builds and loops, user-style testing, change risk, review and PRs.",
-      "version": "3.1.0",
+      "version": "3.2.0",
       "author": {
         "name": "John Carlo Austria"
       },
@@ -127,6 +127,17 @@
         "name": "John Carlo Austria"
       },
       "source": "./mods/memory-lint",
+      "category": "productivity"
+    },
+    {
+      "name": "implement-gate",
+      "displayName": "Implement Gate",
+      "description": "Hold /implement to its stop point — denies a merge or push past commit, pr, ready or merged, and blocks an early stop.",
+      "version": "0.1.0",
+      "author": {
+        "name": "John Carlo Austria"
+      },
+      "source": "./mods/implement-gate",
       "category": "productivity"
     },
     {

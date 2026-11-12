@@ -23,7 +23,7 @@ CLI.
    item, the brief names its base. The thread resets onto that base and opens its PR against it.
 6. Each thread opens its own PR. Auto-fix then handles CI failures, review comments and conflicts.
 
-## Until merged
+## Stop points
 
 Checked against https://code.claude.com/docs/en/claude-code-on-the-web.md ("Auto-fix pull
 requests") and https://code.claude.com/docs/en/desktop.md ("Monitor pull request status") in
@@ -32,12 +32,19 @@ November 2026.
 - **Watch**: auto-fix. It needs the Claude GitHub App on the repo. Turn it on with
   `/autofix-pr` on the PR branch, or from the Changes card menu on the web. It wakes on GitHub
   events and fixes CI failures and review comments, so the session spends nothing while CI runs.
-  No GitHub App: one background `gh pr checks <pr> --watch`, not `/loop`.
+  No GitHub App: wait as in **Wait** below, not `/loop`.
 - **Conflicts**: auto-fix gets no event for a base-branch conflict. Rebase yourself.
 - **Merge**: on the desktop app, "Merge when ready" turns on GitHub auto-merge. On the web or
   CLI, `gh pr merge <pr> --auto` with the repo's method (`--squash`, `--merge` or `--rebase`,
   from recent merged PRs). Auto-merge must be allowed in the repo settings; if it is not, ask.
+- **Ready**: `gh pr merge <pr> --disable-auto` turns off auto-merge that is already on.
 - **Ask**: `AskUserQuestion`.
+- **Wait**: while checks run at `ready`, wait in the foreground with `gh pr checks <pr> --watch`
+  (Bash timeout 600000). A turn that ends while CI runs ends the run.
+- **Hold**: the `implement-gate` mod reads the last word of the `/implement` line. Below `merged`
+  it denies a merge and a push to the default branch; at `commit`, every push. At `pr` and past,
+  it blocks the turn's end until `gh pr view` shows the stop point, at most 3 times. Without the
+  mod, the stop point rests on this text alone. `/implement-gate off` ends its hold.
 
 ## Thread briefs
 

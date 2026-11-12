@@ -6,12 +6,12 @@ description: >
   builds it in checked slices, runs review-loop on the commits and opens a PR that closes it.
   With a spec or several tickets, it starts one parallel worker per ready ticket.
 disable-model-invocation: true
-argument-hint: "<ticket | spec> [until-merged]"
+argument-hint: "<ticket | spec> [commit | pr | ready | merged]"
 ---
 
 Arguments: `$ARGUMENTS`. A spec or several tickets: `references/orchestrate.md`, workers per
 `references/claude-code.md`. One ticket: steps 1 to 7; never reopen the plan; end with proof,
-not a question. `until-merged`: then step 8.
+not a question. A stop point word (default `pr`) sets how far it goes: `references/stop-points.md`.
 
 1. **Tracker**: the one the project names, else inferred from the reference. Two: ask.
 2. **Ticket** by URL or key; a bare number matched against a list picks the wrong item. Write
@@ -25,4 +25,5 @@ not a question. `until-merged`: then step 8.
    finding that is not fixed goes in the PR.
 7. **PR** with `create-pr`, body per `references/ticket.md`. Report the link, Decided and Needs
    you.
-8. **Merge**, only with `until-merged`: `references/merge.md`. Report the merge commit too.
+8. **Stop point**: `commit` ends after step 6 with no push; `ready` and `merged` go on per
+   `references/stop-points.md`.

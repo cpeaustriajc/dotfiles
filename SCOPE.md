@@ -31,7 +31,7 @@ not add a new dated line.
   model family): it needs a fleet and other vendors. `implement` hands a spec to Claude Code
   Projects, a few threads at a time.
 - **Babysit's watcher**: Claude Code's auto-fix watches a PR and fixes CI failures and review
-  comments. `implement until-merged` hands off to it.
+  comments. `implement` hands off to it at the stop points `ready` and `merged`.
 - **Cursor automations**, **Bugbot** and **Grok Bot UI**: they work only in Cursor.
 - **Cloud agents** from pstack: they need Cursor's cloud agents.
 - **setup-pstack's model map**: it maps models from other vendors.
