@@ -43,5 +43,6 @@
   "permissions": {
     "blockWritesOutsideWorkingDirectories": true
   },
-  "outputStyle": "Lucid"
+  "outputStyle": "Lucid",
+  "autoMemoryEnabled": false
 }
