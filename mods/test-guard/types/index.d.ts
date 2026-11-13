@@ -6,6 +6,10 @@ export type Turn = { root: string; sha: string; had: [string, string][] }
 export type Call = { path: string; lost: string[]; opens?: true } | { deny: string }
 // By path: each HEAD line a person approved losing, and how many times.
 export type Approved = Record<string, Record<string, number>>
+// The rules that run in one repository, chosen by /test-guard setup. `rigs`: the content rules only.
+export type Mode = 'off' | 'rigs' | 'full'
+// Kept in $.store under `profile:<remote or root>`, with the replay counts the choice was based on.
+export type Profile = { mode: Mode; at: string; commits: number; changes: number; full: number; rigs: number }
 
 declare module 'claude-code' {
   interface PluginState {

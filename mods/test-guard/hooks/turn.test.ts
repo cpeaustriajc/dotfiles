@@ -9,6 +9,11 @@ const T_HEAD = "it('sends once', () => {\n  expect(send).toHaveBeenCalledTimes(1
 
 function repo(on: On, given: Partial<Repo> = {}): Repo {
   const r: Repo = { commits: { c1: { [T]: T_HEAD, 'src/a.ts': 'a\n' } }, head: 'c1', disk: { [T]: T_HEAD, 'src/a.ts': 'a\n' }, ancestors: [], logs: [], runs: [], git: 'ok', below: {}, ...given }
+  // This repository's test-guard profile: the full rules unless a test gives `profile`, or null for none.
+  const g = given as { profile?: { mode: string } | null }
+  const profile = 'profile' in g ? g.profile : { mode: 'full', at: '2026-11-13T00:00:00.000Z', commits: 0, changes: 0, full: 0, rigs: 0 }
+  on('session.repo', () => ({ value: { root: '/repo', remote: null, internal: false, name: null } }) as never)
+  on('store.get', (_$, e) => ({ value: (e as { key: string }).key === 'profile:/repo' && profile ? profile : undefined }) as never)
   const ok = (stdout: string) => ({ value: { exitCode: 0, stdout, stderr: '' } }) as never
   const fail = (stderr: string) => ({ value: { exitCode: 128, stdout: '', stderr } }) as never
   on('session.cwd', () => ({ value: '/repo/src' }) as never)
