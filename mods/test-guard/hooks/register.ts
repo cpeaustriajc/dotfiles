@@ -1,8 +1,8 @@
 import { atom, read, update } from 'claude-code'
 import type { Hook, Register } from 'claude-code'
-import { align, apply, findings, kindOf, maybeGuarded, nameKind } from './check'
+import { align, apply, findings, kindOf, lostLines, maybeGuarded, minus, nameKind } from './check'
 import type { Change, Finding, Kind } from './check'
-import type { Turn } from '../types'
+import type { Approved, Call, Turn } from '../types'
 
 type Api = Parameters<Hook<'tool.call'>>[0]
 
@@ -16,12 +16,21 @@ const USER = new Set(['composer', 'bridge', 'sdk'])
 const allowed = atom({ plugin: 'test-guard', key: 'allowed' } as const, [] as string[])
 const turn = atom({ plugin: 'test-guard', key: 'turn' } as const, null as Turn | null)
 const noted = atom({ plugin: 'test-guard', key: 'noted' } as const, [] as string[])
+// What tool.check said about a call, by tool_use_id, until its tool.call reads it.
+const calls = atom({ plugin: 'test-guard', key: 'calls' } as const, {} as Record<string, Call>)
+const approved = atom({ plugin: 'test-guard', key: 'approved' } as const, {} as Approved)
+// Paths whose HEAD lines a person approved changing, until the turn ends.
+const opened = atom({ plugin: 'test-guard', key: 'opened' } as const, [] as string[])
 
-// Every deny and note ends with the same exit: fix the code, or stop and ask the user.
-const exit = (path: string) =>
-  'Fix the code, or add a new test. If a test contradicts the spec, stop and tell the user which test, the old line and why; ' +
-  `only the user can run \`/test-guard allow ${path}\`.`
-const deny = (path: string, f: Finding) => `${MOD}: this ${f.what}: \`${f.line.trim()}\`. ${exit(path)}`
+// The person reads `ask` in the approval dialog; the model reads `deny` and `failed`.
+const ask = (f: Finding) =>
+  `${MOD}: this edit ${f.what}: \`${f.line.trim()}\`. ` +
+  (f.lost ? 'Approve to let Claude change existing lines in this file until the turn ends.' : 'Approve it if you asked for this change.')
+const deny = (path: string, f: Finding) =>
+  `${MOD}: this edit ${f.what}: \`${f.line.trim()}\`, and nobody is here to approve it. ` +
+  `Finish the task without this change, then stop and tell the user which test, the old line and why, so they can run \`/test-guard allow ${path}\`.`
+const failed = (why: string) =>
+  `${MOD}: could not check this edit (${why}). Retry once; if it fails again, stop and tell the user, who can run \`/test-guard allow <path>\`.`
 
 function absolute(path: string, cwd: string): string {
   const parts: string[] = []
@@ -32,9 +41,9 @@ function absolute(path: string, cwd: string): string {
   return `/${parts.join('/')}`
 }
 
-async function after($: Api, e: Record<string, unknown>, path: string): Promise<string> {
-  if (e.tool === 'Write') return String(e.content)
-  const changes = e.tool === 'MultiEdit' ? (e.edits as Change[]) : [e as unknown as Change]
+async function after($: Api, tool: string, e: Record<string, unknown>, path: string): Promise<string> {
+  if (tool === 'Write') return String(e.content)
+  const changes = tool === 'MultiEdit' ? (e.edits as Change[]) : [e as unknown as Change]
   return changes.reduce(apply, String(await $.fs.read(path)))
 }
 
@@ -78,14 +87,16 @@ async function losses($: Api, root: string, sha: string): Promise<Map<string, st
   const d = await $.process.run(['git', 'diff', '--name-only', '--no-renames', '-z', sha, '--'], { cwd: root })
   if (d.exitCode !== 0) throw new Error(`git diff exited ${d.exitCode}`)
   const ok = await read($, allowed)
+  const yes = await read($, approved)
+  const open = await read($, opened)
   for (const rel of d.stdout.split('\0').filter(Boolean)) {
     const k = kindOf(rel)
     const path = `${root}/${rel}`
-    if ((k !== 'test' && k !== 'config') || ok.includes(path)) continue
+    if ((k !== 'test' && k !== 'config') || ok.includes(path) || open.includes(path)) continue
     const head = await $.process.run(['git', 'show', `${sha}:${rel}`], { cwd: root })
     if (head.exitCode !== 0) continue
     const now = (await $.fs.exists(path)) ? String(await $.fs.read(path)) : ''
-    const lost = align(head.stdout, now, rel).lost
+    const lost = minus(align(head.stdout, now, rel).gone, yes[path])[0]
     if (lost !== undefined) out.set(path, lost)
   }
   return out
@@ -115,21 +126,56 @@ export const register: Register = on => {
     return { text: `Claude can now change the HEAD lines of ${path} for the rest of this session.` }
   })
 
-  on('tool.call', async ($, e, next) => {
-    if (!TOOLS.has(e.tool)) return next(e)
-    const input = e as unknown as Record<string, unknown>
-    if (typeof input.file_path !== 'string' || !maybeGuarded(input.file_path)) return next(e)
+  // The gate: a finding goes to the person present, and is refused where nobody can be asked.
+  // It only tightens the verdict beneath, and records its answer for the call's tool.call.
+  on('tool.check', async ($, e, next) => {
+    const r = await next(e)
+    if (r.decision === 'deny' || !TOOLS.has(e.tool)) return r
+    const input = (e.input ?? {}) as Record<string, unknown>
+    if (typeof input.file_path !== 'string' || !maybeGuarded(input.file_path)) return r
     const path = absolute(input.file_path, await $.session.cwd())
     const k = await kind($, path)
-    if (!k) return next(e)
-    if ((await read($, allowed)).includes(path)) return next(e)
-    const f = findings(k, path, await headText($, path), await after($, input, path))
-    return f ? { deny: deny(path, f) } : next(e)
-  }).catch(($, e, next) =>
-    next.called
-      ? next(e)
-      : { deny: `${MOD}: could not check this edit (${next.error.message}). Retry. If it fails again, stop and tell the user; only the user can run /test-guard allow <path>.` },
-  )
+    if (!k || (await read($, allowed)).includes(path)) return r
+    const head = await headText($, path)
+    const text = await after($, e.tool, input, path)
+    const open = (await read($, opened)).includes(path)
+    const before = head !== undefined && (await $.fs.exists(path)) ? String(await $.fs.read(path)) : ''
+    const f = findings(k, path, head, text, open, head === undefined ? [] : lostLines(head, before, path))
+    const lost = head === undefined ? [] : lostLines(head, text, path)
+    // An edit to an opened path runs with no ask; its lost lines are recorded as approved too.
+    let call: Call | undefined = open && lost.length ? { path, lost } : undefined
+    if (f) call = e.approver ? { path, lost, ...(f.lost ? { opens: true as const } : {}) } : { deny: deny(path, f) }
+    if (call && e.tool_use_id) await update($, calls, m => ({ ...m, [e.tool_use_id as string]: call }))
+    if (!f) return r
+    return call && 'deny' in call ? { decision: 'deny', reason: call.deny } : { decision: 'ask', reason: ask(f) }
+  }).catch(async ($, e, next) => {
+    const reason = failed(next.error.message)
+    try {
+      if (e.tool_use_id) await update($, calls, m => ({ ...m, [e.tool_use_id as string]: { deny: reason } }))
+    } catch {}
+    return { decision: 'deny', reason }
+  })
+
+  // tool.check runs inside this call's next(e). A refusal there comes back as the mod's own deny; an
+  // approved edit that ran records the HEAD lines it lost, so the turn-end check leaves them out.
+  on('tool.call', async ($, e, next) => {
+    if (!TOOLS.has(e.tool)) return next(e)
+    const r = await next(e)
+    const id = e.tool_use_id
+    const c = (await read($, calls))[id]
+    if (!c) return r
+    await update($, calls, ({ [id]: _, ...rest }) => rest)
+    if ('deny' in c) return { deny: c.deny }
+    if (r.deny !== undefined || (r as { isError?: boolean }).isError) return r
+    if (c.opens) await update($, opened, o => (o.includes(c.path) ? o : [...o, c.path]))
+    if (c.lost.length)
+      await update($, approved, a => {
+        const had = { ...a[c.path] }
+        for (const l of c.lost) had[l] = Math.max(had[l] ?? 0, c.lost.filter(x => x === l).length)
+        return { ...a, [c.path]: had }
+      })
+    return r
+  }).catch(($, e, next) => (next.called ? next(e) : { deny: failed(next.error.message) }))
 
   // Claude Code owns Bash, so a `sed -i`, `rm` or `jest -u` on a test runs. At the turn's start the
   // hook notes HEAD and the losses already there; at the turn's end it compares the guarded tracked
@@ -138,6 +184,9 @@ export const register: Register = on => {
   on('turn.start', async ($, e, next) => {
     const result = await next(e)
     if (e.agentId !== undefined) return result
+    // A refused ask never reaches its tool.call, so its id is left here; an approval opens a path for one turn.
+    await update($, calls, () => ({}))
+    await update($, opened, () => [])
     try {
       const b = await base($)
       const had = b ? [...(await losses($, b.root, b.sha))] : []
@@ -172,7 +221,7 @@ export const register: Register = on => {
       return {
         ...result,
         block: `${MOD}: this turn changed or removed a line that a test or runner config has at HEAD, outside Edit and Write: ${list}. ` +
-          `If the user did not ask for it, put the line back. ${exit('<path>')}`,
+          'If the user did not ask for it, put the line back; if the test is wrong, stop and tell the user which test, the old line and why.',
       }
     } catch (cause) {
       $.ui.log(`${MOD}: could not compare the test files with HEAD (${String(cause)}).`, { to: 'debug' })

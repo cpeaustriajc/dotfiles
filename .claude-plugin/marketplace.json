@@ -143,8 +143,8 @@
     {
       "name": "test-guard",
       "displayName": "Test Guard",
-      "description": "Stop tests changed to pass — denies an edit that changes or removes a test line at HEAD; additions pass.",
-      "version": "0.2.0",
+      "description": "Stop tests changed to pass — asks you before an edit changes or removes a test line at HEAD, and refuses it when nobody can approve; additions pass.",
+      "version": "0.3.0",
       "author": {
         "name": "John Carlo Austria"
       },

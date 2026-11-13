@@ -319,3 +319,147 @@ test('an Edit that adds passWithNoTests to a tracked package.json is denied; ano
   expect(r.deny).toContain('stops tests from running or from failing')
   passes(await edit($, P, '"jest"', '"jest",\n    "lint": "eslint ."'), w)
 })
+
+// tool.check: the person present decides. `core` is the verdict beneath the mod.
+const WEAKEN = { file_path: A, old_string: 'toHaveBeenCalledTimes(1)', new_string: 'toHaveBeenCalled()' }
+const ADD = { file_path: A, old_string: '})\n', new_string: "})\n\nit('more', () => {})\n" }
+const checkWith = (on: On, given: Partial<World> = {}) => {
+  const core = { decision: 'allow', reason: 'core' } as { decision: string; reason: string }
+  const w = world(on, given)
+  on('tool.check', () => ({ ...core }) as never)
+  return { w, core }
+}
+const check = ($: any, input: Record<string, unknown>, approver?: 'person' | 'host', tool = 'Edit') =>
+  $.tool.check({ tool, input, tool_use_id: 'u1', ...(approver ? { approver } : {}) })
+
+test('tool.check: a person present gets ask, with the file and the HEAD line', async ($, on) => {
+  checkWith(on)
+  const r = await check($, WEAKEN, 'person')
+  expect(r.decision).toBe('ask')
+  expect(r.reason).toContain(`test-guard: this edit changes or removes a line that ${A} has at HEAD: \`expect(send).toHaveBeenCalledTimes(1)\``)
+  expect(r.reason).toContain('Approve to let Claude change existing lines in this file until the turn ends.')
+})
+
+test('tool.check: nobody present gets deny, with one next step', async ($, on) => {
+  checkWith(on)
+  const r = await check($, WEAKEN)
+  expect(r.decision).toBe('deny')
+  expect(r.reason).toContain('`expect(send).toHaveBeenCalledTimes(1)`, and nobody is here to approve it.')
+  expect(r.reason).toContain('Finish the task without this change, then stop and tell the user')
+})
+
+test('tool.check: a host program gets ask, since its callback answers for a person', async ($, on) => {
+  checkWith(on)
+  expect((await check($, WEAKEN, 'host')).decision).toBe('ask')
+})
+
+test('tool.check: a rig gets ask with what it adds', async ($, on) => {
+  const P = '/repo/tests/test_send.py'
+  const head = 'def test_sends():\n    assert send() == 1\n'
+  checkWith(on, { disk: { [P]: head }, head: { [P]: head } })
+  const r = await check($, { file_path: P, old_string: 'def test_sends', new_string: '@pytest.mark.skip\ndef test_sends' }, 'person')
+  expect(r.decision).toBe('ask')
+  expect(r.reason).toContain('skips the HEAD test `def test_sends():`')
+  expect(r.reason).toContain('`@pytest.mark.skip`')
+})
+
+test('tool.check: an allowed path gets the verdict beneath unchanged', async ($, on) => {
+  const { core } = checkWith(on)
+  core.decision = 'ask'
+  await allow($, 'allow tests/a.test.ts')
+  const r = await check($, WEAKEN, 'person')
+  expect(r.decision).toBe('ask')
+  expect(r.reason).toBe('core')
+})
+
+test("tool.check: core's deny stays, with core's reason", async ($, on) => {
+  const { core } = checkWith(on)
+  core.decision = 'deny'
+  for (const approver of ['person', 'host', undefined] as const) {
+    const r = await check($, WEAKEN, approver)
+    expect(r.decision).toBe('deny')
+    expect(r.reason).toBe('core')
+  }
+})
+
+test("tool.check: an edit with no finding gets core's allow or ask unchanged", async ($, on) => {
+  const { core } = checkWith(on)
+  for (const d of ['allow', 'ask']) {
+    core.decision = d
+    for (const approver of ['person', undefined] as const) {
+      const r = await check($, ADD, approver)
+      expect(r.decision).toBe(d)
+      expect(r.reason).toBe('core')
+    }
+  }
+  const r = await check($, { command: 'rm tests/a.test.ts' }, 'person', 'Bash')
+  expect(r.decision).toBe('ask')
+})
+
+test('tool.check: a hook body that throws gives deny with could not check', async ($, on) => {
+  checkWith(on)
+  const r = await check($, { file_path: A, old_string: null, new_string: 'x' }, 'person')
+  expect(r.decision).toBe('deny')
+  expect(r.reason).toContain('test-guard: could not check')
+})
+
+test('tool.call: an edit a person was asked about under one id is checked again under another, and denied with nobody present', async ($, on) => {
+  const { w } = checkWith(on)
+  expect((await check($, WEAKEN, 'person')).decision).toBe('ask')
+  const r = await edit($, A, 'toHaveBeenCalledTimes(1)', 'toHaveBeenCalled()')
+  expect(r.deny).toContain('nobody is here to approve it')
+  expect(w.ran).toEqual([])
+})
+
+test('tool.call: the verify line of a package.json can change while it holds --passWithNoTests', async ($, on) => {
+  const P = '/repo/package.json'
+  const verify = '    "verify": "tsr generate && npm run --silent migrations:check && oxfmt --check && effect-tsgo oxlint --type-aware && effect-tsgo tsc -p tsconfig.json && effect-tsgo tsrs -p tsconfig.json && vitest run --passWithNoTests"'
+  const pkg = `{\n  "scripts": {\n${verify},\n    "test": "vitest run"\n  }\n}\n`
+  const w = world(on, { disk: { [P]: pkg }, head: { [P]: pkg } })
+  passes(await edit($, P, '--passWithNoTests"', '--passWithNoTests && npm run build"'), w)
+  const r = await edit($, P, '"test": "vitest run"', '"test": "vitest run --passWithNoTests"')
+  expect(r.deny).toContain('stops tests from running or from failing')
+})
+
+// A seeded generator (mulberry32), as in check.test.ts: a failure prints the seed.
+const SEED = Date.now() % 2 ** 31
+function rng(seed: number) {
+  let a = seed
+  return () => {
+    a = (a + 0x6d2b79f5) | 0
+    let t = Math.imul(a ^ (a >>> 15), 1 | a)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+test('property: tool.check never returns a looser decision than the verdict beneath', async ($, on) => {
+  const r = rng(SEED)
+  const { core } = checkWith(on)
+  const rank = { allow: 0, ask: 1, deny: 2 } as Record<string, number>
+  const inputs = [WEAKEN, ADD, { file_path: A, old_string: "  expect(send).toHaveBeenCalledWith('hi')\n", new_string: '' }, { file_path: '/repo/src/app.ts', old_string: 'a', new_string: 'b' }]
+  let allowed = false
+  for (let k = 0; k < 120; k++) {
+    if (!allowed && r() < 0.05) (await allow($, 'allow tests/a.test.ts'), (allowed = true))
+    core.decision = (['allow', 'ask', 'deny'] as const)[Math.floor(r() * 3)] as string
+    const approver = (['person', 'host', undefined] as const)[Math.floor(r() * 3)]
+    const input = inputs[Math.floor(r() * inputs.length)] as Record<string, unknown>
+    const got = await check($, input, approver)
+    expect(rank[got.decision]! >= rank[core.decision]!, `seed ${SEED} run ${k}: ${core.decision} -> ${got.decision}`).toBe(true)
+  }
+})
+
+const LACKS = A_HEAD.replace("  expect(send).toHaveBeenCalledWith('hi')\n", '')
+test('tool.check: a file that already lacks a HEAD line gets no ask for an edit that adds a test', async ($, on) => {
+  const { w } = checkWith(on, { disk: { [A]: LACKS } })
+  for (const approver of ['person', 'host', undefined] as const) expect((await check($, ADD, approver)).decision).toBe('allow')
+  passes(await edit($, A, '})\n', "})\n\nit('more', () => {})\n"), w)
+})
+
+test('tool.check: a file that already lacks a HEAD line is asked about another HEAD line, and the reason quotes that one', async ($, on) => {
+  checkWith(on, { disk: { [A]: LACKS } })
+  const r = await check($, WEAKEN, 'person')
+  expect(r.decision).toBe('ask')
+  expect(r.reason).toContain('`expect(send).toHaveBeenCalledTimes(1)`')
+  expect(r.reason).not.toContain("toHaveBeenCalledWith('hi')")
+})

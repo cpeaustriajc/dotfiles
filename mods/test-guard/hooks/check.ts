@@ -4,7 +4,7 @@
 // and CONFIG_ADD. `shared`: files that also hold other settings, CONFIG_ADD only.
 export type Kind = 'test' | 'config' | 'shared'
 export type Change = { old_string: string; new_string: string; replace_all?: boolean }
-export type Finding = { what: string; line: string }
+export type Finding = { what: string; line: string; lost?: true } // `lost`: the HEAD-line rule found it; else a content rule (a rig)
 
 // Kept the same as TEST_NAME and TEST_DIR in review-loop's tests_kept.py; scripts/check_test_names.py fails on drift.
 const TEST_NAME = [/\.(test|spec)\.[^/]+$/, /(^|\/)test_[^/]*\.(py|sh)$/, /_test\.(py|go)$/, /(^|\/)conftest\.py$/, /\.(snap|golden)$/]
@@ -79,9 +79,18 @@ export function hidden(lines: string[], lang: Lang): boolean[] {
   })
 }
 
+// A workflow step `uses: <name>@<ref>`, with an optional trailing comment: a new ref keeps the line.
+const WORKFLOW = /(^|\/)\.github\/workflows\//
+const USES = /^(\s*(?:-\s+)?uses:\s*)([^@\s#]+)@\S+(?:\s+#.*)?$/
+function sameStep(a: string, b: string): boolean {
+  const x = USES.exec(a)
+  const y = USES.exec(b)
+  return !!x && !!y && x[1] === y[1] && x[2] === y[2]
+}
+
 // Matches each non-blank HEAD line, in order, to a line of the new text with the same text and the
-// same comment state. `lost` is the first HEAD line with no match; `added` marks new-text lines
-// that no HEAD line took.
+// same comment state. `lost` is the first HEAD line with no match and `gone` every one; `added`
+// marks new-text lines that no HEAD line took.
 export function align(head: string, next: string, path = '') {
   const lines = next.split(/\r?\n/)
   const lang = langOf(path)
@@ -89,14 +98,34 @@ export function align(head: string, next: string, path = '') {
   const added = lines.map(() => true)
   const h = head.split(/\r?\n/)
   const hh = hidden(h, lang)
+  const steps = WORKFLOW.test(path.replace(/\\/g, '/'))
+  const same = (a: string, b: string) => a === b || (steps && sameStep(a, b))
+  const gone: string[] = []
+  let commented = false
   let at = 0
   for (const [i, line] of h.entries()) {
     if (!line.trim()) continue
-    while (at < lines.length && !(lines[at] === line && nh[at] === hh[i])) at++
-    if (at === lines.length) return { lost: line, commented: !hh[i] && lines.some((l, j) => l === line && nh[j]), added, lines }
-    added[at++] = false
+    let j = at
+    while (j < lines.length && !(same(line, lines[j] as string) && nh[j] === hh[i])) j++
+    if (j < lines.length) {
+      added[j] = false
+      at = j + 1
+      continue
+    }
+    if (!gone.length) commented = !hh[i] && lines.some((l, k) => l === line && nh[k])
+    gone.push(line)
   }
-  return { lost: undefined, commented: false, added, lines }
+  return { lost: gone[0], gone, commented, added, lines }
+}
+
+// Every non-blank HEAD line with no match in the new text, in order.
+export const lostLines = (head: string, next: string, path = '') => align(head, next, path).gone
+
+// `lines` with `take` taken out, each line as many times as `take` holds it.
+export function minus(lines: string[], take: string[] | Record<string, number> = []): string[] {
+  const left: Record<string, number> = Array.isArray(take) ? {} : { ...take }
+  if (Array.isArray(take)) for (const l of take) left[l] = (left[l] ?? 0) + 1
+  return lines.filter(l => !(left[l]! > 0 && left[l]!--))
 }
 
 export const firstLost = (head: string, next: string, path = '') => align(head, next, path).lost
@@ -118,8 +147,10 @@ const EQ_LINE =
   /__eq__.*\breturn\s+True\b|__eq__\s*=\s*lambda[^:]*:\s*True\b|__ne__.*\breturn\s+False\b|asymmetricMatch.*\breturn\s+true\b|asymmetricMatch\s*[:=]\s*\([^)]*\)\s*=>\s*true\b/
 const EQ_DEF = /\b(def\s+__eq__|asymmetricMatch)\s*\(/
 const EQ_RETURN = /^\s*return\s+(True|true);?\s*$/
-const CONFIG_ADD = /passWithNoTests|--deselect\b|continue-on-error:\s*true\b/
-const CONFIG_ONLY_ADD = /\|\|\s*(true|exit\s+0)\b/
+// Each counts as added only when the file holds more of it than at HEAD, so a line that keeps one can change.
+const CONFIG_ADD = [/passWithNoTests/g, /--deselect\b/g, /continue-on-error:\s*true\b/g]
+const CONFIG_ONLY_ADD = [/\|\|\s*(true|exit\s+0)\b/g]
+const count = (re: RegExp, text: string) => text.match(re)?.length ?? 0
 
 // The test an added line sits in: the nearest function opener above it, if that opener is a test
 // header that HEAD has.
@@ -143,16 +174,20 @@ function decorated(lines: string[], added: boolean[], i: number): string | undef
 const prevCode = (lines: string[], i: number) => lines.slice(0, i).reverse().find(l => l.trim()) ?? ''
 
 // What an edit that turns `head` (undefined for a new file) into `next` may not do to a file of `kind`.
-export function findings(kind: Kind, path: string, head: string | undefined, next: string): Finding | undefined {
-  const a = head === undefined ? { lost: undefined, commented: false, lines: next.split(/\r?\n/), added: [] as boolean[] } : align(head, next, path)
-  if (a.lost !== undefined && kind !== 'shared')
-    return { what: `${a.commented ? 'comments out' : 'changes or removes'} a line that ${path} has at HEAD`, line: a.lost }
+// `opened`: a person approved changing this file's HEAD lines for the turn, so only the content rules run.
+// `had`: the HEAD lines the file lacked before this edit; the HEAD-line rule judges only the lines this edit loses.
+export function findings(kind: Kind, path: string, head: string | undefined, next: string, opened = false, had: string[] = []): Finding | undefined {
+  const a = head === undefined ? { gone: [] as string[], commented: false, lines: next.split(/\r?\n/), added: [] as boolean[] } : align(head, next, path)
+  const lost = minus(a.gone, had)[0]
+  if (lost !== undefined && kind !== 'shared' && !opened)
+    return { what: `${a.commented && lost === a.gone[0] ? 'comments out' : 'changes or removes'} a line that ${path} has at HEAD`, line: lost, lost: true }
   const { lines } = a
   const added = head === undefined ? lines.map(() => true) : a.added
   for (const [i, l] of lines.entries()) {
     if (!added[i]) continue
     if (kind !== 'test') {
-      if (head !== undefined && (CONFIG_ADD.test(l) || (kind === 'config' && CONFIG_ONLY_ADD.test(l))))
+      const rigs = kind === 'config' ? [...CONFIG_ADD, ...CONFIG_ONLY_ADD] : CONFIG_ADD
+      if (head !== undefined && rigs.some(re => count(re, l) && count(re, next) > count(re, head)))
         return { what: `stops tests from running or from failing, in ${path}`, line: l }
       continue
     }
@@ -165,7 +200,7 @@ export function findings(kind: Kind, path: string, head: string | undefined, nex
     if ((EXIT.test(l) || (path.endsWith('.py') && PY_EXIT.test(l))) && nameKind(path)) return { what: `exits the test process with success in ${path}`, line: l }
     if (REPORT.test(l)) return { what: `rewrites the test report in ${path}`, line: l }
     if (EQ_LINE.test(l) || (EQ_RETURN.test(l) && EQ_DEF.test(prevCode(lines, i))))
-      return { what: `adds an equality that is always true in ${path}. For a wildcard, use unittest.mock.ANY or expect.anything()`, line: l }
+      return { what: `adds an equality that is always true in ${path}`, line: l }
   }
   return undefined
 }
