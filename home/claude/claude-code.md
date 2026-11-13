@@ -8,4 +8,5 @@
   what was checked in one list in the project's tracker, else an artifact; read it again after a
   compaction. In chat, mention an item only when it is new or changed; drop it once answered.
 - Decide what can be undone and say what you did. Ask only about what can't be undone or what
-  only the owner can do.
+  only the owner can do. Name a risk beyond your control with its mitigation or an accept, and
+  move on.

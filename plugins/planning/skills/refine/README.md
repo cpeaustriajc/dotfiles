@@ -46,7 +46,7 @@ The skill then loads as `/planning:refine`.
 - Each check in a ticket names who runs it, and with which account, data or control.
 - A fresh subagent, which has not seen Claude's reasoning, reads the first draft as a user, QA, a builder and an attacker.
 - Claude writes the decided fixes to a decision log beside the draft, so a later session can apply them.
-- The loop stops when a re-check finds no new blocker. A question only you can settle is listed once and does not block.
+- The loop stops when a re-check finds no new blocker. A question only you can settle is logged once as a risk, with a mitigation or an accept.
 
 ## Limits
 

@@ -8,8 +8,8 @@
 - Cold read: `Agent` on `model: "opus"` for the first full read, `model: "sonnet"` for each
   re-check. Effort per `~/.claude/CLAUDE.md`.
 - Drafts and decided fixes: `Agent` on `model: "sonnet"`, given the decision log.
-- `/goal`: "the last re-check found 0 blockers, and every open item is listed as my call or an
-  outside party's".
+- `/goal`: "the last re-check found 0 blockers, and every open item is in the risk log with a
+  mitigation or an accept".
 - Ask with `AskUserQuestion`, each option with its confidence.
 - A long session keeps the round, the open decisions and the spikes run in one place I can open,
   per `~/.claude/CLAUDE.md`.

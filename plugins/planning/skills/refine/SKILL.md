@@ -26,11 +26,12 @@ calls only I can make and approve the tracker writes. Commands: `references/clau
 6. Start a cold read per `references/cold-read.md`: a fresh-context reviewer reads the first
    draft in full and blind, and each later round re-checks only the last fixes.
 7. Triage its findings into a decision log beside the draft. A finding only I or an outside party
-   can settle goes to the residual risks once and blocks nothing. Delegate the drafts and the
+   can settle is a risk: log it once with its likelihood, its impact and a mitigation in the draft
+   (a fallback, a check, a flag) or an accept, then stop working it. Delegate the drafts and the
    edits to a cheaper agent, and keep the orchestration yourself.
 8. Repeat steps 4 to 7 for the new blockers until a read finds none. Slips alone never start
    another round.
 
 Then report the rounds and their finding counts, each choice with its confidence and the
-alternative, the steps only a person can do, and the residual risks. Send a security issue to me
+alternative, the steps only a person can do, and the risk log. Send a security issue to me
 privately. After I approve, `tickets` writes the items and `triage` sets their states.
