@@ -8,7 +8,7 @@ again when a model ships. Brackets name the page section.
 
 ## All models
 
-- Give goal, reasons and what done looks like; skip the steps. [Add context; Leverage thinking]
+- Give goal, reasons and what done looks like; skip the steps. [Add context; Leverage thinking] Seen here: a brief dictated a design from an unchecked reading of an API, and the worker redid it.
 - Say what to do, not what to avoid. [Control the format]
 - Ask for the action: "Change this function", not "Can you suggest changes". [Tool usage]
 - Examples: three to five, varied, in <example> tags. [Use examples effectively] Seen here: a single draft text was copied word for word.
