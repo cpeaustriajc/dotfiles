@@ -6,7 +6,7 @@ Steps 1 to 3 of `SKILL.md`, and the checks the repo sweep reuses. Commands: `ref
 
 What this session made, from this conversation: background processes and their PIDs, dev
 servers, containers and volumes, local and remote branches, stashes, edits to tool config
-(including `.claude/launch.json`), evidence (videos, screenshots, `test-results/`, `artifacts/`,
+(including the harness's dev-server or launch config), evidence (videos, screenshots, `test-results/`, `artifacts/`,
 the session's scratchpad directory) and temp files.
 
 ## Checks (step 2)

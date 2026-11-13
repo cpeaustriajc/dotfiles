@@ -3,9 +3,9 @@
 Step 1 of `SKILL.md`, in this order.
 
 1. **Rules.** List the project's rules that bind copy: brand, positioning (what the product is never
-   framed as), legal or billing limits, people who must not appear. Look in the wiki, `CLAUDE.md`
-   and memory notes. Check every script line, on-screen line and post against the list. For a
-   missing rule, ask with an example: "Can it say 'no bank login'? If bank connections may come
+   framed as), legal or billing limits, people who must not appear. Look in the wiki, the project's
+   instruction file (`AGENTS.md`, `CLAUDE.md` or the harness's own) and memory notes. Check every script line, on-screen line and post against the list. For a
+   missing rule, ask with an example: "Can it say 'no account login'? If account connections may come
    later, it would have to be pulled."
 2. **Brief.** One question each, with an example of what it changes: the angle (the hook, the first
    2 s), sound (voice, music, or silent for muted autoplay), the master shape (9:16 first, then 1:1

@@ -54,7 +54,6 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
-- [references/claude-code.md](references/claude-code.md): how the comment reader runs in Claude Code.
 - [references/pr-body.md](references/pr-body.md): the PR title, body and metadata.
 - [references/stacking.md](references/stacking.md): stacked PRs on an open blocker, with commands for plain git, gh stack, Graphite and git-town.
 - [references/evidence.md](references/evidence.md): the rules for screenshots and videos in the Evidence line.

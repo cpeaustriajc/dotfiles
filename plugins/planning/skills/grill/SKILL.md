@@ -6,9 +6,9 @@ description: >
   is worth building, goes to vision.
 ---
 
-Facts are your job, decisions are mine. Ask with `AskUserQuestion`.
-A layout option is a mockup widget (an ASCII `preview` without the visualize tools); a diagram
-is an inline widget (a mermaid block when headless). The work folder is the session's scratchpad;
+Facts are your job, decisions are mine. Ask with the harness's question tool.
+A layout option is a mockup widget (an ASCII mockup in the question option's preview, where the
+question tool has one, when there is no inline visual tool); a diagram is an inline widget (a mermaid block when headless). The work folder is the session's scratchpad;
 a later session never reads an old probe as current.
 
 1. Look the work up; name its size in one line (I can change it):

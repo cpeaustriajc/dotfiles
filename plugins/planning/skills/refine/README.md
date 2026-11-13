@@ -58,4 +58,3 @@ The skill then loads as `/planning:refine`.
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/cold-read.md](references/cold-read.md): the cold reader's brief and findings.
-- [references/claude-code.md](references/claude-code.md): the Claude Code commands.

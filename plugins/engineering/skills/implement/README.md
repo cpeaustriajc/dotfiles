@@ -53,14 +53,13 @@ The skill then loads as `/engineering:implement`.
 - The `implement-gate` mod limits the run to its stop point. It denies a merge or push past it and blocks an early stop.
 - It turns on GitHub auto-merge only when its proof covers every changed file and each bot finding has an answer.
 - It never closes a ticket by hand. The merge closes the ticket.
-- A spec or several tickets need a harness that runs parallel workers. In Claude Code, this is Projects. `references/claude-code.md` lists the plans that have it.
+- A spec or several tickets need a harness that runs parallel workers. In Claude Code, this is Projects.
 
 ## More
 
 - [SKILL.md](SKILL.md) is the method that Claude follows.
 - [references/orchestrate.md](references/orchestrate.md) is the coordinator method for a spec or several tickets.
 - [references/stop-points.md](references/stop-points.md) is the stop point method: the grant, the fix budget, the merge gate and when to ask.
-- [references/claude-code.md](references/claude-code.md) covers the Projects setup, auto-fix and merging, the thread briefs and `/batch`.
 - `ready` and `merged` come from the `full-stop` and `full-send` skills in [t3dotgg/tstack](https://github.com/t3dotgg/tstack/tree/main/skills), read in November 2026. Those skills show no measured results.
 - Claude Code's auto-fix and GitHub auto-merge replace its `babysit-pr` watcher here.
 - The fix budget is new here. It stops an unattended run from spending tokens on a pull request that keeps failing.

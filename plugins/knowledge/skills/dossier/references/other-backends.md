@@ -11,4 +11,4 @@ MCP server or CLI.
   table; each decision is a Doc in a `Decisions` subfolder. Link with the Doc URL.
 - **Anything else:** before writing, tell the user which tool serves each operation and how a
   superseded decision will be marked, and get a yes. Record the mapping in the `"notes"` field of
-  that entry in `~/.claude/dossier.json`.
+  that entry in `${XDG_CONFIG_HOME:-~/.config}/dossier/dossier.json`.

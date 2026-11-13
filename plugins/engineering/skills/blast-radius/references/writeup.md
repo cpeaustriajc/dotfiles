@@ -12,4 +12,4 @@ anything private before it goes anywhere public. Proof levels: `references/metho
 - **Before you merge**: the test at the lowest tier that catches the real bug
   (`../../review-loop/references/tests.md`), including the script you wrote.
 
-Then the risk map, per the adapter.
+Then the risk map, as the reply paragraph of `SKILL.md` describes.

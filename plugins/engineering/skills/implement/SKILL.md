@@ -9,8 +9,7 @@ disable-model-invocation: true
 argument-hint: "<ticket | spec> [commit | pr | ready | merged]"
 ---
 
-Arguments: `$ARGUMENTS`. A spec or several tickets: `references/orchestrate.md`, workers per
-`references/claude-code.md`. One ticket: steps 1 to 7; never reopen the plan; end with proof,
+Arguments: the text after the skill name (`$ARGUMENTS` where the harness fills it in). A spec or several tickets: `references/orchestrate.md`. One ticket: steps 1 to 7; never reopen the plan; end with proof,
 not a question. A stop point word (default `pr`) sets how far it goes: `references/stop-points.md`.
 
 1. **Tracker**: the one the project names, else inferred from the reference. Two: ask.
