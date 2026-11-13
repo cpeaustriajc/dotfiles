@@ -1,7 +1,6 @@
 # Output and preview
 
-Steps 4 and 5 of `SKILL.md`. The harness mechanics are in `claude-code.md`.
-
+Steps 4 and 5 of `SKILL.md`. 
 If nothing survives the gate, say so plainly in Part 1; Parts 2 and 3 still follow.
 
 ## Part 1: Opportunities
@@ -41,5 +40,17 @@ One inline view, one card per proposal, in table order:
 - **Beside the stage:** number, term, location, purpose, values (property, duration, curve).
 - **Pick and Skip** per card, and one button that sends the choices.
 
-Self-contained: no network, no build step. Without an inline view, use the fallback in
-`claude-code.md`.
+Self-contained: no network, no build step. Use the harness's inline visual tool, one HTML view
+holding every card (load its interactive-view guidance first if it has any).
+
+- Each card is a row: stage left, text right (stacked on a narrow screen).
+- The stage's motion is plain CSS (a class-toggled transition; `@keyframes` only when the
+  suggestion is itself a keyframe loop). Replay removes the class, forces a reflow
+  (`el.offsetWidth`), re-adds it. It also plays once on load.
+- Pick and Skip are a toggle per card; nothing is chosen at the start. One Send button sends
+  the reply "Pick 1, 3. Skip 2." back to the chat; an unchosen card counts as Skip.
+- After the view, end the turn. The owner's reply is the pick.
+
+Without an inline view (a terminal or headless run), print the three Parts as text, then end
+with: "Reply with the numbers to pick, for example Pick 1, 3. The rest are skipped." Nobody
+answering is not a pick.

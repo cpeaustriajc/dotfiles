@@ -51,5 +51,4 @@ The skill then loads as `/knowledge:recall`.
 ## More
 
 - [SKILL.md](SKILL.md): the method.
-- [references/claude-code.md](references/claude-code.md): where Claude Code keeps transcripts, the desktop app's session search and the subagent models.
 - [references/miners.md](references/miners.md): how the wide-window subagents split the sessions and what each returns.

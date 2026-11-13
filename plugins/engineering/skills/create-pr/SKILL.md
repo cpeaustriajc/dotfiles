@@ -7,13 +7,16 @@ description: >
 argument-hint: "[draft] [base-branch]"
 ---
 
-Arguments: `$ARGUMENTS`. `draft` opens a draft; any other word is the base. Commands: the code
-host's adapter (`references/github.md`) and the harness's (`references/claude-code.md`).
+Arguments: the text after the skill name (`$ARGUMENTS` where the harness fills it in). `draft` opens a draft; any other word is the base. Commands: the code
+host's adapter (`references/github.md`).
 
 1. No remote: offer to create the matching repo, private or public.
 2. Branch and commit per steps 1 and 2 of `../commit/SKILL.md`; keep existing commits. An open
    blocker PR: stack on it (`references/stacking.md`).
-3. A fresh reader on the cheapest model reads only added or changed comments. A comment stays
+3. A fresh reader on the cheapest model reads only added or changed comments. Hand it the
+   output of `git diff <base>...HEAD` and the comment rule in its prompt, so it needs no tools
+   and sees nothing of this session; the harness's code review and simplify checks do not
+   replace it. A comment stays
    when it names a trap (what breaks if the next reader edits blindly) in at most two sentences
    and about 20 words; the repo's comment rule wins. It lists every other one with file:line and
    why. Cut or shorten each, in one commit; the list is final.

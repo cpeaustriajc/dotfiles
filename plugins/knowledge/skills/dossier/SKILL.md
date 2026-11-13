@@ -3,11 +3,11 @@ name: dossier
 description: >
   This skill should be used when the user says "note that down as a decision", "what did we decide
   about X", "supersede that decision" or "record this research". It keeps the project's dossier:
-  decision and research pages in the team's wiki or Notion. Agent rules: CLAUDE.md.
+  decision and research pages in the team's wiki or Notion. Agent rules: the instruction file.
 ---
 
 Decision log and research pages live where the team writes, not in the code repo (an existing
-`docs/adr/` is followed: `references/shape.md`), and are written for people; agent instructions go in `CLAUDE.md`.
+`docs/adr/` is followed: `references/shape.md`), and are written for people; agent instructions go in the project's instruction file (`AGENTS.md`, `CLAUDE.md` or the harness's own).
 
 1. Find the log in the order of `references/locate.md`.
 2. Read the backend's adapter in `references/`: `github-wiki.md`, `notion.md`, `linear.md`,

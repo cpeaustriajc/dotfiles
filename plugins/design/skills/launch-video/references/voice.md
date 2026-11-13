@@ -10,7 +10,7 @@ Measured results (October 2026); re-check against a current arena:
 
 | Model | Result |
 |---|---|
-| Kokoro-82M | Fast, flat. Mispronounced "lives" and "Renav"; needs Homebrew `espeak-ng`. Pitch-shifting with ffmpeg still sounded synthetic. |
+| Kokoro-82M | Fast, flat. Mispronounced "lives" and the brand name; needs Homebrew `espeak-ng`. Pitch-shifting with ffmpeg still sounded synthetic. |
 | Qwen3-TTS CustomVoice (presets) | Expressive, but Chinese-native speakers sounded like dubbed television to an English listener. |
 | Qwen3-TTS VoiceDesign, one call per line | Natural, but each call designs a new voice: lines sounded like different people. |
 | Qwen3-TTS Base, cloning one clip | One voice, flat: Base takes no delivery instructions. |
@@ -43,7 +43,8 @@ Measured results (October 2026); re-check against a current arena:
 - Stretch a vowel in the direction, not the spelling: "riiight" was read *reeet*; "All right there!"
   with "draw out 'right', the long 'eye' vowel as in 'bright'" worked.
 - Respell names for the voice only, never on screen. Check phonemes first:
-  `espeak-ng -q --ipa -v en-us "Ree-nav"` gives `ɹˈiːnˈæv`. Record the pronunciation in the
+  `espeak-ng -q --ipa -v en-us "<respelled name>"` prints its phonemes; compare them with the
+  intended sound. Record the pronunciation in the
   project's memory.
 - A line the model rambles past (22 s for a 5 s line) is a failed generation: regenerate on another
   seed; do not keep the spelling that caused it.

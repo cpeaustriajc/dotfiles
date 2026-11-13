@@ -21,8 +21,8 @@ Give each the skills list with descriptions. Return every instance, no count lim
 miners pad and miss), each with session id and one short quote:
 
 - **No artifact**: "done", "fixed" or "passing" with no test run, output or screenshot.
-- **Pasted context**: I pasted a ticket, PR, trace or log Claude could have fetched.
-- **Rediscovered**: Claude searched again for a command, flag or path it found in an earlier
+- **Pasted context**: I pasted a ticket, PR, trace or log the agent could have fetched.
+- **Rediscovered**: The agent searched again for a command, flag or path it found in an earlier
   session.
 - **Skipped check**: skipped, deferred, or reported without running.
 - **Missed trigger**: my request matched a skill's description and it did not load.

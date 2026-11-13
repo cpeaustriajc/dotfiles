@@ -41,13 +41,13 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 ## Limits
 
 - It does not commit, push or open a PR.
-- If the project has no verify skill, the verify step is blocked and the report says so.
+- If the project has no verify check, the verify step is blocked and the report says so.
+- The first run in a project writes a copy of the skill to `.claude/skills/review-loop/` with the project's own verify, review and simplify commands. Running setup again regenerates it.
 - It has no settings and no arguments.
 
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
-- [references/claude-code.md](references/claude-code.md): the commands for each step in Claude Code.
 - [references/tests.md](references/tests.md): the test tiers and the proof rule that `implement`, `create-pr` and `break-it` also use.
 
 ### Sources and evidence

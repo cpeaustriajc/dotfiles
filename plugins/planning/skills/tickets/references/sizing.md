@@ -8,7 +8,7 @@ compare the upper estimate with the budget. More than five checks, more than fiv
 body over 1,500 characters and unrelated parts of the code are quick signs to split; the checks
 count and the body length are enforced by `check_tree.py`. A slice that passes all of them can still be too big.
 
-Failure (8ebccc9; one measured run, 2026-11-07, a blog redesign cut into six stacked items): six
+Failure (one measured run, 2026-11-07, a redesign cut into six stacked items): six
 items passed every quick sign. The user had to ask if they fit 200–400k with exploration and
 proof. Measured, each needed 140k–400k, and one did not fit 200k. Measure again when the harness
 or the model changes its fixed or image cost.

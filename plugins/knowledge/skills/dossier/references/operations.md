@@ -19,7 +19,7 @@ immutable except its Status.
 
 **When only part of it is replaced**, the rest still stands, so the old decision stays in force.
 Write its Status as one line: `Partly superseded by [[Decision NNN …]]: <the part replaced>`, for
-example `Partly superseded by [[Decision 010 Polar Web Checkout]]: the App-Store-only rule`. Put the
+example `Partly superseded by [[Decision 010 Web Checkout]]: the single-store-only rule`. Put the
 same words in its index row. The new page's Context names the part it replaces and says the rest
 of the old decision stands. When several decisions each replace a different part, list them in one
 Status line, separated by `;`. Once no part is left, the Status becomes plain `Superseded by`.

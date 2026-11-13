@@ -8,7 +8,7 @@ argument-hint: "[local]"
 disable-model-invocation: true
 ---
 
-Arguments: `$ARGUMENTS`. `local` skips the push.
+Arguments: the text after the skill name (`$ARGUMENTS` where the harness fills it in). `local` skips the push.
 
 1. On the default branch: branch first, by the project's rule, else the tracker's branch name
    for the issue, else a short topic. Add no prefix: the harness and the tracker set their own.

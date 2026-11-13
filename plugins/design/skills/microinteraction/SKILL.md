@@ -11,7 +11,7 @@ argument-hint: "<area: a page, view, component or path>"
 
 # Microinteraction
 
-Area: `$ARGUMENTS`. If empty, ask for one and say nothing else. Adapted from Emil Kowalski (MIT,
+Area: the arguments (the text after the skill name; `$ARGUMENTS` where the harness fills it in). If empty, ask for one and say nothing else. Adapted from Emil Kowalski (MIT,
 `LICENSE`).
 
 Restraint: most candidates fail, and an empty list is a good result. Existing motion goes to
@@ -25,8 +25,7 @@ Restraint: most candidates fail, and an empty list is a good result. Existing mo
    (https://github.com/emilkowalski/skills): the closest term, say when approximate, never invent
    one. Principles: Lasseter, "Principles of Traditional Animation Applied to 3D Computer
    Animation", SIGGRAPH 1987; Thomas and Johnston, "The Illusion of Life", 1981.
-5. Play each proposal inline on a stand-in copy, with Pick and Skip
-   (`references/claude-code.md`).
+5. Play each proposal inline on a stand-in copy, with Pick and Skip (`references/output.md`).
 6. Wait for the pick, then stop: build nothing, start no other command.
 
 If code cannot show how a motion feels, say so.

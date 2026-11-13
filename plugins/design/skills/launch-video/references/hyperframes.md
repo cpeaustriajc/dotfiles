@@ -1,9 +1,10 @@
 # HyperFrames: composing and rendering
 
-Install it as a Claude Code plugin (`claude plugin marketplace add heygen-com/hyperframes`, then
-`claude plugin install hyperframes@hyperframes`) and read its `hyperframes-core` skill and
-`hyperframes/references/plugin-installation.md` before writing a composition. `hf` below is that
-file's launcher, `node <PLUGIN_ROOT>/skills/hyperframes/scripts/plugin-cli.mjs`, never `npx`:
+Install HyperFrames (`heygen-com/hyperframes`) the way this harness installs plugins or skills,
+then read its `hyperframes-core` skill and `hyperframes/references/plugin-installation.md` before
+writing a composition. `hf` below is that file's launcher,
+`node <PLUGIN_ROOT>/skills/hyperframes/scripts/plugin-cli.mjs` (`<PLUGIN_ROOT>` is where it was
+installed), never `npx`:
 
 ```sh
 hf init videos/<project> --non-interactive --example=blank --skill=product-launch-video

@@ -38,8 +38,8 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 
 ## What it does
 
-- It finds the log in this order: a pointer line in your project `CLAUDE.md`, `~/.claude/dossier.json`, GitHub wiki detection, then a question to you.
-- It saves your answer to `~/.claude/dossier.json`, so it asks once.
+- It finds the log in this order: a pointer line in your project `CLAUDE.md`, `${XDG_CONFIG_HOME:-~/.config}/dossier/dossier.json`, GitHub wiki detection, then a question to you.
+- It saves your answer to `${XDG_CONFIG_HOME:-~/.config}/dossier/dossier.json`, so it asks once.
 - It supports these backends: GitHub wiki, Notion, Linear documents, Obsidian vault, and Confluence or Google Docs through MCP.
 - Before its first write, Claude reads your log's newest pages and copies their template, numbering and status words.
 - Claude offers a decision page unasked only for a choice that is hard to undo, surprising, and a real trade-off.

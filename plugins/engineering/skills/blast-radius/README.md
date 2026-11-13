@@ -49,5 +49,4 @@ The skill then loads as `/engineering:blast-radius`.
 - [SKILL.md](SKILL.md): the method.
 - [references/method.md](references/method.md): the proof levels and where to look past the diff.
 - [references/writeup.md](references/writeup.md): the five parts of the writeup and the risk map.
-- [references/claude-code.md](references/claude-code.md): proof scripts and the risk map.
 - [LICENSE](LICENSE): adapted from pstack by Lauren Tan, under the MIT licence.

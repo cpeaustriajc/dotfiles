@@ -42,8 +42,8 @@ again, because the evidence may no longer hold.
 
 ## Tool docs
 
-These docs say how each tool behaves today. Read them before you trust an adapter in
-`references/<tool>.md`.
+These docs say how each tool behaves today. Read them before you trust a code-host or tracker
+adapter in `references/<host>.md`.
 
 - code.claude.com/docs (Claude Code)
 - developers.openai.com/codex (Codex)

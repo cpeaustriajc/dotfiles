@@ -33,7 +33,7 @@ Questions thin out going down, because each level inherits what the one above se
 
 Stop at the first hit:
 
-1. A pointer in the project's `CLAUDE.md` or `AGENTS.md`, for example `Tracker: Linear, team MP`,
+1. A pointer in the project's `CLAUDE.md` or `AGENTS.md`, for example `Tracker: Linear, team ENG`,
    a Jira URL, or `GitHub issues`.
 2. The connected tools: a Linear MCP server means Linear; an Atlassian MCP server or the `acli`
    CLI means Jira; a GitHub remote with `gh` signed in means GitHub.

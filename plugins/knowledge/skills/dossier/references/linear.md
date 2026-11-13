@@ -8,8 +8,8 @@ tool, hand the user the page text to paste. Never fake a write through an issue 
 
 Search replaces the index and the number; a hand-kept index goes stale here.
 
-- **`Decision: <Topic>`**: one document per decision, topic a plain statement ("Decision: Make
-  Offer hidden"). Keep the prefix: a title search lists every decision.
+- **`Decision: <Topic>`**: one document per decision, topic a plain statement ("Decision: Hide
+  the export button"). Keep the prefix: a title search lists every decision.
 - **First body line:** `**Status:** Accepted · **Kind:** Product · **Decided by:** <name or role>
   · **Date:** YYYY-MM-DD`. `Kind` is Architecture, Product, Process or Business. Then Context,
   Decision and Consequences.
