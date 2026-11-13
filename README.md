@@ -140,7 +140,7 @@ The mods are Claude Code plugins. To install a mod, run `claude plugin install <
 |---|---|
 | [hone-nudge](mods/hone-nudge/README.md) | Suggests `/hone <skill>` after you correct Claude during a dotfiles skill. |
 | [memory-lint](mods/memory-lint/README.md) | Denies an auto-memory write that holds task state, short-lived detail, PR or commit references, file:line pointers, code, or too much text. A prune always passes. |
-| [test-guard](mods/test-guard/README.md) | Asks you before an Edit or Write changes or removes a test line at `HEAD`, and refuses it when nobody can approve. Additions pass. `/test-guard allow <path>` lets one file change. |
+| [test-guard](mods/test-guard/README.md) | Off until you run `/test-guard setup` in a project and choose its rules from that project's history. Then it asks you before an Edit or Write rigs a test or, with the full rules, changes a test line at `HEAD`. |
 
 ## painting-craft: before and after
 

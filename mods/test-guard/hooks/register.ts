@@ -1,8 +1,8 @@
 import { atom, read, update } from 'claude-code'
-import type { Hook, Register } from 'claude-code'
+import type { Hook, Register, SessionRepo } from 'claude-code'
 import { align, apply, findings, kindOf, lostLines, maybeGuarded, minus, nameKind } from './check'
 import type { Change, Finding, Kind } from './check'
-import type { Approved, Call, Turn } from '../types'
+import type { Approved, Call, Mode, Profile, Turn } from '../types'
 
 type Api = Parameters<Hook<'tool.call'>>[0]
 
@@ -12,6 +12,12 @@ const NO_BASELINE = [/not a git repository/, /invalid object name '?HEAD'?/, /do
 const USAGE = 'Use /test-guard allow <path> to let Claude change the lines that path has at HEAD, or /test-guard to list allowed paths.'
 // The origins where the user typed the command. A model, a peer session or a coordinator never grants a path.
 const USER = new Set(['composer', 'bridge', 'sdk'])
+// /test-guard setup replays at most this many commits, and stops at CAP guarded file changes.
+const COMMITS = 200
+const CAP = 300
+const CHOICES: Record<string, Mode> = { 'Rig rules only (Recommended)': 'rigs', 'Full rules': 'full', Off: 'off' }
+const NAMED: Record<Mode, string> = { rigs: 'rig rules only', full: 'full rules', off: 'off' }
+const CHOOSE = 'Run `/test-guard setup rigs`, `/test-guard setup full` or `/test-guard setup off` to choose.'
 
 const allowed = atom({ plugin: 'test-guard', key: 'allowed' } as const, [] as string[])
 const turn = atom({ plugin: 'test-guard', key: 'turn' } as const, null as Turn | null)
@@ -102,25 +108,124 @@ async function losses($: Api, root: string, sha: string): Promise<Map<string, st
   return out
 }
 
+// A repository's profile is keyed by its origin remote, else its main working tree, so every worktree shares it.
+const profileKey = (repo: SessionRepo) => `profile:${repo.remote ?? repo.root}`
+const repoName = (repo: SessionRepo) => repo.name ?? repo.root.slice(repo.root.lastIndexOf('/') + 1)
+
+async function profile($: Api): Promise<{ repo: SessionRepo; profile?: Profile } | null> {
+  const repo = await $.session.repo()
+  if (!repo) return null
+  return { repo, profile: (await $.store.get(profileKey(repo))) as Profile | undefined }
+}
+
+// The rules for the session's repository: off with no profile, outside a repo, or when the store fails.
+async function mode($: Api): Promise<Mode> {
+  try {
+    const m = (await profile($))?.profile?.mode
+    return m === 'rigs' || m === 'full' ? m : 'off'
+  } catch (cause) {
+    $.ui.log(`${MOD}: could not read this project's profile (${String(cause)}); the guard is off for this call.`, { to: 'debug' })
+    return 'off'
+  }
+}
+
+type Replay = { commits: number; changes: number; full: number; rigs: number; capped: boolean }
+
+// Runs the project's own recent history through the rules: how many guarded file changes each rule set would ask about.
+async function replay($: Api, root: string): Promise<Replay> {
+  const out: Replay = { commits: 0, changes: 0, full: 0, rigs: 0, capped: false }
+  const log = await $.process.run(['git', 'log', '--no-merges', `-n${COMMITS}`, '--no-renames', '--name-status', '-z', '--format=%x01%H %P'], { cwd: root })
+  if (log.exitCode !== 0) {
+    if (/does not have any commits yet/.test(log.stderr)) return out
+    throw new Error(`git log exited ${log.exitCode}: ${log.stderr.trim()}`)
+  }
+  const show = async (spec: string) => {
+    const r = await $.process.run(['git', 'show', spec], { cwd: root })
+    return r.exitCode === 0 ? r.stdout : undefined
+  }
+  for (const record of log.stdout.split('\x01').slice(1)) {
+    const [header = '', ...files] = record.split('\0')
+    const [sha, parent] = header.trim().split(' ')
+    out.commits++
+    if (!sha || !parent) continue
+    for (let i = 0; i + 1 < files.length; i += 2) {
+      const status = (files[i] as string).trim()
+      const rel = files[i + 1] as string
+      const k = kindOf(rel)
+      if ((status !== 'M' && status !== 'D') || (k !== 'test' && k !== 'config')) continue
+      if (out.changes === CAP) return { ...out, capped: true }
+      const head = await show(`${sha}^:${rel}`)
+      const text = status === 'D' ? '' : await show(`${sha}:${rel}`)
+      if (head === undefined || text === undefined) continue
+      out.changes++
+      if (findings(k, rel, head, text)) out.full++
+      if (findings(k, rel, head, text, true)) out.rigs++
+    }
+  }
+  return out
+}
+
+function replayed(name: string, r: Replay): string {
+  if (r.commits < 2 && !r.capped) return `In ${name}, the history has fewer than 2 commits to learn from.`
+  const last = `the last ${r.commits} commit${r.commits === 1 ? '' : 's'}${r.capped ? ` (cut at ${CAP} file changes)` : ''}`
+  if (!r.changes) return `In ${name}, ${last} changed no test or runner file.`
+  return `In ${name}, ${last} made ${r.changes} changes to test or runner files; ` +
+    `the full rules would have asked you about ${r.full} of them and the rig rules about ${r.rigs}.`
+}
+
+async function setup($: Api, choice: string | undefined): Promise<string> {
+  const repo = await $.session.repo()
+  if (!repo) return 'Not in a git repository.'
+  const name = repoName(repo)
+  const r = await replay($, repo.root)
+  let m = choice === undefined ? undefined : (choice as Mode)
+  if (m === undefined) {
+    let answer: string
+    try {
+      answer = await $.ui.ask(`${replayed(name, r)} Which rules should run here?`, { options: Object.keys(CHOICES), header: MOD })
+    } catch {
+      return `${replayed(name, r)} ${CHOOSE}`
+    }
+    m = CHOICES[answer]
+    if (!m) return `Nothing saved, since the answer was not one of the choices. ${CHOOSE}`
+  }
+  const saved: Profile = { mode: m, at: new Date(await $.clock.now()).toISOString(), commits: r.commits, changes: r.changes, full: r.full, rigs: r.rigs }
+  await $.store.set(profileKey(repo), saved)
+  return `Now ${NAMED[m]} in ${name}. Run /test-guard setup to change it.`
+}
+
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     const result = await next(e)
     await $.command.register({
       name: 'test-guard',
-      description: 'Let Claude change the HEAD lines of one test file, or list the allowed files',
-      argumentHint: 'allow <path>',
+      description: 'Choose the rules test-guard runs in this project, or let Claude change the HEAD lines of one test file',
+      argumentHint: 'setup [rigs|full|off] | allow <path>',
     })
+    try {
+      const p = await profile($)
+      if (p && !p.profile) $.ui.toast('test-guard is off in this project. Run /test-guard setup to choose its rules.')
+    } catch (cause) {
+      $.ui.log(`${MOD}: could not read this project's profile (${String(cause)}).`, { to: 'debug' })
+    }
     return result
   })
 
   on('command.run', { command: 'test-guard' }, async ($, e) => {
     const [verb, ...rest] = e.args.trim().split(/\s+/)
+    const user = !e.origin || USER.has(e.origin.kind)
     if (!verb) {
+      const p = await profile($)
+      const set = p?.profile ? `Rules: ${NAMED[p.profile.mode]} in this project, set ${p.profile.at.slice(0, 10)}.` : 'Not set up in this project; run /test-guard setup.'
       const paths = await read($, allowed)
-      return { text: paths.length ? `Allowed: ${paths.join(', ')}` : `No path is allowed. ${USAGE}` }
+      return { text: `${set}\n${paths.length ? `Allowed: ${paths.join(', ')}` : `No path is allowed. ${USAGE}`}` }
+    }
+    if (verb === 'setup' && rest.length <= 1 && (!rest[0] || rest[0] in NAMED)) {
+      if (!user) return { text: 'Only the user can set up test-guard, by typing /test-guard setup at the prompt.' }
+      return { text: await setup($, rest[0]) }
     }
     if (verb !== 'allow' || !rest.length) return { text: USAGE }
-    if (e.origin && !USER.has(e.origin.kind)) return { text: `${MOD}: only the user can allow a path, by typing /test-guard allow at the prompt.` }
+    if (!user) return { text: `${MOD}: only the user can allow a path, by typing /test-guard allow at the prompt.` }
     const path = absolute(rest.join(' '), await $.session.cwd())
     await update($, allowed, paths => (paths.includes(path) ? paths : [...paths, path]))
     return { text: `Claude can now change the HEAD lines of ${path} for the rest of this session.` }
@@ -133,12 +238,16 @@ export const register: Register = on => {
     if (r.decision === 'deny' || !TOOLS.has(e.tool)) return r
     const input = (e.input ?? {}) as Record<string, unknown>
     if (typeof input.file_path !== 'string' || !maybeGuarded(input.file_path)) return r
+    // Every throw below has a profile of rigs or full behind it, so the catch fails closed.
+    const m = await mode($)
+    if (m === 'off') return r
     const path = absolute(input.file_path, await $.session.cwd())
     const k = await kind($, path)
     if (!k || (await read($, allowed)).includes(path)) return r
     const head = await headText($, path)
     const text = await after($, e.tool, input, path)
-    const open = (await read($, opened)).includes(path)
+    // In rigs mode the HEAD-line rule never runs, as for an opened path.
+    const open = m === 'rigs' || (await read($, opened)).includes(path)
     const before = head !== undefined && (await $.fs.exists(path)) ? String(await $.fs.read(path)) : ''
     const f = findings(k, path, head, text, open, head === undefined ? [] : lostLines(head, before, path))
     const lost = head === undefined ? [] : lostLines(head, text, path)
@@ -184,6 +293,10 @@ export const register: Register = on => {
   on('turn.start', async ($, e, next) => {
     const result = await next(e)
     if (e.agentId !== undefined) return result
+    if ((await mode($)) !== 'full') {
+      await update($, turn, () => null)
+      return result
+    }
     // A refused ask never reaches its tool.call, so its id is left here; an approval opens a path for one turn.
     await update($, calls, () => ({}))
     await update($, opened, () => [])
@@ -202,7 +315,7 @@ export const register: Register = on => {
     const result = await next(e)
     if (result.block !== undefined || result.preventContinuation) return result
     const t = await read($, turn)
-    if (!t) return result
+    if (!t || (await mode($)) !== 'full') return result
     try {
       // A commit in the turn keeps the turn's HEAD as the base; a checkout or a reset takes the new one.
       let sha = t.sha

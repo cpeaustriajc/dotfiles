@@ -9,6 +9,8 @@ type World = {
   head: Record<string, string>
   repo: 'yes' | 'no' | 'unborn' | 'broken' | 'throws'
   root: string
+  // This repository's test-guard profile; the full rules unless a test gives another, or null for none.
+  profile?: { mode: string; at: string } | null
 }
 
 const A = '/repo/tests/a.test.ts'
@@ -25,6 +27,9 @@ const A_HEAD = [
 
 function world(on: On, given: Partial<World> = {}): World {
   const w: World = { ran: [], commands: [], runs: [], disk: { [A]: A_HEAD }, head: { [A]: A_HEAD }, repo: 'yes', root: '/repo', ...given }
+  const profile = 'profile' in given ? given.profile : { mode: 'full', at: '2026-11-13T00:00:00.000Z', commits: 0, changes: 0, full: 0, rigs: 0 }
+  on('session.repo', () => ({ value: { root: w.root, remote: null, internal: false, name: null } }) as never)
+  on('store.get', (_$, e) => ({ value: (e as { key: string }).key === `profile:${w.root}` && profile ? profile : undefined }) as never)
   const isDir = (p: string) => p === w.root || Object.keys(w.disk).some(f => f.startsWith(`${p}/`))
   on('session.cwd', () => ({ value: '/repo' }) as never)
   on('fs.exists', (_$, e) => {
