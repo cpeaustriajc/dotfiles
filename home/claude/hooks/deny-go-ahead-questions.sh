@@ -4,6 +4,7 @@
 # It denies a question once: an agent with a real reason asks it again soon after, and the second
 # time it goes through. A project that wants a sign-off turns the hook off with a
 # file: .claude/wants-sign-off.
+# Failure: agents asked the owner to approve work the owner had already asked for.
 set -u
 
 input="$(cat)"

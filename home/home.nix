@@ -37,6 +37,7 @@ in
     ".claude/CLAUDE.md".text = builtins.readFile ./agents.md + "\n" + builtins.readFile ./claude/claude-code.md;
     ".codex/AGENTS.md".text = builtins.readFile ./agents.md + "\n";
 
+    ".claude/prompting.md".source = link "claude/prompting.md";
     ".claude/statusline-command.sh".source = link "claude/statusline-command.sh";
     ".claude/agents".source = link "claude/agents";
     ".claude/output-styles".source = link "claude/output-styles";
