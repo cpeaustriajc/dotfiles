@@ -17,6 +17,7 @@
     "sessionUrl": false
   },
   "model": "opus",
+  "advisorModel": "fable",
   "fallbackModel": [
     "opus",
     "sonnet"

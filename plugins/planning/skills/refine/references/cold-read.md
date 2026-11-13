@@ -4,9 +4,11 @@ Read this before you brief the cold reader. The steps are in `SKILL.md`.
 
 ## The brief
 
-Give the reader the draft, the sources and the personas below. Keep the read blind: leave out
-your reasoning, the gap list and the earlier drafts. A reader that knows why a line exists skips
-past it.
+The first read is blind and full: give the reader the draft, the sources and the personas below,
+and leave out your reasoning and the gap list. A reader that knows why a line exists skips past it.
+
+Each later read is a re-check: give the last round's findings and the lines the fixes changed.
+The reader checks those, not the whole draft.
 
 The reader takes each persona in turn:
 
@@ -28,12 +30,7 @@ The reader writes them beside the draft, one per line:
 - **slip**: a wrong count or name, or a stale cross-reference. The reader fixes it in the draft.
 - **decision**: two ways that both work. The reader names both and does not pick one.
 
-The reader ends by marking each fix from the last round as fixed, partly fixed or missing.
+A re-check marks each fix as fixed, partly fixed or missing; the last two count as blockers.
 
-## Seen in the session this came from
-
-| Draft | Reader | Found |
-|---|---|---|
-| 10 | Opus, cold read | 25 problems, 9 of them blockers |
-| 11 | Opus, cold read | 23 problems; 19 earlier fixes confirmed, 6 partly fixed |
-| 12 | Sonnet, check and tidy | 4 slips, 1 decision |
+Failure: blind full reads of every draft found 17 to 25 problems a round for nine drafts, most
+of them new wording, so the loop never reached a fixed point.

@@ -125,6 +125,13 @@ Each entry was opened in full text. The level belongs to each claim, as above.
 - Parallel Change. Danilo Sato, 13 May 2014. martinfowler.com/bliki/ParallelChange.html. Expand,
   migrate, contract for backward-incompatible interface changes; two versions coexist until the
   contract is done.
+- Risk register. Wikipedia, n.d. en.wikipedia.org/wiki/Risk_register ; ModelDiplomat glossary
+  modeldiplomat.com/learn/glossary/risk-register. Search summary only, pages not opened. A
+  register holds probability, impact, an owner and a response: avoid, transfer, mitigate or
+  accept. Source of refine's risk log.
+- Do Agents Know What They Can't Do? Evaluating Feasibility Awareness in Tool-Using Agents.
+  arXiv 2605.28532, 2026. arxiv.org/pdf/2605.28532. Search summary only, paper not opened. Agents
+  often keep going on a task they lack a capability for.
 - Figure Drawing for All It's Worth. Andrew Loomis, 1943. archive.org/details/loomis_FIGURE_draw.
   Metadata confirms title, author and year. Pages not read.
 

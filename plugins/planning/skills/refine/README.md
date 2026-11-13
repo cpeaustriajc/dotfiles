@@ -23,7 +23,7 @@ You say: "Refine the request-only checkout tickets."
 3. Three read-only subagents check the code, the tracker and the vendor's test site at the same time.
 4. Claude writes draft 10, with a confidence and a source for each choice.
 5. A fresh subagent reads draft 10 cold and finds 25 problems. Claude fixes them as draft 11.
-6. Rounds go on until a cold read finds only slips. Then Claude reports the choices and waits.
+6. Later reads re-check only those fixes. When one finds no new blocker, Claude reports and waits.
 
 You get a local draft, each choice with its confidence, and the list of what only a person can do.
 
@@ -44,9 +44,9 @@ The skill then loads as `/planning:refine`.
 - Each open behaviour is checked against the sources before Claude asks you about it.
 - Each choice in a draft carries a confidence and a link or command that shows it.
 - Each check in a ticket names who runs it, and with which account, data or control.
-- A fresh subagent, which has not seen Claude's reasoning, reads each draft as a user, QA, a builder and an attacker.
+- A fresh subagent, which has not seen Claude's reasoning, reads the first draft as a user, QA, a builder and an attacker.
 - Claude writes the decided fixes to a decision log beside the draft, so a later session can apply them.
-- The loop stops when a cold read finds only slips, such as a wrong count or name.
+- The loop stops when a re-check finds no new blocker. A question only you can settle is logged once as a risk, with a mitigation or an accept.
 
 ## Limits
 

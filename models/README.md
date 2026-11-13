@@ -13,7 +13,7 @@ T3 counts below are history.
             Opus 5.5 (main)      on every PR
  no Codex   Opus 5.5 (main)  ──▶ review-loop: Claude code review (no GPT sub)
  any day    builder by task: mechanical Haiku 5.5 · specced Sonnet 5.5 · design Opus 5.5
-            researcher: Sonnet 5.5 · Explore: Haiku 5.5 · Fable: hardest calls only
+            researcher: Sonnet 5.5 · Explore: Haiku 5.5 · Fable: advisor
 ```
 
 | Model | Where I lean on it | Evidence |
@@ -40,7 +40,7 @@ falls back to `review-loop` with Claude code review.
 
 | Task | Model |
 |---|---|
-| Plan, spec, decide | Opus 5.5 (main session); when Opus stalls, Fable 5.2 at `high` before Opus at `max`; `xhigh` only for long unattended runs |
+| Plan, spec, decide | Opus 5.5 (main session), with Fable 5.2 as advisor; a Fable session only to coordinate a planned orchestration |
 | Mechanical code | Haiku 5.5 builder, or GPT-6 luna with Codex |
 | Specced code | Sonnet 5.5 builder |
 | Code that needs design calls | Opus 5.5 builder |
@@ -72,7 +72,8 @@ Code docs on the `haiku` alias and Explore.
 ### Picking a thread's model by complexity (Nov 12 2026)
 
 A thread gets the cheapest model that fits its task: mechanical work on Haiku 5.5, specced work on
-Sonnet 5.5, design on Opus 5.5. Fable 5.2 runs only on my word. Evidence:
+Sonnet 5.5, design on Opus 5.5. A Fable 5.2 session runs only on my word; Fable advises any
+session (see below). Evidence:
 
 - Prices per million tokens, input/output (platform.claude.com/docs/en/about-claude/pricing):
   Haiku 5.5 $0.10/$0.50 for a prompt up to 100,000 tokens and $0.50/$2.50 over it; Sonnet 5.5
@@ -97,6 +98,20 @@ Cards: [Haiku 5.5](https://www.anthropic.com/document/claude-haiku-5-5-system-ca
 [Sonnet 5.5](https://www.anthropic.com/document/claude-sonnet-5-5-system-card),
 [Fable 5.2 and Mythos 5.2](https://www.anthropic.com/document/claude-fable-5-2-mythos-5-2-system-card),
 [Opus 5.5](https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf).
+
+### Fable 5.2 as advisor (Nov 13 2026)
+
+`advisorModel: fable` in `home/claude/settings.shared.json` lets every session, subagents too,
+consult Fable 5.2 ([advisor docs](https://code.claude.com/docs/en/advisor.md)). Fable runs a
+session only to coordinate a planned orchestration. Evidence:
+
+- The Request-only checkout planning session ran on Fable 5.2 (marketplace repo, Nov 13). It was
+  a planning request, which these picks give to Opus. Fable did the hands-on work itself (276 Bash
+  calls, 66 Edits, 62 Linear issue reads, 57 subagents) until told "no, orchestrate. a haiku".
+  My corrections there were judgment slips, which coordinating doesn't help with.
+- Each consult reads the whole session at Fable's full input price: "The advisor model's own read
+  of the conversation is not cached." Measured: 41,693 input tokens, 0 cache reads, $0.376 for
+  one consult. A 200K-token session pays about $1.60 a consult.
 
 ## Cache-friendly subagents
 
