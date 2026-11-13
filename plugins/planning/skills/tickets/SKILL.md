@@ -22,3 +22,5 @@ Read `../shape/references/top-down.md` first: its adapter rows say where each pa
 5. Write each item per `references/item-template.md`; type, Bug or wide change per
    `references/item-kinds.md`.
 6. Write blockers first. Run the tree check (`--launch` at Launch).
+
+A set that an agent builds without me goes through `refine` before step 5.

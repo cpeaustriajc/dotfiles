@@ -30,7 +30,7 @@ The skills ship in five plugins. Install only the plugins that you need.
 |---|---|---|
 | `design` | Sign off UI work and motion. Check it against the design, add missing microinteractions, and make launch videos. | ui-polish, microinteraction, launch-video |
 | `engineering` | Prove the work in the real app with unattended builds and loops, user-style testing, change risk, review and PRs. | break-it, review-loop, commit, create-pr, implement, blast-radius, cleanup |
-| `planning` | Turn an idea into tickets. Find and test ideas, write the spec, cut thin slices, and triage them in any tracker. | vision, shape, tickets, grill, scout, triage |
+| `planning` | Turn an idea into tickets. Find and test ideas, write the spec, cut thin slices, and triage them in any tracker. | vision, shape, tickets, grill, scout, refine, triage |
 | `knowledge` | Keep what the team learns: a decision log, research pages, lessons from past sessions, and a recap of recent work. | dossier, hone, recall |
 | `visual` | Paint scenes in code to a gallery standard. | painting-craft |
 
@@ -123,6 +123,7 @@ only when you call it by name.
 | [tickets](plugins/planning/skills/tickets/README.md) | planning | Cuts a spec into thin slices that each cite their requirements, or writes one bug or chore. |
 | [grill](plugins/planning/skills/grill/README.md) | planning | Sizes a change, then asks you rounds of questions with a recommended answer each, until no decision is open. |
 | [scout](plugins/planning/skills/scout/README.md) | planning | Finds an idea worth building, or checks a niche, when apps are cheap to copy. It gives the best idea to `vision`. |
+| [refine](plugins/planning/skills/refine/README.md) | planning | Loops drafted tickets through fact probes and cold reads until nothing is left open, before an agent gets them. |
 | [triage](plugins/planning/skills/triage/README.md) | planning | Sets one state on an issue, for "what needs my attention" or "can an agent take this". Writes an agent brief. |
 | [dossier](plugins/knowledge/skills/dossier/README.md) | knowledge | Keeps decision and research pages where the team writes, such as a GitHub wiki, Notion, Obsidian or Confluence. |
 | [hone](plugins/knowledge/skills/hone/README.md) | knowledge | Finds your repeated corrections in the transcripts on this machine, and proposes where each lesson goes. |
