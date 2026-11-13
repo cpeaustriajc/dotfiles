@@ -13,7 +13,7 @@ T3 counts below are history.
             Opus 5.5 (main)      on every PR
  no Codex   Opus 5.5 (main)  ──▶ review-loop: Claude code review (no GPT sub)
  any day    builder by task: mechanical Haiku 5.5 · specced Sonnet 5.5 · design Opus 5.5
-            researcher: Sonnet 5.5 · Explore: Haiku 5.5 · Fable: advisor on hard calls
+            researcher: Sonnet 5.5 · Explore: Haiku 5.5 · Fable: advisor
 ```
 
 | Model | Where I lean on it | Evidence |
@@ -109,16 +109,9 @@ session only to coordinate a planned orchestration. Evidence:
   a planning request, which these picks give to Opus. Fable did the hands-on work itself (276 Bash
   calls, 66 Edits, 62 Linear issue reads, 57 subagents) until told "no, orchestrate. a haiku".
   My corrections there were judgment slips, which coordinating doesn't help with.
-- Claude Code has no cap on advisor calls: "if you want Claude to consult more or less often
-  during a task, say so in your instructions." A hook can't count them: a logging hook on
-  `PreToolUse`, `PostToolUse` and `PostToolBatch` saw a Bash call and not the advisor call in the
-  same run. So the cap of three consults a task is a written rule, and three is my pick; the
-  [API docs](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool.md)
-  expect two to three calls on a coding task.
 - Each consult reads the whole session at Fable's full input price: "The advisor model's own read
   of the conversation is not cached." Measured: 41,693 input tokens, 0 cache reads, $0.376 for
-  one consult. A 200K-token session pays about $1.60 a consult, so consult at a natural break,
-  not in a retry loop.
+  one consult. A 200K-token session pays about $1.60 a consult.
 
 ## Cache-friendly subagents
 
