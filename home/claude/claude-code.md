@@ -1,5 +1,6 @@
-- Models: Haiku for mechanical work, Sonnet for specced work, Opus for design and judgment, Fable
-  only to coordinate a planned orchestration.
+- Models: Haiku for mechanical work, Sonnet for specced work, Opus for design and judgment. Fable
+  5.2 is the advisor: consult it on a call that is costly to undo, at most three times a task,
+  then ask me. A Fable session only coordinates a planned orchestration.
 - Effort: `high` for Fable; `medium` for Opus and Haiku; Sonnet `medium` on a specced task,
   `high` on a harder or longer one; `high` for code review; one step up when it keeps failing;
   `xhigh` rarely.
