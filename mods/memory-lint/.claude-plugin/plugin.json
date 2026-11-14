@@ -1,5 +1,10 @@
 {
   "name": "memory-lint",
+  "displayName": "Memory Lint",
+  "description": "Keep memory worth relearning — denies a memory write with task state, one-off references or repo detail.",
+  "author": {
+    "name": "John Carlo Austria"
+  },
   "userConfig": {
     "memoryDir": {
       "type": "string",
