@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Open .h files as C, not C++.
+vim.g.c_syntax_for_h = true
+
 local opt = vim.opt
 
 opt.number = true

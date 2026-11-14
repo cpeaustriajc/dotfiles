@@ -10,3 +10,5 @@
 	postBuffer = 524288000
 [core]
 	compression = 9
+[init]
+	defaultBranch = main

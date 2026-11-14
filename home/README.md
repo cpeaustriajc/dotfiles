@@ -83,7 +83,6 @@ tmux reads the system appearance when it loads the config. To apply a new appear
   `/auto-mode-setup`.
 - Machine-only files next to the links: `~/.config/nvim/nvim-pack-lock.json` and each hook in
   `~/.claude/hooks/` that `home.nix` does not list.
-- The playwright-cli skill. To install it, run `playwright-cli install --skills -g`.
 - Programs: `home.nix` installs each app above except Zed, plus `jq` for the hooks, colima, the Docker CLI
   and lazygit. Homebrew can stay installed next to them; the first `PATH` entry wins.
 - Secrets and machine files: the `EMAIL` value, `~/.config/git/local`, `~/.config/gh/hosts.yml`, `~/.ssh/config`,
