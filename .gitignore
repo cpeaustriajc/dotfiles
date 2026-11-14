@@ -3,3 +3,5 @@
 __pycache__/
 **/evals/**/results/
 .claude/work/
+home/claude/hooks/tests/check-facts.replay.cases.jsonl
+home/claude/hooks/tests/check-facts.replay.baseline.json
