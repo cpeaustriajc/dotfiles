@@ -41,6 +41,7 @@ The skill then loads as `/planning:refine`.
 ## What it does
 
 - Claude keeps each draft version private, in your tool's document or artifact feature, or in a temp directory outside the repo.
+- Claude trims each ticket, then cuts what is still too big into items that fit one agent session, before the first read. The approved draft goes to the tracker unchanged.
 - Each open behaviour is checked against the sources before Claude asks you about it.
 - Each choice in a draft carries a confidence and a link or command that shows it.
 - Each check in a ticket names who runs it, and with which account, data or control.

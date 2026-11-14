@@ -14,6 +14,10 @@ calls only I can make and approve the tracker writes. Ask me with the harness's 
    a session temp directory outside the repo (`draft-<n>.md`, `review-<n>.md`, `decisions-<n>.md`). Treat the tracker as read-only until I approve.
 2. Read the trunk, the contract, the ticket threads and the decision log in full; search meeting
    notes and mail for the tickets' terms. Quote my settled answers with their date; never ask again.
+   Size before the first cold read: each item fits one session of its builder and the limits
+   in `../tickets/references/sizing.md`. Trim an oversized ticket first, per its "Make it fit";
+   cut an issue or what is still over into items now, with each order rule as a blocker, so the
+   blind read sees the items `tickets` will write.
 3. List the gaps that would stop a builder or QA: edge cases, race conditions, stale state,
    chained cases, limits and checks nobody can run. Leave wording to the cold read.
 4. Spike each gap before you ask me. Fan the spikes out read-only, each on the cheapest model
@@ -22,7 +26,7 @@ calls only I can make and approve the tracker writes. Ask me with the harness's 
    environment probe, goes to its own session; bring back only its conclusion.
 5. Write draft n+1 to a Definition of Ready. Give each choice a confidence and evidence: a
    permalink, or a command and its output. Make each check testable, with its owner, fixture and
-   environment. Add missing setup as a check on the same ticket.
+   environment. Add missing setup as a check; an item at its size limit is trimmed, then split.
 6. Start a cold read per `references/cold-read.md`: a fresh-context reviewer on the strongest
    model reads the first draft in full and blind, and a mid-tier one re-checks only the last
    fixes each later round.
@@ -38,4 +42,5 @@ place I can open.
 
 Then report the rounds and their finding counts, each choice with its confidence and the
 alternative, the steps only a person can do, and the risk log. Send a security issue to me
-privately. After I approve, `tickets` writes the items and `triage` sets their states.
+privately. After I approve, `tickets` writes the items as they stand and `triage` sets their
+states.
