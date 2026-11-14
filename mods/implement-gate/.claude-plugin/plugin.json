@@ -1,4 +1,9 @@
 {
   "name": "implement-gate",
+  "displayName": "Implement Gate",
+  "description": "Hold /implement to its stop point — denies a merge or push past commit, pr, ready or merged, and blocks an early stop.",
+  "author": {
+    "name": "John Carlo Austria"
+  },
   "types": "./types/index.d.ts"
 }
