@@ -1,12 +1,12 @@
 # test-guard
 
-A mod (a plugin that adds a hook to Claude Code) that stops Claude from passing a failing test by changing the test or runner. You choose its rules for each project, from that project's own history.
+A mod (a plugin that adds a hook to Claude Code) that stops Claude from passing a failing test by changing the test or runner. A small model picks its rules for each project, from that project's own history.
 
 ## Why
 
 An agent with a red test sometimes games it instead of fixing the code (reward hacking). It turns `toHaveBeenCalledTimes(1)` into `toHaveBeenCalled()`, skips the test, or patches the pytest report. The test goes green while the bug stays.
 
-test-guard shows you that edit with the line it changes, and you approve or refuse it. When nobody can approve, the edit is refused. Projects differ: in some, most honest commits change test lines, so the rules start off until you choose.
+test-guard shows you that edit with the line it changes, and you approve or refuse it. When nobody can approve, the edit is refused. Projects differ: in some, most honest commits change test lines, so the model picks the rules from the history.
 
 ## Install
 
@@ -15,14 +15,14 @@ test-guard shows you that edit with the line it changes, and you approve or refu
 /plugin install test-guard@dotfiles
 ```
 
-After you install it, the mod does nothing in a project until you run `/test-guard setup` there. Until then, each session start shows a toast that says so. The mod is optional. `dotfiles` does not install it.
+The first session in each project sets it up. The hook replays the history, Haiku picks the rules from the counts, and a toast names the pick. The mod is optional. `dotfiles` does not install it.
 
 ## Example
 
-1. Run `/test-guard setup` in the project.
-2. The hook replays the last 200 commits through its rules and shows a question with the counts.
-3. Read the counts: for example, 57 test file changes, 31 full-rule asks and 1 rig-rule ask.
-4. Choose `Rig rules only (Recommended)`, `Full rules` or `Off`.
+1. Start a session in a project that has no rules yet.
+2. The hook replays the last 200 commits: for example, 57 test file changes, 31 full-rule asks and 1 rig-rule ask.
+3. Haiku gets the rule sets and those counts, with no text from the repository. It answers `rigs`, `full` or `off`.
+4. A toast says `test-guard: rig rules only in <repo>, picked by the model.` with the counts.
 5. Later, Claude edits `tests/test_notify.py` to add `@pytest.mark.skip` above a test that `HEAD` has.
 6. The approval dialog names the file and the line. Refuse it, and Claude fixes the code.
 
@@ -52,18 +52,20 @@ The hook checks every Edit, MultiEdit and Write to a guarded file at `tool.check
 
 The turn check covers changes that Bash, an MCP tool or a subagent made. At the start of each turn, the hook notes `HEAD` and the lines already gone.
 
-`/test-guard` alone shows the mode, the date you set it, and the allowed files. `/test-guard allow <path>` allows one file until the session ends. The hook takes `setup` and `allow` only when you type them. A model, a peer session or a coordinator gets a refusal.
+`/test-guard` alone shows the mode, the date it was set, who set it, and the allowed files. `/test-guard allow <path>` allows one file until the session ends. The hook takes `setup` and `allow` only when you type them. The session's own model never picks the rules. A model, a peer session or a coordinator gets a refusal.
 
 ## Settings
 
 The choice is stored in the mod's own store, a JSON file under your Claude Code configuration folder. The key is the repository's `origin` remote, or its main working tree when it has no remote, so worktrees share it.
 
-To change it, run `/test-guard setup` again, or `/test-guard setup rigs`, `/test-guard setup full` or `/test-guard setup off` with no question. To turn the mod off everywhere, run `claude plugin disable test-guard@dotfiles`.
+To have the model pick again, run `/test-guard setup`. To choose yourself, run `/test-guard setup rigs`, `/test-guard setup full` or `/test-guard setup off`. If the model call fails or names no rules, nothing is saved, the toast names those three commands, and the next session tries again. To turn the mod off everywhere, run `claude plugin disable test-guard@dotfiles`.
 
 ## Limits
 
 - The replay reads commits, which are coarser than an agent's edits. It stops at 300 guarded file changes and says so (`COMMITS` and `CAP` in `hooks/register.ts`).
 - A profile is per repository, not per branch.
+- The replay runs when the first session in a project starts, so that start can take seconds in a large history.
+- The pick is one Haiku call, billed to the session's credentials.
 - Anyone who can write your Claude Code configuration folder can change the choice. The agent that the mod guards must not have write access there.
 - If the store cannot be read, the hook passes that call and writes a debug log line.
 - It never asks about Bash, because Claude Code decides Bash. A `sed -i`, `rm` or `jest -u` runs, and the turn check reports it.
