@@ -1,3 +1,6 @@
+# Nix and home-manager packages; macOS updates reset the /etc/zshrc block the Nix installer adds.
+[ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ] && . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+
 fpath=(~/.zsh/completions $fpath)
 
 

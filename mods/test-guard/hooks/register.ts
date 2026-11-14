@@ -15,7 +15,14 @@ const USER = new Set(['composer', 'bridge', 'sdk'])
 // /test-guard setup replays at most this many commits, and stops at CAP guarded file changes.
 const COMMITS = 200
 const CAP = 300
-const CHOICES: Record<string, Mode> = { 'Rig rules only (Recommended)': 'rigs', 'Full rules': 'full', Off: 'off' }
+const MODES: readonly Mode[] = ['rigs', 'full', 'off']
+// What the small model reads to pick the rules: the rule sets and the replay counts, never text from the repository.
+const BRIEF = 'test-guard stops a coding agent from passing a failing test by weakening the test. ' +
+  'Each rule that fires on an edit asks a person to approve it. Pick the rules for one repository from its history. ' +
+  'rigs: the content rules only (an added skip, exit, report patch, always-true equality or pass-anyway flag); few honest edits trip them. ' +
+  'full: the rig rules, plus an ask on any change to a line a test or runner file has at HEAD. ' +
+  'off: no rules. ' +
+  'Pick full when it would ask about few of the changes, rigs when full would ask about many, off only when even the rig rules would ask about most.'
 const NAMED: Record<Mode, string> = { rigs: 'rig rules only', full: 'full rules', off: 'off' }
 const CHOOSE = 'Run `/test-guard setup rigs`, `/test-guard setup full` or `/test-guard setup off` to choose.'
 
@@ -173,25 +180,27 @@ function replayed(name: string, r: Replay): string {
     `the full rules would have asked you about ${r.full} of them and the rig rules about ${r.rigs}.`
 }
 
-async function setup($: Api, choice: string | undefined): Promise<string> {
+// With no choice, a small model picks the mode from the replay counts. The session's own model never picks.
+async function setup($: Api, choice: Mode | undefined): Promise<string> {
   const repo = await $.session.repo()
   if (!repo) return 'Not in a git repository.'
   const name = repoName(repo)
   const r = await replay($, repo.root)
-  let m = choice === undefined ? undefined : (choice as Mode)
+  let m = choice
   if (m === undefined) {
-    let answer: string
+    let label: string | undefined
     try {
-      answer = await $.ui.ask(`${replayed(name, r)} Which rules should run here?`, { options: Object.keys(CHOICES), header: MOD })
-    } catch {
-      return `${replayed(name, r)} ${CHOOSE}`
+      label = await $.model.classify(`${BRIEF}\n\n${replayed(name, r)}`, MODES, { model: 'haiku' })
+    } catch (cause) {
+      $.ui.log(`${MOD}: the model could not pick the rules (${String(cause)}).`, { to: 'debug' })
     }
-    m = CHOICES[answer]
-    if (!m) return `Nothing saved, since the answer was not one of the choices. ${CHOOSE}`
+    m = MODES.find(x => x === label)
+    if (!m) return `${MOD}: nothing saved, since the model picked no rules. ${replayed(name, r)} ${CHOOSE}`
   }
-  const saved: Profile = { mode: m, at: new Date(await $.clock.now()).toISOString(), commits: r.commits, changes: r.changes, full: r.full, rigs: r.rigs }
+  const saved: Profile = { mode: m, by: choice ? 'user' : 'model', at: new Date(await $.clock.now()).toISOString(), commits: r.commits, changes: r.changes, full: r.full, rigs: r.rigs }
   await $.store.set(profileKey(repo), saved)
-  return `Now ${NAMED[m]} in ${name}. Run /test-guard setup to change it.`
+  const why = choice ? '' : ` ${replayed(name, r)}`
+  return `${MOD}: ${NAMED[m]} in ${name}, ${choice ? 'as you chose' : 'picked by the model'}.${why} Run \`/test-guard setup rigs\`, \`full\` or \`off\` to change it.`
 }
 
 export const register: Register = on => {
@@ -199,14 +208,14 @@ export const register: Register = on => {
     const result = await next(e)
     await $.command.register({
       name: 'test-guard',
-      description: 'Choose the rules test-guard runs in this project, or let Claude change the HEAD lines of one test file',
+      description: 'Show or change the rules test-guard runs in this project, or let Claude change the HEAD lines of one test file',
       argumentHint: 'setup [rigs|full|off] | allow <path>',
     })
     try {
       const p = await profile($)
-      if (p && !p.profile) $.ui.toast('test-guard is off in this project. Run /test-guard setup to choose its rules.')
+      if (p && !p.profile) $.ui.toast(await setup($, undefined))
     } catch (cause) {
-      $.ui.log(`${MOD}: could not read this project's profile (${String(cause)}).`, { to: 'debug' })
+      $.ui.log(`${MOD}: could not set up this project (${String(cause)}).`, { to: 'debug' })
     }
     return result
   })
@@ -216,13 +225,15 @@ export const register: Register = on => {
     const user = !e.origin || USER.has(e.origin.kind)
     if (!verb) {
       const p = await profile($)
-      const set = p?.profile ? `Rules: ${NAMED[p.profile.mode]} in this project, set ${p.profile.at.slice(0, 10)}.` : 'Not set up in this project; run /test-guard setup.'
+      const set = p?.profile
+        ? `Rules: ${NAMED[p.profile.mode]} in this project, set ${p.profile.at.slice(0, 10)}${p.profile.by ? ` by ${p.profile.by === 'user' ? 'you' : 'the model'}` : ''}.`
+        : 'Not set up in this project; run /test-guard setup.'
       const paths = await read($, allowed)
       return { text: `${set}\n${paths.length ? `Allowed: ${paths.join(', ')}` : `No path is allowed. ${USAGE}`}` }
     }
     if (verb === 'setup' && rest.length <= 1 && (!rest[0] || rest[0] in NAMED)) {
       if (!user) return { text: 'Only the user can set up test-guard, by typing /test-guard setup at the prompt.' }
-      return { text: await setup($, rest[0]) }
+      return { text: await setup($, rest[0] as Mode | undefined) }
     }
     if (verb !== 'allow' || !rest.length) return { text: USAGE }
     if (!user) return { text: `${MOD}: only the user can allow a path, by typing /test-guard allow at the prompt.` }

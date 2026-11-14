@@ -23,6 +23,7 @@ in
     pkgs.colima
     pkgs.docker-client
     pkgs.neovim
+    pkgs.muon # Meson language server for Neovim
     pkgs.tmux
     pkgs.lazygit
   ];

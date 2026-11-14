@@ -1,7 +1,7 @@
 {
   "name": "test-guard",
   "displayName": "Test Guard",
-  "description": "Stop tests changed to pass — you choose its rules per project from that project's own history; it asks you before an edit rigs a test, and refuses when nobody can approve.",
+  "description": "Stop tests changed to pass — a small model picks its rules per project from that project's own history; it asks you before an edit rigs a test, and refuses when nobody can approve.",
   "author": {
     "name": "John Carlo Austria"
   },

@@ -12,8 +12,8 @@ type Project = {
   storeFails: boolean
   history: Commit[]
   disk: Record<string, string>
-  answer: string | null
-  asked: { question: string; header: string; labels: string[] }[]
+  pick: string | Error | undefined
+  picked: { text: string; labels: readonly string[]; model?: string }[]
   sets: { key: string; value: unknown }[]
   toasts: string[]
   logs: string[]
@@ -30,7 +30,7 @@ function project(on: On, given: Partial<Project> = {}): Project {
   const w: Project = {
     root: '/repo', cwd: '/repo', remote: null, inRepo: true, store: {}, storeFails: false,
     history: [{ sha: 'c1', files: { [T]: T_HEAD, [P]: P_HEAD } }], disk: { [T]: T_HEAD, [P]: P_HEAD },
-    answer: null, asked: [], sets: [], toasts: [], logs: [], ran: [], ...given,
+    pick: 'rigs', picked: [], sets: [], toasts: [], logs: [], ran: [], ...given,
   }
   const snap = (i: number) => {
     const files: Record<string, string> = {}
@@ -89,13 +89,12 @@ function project(on: On, given: Partial<Project> = {}): Project {
     }
     return fail(`unexpected ${argv.join(' ')}`)
   })
-  on('tool.call', (_$, e) => {
-    const c = e as { tool: string; questions?: { question: string; header: string; options: { label: string }[] }[] }
-    if (c.tool !== 'AskUserQuestion') return (w.ran.push(e), { result: { ok: true } }) as never
-    const q = c.questions![0]!
-    w.asked.push({ question: q.question, header: q.header, labels: q.options.map(o => o.label) })
-    if (w.answer === null) return { deny: 'dismissed' } as never
-    return { result: { questions: c.questions, answers: { [q.question]: w.answer } } } as never
+  on('tool.call', (_$, e) => (w.ran.push(e), { result: { ok: true } }) as never)
+  on('model.classify', (_$, e) => {
+    const c = e as { text: string; labels: readonly string[]; options?: { model?: string } }
+    w.picked.push({ text: c.text, labels: c.labels, model: c.options?.model })
+    if (w.pick instanceof Error) throw w.pick
+    return { value: w.pick } as never
   })
   on('tool.check', () => ({ decision: 'allow', reason: 'core' }) as never)
   on('command.register', () => ({ value: {} }) as never)
@@ -185,64 +184,70 @@ const HISTORY: Commit[] = [
 ]
 const NUMBERS = 'In repo, the last 6 commits made 4 changes to test or runner files; the full rules would have asked you about 3 of them and the rig rules about 1.'
 
-test('setup: the replay counts a small history, and the question holds the numbers and the three choices', async ($, on) => {
-  const w = project(on, { history: HISTORY, answer: 'Rig rules only (Recommended)' })
+const CHANGE = 'Run `/test-guard setup rigs`, `full` or `off` to change it.'
+
+test('setup: the model picks from the replay counts alone, and the profile records it', async ($, on) => {
+  const w = project(on, { history: HISTORY })
   const out = await run($, 'setup')
-  expect(w.asked).toEqual([{ question: `${NUMBERS} Which rules should run here?`, header: 'test-guard', labels: ['Rig rules only (Recommended)', 'Full rules', 'Off'] }])
-  expect(w.sets).toEqual([{ key: 'profile:/repo', value: { mode: 'rigs', at: '2026-11-13T09:30:00.000Z', commits: 6, changes: 4, full: 3, rigs: 1 } }])
-  expect(out.text).toBe('Now rig rules only in repo. Run /test-guard setup to change it.')
+  expect(w.picked.length).toBe(1)
+  expect(w.picked[0]!.labels).toEqual(['rigs', 'full', 'off'])
+  expect(w.picked[0]!.model).toBe('haiku')
+  expect(w.picked[0]!.text.endsWith(`\n\n${NUMBERS}`)).toBe(true)
+  expect(w.picked[0]!.text).not.toContain('pytest.mark.skip')
+  expect(w.sets).toEqual([{ key: 'profile:/repo', value: { mode: 'rigs', by: 'model', at: '2026-11-13T09:30:00.000Z', commits: 6, changes: 4, full: 3, rigs: 1 } }])
+  expect(out.text).toBe(`test-guard: rig rules only in repo, picked by the model. ${NUMBERS} ${CHANGE}`)
 })
 
-test('setup: each label saves its mode, and free text saves nothing', async ($, on) => {
+test('setup: each label the model names saves its mode', async ($, on) => {
   const w = project(on, { history: HISTORY })
-  for (const [label, mode] of [['Rig rules only (Recommended)', 'rigs'], ['Full rules', 'full'], ['Off', 'off']]) {
-    w.answer = label
+  for (const mode of ['rigs', 'full', 'off']) {
+    w.pick = mode
     await run($, 'setup')
     expect((w.store['profile:/repo'] as { mode: string }).mode).toBe(mode)
   }
-  w.answer = 'only on main'
-  const n = w.sets.length
-  expect((await run($, 'setup')).text).toContain('Nothing saved')
-  expect(w.sets.length).toBe(n)
 })
 
-test('setup: a dismissed question saves nothing and names the three commands', async ($, on) => {
+test('setup: no label, or a failed call, saves nothing and names the three commands', async ($, on) => {
   const w = project(on, { history: HISTORY })
-  const out = await run($, 'setup')
+  for (const pick of [undefined, new Error('api-error 529')]) {
+    w.pick = pick
+    const out = await run($, 'setup')
+    expect(out.text).toBe(`test-guard: nothing saved, since the model picked no rules. ${NUMBERS} Run \`/test-guard setup rigs\`, \`/test-guard setup full\` or \`/test-guard setup off\` to choose.`)
+  }
   expect(w.sets).toEqual([])
-  expect(out.text).toBe(`${NUMBERS} Run \`/test-guard setup rigs\`, \`/test-guard setup full\` or \`/test-guard setup off\` to choose.`)
+  expect(w.logs.some(l => l.includes('the model could not pick the rules'))).toBe(true)
 })
 
-test('setup rigs saves with the replay numbers and no question', async ($, on) => {
+test('setup rigs saves with the replay numbers and no model call', async ($, on) => {
   const w = project(on, { history: HISTORY })
-  await run($, 'setup rigs')
-  expect(w.asked).toEqual([])
-  expect(w.sets).toEqual([{ key: 'profile:/repo', value: { mode: 'rigs', at: '2026-11-13T09:30:00.000Z', commits: 6, changes: 4, full: 3, rigs: 1 } }])
+  expect((await run($, 'setup rigs')).text).toBe(`test-guard: rig rules only in repo, as you chose. ${CHANGE}`)
+  expect(w.picked).toEqual([])
+  expect(w.sets).toEqual([{ key: 'profile:/repo', value: { mode: 'rigs', by: 'user', at: '2026-11-13T09:30:00.000Z', commits: 6, changes: 4, full: 3, rigs: 1 } }])
 })
 
-test('setup from an origin other than the user saves nothing and asks nothing', async ($, on) => {
-  const w = project(on, { history: HISTORY, answer: 'Off' })
+test('setup from an origin other than the user saves nothing and calls no model', async ($, on) => {
+  const w = project(on, { history: HISTORY, pick: 'off' })
   for (const kind of ['peer-send-message', 'coordinator', 'plugin', 'unclassified'])
     for (const args of ['setup', 'setup off']) expect((await run($, args, kind)).text).toContain('Only the user can set up')
-  expect(w.asked).toEqual([])
+  expect(w.picked).toEqual([])
   expect(w.sets).toEqual([])
 })
 
-test('setup stops the replay at 300 file changes and says so', async ($, on) => {
+test('setup stops the replay at 300 file changes and tells the model so', async ($, on) => {
   const files = Object.fromEntries(Array.from({ length: 301 }, (_, i) => [`tests/t${i}.test.ts`, 'a\n']))
   const changed = Object.fromEntries(Object.keys(files).map(p => [p, 'b\n']))
-  const w = project(on, { history: [{ sha: 'c0', files }, { sha: 'c1', files: changed }], answer: 'Off' })
+  const w = project(on, { history: [{ sha: 'c0', files }, { sha: 'c1', files: changed }] })
   await run($, 'setup')
-  expect(w.asked[0]!.question).toContain('the last 1 commit (cut at 300 file changes) made 300 changes to test or runner files; the full rules would have asked you about 300')
+  expect(w.picked[0]!.text).toContain('the last 1 commit (cut at 300 file changes) made 300 changes to test or runner files; the full rules would have asked you about 300')
 })
 
-test('setup still asks in a repo with one commit, or with no test change, and says so first', async ($, on) => {
-  const w = project(on, { answer: 'Off' })
+test('setup still picks in a repo with one commit, or with no test change, and says so', async ($, on) => {
+  const w = project(on)
   await run($, 'setup')
-  expect(w.asked[0]!.question).toBe('In repo, the history has fewer than 2 commits to learn from. Which rules should run here?')
+  expect(w.picked[0]!.text.endsWith('In repo, the history has fewer than 2 commits to learn from.')).toBe(true)
   w.history = [HISTORY[0]!, { sha: 'c1', files: { 'src/a.ts': 'b\n' } }]
   await run($, 'setup')
-  expect(w.asked[1]!.question).toBe('In repo, the last 2 commits changed no test or runner file. Which rules should run here?')
+  expect(w.picked[1]!.text.endsWith('In repo, the last 2 commits changed no test or runner file.')).toBe(true)
 })
 
 test('/test-guard alone shows the mode and the date, or not set up', async ($, on) => {
@@ -250,14 +255,16 @@ test('/test-guard alone shows the mode and the date, or not set up', async ($, o
   expect((await run($, '')).text).toBe('Not set up in this project; run /test-guard setup.\nNo path is allowed. Use /test-guard allow <path> to let Claude change the lines that path has at HEAD, or /test-guard to list allowed paths.')
   w.store['profile:/repo'] = profileOf('rigs')
   expect((await run($, '')).text).toContain('Rules: rig rules only in this project, set 2026-11-01.\n')
+  w.store['profile:/repo'] = { ...profileOf('full'), by: 'model' }
+  expect((await run($, '')).text).toContain('Rules: full rules in this project, set 2026-11-01 by the model.\n')
 })
 
-test('session.start: a toast with no profile; none with a profile, outside a repo, or when the store fails', async ($, on) => {
-  const w = project(on)
+test('session.start: with no profile the model picks and a toast says so; nothing with a profile, outside a repo, or when the store fails', async ($, on) => {
+  const w = project(on, { history: HISTORY })
   const begin = () => ($ as any).session.start({ cwd: '/repo', isInteractive: true })
   await begin()
-  expect(w.toasts).toEqual(['test-guard is off in this project. Run /test-guard setup to choose its rules.'])
-  w.store['profile:/repo'] = profileOf('off')
+  expect(w.toasts).toEqual([`test-guard: rig rules only in repo, picked by the model. ${NUMBERS} ${CHANGE}`])
+  expect((w.store['profile:/repo'] as { by: string }).by).toBe('model')
   await begin()
   w.store = {}
   w.inRepo = false
@@ -266,5 +273,16 @@ test('session.start: a toast with no profile; none with a profile, outside a rep
   w.storeFails = true
   await begin()
   expect(w.toasts.length).toBe(1)
-  expect(w.logs.some(l => l.includes("could not read this project's profile"))).toBe(true)
+  expect(w.picked.length).toBe(1)
+  expect(w.logs.some(l => l.includes('could not set up this project'))).toBe(true)
+})
+
+test('session.start: a failed pick saves nothing, toasts the three commands and picks again next session', async ($, on) => {
+  const w = project(on, { history: HISTORY, pick: new Error('api-error 529') })
+  await ($ as any).session.start({ cwd: '/repo', isInteractive: true })
+  expect(w.sets).toEqual([])
+  expect(w.toasts[0]).toContain('nothing saved, since the model picked no rules')
+  w.pick = 'full'
+  await ($ as any).session.start({ cwd: '/repo', isInteractive: true })
+  expect((w.store['profile:/repo'] as { mode: string }).mode).toBe('full')
 })

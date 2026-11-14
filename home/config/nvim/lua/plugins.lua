@@ -9,7 +9,22 @@ end
 vim.pack.add({
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/neovim/nvim-lspconfig",
 })
+
+-- nvim-lspconfig supplies each server's start command, file types and project root markers.
+--
+-- C: clangd reads the compile database that `meson setup build` writes to
+-- build/compile_commands.json, so it checks code with the project's own flags,
+-- cross-compiling ones included. Homebrew's clangd matches Homebrew's clang version;
+-- the Xcode one (/usr/bin/clangd) is the fallback.
+local brew_clangd = "/opt/homebrew/opt/llvm/bin/clangd"
+if vim.fn.executable(brew_clangd) == 1 then
+  vim.lsp.config("clangd", { cmd = { brew_clangd } })
+end
+
+-- Meson: muon checks meson.build files as you type.
+vim.lsp.enable({ "clangd", "muon" })
 
 -- Setup telescope with sensible defaults
 require("telescope").setup({
