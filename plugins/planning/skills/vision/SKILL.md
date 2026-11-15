@@ -6,7 +6,7 @@ description: >
   wants a product update. No ideation.
 ---
 
-Read `../shape/references/top-down.md` and its adapter's Product row.
+Read `../shape/references/top-down.md` and the Product row of the Tracker section in the project's copy of `shape`.
 
 1. Grill the idea: steps 2 to 6 of `../grill/SKILL.md`, with `../grill/references/rounds.md`
    and the changes in `references/interview.md`. A `scout`

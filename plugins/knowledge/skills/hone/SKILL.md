@@ -6,7 +6,7 @@ description: >
   corrections. Not for one instruction-file edit.
 ---
 
-A correction I made twice is a missing mechanism: propose its cheapest durable fix. Code-host commands: `references/github.md`.
+A correction I made twice is a missing mechanism: propose its cheapest durable fix. On a code host, read a PR's inline review comments too: the conversation view leaves them out.
 
 1. Gather from each source in `references/sources.md`, the lens pass included. Brief each miner
    with `references/miners.md`.

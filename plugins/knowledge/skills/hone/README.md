@@ -63,6 +63,5 @@ To turn the plugin off, run `claude plugin disable knowledge@dotfiles`. This als
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/sources.md](references/sources.md): the four places it gathers from, the scope flags, the lens pass and the trigger proof.
 - [references/miners.md](references/miners.md): the rules each transcript reader gets, and the five lenses.
-- [references/github.md](references/github.md): where the inline PR review comments are.
 - [references/layers.md](references/layers.md): the seven places a lesson can live, strongest first.
 - [scripts/corrections.py](scripts/corrections.py) and [scripts/test_corrections.sh](scripts/test_corrections.sh): the extractor and its test.

@@ -1,7 +1,7 @@
 # Product template
 
 Read this before you write the product. The steps are in `SKILL.md`. Write it in the tracker
-object the adapter names for the Product level:
+object the Tracker section of the project's copy of `shape` names for the Product level:
 
 ```markdown
 Status: Draft | Confirmed (<date>, <approver>)

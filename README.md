@@ -127,9 +127,9 @@ only when you call it by name.
 | [recall](plugins/knowledge/skills/recall/README.md) | knowledge | Gives a brief of recent work from transcripts, git and PRs. |
 | [painting-craft](plugins/visual/skills/painting-craft/README.md) | visual | Draws and paints in code to a gallery standard, with a screenshot review loop. It is not for UI icons, charts or diagrams. |
 
-A skill holds no harness details and no project facts. The details of a code host or tracker go
-in the skill's `references/<host>.md` adapters. A project's own facts stay in that project, or in
-the project copy that the skill's setup writes.
+A skill holds no harness details, no code-host or tracker details and no project facts. Where a
+skill needs them, its Setup writes a project copy, and the agent fills in the host or tracker it
+finds in the project, as `review-loop` does.
 
 ## painting-craft: before and after
 

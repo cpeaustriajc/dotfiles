@@ -37,7 +37,7 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 
 ## What it does
 
-- Claude finds your tracker and reads the matching adapter in `references/`: `linear.md`, `jira.md`, `github.md` or `other-trackers.md`.
+- Claude finds your tracker and writes a project copy of the skill that maps each level onto the tracker's own objects.
 - Claude writes the spec as Draft, with Problem, Done, Requirements, Testing seams, Approaches considered, Out of scope and Open questions. A Confirmed spec needs Out of scope filled and no open questions.
 - Claude writes each requirement as a statement of who does what and what they see, with no endpoint or vendor.
 - Claude sets fixed phases as milestones: Demo, Implementation, Launch and Post Launch. An internal tool has no Demo. Phases carry no dates unless you ask.

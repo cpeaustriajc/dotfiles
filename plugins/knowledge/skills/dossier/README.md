@@ -40,7 +40,8 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 
 - It finds the log in this order: a pointer line in your project `CLAUDE.md`, `${XDG_CONFIG_HOME:-~/.config}/dossier/dossier.json`, GitHub wiki detection, then a question to you.
 - It saves your answer to `${XDG_CONFIG_HOME:-~/.config}/dossier/dossier.json`, so it asks once.
-- It supports these backends: GitHub wiki, Notion, Linear documents, Obsidian vault, and Confluence or Google Docs through MCP.
+- It works with any backend that has tools to read and write pages, such as a wiki, Notion, Obsidian or Confluence.
+- Claude writes a project copy of the skill that records how your backend lays out the log.
 - Before its first write, Claude reads your log's newest pages and copies their template, numbering and status words.
 - Claude offers a decision page unasked only for a choice that is hard to undo, surprising, and a real trade-off.
 - A decision page is never rewritten. To supersede it, Claude changes only the Status line and adds a new page.
@@ -63,7 +64,6 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
-- [references/github-wiki.md](references/github-wiki.md), [notion.md](references/notion.md), [linear.md](references/linear.md), [obsidian.md](references/obsidian.md) and [other-backends.md](references/other-backends.md): one adapter for each backend.
 - [references/locate.md](references/locate.md): the order in which Claude looks for your decision log.
 - [references/publish.md](references/publish.md): the review and the checks before a page is published.
 - [references/shape.md](references/shape.md): the page layout, the decision template and where dates come from.

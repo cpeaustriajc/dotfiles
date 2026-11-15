@@ -59,7 +59,6 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 - [references/evidence.md](references/evidence.md): the rules for screenshots and videos in the Evidence line.
 - [scripts/check_pr_body.py](scripts/check_pr_body.py): the PR body check, with its tests in `scripts/test_check_pr_body.py`.
 - [scripts/check-video.sh](scripts/check-video.sh): fails a video over the upload limit, with grey padding, or frozen for most of its length. Tests: `scripts/test_check_video.sh`.
-- [references/github.md](references/github.md): how to upload screenshots and videos to a GitHub PR or issue.
 
 ### Sources and evidence
 
