@@ -19,20 +19,13 @@ harness loads a repo's skills), or its hooks have no `guard_tests.py`, set up fi
 2. Write a project copy of this skill in that folder with those commands filled in and no Setup
    section, and copy `scripts/tests_kept.py` beside it. Stamp this skill's version or commit in
    the copy's front matter or first line.
-3. Add the test guard, a hook that asks before an edit rigs a test, to the project's hooks per
+3. Add the test guard, a hook that asks before an edit rigs a test, per
    `references/<harness>.md`:
-   - Run `python3 -I scripts/replay.py` in the project. It replays recent commits and prints how
-     often each rule set would have asked.
-   - Pick the mode: `full` when the full rules ask on few honest commits, `rigs` when they ask
-     on many, `off` when even the rig rules ask on many. Name the counts in the report.
-   - Copy `scripts/guard_tests.py` and `scripts/tests_kept.py`, which it imports, into the
-     hooks folder. Beside them write `guard_tests.json`: `mode`, `extra_test_dirs` (the
-     project's other test folder names), `extra_test_names` (path regexes for its other test
-     files), `shared_files` (config files that also hold other settings) and
-     `picked: {"at": <date>, "by": <who>}`.
-   - Wire `scripts/guard_tests.settings.json` with `scripts/merge_hooks.py`.
-   - A hook that refuses a setup edit is not a failure: skip the guard, finish the loop, and
-     report the guard as not set up.
+   - Mode: run `python3 -I scripts/replay.py` in the project. `full` if the full rules ask on few
+     commits, `rigs` if on many, `off` if the rig rules do too. Report the counts.
+   - Copy `scripts/guard_tests.py` and `scripts/tests_kept.py`; write `guard_tests.json` with the
+     keys in the script's docstring; wire `scripts/guard_tests.settings.json`.
+   - A refused setup edit: skip the guard and report it as not set up.
 4. Run the copy, not this file.
 
 Running setup again regenerates the copy and the guard's config; the wiring is left as is.

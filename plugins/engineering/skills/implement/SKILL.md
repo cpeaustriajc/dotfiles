@@ -12,14 +12,11 @@ argument-hint: "<ticket | spec> [commit | pr | ready | merged]"
 Arguments: the text after the skill name (`$ARGUMENTS` where the harness fills it in). A spec or several tickets: `references/orchestrate.md`. One ticket: steps 1 to 7; never reopen the plan; end with proof,
 not a question. A stop point word (default `pr`) sets how far it goes: `references/stop-points.md`.
 
-**Setup**, when the project's hooks have no `stop_gate.py`: add the stop gate, a hook that denies
-a merge or push past the stop point and blocks an early stop, per
-`../review-loop/references/<harness>.md`. Copy `scripts/stop_gate.py`, write `stop_gate.json`
-beside it (`default_branch`; `merge_tools` and `push_tools`, the tool names of the code host
-connector that merge or push; `max_blocks`, default 3), and wire `scripts/stop_gate.settings.json`
-with `../review-loop/scripts/merge_hooks.py`. Run review-loop's setup in the same step, since a
-loaded gate refuses edits to the hooks folder later in the run. A refused setup edit: skip that
-hook and list it under Needs you. Running setup again rewrites `stop_gate.json`.
+**Setup**, when the project's hooks have no `stop_gate.py`: add the stop gate, a hook that holds
+the run to its stop point, per `../review-loop/references/<harness>.md`. Copy
+`scripts/stop_gate.py`, write `stop_gate.json` with the keys in its docstring, and wire
+`scripts/stop_gate.settings.json`. Run review-loop's setup now too: the gate later refuses edits
+to the hooks folder. A refused setup edit: skip that hook, list it under Needs you.
 
 1. **Tracker**: the one the project names, else inferred from the reference. Two: ask.
 2. **Ticket** by URL or key; a bare number matched against a list picks the wrong item. Write
