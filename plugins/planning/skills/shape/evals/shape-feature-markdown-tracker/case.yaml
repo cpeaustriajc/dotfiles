@@ -1,0 +1,10 @@
+schema_version: "1.1"
+name: shape-feature-markdown-tracker
+expected_outcome: |
+  A Draft spec for F2 that quotes the feature, with numbered requirements written as who does what
+  and sees what (including empty and error states) and no endpoints or vendors, a proposed testing
+  seam for the owner to agree, and a project with Demo, Implementation, Launch and Post Launch
+  phases and no build items under the Draft spec. The plan file is not edited before the owner
+  sees the exact change.
+context:
+  scaffold_script: place-files.sh

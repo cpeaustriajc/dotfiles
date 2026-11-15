@@ -1,9 +1,9 @@
 # Tree outline
 
-`scripts/check_tree.py` checks the plan as a tracker-neutral outline, never the tracker itself.
-Read the tree back after writing and save it as JSON in a scratch file. Include only the levels
-the run touched: a `shape` run may omit `product` when the project stands alone, and a `tickets`
-run includes its project and that project's items.
+`scripts/check_tree.py` checks a tracker-neutral outline of the plan, not the tracker. Read the
+tree back after writing and save it as JSON in a scratch file, with only the levels the run
+touched: `shape` may omit `product` for a standalone project; `tickets` includes its project and
+that project's items.
 
 ```json
 {
@@ -44,15 +44,13 @@ run includes its project and that project's items.
 }
 ```
 
-- `status` and `spec_status`: `Draft` or `Confirmed`; the script rejects anything else.
-- `project`: the project's name, or `null` while the feature waits its turn (listed as not yet
-  shaped); `deferred: true` marks a feature or requirement consciously left out of this round.
-- `kind`: `build`, `bug`, `chore` or `prototype`. A prototype item may sit under a Draft spec and
-  cites no requirement.
-- `checks`: the number of checks; `chars`: the whole body's length. The script subtracts the
-  quoted lines of the cited requirements, computed from their `text`, before it applies the
-  1,500 limit.
+- `status`, `spec_status`: `Draft` or `Confirmed`.
+- `project`: the project's name, or `null` while the feature waits (listed as not yet shaped);
+  `deferred: true` marks a feature or requirement left out of this round.
+- `kind`: `build`, `bug`, `chore` or `prototype`; a prototype may sit under a Draft spec and cites
+  no requirement.
+- `checks`: the number of checks; `chars`: the body's length, which must stay under 1,500 once
+  the quoted lines of its cited requirements are subtracted.
 
-Run `python3 <shape>/scripts/check_tree.py <absolute path to the JSON>`, where `<shape>` is this
-skill's folder; add `--launch` when the project is entering Launch, so a
-requirement with no item fails instead of being listed as not yet sliced.
+Run `python3 <shape>/scripts/check_tree.py <absolute path to the JSON>` (`<shape>` is this
+skill's folder). Add `--launch` when the project enters Launch, so an unsliced requirement fails.
