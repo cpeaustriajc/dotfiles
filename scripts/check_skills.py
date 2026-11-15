@@ -34,8 +34,9 @@ EXCEPTIONS = {
 
 
 def files():
+    """Every Markdown file the model may read; README.md is for people, evals/ for the eval runner."""
     for p in sorted(ROOT.glob("plugins/*/skills/*/**/*.md")):
-        if p.name != "README.md" and p.is_file():
+        if p.name != "README.md" and p.is_file() and "evals" not in p.relative_to(ROOT).parts[4:]:
             yield p
 
 

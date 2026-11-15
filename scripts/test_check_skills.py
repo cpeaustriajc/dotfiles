@@ -102,7 +102,7 @@ class Check(unittest.TestCase):
             del check_skills.EXCEPTIONS[(REL, "Codex")]
 
     def test_files_skip_readmes_and_include_nested_folders(self):
-        for rel in ("SKILL.md", "README.md", "references/r.md", "library/x/index.md"):
+        for rel in ("SKILL.md", "README.md", "references/r.md", "library/x/index.md", "evals/case/prompt.md"):
             (self.skill / rel).parent.mkdir(parents=True, exist_ok=True)
             (self.skill / rel).write_text("Text.\n")
         self.assertEqual([str(p.relative_to(self.skill)) for p in files()],
