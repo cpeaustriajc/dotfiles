@@ -4,10 +4,10 @@
 Usage: python3 -I scripts/canary.py [--self-test]
 
 It copies the working tree to a temp repo, adds one failing test with a random name to every test
-file (each mod's *.test.ts, each test_*.py, test_*.sh and *.test.sh), runs `smoke.sh tests` there,
-and requires exit 1 and a `FAILED:` line that names each file (a mod by its folder). A file that
+file (each test_*.py, test_*.sh and *.test.sh), runs `smoke.sh tests` there,
+and requires exit 1 and a `FAILED:` line that names each file. A file that
 stays green has a rigged runner (an early exit, `|| true`, a conftest-style patch) or no runner at
-all. tests/claude-owned/ is left out: `run.py --self-test` proves it.
+all.
 --self-test rigs smoke.sh's run() with `|| true` and two test files with an early exit, and exits
 1 unless the canary catches each.
 
@@ -24,7 +24,6 @@ import sys
 import tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MOD_TEST = re.compile(r"^mods/([^/]+)/hooks/[^/]+\.test\.ts$")
 PY_TEST = re.compile(r"(^|/)test_[^/]*\.py$")
 SH_TEST = re.compile(r"(^|/)test_[^/]*\.sh$|\.test\.sh$")
 GIT_ENV = {"GIT_CONFIG_GLOBAL": os.devnull, "GIT_CONFIG_SYSTEM": os.devnull, "GIT_AUTHOR_NAME": "canary",
@@ -33,9 +32,6 @@ GIT_ENV = {"GIT_CONFIG_GLOBAL": os.devnull, "GIT_CONFIG_SYSTEM": os.devnull, "GI
 
 def inject(path, text, name):
     """The text with one failing test named `name`, or None when the file's style is unknown."""
-    if MOD_TEST.match(path):
-        return (text + f"\nimport {{ test as canaryTest, expect as canaryExpect }} from 'claude-code/testing'\n"
-                f"canaryTest('{name}', () => {{ canaryExpect('{name}').toBe('green') }})\n")
     lines = text.split("\n")
     if PY_TEST.search(path):
         for i in range(len(lines) - 1, -1, -1):
@@ -63,8 +59,7 @@ def inject(path, text, name):
 
 def target(path):
     """The text a FAILED: line must contain for this test file."""
-    m = MOD_TEST.match(path)
-    return f"mods/{m.group(1)}/" if m else path
+    return path
 
 
 def copy_tree(dest):
@@ -88,7 +83,7 @@ def run(dest, files, rig=None):
     name = f"canary-{secrets.token_hex(4)}"
     findings, injected = [], []
     for rel in files:
-        if rel.startswith("tests/claude-owned/") or not (MOD_TEST.match(rel) or PY_TEST.search(rel) or SH_TEST.search(rel)):
+        if not (PY_TEST.search(rel) or SH_TEST.search(rel)):
             continue
         p = os.path.join(dest, rel)
         try:

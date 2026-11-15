@@ -1,8 +1,0 @@
-{
-  "name": "hone-nudge",
-  "displayName": "Hone Nudge",
-  "description": "Turn corrections into fixes — suggests /hone <skill> after you correct Claude during a dotfiles skill.",
-  "author": {
-    "name": "John Carlo Austria"
-  }
-}

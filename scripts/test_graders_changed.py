@@ -22,10 +22,9 @@ def case(name, got, want):
 
 
 case("a skill change is not a grader", graders(["plugins/planning/skills/shape/SKILL.md"]), [])
-case("a mod and its test are judged, not graders", graders(["mods/test-guard/hooks/register.test.ts"]), [])
 for path in (".github/workflows/checks.yml", ".github/workflows/new.yml", "scripts/check_trunk.py", "scripts/canary.py",
              ".claude/skills/verify/drive.sh", ".claude/skills/run-dotfiles/smoke.sh", ".gitattributes",
-             "plugins/engineering/skills/review-loop/scripts/tests_kept.py", "tests/claude-owned/run.py"):
+             "plugins/engineering/skills/review-loop/scripts/tests_kept.py"):
     case(f"{path} is a grader", graders([path]), [path])
 case("a look-alike path is not a grader", graders(["plugins/x/scripts/check.py", "docs/scripts/a.md", "a.gitattributes"]), [])
 
@@ -36,16 +35,15 @@ def cli(stdin):
     return r.returncode, r.stdout.strip()
 
 
-case("the CLI passes a list with no grader", cli("README.md\nmods/x/hooks/register.ts\n"),
+case("the CLI passes a list with no grader", cli("README.md\ndocs/x.md\n"),
      (0, "graders unchanged: 2 files checked"))
 case("the CLI names each grader and exits 1", cli("README.md\nscripts/canary.py\n"),
      (1, "scripts/canary.py: changes a grader; the owner reviews the diff and merges past this check"))
 
 case("a dotfile sorting before .gitattributes is not a grader", graders([".editorconfig", ".git", ".gitattr"]), [])
 case("each grader prefix is a grader", graders([g + "x" for g in (".github/", "scripts/", ".claude/skills/verify/",
-                                                                   ".claude/skills/run-dotfiles/", "tests/claude-owned/")]),
-     [g + "x" for g in (".github/", "scripts/", ".claude/skills/verify/", ".claude/skills/run-dotfiles/",
-                         "tests/claude-owned/")])
+                                                                   ".claude/skills/run-dotfiles/")]),
+     [g + "x" for g in (".github/", "scripts/", ".claude/skills/verify/", ".claude/skills/run-dotfiles/")])
 case("hits keep the list's order", graders(["scripts/b.py", "README.md", ".gitattributes", ".github/a.yml"]),
      ["scripts/b.py", ".gitattributes", ".github/a.yml"])
 case("the CLI skips blank lines and trims", cli("\n  README.md  \n\n"), (0, "graders unchanged: 1 files checked"))

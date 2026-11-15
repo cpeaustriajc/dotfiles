@@ -14,7 +14,7 @@ exit 2  could not check: one line saying why
 
 Findings:
 - a non-blank line that a base test file has is changed, moved or removed, or the file is gone
-  (the line rule of mods/test-guard, here against the base instead of HEAD)
+  (the line rule of guard_tests.py, here against the base instead of HEAD)
 - a test file has fewer tests or assertions than at the base
 - an added line that rigs the run: a skip, only or xfail marker; an early exit in a test file or
   conftest.py; a pytest report or collection hook; an __eq__ override in a test file; `|| true`
@@ -30,21 +30,31 @@ and shell checks inside a helper function. Strings are blanked before matching i
 Go and Rust, so a marker inside a string literal is not a finding.
 """
 import argparse
+import collections
 import difflib
 import os
 import re
 import subprocess
 import sys
 
-# A test file, kept the same as TEST_NAME and TEST_DIR in mods/test-guard/hooks/check.ts so the
-# guard (before an edit) and this check (after it lands) agree; scripts/check_test_names.py fails on drift.
+# A test file. guard_tests.py (the edit hook, before an edit) imports this, so the hook and this
+# check (after it lands) agree; a project adds its own folders and names to the hook's config.
 TEST_NAME = [re.compile(p) for p in (r"\.(test|spec)\.[^/]+$", r"(^|/)test_[^/]*\.(py|sh)$", r"_test\.(py|go)$",
                                      r"(^|/)conftest\.py$", r"\.(snap|golden)$")]
 TEST_DIR = {"test", "tests", "__tests__", "e2e", "__snapshots__", "testdata"}
 
 
-def is_test(path):
-    return any(p.search(path) for p in TEST_NAME) or any(s in TEST_DIR for s in path.split("/")[:-1])
+def is_test_name(path, extra_names=()):
+    """A test file by its name alone. extra_names: regexes a project adds."""
+    return any(p.search(path) for p in TEST_NAME) or any(re.search(p, path) for p in extra_names)
+
+
+def in_test_dir(path, extra_dirs=()):
+    return any(s in TEST_DIR or s in extra_dirs for s in path.split("/")[:-1])
+
+
+def is_test(path, extra_dirs=(), extra_names=()):
+    return is_test_name(path, extra_names) or in_test_dir(path, extra_dirs)
 
 
 LANG = {".py": "py", ".go": "go", ".rs": "rs", ".sh": "sh", ".bash": "sh", ".bats": "sh"}
@@ -137,21 +147,95 @@ def count(text, path):
     return tests, asserts
 
 
-def lost_lines(base, now):
-    """(base line number, text) of each non-blank base line not kept in order: test-guard's rule."""
-    lines = now.splitlines()
-    at, lost = 0, []
-    for n, line in enumerate(base.splitlines(), 1):
+COMMENTED = {".py": "py"}
+COMMENTED.update(dict.fromkeys([".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs", ".mts", ".cts", ".go", ".java", ".kt", ".kts",
+                                ".scala", ".swift", ".rs", ".c", ".cc", ".cpp", ".h", ".hpp", ".cs", ".dart"], "c"))
+WORKFLOW = re.compile(r"(^|/)\.github/workflows/")
+USES = re.compile(r"^(\s*(?:-\s+)?uses:\s*)([^@\s#]+)@\S+(?:\s+#.*)?$")
+
+
+def hidden(lines, kind):
+    """For each line: does it start inside a block comment or a string that spans lines? kind: "c", "py" or "".
+    Quotes that end at the line end are skipped, so `'**/*.ts'` opens no comment. It reads quotes and
+    comments, not regular expressions."""
+    if not kind:
+        return [False] * len(lines)
+    out, open_ = [], ""
+    for line in lines:
+        out.append(open_ != "")
+        i, n = 0, len(line)
+        while i < n:
+            if open_:
+                if line[i] == "\\" and open_ != "*/":
+                    i += 1
+                elif line.startswith(open_, i):
+                    i += len(open_) - 1
+                    open_ = ""
+                i += 1
+                continue
+            two, three = line[i:i + 2], line[i:i + 3]
+            if (kind == "c" and two == "//") or (kind == "py" and line[i] == "#"):
+                break
+            if kind == "c" and two == "/*":
+                open_ = "*/"
+                i += 1
+            elif kind == "c" and line[i] == "`":
+                open_ = "`"
+            elif kind == "py" and three in ('"""', "'''"):
+                open_ = three
+                i += 2
+            elif line[i] in "\"'":
+                q = line[i]
+                i += 1
+                while i < n and line[i] != q:
+                    if line[i] == "\\":
+                        i += 1
+                    i += 1
+            i += 1
+    return out
+
+
+def same_step(a, b):
+    """Two workflow lines `uses: <name>@<ref>` with the same name: a new ref or comment keeps the line."""
+    x, y = USES.match(a), USES.match(b)
+    return bool(x and y and x.group(1) == y.group(1) and x.group(2) == y.group(2))
+
+
+Aligned = collections.namedtuple("Aligned", "gone commented added lines")
+
+
+def align(base, now, path=""):
+    """Matches each non-blank base line, in order, to a line of `now` with the same text. With a path, a
+    line must also keep its comment state (a line moved into a block comment is lost), and in a workflow
+    file a `uses:` step keeps its line under a new ref. gone: (base line number, text) of each base line
+    with no match; commented: the first one is still there, inside a comment; added: per line of `now`,
+    whether no base line took it."""
+    lines, kind = now.splitlines(), COMMENTED.get(os.path.splitext(path)[1], "")
+    nh = hidden(lines, kind)
+    base_lines = base.splitlines()
+    bh = hidden(base_lines, kind)
+    steps = bool(WORKFLOW.search(path.replace("\\", "/")))
+    added = [True] * len(lines)
+    gone, commented, at = [], False, 0
+    for i, line in enumerate(base_lines):
         if not line.strip():
             continue
         j = at
-        while j < len(lines) and lines[j] != line:
+        while j < len(lines) and not ((lines[j] == line or (steps and same_step(line, lines[j]))) and nh[j] == bh[i]):
             j += 1
-        if j == len(lines):
-            lost.append((n, line))
-        else:
+        if j < len(lines):
+            added[j] = False
             at = j + 1
-    return lost
+            continue
+        if not gone:
+            commented = not bh[i] and any(l == line and nh[k] for k, l in enumerate(lines))
+        gone.append((i + 1, line))
+    return Aligned(gone, commented, added, lines)
+
+
+def lost_lines(base, now, path=""):
+    """(base line number, text) of each non-blank base line not kept in order: the line rule of guard_tests.py."""
+    return align(base, now, path).gone
 
 
 def added_lines(base, now):

@@ -50,7 +50,10 @@ The skill then loads as `/engineering:implement`.
 - A stop point word after the ticket sets how far it goes: `commit`, `pr` (the default), `ready` or `merged`.
 - It merges a pull request only when you type `merged`. Otherwise you merge it.
 - With `ready` or `merged`, Claude Code's auto-fix handles CI failures and review comments. `references/stop-points.md` sets the fix budget.
-- The `implement-gate` mod limits the run to its stop point. It denies a merge or push past it and blocks an early stop.
+- The first run in a project adds a stop gate hook to its committed hooks, set to its default branch and code host tools. The hook denies a merge or push past the stop point and blocks an early stop, in a one-repository cloud session too. A cloud thread in a project runs no project hooks, so a spec worker there has only the skill text.
+- Type `/implement-gate` to see the stop point, or `/implement-gate off` to end the gate. The hook reads these from your prompt, so the model never sees them.
+- An interrupt does not end the gate. Type `/implement-gate off` if you take over.
+- The gate reads Bash commands as text. A merge from a script file, or a Bash edit of its config, passes.
 - It turns on GitHub auto-merge only when its proof covers every changed file and each bot finding has an answer.
 - It never closes a ticket by hand. The merge closes the ticket.
 - A spec or several tickets need a harness that runs parallel workers. In Claude Code, this is Projects.

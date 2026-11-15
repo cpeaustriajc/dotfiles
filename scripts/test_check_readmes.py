@@ -11,7 +11,7 @@ import io  # noqa: E402
 import tempfile  # noqa: E402
 
 import check_readmes  # noqa: E402
-from check_readmes import MOD_HEADINGS, SKILL_HEADINGS, check, folders, main  # noqa: E402
+from check_readmes import SKILL_HEADINGS, check, folders, main  # noqa: E402
 import subprocess  # noqa: E402
 
 # The limits from .claude/rules/wiki.md, pinned here so a changed limit fails a test.
@@ -170,19 +170,15 @@ class Check(unittest.TestCase):
         errors = self.readme("You just run it.\n")
         self.assertEqual(errors, [f'plugins/p/skills/s/README.md:{self.HEAD_LINES + 1}: banned "just" (see .claude/rules/wiki.md)'])
 
-    def test_folders_lists_skills_then_mods(self):
-        (self.root / "mods" / "m").mkdir(parents=True)
-        self.assertEqual([(d.name, h) for d, h in folders()], [("s", SKILL_HEADINGS), ("m", MOD_HEADINGS)])
+    def test_folders_lists_skills(self):
+        self.assertEqual([(d.name, h) for d, h in folders()], [("s", SKILL_HEADINGS)])
 
     def test_main_exit_and_output(self):
-        (self.root / "mods" / "m").mkdir(parents=True)
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             self.assertEqual(main(), 1)
-        self.assertEqual(out.getvalue().splitlines(), ["plugins/p/skills/s: no README.md (see .claude/rules/wiki.md)",
-                                                       "mods/m: no README.md (see .claude/rules/wiki.md)"])
+        self.assertEqual(out.getvalue().splitlines(), ["plugins/p/skills/s: no README.md (see .claude/rules/wiki.md)"])
         self.readme()
-        (self.root / "mods" / "m").rmdir()
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             self.assertEqual(main(), 0)

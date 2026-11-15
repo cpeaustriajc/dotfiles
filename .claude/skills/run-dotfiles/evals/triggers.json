@@ -12,7 +12,7 @@
   "should_trigger": true
  },
  {
-  "query": "test all the mods and validate the marketplace",
+  "query": "run the script tests and validate the marketplace",
   "should_trigger": true
  },
  {

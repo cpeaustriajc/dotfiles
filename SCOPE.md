@@ -18,12 +18,12 @@ harness where the user runs agents:
 An idea goes on this list only with a reason. Keep the list current, and edit each
 line in place.
 
-- **Skill-fire log mod**: `/skill-doctor` already reports the uses, the last-used date and the
+- **Skill-fire log**: `/skill-doctor` already reports the uses, the last-used date and the
   7-day tokens of each skill.
 - **Careful mode** (hooks that run only while a skill runs): a hook in skill frontmatter stays on
   for the rest of the session after the skill starts. See "Hooks in skills and agents" in the
   [hooks docs](https://code.claude.com/docs/en/hooks). Also, a deny would override the
-  permission mode, and a mod never does that.
+  permission mode, and a plugin never does that.
 - **Multi-model panels** (arena, a model mix in a review, cross-family judges): they need
   models from another vendor.
 - **Autopilot**: it needs a fleet of agents.

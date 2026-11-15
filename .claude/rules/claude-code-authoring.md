@@ -1,7 +1,6 @@
 ---
 paths:
   - "plugins/**"
-  - "mods/**"
   - "**/.claude-plugin/*.json"
   - "AGENTS.md"
 ---
@@ -18,10 +17,6 @@ for it. Use what Claude Code ships before writing your own checks.
 ## Check a plugin's components and token cost
 
 - `claude plugin details <plugin>` for a plugin's components and projected token cost.
-
-## Run a mod's hook tests
-
-- `claude plugin test mods/<mod>` for a mod's hook tests.
 
 ## Audit the instruction files
 
