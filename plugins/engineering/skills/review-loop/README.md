@@ -43,11 +43,16 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 - It does not commit, push or open a PR.
 - If the project has no verify check, the verify step is blocked and the report says so.
 - The first run in a project writes a copy of the skill to `.claude/skills/review-loop/` with the project's own verify, review and simplify commands. Running setup again regenerates it.
+- The first run also adds the test guard hook to `.claude/hooks/`. The hook asks you before an edit skips, weakens or rigs a test. Setup replays the project's recent commits and picks the rules that would not have asked on most honest ones: `full`, `rigs` or `off`. The pick goes in `.claude/hooks/guard_tests.json`, which you can edit. It runs in cloud sessions too, because it is in the committed `.claude/settings.json`.
+- The model that runs setup picks the guard's mode from the counts, and you review the pick in its commit. Type `/test-guard` to see the mode, or `/test-guard allow <path>` to allow one file for the session.
+- With nobody to approve, as in a headless run, an ask is refused.
+- The guard checks Edit and Write. A Bash command that changes a test or the guard's config runs; at `full`, the turn check reports a lost test line.
 - It has no settings and no arguments.
 
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
+- [references/claude-code.md](references/claude-code.md): where Claude Code runs a project hook, used by this setup and by `implement`'s.
 - [references/tests.md](references/tests.md): the test tiers and the proof rule that `implement`, `create-pr` and `break-it` also use.
 
 ### Sources and evidence

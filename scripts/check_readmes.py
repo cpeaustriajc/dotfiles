@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Checks that each skill and mod folder has a README.md that follows .claude/rules/wiki.md."""
+"""Checks that each skill folder has a README.md that follows .claude/rules/wiki.md."""
 import pathlib
 import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SKILL_HEADINGS = ["When to use it", "Example", "Install", "What it does", "Limits", "More"]
-MOD_HEADINGS = ["Why", "Install", "Example", "What it does", "Settings", "Limits", "More"]
 MAX_LINES = 100
 MAX_WORDS = 25
 MAX_STEP_WORDS = 20
@@ -16,8 +15,6 @@ BANNED = re.compile(r"\b(?:simply|just|powerful|seamless)\b|\b(?:e\.g|i\.e)\.|[\
 def folders():
     for d in sorted(ROOT.glob("plugins/*/skills/*/")):
         yield d, SKILL_HEADINGS
-    for d in sorted(ROOT.glob("mods/*/")):
-        yield d, MOD_HEADINGS
 
 
 def words(text):

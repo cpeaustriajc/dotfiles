@@ -1,21 +1,19 @@
 # dotfiles
 
-This repo holds CJ's home folder config and CJ's skills and mods for coding agents.
+This repo holds CJ's home folder config and CJ's skills for coding agents.
 
 - The home folder config is a [home-manager](https://nix-community.github.io/home-manager/)
   config. [`flake.nix`](flake.nix) and [`home/`](home/README.md) put the Claude Code, Codex,
   zsh, nvim and tmux config in `~`.
-- The skills are in `plugins/`, in five plugins. The mods are in `mods/`.
-  [`marketplace.json`](.claude-plugin/marketplace.json) lists both for Claude Code.
+- The skills are in `plugins/`, in five plugins.
+  [`marketplace.json`](.claude-plugin/marketplace.json) lists them for Claude Code.
 
 A skill is a method that an agent reads when a task needs it. Each skill must work in each
-agent tool that CJ uses. [Success in SCOPE.md](SCOPE.md#success) lists these tools. A mod is a
-set of hooks for Claude Code only.
+agent tool that CJ uses. [Success in SCOPE.md](SCOPE.md#success) lists these tools.
 
 - [Home](home/README.md): set up a new machine, change a home file, and sync `settings.json`.
 - [Install](#install): install the skills in Claude Code or in another agent tool.
 - [Skills](#skills): each skill, its plugin, and what it does.
-- [Mods](#mods): each mod and what it does.
 - [Models](models/README.md): which model does what.
 - [Scope](SCOPE.md): what dotfiles is, its success criteria, and the ideas it rejects, each with
   its reason.
@@ -72,7 +70,7 @@ that you can copy into a session.
 ### Claude Code
 
 1. Add the marketplace.
-2. Install each plugin that you need, and each mod that you need.
+2. Install each plugin that you need.
 
 ```bash
 claude plugin marketplace add cpeaustriajc/dotfiles
@@ -82,7 +80,7 @@ claude plugin marketplace add cpeaustriajc/dotfiles
 claude plugin install engineering@dotfiles
 ```
 
-To edit a skill or a mod, add your clone as the marketplace in place of the repo:
+To edit a skill, add your clone as the marketplace in place of the repo:
 `claude plugin marketplace add ~/Projects/dotfiles`.
 
 If you installed plugins from the `cj-stack` marketplace before, follow
@@ -98,8 +96,7 @@ scripts/link-skills.sh
 ```
 
 To link them into another folder, give the folder as the first argument. Never give
-`~/.claude/skills`, because the plugins already list the skills there. The mods do not work
-outside Claude Code.
+`~/.claude/skills`, because the plugins already list the skills there.
 
 ## Skills
 
@@ -131,18 +128,9 @@ only when you call it by name.
 | [painting-craft](plugins/visual/skills/painting-craft/README.md) | visual | Draws and paints in code to a gallery standard, with a screenshot review loop. It is not for UI icons, charts or diagrams. |
 
 A skill holds no harness details and no project facts. The details of a code host or tracker go
-in the skill's `references/<host>.md` adapters. A project's own facts stay in that project, or in
+in the skill's `references/<host>.md` adapters, and a harness's details, such as where a project
+hook goes, in `references/<harness>.md`. A project's own facts stay in that project, or in
 the project copy that the skill's setup writes.
-
-## Mods
-
-The mods are Claude Code plugins. To install a mod, run `claude plugin install <mod>@dotfiles`.
-
-| Mod | What it does |
-|---|---|
-| [hone-nudge](mods/hone-nudge/README.md) | Suggests `/hone <skill>` after you correct Claude during a dotfiles skill. |
-| [memory-lint](mods/memory-lint/README.md) | Denies an auto-memory write that holds task state, short-lived detail, PR or commit references, file:line pointers, code, or too much text. A prune always passes. |
-| [test-guard](mods/test-guard/README.md) | Off until you run `/test-guard setup` in a project and choose its rules from that project's history. Then it asks you before an Edit or Write rigs a test or, with the full rules, changes a test line at `HEAD`. |
 
 ## painting-craft: before and after
 

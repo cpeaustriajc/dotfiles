@@ -41,7 +41,31 @@ This guide removes the old names and installs the new plugins. It also fixes the
 | `linear-gate@cj-stack` | Nothing. A connector in the Claude desktop app sets its own tool permissions. |
 | `work-folder@cj-stack` | Nothing. The marketplace has no replacement. |
 
-The mods `hone-nudge`, `memory-lint` and `test-guard` keep their names. Do not change them.
+The mods `hone-nudge` and `memory-lint` were removed later; see the next section.
+
+## The mods are gone
+
+The repo no longer has mods. Uninstall each one you installed, and delete its line from
+`enabledPlugins`.
+
+### implement-gate and test-guard are now project hooks
+
+On 2026-11-15 the mods `implement-gate` and `test-guard` left the marketplace. A cloud session runs the
+hooks in a repo's committed `.claude/settings.json`; its docs do not say it runs a mod. The `implement` skill now sets up a stop gate hook, and `review-loop`
+sets up a test guard hook, in the project's committed `.claude/settings.json`, with a config
+fitted to that project. To move:
+
+1. Uninstall the mods: `claude plugin uninstall implement-gate@dotfiles` and
+   `claude plugin uninstall test-guard@dotfiles`.
+2. Delete their lines from `enabledPlugins` in your settings files.
+3. Run `/implement` or `review-loop` once in each project; its setup adds the hook.
+
+### hone-nudge and memory-lint are removed
+
+On 2026-11-15 the mods `hone-nudge` and `memory-lint` were removed with no replacement. To move,
+run `claude plugin uninstall hone-nudge@dotfiles` and `claude plugin uninstall memory-lint@dotfiles`.
+Then delete their lines from `enabledPlugins`. The `/hone` skill still works; you start it
+yourself.
 
 ## Remove the old names
 
@@ -54,7 +78,7 @@ Do these steps for your user settings first. Then do them in each project that n
    ```
 
 2. In each file from step 1, delete the lines of the old names from `enabledPlugins`. Keep the
-   lines of the mods.
+   lines of the dotfiles plugins.
 3. Uninstall each old plugin that is still installed. For your user settings, run the command in
    any folder:
 
@@ -110,9 +134,9 @@ To fix the error, give cj-stack the same source in both files. Use the GitHub so
 }
 ```
 
-With the GitHub source, a project runs your change to a mod only after you push it and run
+With the GitHub source, a project runs your change to a plugin only after you push it and run
 `claude plugin marketplace update cj-stack`. To try a change before you push it, start a session
-with the mod folder: `claude --plugin-dir ~/Projects/dotfiles/mods/<mod>`.
+with the plugin folder: `claude --plugin-dir ~/Projects/dotfiles/plugins/<plugin>`.
 
 ## Check the result
 

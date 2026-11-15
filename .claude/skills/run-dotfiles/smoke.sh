@@ -20,12 +20,6 @@ installed() {
 validate() { say "validate"; run claude plugin validate .; }
 
 tests() {
-  for mod in mods/*/; do
-    compgen -G "$mod/hooks/*.test.ts*" >/dev/null || continue
-    say "mod tests: $mod"; run bash -c "set -o pipefail; claude plugin test '$mod' 2>&1 | tail -3"
-  done
-  say "claude-owned: no mod denies or approves what Claude Code decides"
-  run python3 tests/claude-owned/run.py
   say "checks: READMEs, typed skills, tracker terms, trunk (scripts/check_*.py)"
   for c in scripts/check_*.py; do run python3 -I "$c"; done
   say "tests kept: no base test line changed or removed, no count dropped, no rig added"
@@ -53,18 +47,15 @@ PY
   local t
   # The list comes on fd 3: a test that reads stdin (ffmpeg does) would swallow the file names after it.
   while IFS= read -r t <&3; do
-    [[ -f "$t" && "$t" != tests/claude-owned/* ]] || continue
+    [[ -f "$t" ]] || continue
     if [[ "$t" == *.py ]]; then run "${pyt[@]}" -I "$t"; else run bash "$t"; fi
   done 3< <(git ls-files --cached --others --exclude-standard -- ':(glob)**/test_*.py' ':(glob)**/test_*.sh' ':(glob)**/*.test.sh')
 }
 
-# Proves the graders go red: a failing test in every file, rigged copies, decoy mods.
+# Proves the graders go red: a failing test in every file, rigged copies.
 selftest() {
   say "canary: every test file goes red in smoke.sh tests"; run python3 -I scripts/canary.py
   say "canary self-test: a rigged run() and early exits are caught"; run python3 -I scripts/canary.py --self-test
-  # Only the summary: the decoys' own ✘ lines are the expected red, not failures.
-  say "claude-owned self-test: decoy mods are caught"
-  run bash -c "set -o pipefail; python3 tests/claude-owned/run.py --self-test | tail -1"
 }
 
 doctor() {

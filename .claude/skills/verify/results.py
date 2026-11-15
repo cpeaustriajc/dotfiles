@@ -20,7 +20,6 @@ SUMMARY = re.compile(r"^(\d+) passed, (\d+) failed$")  # this repo's script test
 UNITTEST_RAN = re.compile(r"^Ran (\d+) tests? in ")
 UNITTEST_FAILED = re.compile(r"^FAILED \(([^)]*)\)$")
 PYTEST = re.compile(r"^=+ (.*\b(?:passed|failed|error|errors)\b.*) in [\d.]+s")
-STEP = re.compile(r"^\[\d+/\d+\] (✔|✘) ")  # tests/claude-owned/run.py
 SELF_TEST = re.compile(r"^SELF-TEST PASSED: all (\d+) ")
 CHECK_OK = re.compile(r"^(?:[\w-]+(?: [\w-]+)* ok|PASSED: .+|✔ Validation passed.*|tests kept: \d+ tests.*|canary ok: \d+ test files went red)$")
 CHECK_FAILED = re.compile(r"^(?:[\w-]+(?: [\w-]+)* FAILED|FAILED\b.*|SELF-TEST FAILED.*|✘ Validation failed.*)$")
@@ -54,8 +53,6 @@ def parse(text):
             passed += nums.get("passed", 0)
             failed += nums.get("failed", 0) + nums.get("error", 0) + nums.get("errors", 0)
             lines += 1
-        elif m := STEP.match(line):
-            passed, failed, lines = passed + (m.group(1) == "✔"), failed + (m.group(1) == "✘"), lines + 1
         elif m := SELF_TEST.match(line):
             passed, lines = passed + int(m.group(1)), lines + 1
         elif CHECK_OK.match(line):

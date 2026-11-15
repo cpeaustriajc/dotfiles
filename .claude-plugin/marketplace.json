@@ -5,7 +5,7 @@
     "url": "https://github.com/cpeaustriajc"
   },
   "metadata": {
-    "description": "CJ's skills and mods for Claude Code: planning in any tracker, a decision log, proving work in the real app, and guards for secrets, memory and Linear writes."
+    "description": "CJ's skills for Claude Code: planning in any tracker, a decision log, and proving work in the real app."
   },
   "plugins": [
     {
@@ -31,7 +31,7 @@
       "name": "engineering",
       "displayName": "Engineering",
       "description": "Prove the work in the real app — unattended builds and loops, user-style testing, change risk, review and PRs.",
-      "version": "3.3.0",
+      "version": "3.4.0",
       "author": {
         "name": "John Carlo Austria"
       },
@@ -106,50 +106,6 @@
         "illustration",
         "painting"
       ]
-    },
-    {
-      "name": "hone-nudge",
-      "displayName": "Hone Nudge",
-      "description": "Turn corrections into fixes — suggests /hone <skill> after you correct Claude during a dotfiles skill.",
-      "version": "0.1.8",
-      "author": {
-        "name": "John Carlo Austria"
-      },
-      "source": "./mods/hone-nudge",
-      "category": "productivity"
-    },
-    {
-      "name": "memory-lint",
-      "displayName": "Memory Lint",
-      "description": "Keep memory worth relearning — denies a memory write with task state, one-off references or repo detail.",
-      "version": "0.1.2",
-      "author": {
-        "name": "John Carlo Austria"
-      },
-      "source": "./mods/memory-lint",
-      "category": "productivity"
-    },
-    {
-      "name": "implement-gate",
-      "displayName": "Implement Gate",
-      "description": "Hold /implement to its stop point — denies a merge or push past commit, pr, ready or merged, and blocks an early stop.",
-      "version": "0.2.1",
-      "author": {
-        "name": "John Carlo Austria"
-      },
-      "source": "./mods/implement-gate",
-      "category": "productivity"
-    },
-    {
-      "name": "test-guard",
-      "displayName": "Test Guard",
-      "description": "Stop tests changed to pass — a small model picks its rules per project from that project's own history; it asks you before an edit rigs a test, and refuses when nobody can approve.",
-      "version": "0.5.0",
-      "author": {
-        "name": "John Carlo Austria"
-      },
-      "source": "./mods/test-guard",
-      "category": "productivity"
     }
   ]
 }

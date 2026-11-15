@@ -23,7 +23,6 @@ BUN = "(pass) a [1ms]\n\n 28 pass\n 0 fail\nRan 28 tests across 1 file. [0.38s]\
 BUN_RED = " 27 pass\n 1 fail\nRan 28 tests across 1 file.\n"
 UNITTEST = "....\n----------------------------------------------------------------------\nRan 20 tests in 0.000s\n\nOK\n"
 UNITTEST_RED = "Ran 20 tests in 0.001s\n\nFAILED (failures=1, errors=2)\n"
-OWNED = "[1/2] ✔ a module tests\n[2/2] ✔ b module tests\nPASSED: no mod denies or approves a Claude Code-owned action\n"
 SMOKE = BUN + "readmes ok\n" + UNITTEST + "descriptions ok\nok   a\n23 passed, 0 failed\n"
 
 case("bun pass and fail lines", parse(BUN), (28, 0, 2))
@@ -32,7 +31,6 @@ case("this repo's summary line", parse("ok   a\n23 passed, 0 failed\n"), (23, 0,
 case("unittest OK", parse(UNITTEST), (20, 0, 1))
 case("unittest FAILED counts failures and errors", parse(UNITTEST_RED), (17, 3, 1))
 case("pytest summary", parse("===== 3 failed, 40 passed, 1 error in 2.10s =====\n"), (40, 4, 1))
-case("claude-owned steps and PASSED", parse(OWNED), (3, 0, 3))
 case("named checks", parse("readmes ok\ntrunk ok\ndescriptions FAILED\nFAILED: uv run x\n"), (2, 2, 4))
 case("claude plugin validate", parse("✔ Validation passed with warnings\n"), (1, 0, 1))
 case("tests kept line", parse("tests kept: 3 tests, 3 assertions (base: 3, 3)\n"), (1, 0, 1))
@@ -70,7 +68,6 @@ case("pytest errors only", parse("===== 2 errors in 0.10s =====\n"), (0, 2, 1))
 case("pytest one error", parse("===== 1 error in 0.10s =====\n"), (0, 1, 1))
 case("pytest failed only, twice", parse("== 2 failed in 1.0s ==\n== 3 failed in 1.0s ==\n"), (0, 5, 2))
 case("two pytest lines add up", parse("== 2 passed in 1.0s ==\n== 3 passed, 1 failed in 1.0s ==\n"), (5, 1, 2))
-case("steps add up", parse("[1/3] ✔ a\n[2/3] ✘ b\n[3/3] ✔ c\n"), (2, 1, 3))
 case("self-test adds its count", parse("SELF-TEST PASSED: all 7 cases\nSELF-TEST PASSED: all 5 cases\n"), (12, 0, 2))
 case("checks add up", parse("a ok\nb-c d ok\nPASSED: x\nc FAILED\nSELF-TEST FAILED: y\n✘ Validation failed: z\n"), (3, 3, 6))
 case("an indented ok is not a result line", parse(" a ok\n"), (0, 0, 0))
@@ -80,8 +77,6 @@ case("a unittest failure adds to counts with shared bits",
      parse(" 3 pass\n 1 fail\nRan 3 tests in 0.1s\n\nFAILED (failures=1)\nreadmes ok\n"), (6, 2, 4))
 case("two bun fail lines add up", parse(" 1 fail\n 1 fail\n"), (0, 2, 2))
 case("two summary lines add up with shared bits", parse("3 passed, 1 failed\n3 passed, 1 failed\n"), (6, 2, 2))
-case("two failed steps add up", parse("[1/2] ✘ a\n[2/2] ✘ b\n"), (0, 2, 2))
-case("two passed steps add up", parse("[1/2] ✔ a\n[2/2] ✔ b\n[3/3] ✔ c\n"), (3, 0, 3))
 case("two bun pass lines add up with shared bits", parse(" 3 pass\n 3 pass\n"), (6, 0, 2))
 
 

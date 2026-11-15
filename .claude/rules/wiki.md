@@ -1,13 +1,12 @@
 ---
 paths:
   - "plugins/*/skills/*/README.md"
-  - "mods/*/README.md"
 ---
 
-# README files for skills and mods
+# README files for skills
 
-Each skill folder and each mod folder has a `README.md`. A person reads it, not Claude: Claude
-loads `SKILL.md` and the hooks, never the README. `python3 -I scripts/check_readmes.py` checks
+Each skill folder has a `README.md`. A person reads it, not Claude: Claude
+loads `SKILL.md`, never the README. `python3 -I scripts/check_readmes.py` checks
 the structure, the sentence lengths and the banned words in Sentences.
 
 ## Reader
@@ -17,8 +16,7 @@ to learn what the thing is, whether they need it, and how to turn it on.
 
 ## Write from the source
 
-- Read the whole `SKILL.md` and its `references/`, or the mod's `hooks/`, `plugin.json` and
-  tests, before you write. Every command, path, setting name and default in the README must
+- Read the whole `SKILL.md` and its `references/` before you write. Every command, path, setting name and default in the README must
   exist in that source today. Never write a command you have not seen there or run.
 - Do not copy the steps of `SKILL.md` into the README. Say what happens in terms the reader
   sees (files written, questions asked, actions blocked), then link to `SKILL.md` for the method.
@@ -31,15 +29,14 @@ reader.
 
 Then these `##` headings, in this order, with no other `##` headings:
 
-| Skill | Mod | What the section answers |
-|---|---|---|
-| When to use it | Why | the problem it solves; for a skill also when not to use it, and which neighbour skill to use then |
-| Example | Install | skill: you say X, Claude does Y, you get Z; mod: the install command and how to see it is on |
-| Install | Example | skill: which plugin ships it and the install command; mod: you do X, the hook does Y, you see Z |
-| What it does | What it does | what it reads, writes, asks, blocks or changes; a table for a mod's events and decisions |
-| Limits | Settings | skill: what it does not do; mod: each `userConfig` option with its default, and how to turn the mod off |
-| More | Limits | skill: links to `SKILL.md`, `references/`; mod: what slips through, what happens on error |
-| | More | mod: links to the hook source, tests and design notes |
+| Section | What it answers |
+|---|---|
+| When to use it | the problem it solves, when not to use it, and which neighbour skill to use then |
+| Example | you say X, Claude does Y, you get Z |
+| Install | which plugin ships it and the install command |
+| What it does | what it reads, writes, asks, blocks or changes |
+| Limits | what it does not do |
+| More | links to `SKILL.md`, `references/` |
 
 Keep the README under 100 lines. Use `###` headings inside a section only when it is long.
 
@@ -56,7 +53,7 @@ Keep the README under 100 lines. Use `###` headings inside a section only when i
 
 ## Check
 
-`plugins/engineering/skills/create-pr/README.md` and `mods/test-guard/README.md` show the expected result.
+`plugins/engineering/skills/create-pr/README.md` and `plugins/knowledge/skills/hone/README.md` show the expected result.
 
 Run `python3 -I scripts/check_readmes.py`. Then read the README as the reader above: can you say
 in one sentence what it does, when you would use it, and how to turn it on?

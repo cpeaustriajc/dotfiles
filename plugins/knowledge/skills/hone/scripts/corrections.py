@@ -11,7 +11,6 @@ PEER = "Another Claude session sent a message"
 HOOK = "Stop hook feedback:"
 COMMAND = re.compile(r"<command-name>\s*([^<\s]+)\s*</command-name>")
 ANSWER = re.compile(r'"="([^"]*)"')
-# Keep this detection in step with mods/hone-nudge/hooks/register.ts, which duplicates it.
 
 
 def skill_name(raw):

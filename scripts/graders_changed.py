@@ -16,7 +16,6 @@ GRADERS = (
     ".claude/skills/verify/",
     ".claude/skills/run-dotfiles/",
     "plugins/engineering/skills/review-loop/scripts/",
-    "tests/claude-owned/",
 )
 
 

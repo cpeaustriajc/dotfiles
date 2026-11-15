@@ -54,7 +54,6 @@ case("a name with no known extension passes", run("`references/gone.txt` `refere
 
 case("a skill folder is the root of its files", skill_root(ROOT / "plugins/p/skills/s/references/a.md"), ROOT / "plugins/p/skills/s")
 case("a project skill folder is the root of its files", skill_root(ROOT / ".claude/skills/s/SKILL.md"), ROOT / ".claude/skills/s")
-case("a mod folder is the root of its README", skill_root(ROOT / "mods/m/README.md"), ROOT / "mods/m")
 case("the checked files are found", len(list(markdown_files())) > 50, True)
 r = subprocess.run([sys.executable, "-I", "-B", os.path.join(HERE, "check_skill_refs.py")], capture_output=True, text=True)
 case("the CLI exit code follows its output", (r.returncode, r.stdout.strip() == "skill refs ok"), (0, True) if r.returncode == 0 else (1, False))
@@ -95,10 +94,10 @@ with tempfile.TemporaryDirectory() as tmp:
 
     write("plugins/p/skills/s/SKILL.md", "# s\nSee `references/x.md`.\nAnd `references/y.md`.\n")
     write("plugins/p/skills/s/references/x.md", "# x\n")
-    write("mods/m/README.md", "# m\n\n[doc](docs/gone.md)\n")
+    write("plugins/p/skills/t/README.md", "# m\n\n[doc](docs/gone.md)\n")
     case("the CLI reports each dead reference and exits 1", cli_on(tree),
          (1, "plugins/p/skills/s/SKILL.md:3: names references/y.md, which does not exist\n"
-             "mods/m/README.md:3: names docs/gone.md, which does not exist"))
+             "plugins/p/skills/t/README.md:3: names docs/gone.md, which does not exist"))
     clean = tree / "clean"
     write("clean/plugins/p/skills/s/SKILL.md", "# s\nSee `references/x.md`.\n")
     write("clean/plugins/p/skills/s/references/x.md", "# x\n")

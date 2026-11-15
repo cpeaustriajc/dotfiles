@@ -122,7 +122,7 @@ case("a marker inside a string is data", {}, {"tests/test_m.py": L("FIXTURE = '@
 case("a rig already at the base is not reported", {"tests/test_a.py": skip + "\ndef test_a():\n    assert 1\n"},
      {"tests/test_a.py": skip + "\ndef test_a():\n    assert 1\n"}, None)
 
-# test files, the same names and folders as mods/test-guard
+# test files, the same names and folders that guard_tests.py imports
 for path, want in [("a/b.test.ts", True), ("a/b.spec.js", True), ("test_x.py", True), ("x_test.go", True),
                    ("scripts/test_x.sh", True), ("tests/run.py", True), ("e2e/flow.ts", True),
                    ("src/__snapshots__/a.snap", True), ("src/contest.py", False), ("src/testing.py", False),

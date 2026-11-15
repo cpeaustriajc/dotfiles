@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Checks that each file a skill or mod README names exists.
+"""Checks that each file a skill README names exists.
 
 Usage: python3 -I scripts/check_skill_refs.py [root]
 
-Checks Markdown under plugins/*/skills/*/, .claude/skills/*/ and mods/*/README.md. A named path is a
+Checks Markdown under plugins/*/skills/*/ and .claude/skills/*/. A named path is a
 relative Markdown link target, or a backticked path with a known extension whose first part is one
 of OWN_DIRS or "..". A path passes if it exists next to the file, in the skill's root, or in the repo.
 """
@@ -44,14 +44,12 @@ def dead(text, roots, exists):
 
 
 def markdown_files(root=ROOT):
-    for pattern in ("plugins/*/skills/*/**/*.md", ".claude/skills/*/**/*.md", "mods/*/README.md"):
+    for pattern in ("plugins/*/skills/*/**/*.md", ".claude/skills/*/**/*.md"):
         yield from sorted(root.glob(pattern))
 
 
 def skill_root(path, root=ROOT):
     rel = path.relative_to(root).parts
-    if rel[0] == "mods":
-        return root / "mods" / rel[1]
     return root.joinpath(*rel[:4] if rel[0] == "plugins" else rel[:3])
 
 
