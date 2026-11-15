@@ -1,11 +1,8 @@
 ---
 name: commit
 description: >
-  This skill should be used when the user says "commit" or words along those lines. It commits the
-  changes as atomic commits in the repo's style and pushes them; `local` skips the push. Typed
-  only: /commit.
+  This skill should be used when the user says "commit", "commit and push", "push it" or "ship it to the branch", or asks to save finished work to git. It makes atomic commits in the repo's style and pushes them; `local` skips the push.
 argument-hint: "[local]"
-disable-model-invocation: true
 ---
 
 Arguments: the text after the skill name (`$ARGUMENTS` where the harness fills it in). `local` skips the push.
