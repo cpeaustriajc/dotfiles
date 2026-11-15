@@ -4,7 +4,7 @@ Step 2 of SKILL.md reads this. It is the default for a new log.
 
 ## An existing log
 
-The project's own conventions win, then the adapter's shape, then this page. Before the first
+The project's own conventions win, then the Backend section's shape, then this page. Before the first
 write, read the log's index or home page and its two newest decision pages. Match their template,
 numbering, title pattern, status words, link syntax and language. A repo whose
 `docs/adr/` holds MADR files (https://adr.github.io/madr/) gets a MADR file, not a `Decision NNN` page. Where the log has
@@ -22,7 +22,7 @@ no convention for something, use this page.
   "Documenting Architecture Decisions", 2011, https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions):
   facts and wording stay as decided.
 - **Backends with search but no sorted views** (Linear) drop the number and the index: each
-  decision is titled `Decision: <Topic>` and found by search. Their adapter gives the shape that
+  decision is titled `Decision: <Topic>` and found by search. The Backend section gives the shape that
   replaces the two items above.
 - **Research pages.** One topic each. Date the research, and mark anything not confirmed on a
   primary source as **UNVERIFIED**. A research page is a living document: when newer facts replace what it describes, rewrite it

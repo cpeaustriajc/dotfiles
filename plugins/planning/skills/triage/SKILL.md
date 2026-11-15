@@ -16,9 +16,29 @@ Give each issue or PR one state and one category (`bug`, `enhancement`):
 | `ready-for-human` | A person must do a named part. |
 | `wontfix` | Built already, or rejected. |
 
-Use the team's labels; with none, propose these. Commands:
-`references/github.md` or `references/other-trackers.md`. No item named, or a direct order:
+Use the team's labels; with none, propose these. No item named, or a direct order:
 `references/requests.md`.
+
+## Setup
+
+When the project has no copy of this skill among its own project skills (the folder where this
+harness loads a repo's skills), set up first:
+
+1. Find the tracker and what reaches it: a pointer in the instruction file, the remote, the
+   connected tools' lists, the CLI's `--help`. With none installed, list the commands you would
+   run and ask me to run them.
+2. Write a project copy of this skill in that folder with no Setup section and `references/`
+   beside it. Map each state to the tracker's own field: a workflow status the team already has,
+   else a label with the state name; create a label only after I say yes. Add the commands for
+   reading an item and its comments, listing open PRs with their authors' association to the
+   team, setting a state, posting a comment and closing as not planned. Stamp this skill's
+   version or commit in the copy's first line.
+3. Run the copy, not this file.
+
+In every tracker: a bare `#42` can be an issue or a PR, so check which. An outside author is
+one with no role in the team. "A reply after the last triage note" compares the last comment's
+date with the disclaimer's and the reporter's last comment. Every write notifies watchers: set
+labels and post the comment in one pass per item.
 
 1. Read everything. An earlier triage comment's answers stay settled.
 2. Search code, harness, skills, the decision log and closed `wontfix` by concept; show matches.

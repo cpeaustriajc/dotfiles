@@ -6,7 +6,7 @@ description: >
   long. It writes slices, or one bug or chore.
 ---
 
-Read `../shape/references/top-down.md` first: its adapter rows say where each part lands, and
+Read `../shape/references/top-down.md` first: its Tracker section (in the project's copy of `shape`) says where each part lands, and
 "Write, then check the tree" says when you may write.
 
 1. Draft spec: cut only Demo prototypes. Else list its requirements and which items cite them.

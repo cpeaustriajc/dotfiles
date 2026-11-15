@@ -24,5 +24,5 @@ and screenshot:
 Before you attach a video, run `scripts/check-video.sh <file>` on it and read each WARN still: a
 chapter card is fine, a frozen step is not. Then read a contact sheet of its frames for the
 marks. Upload each file to the code host and reference it in the body by
-its relative path, as the host's adapter says (`references/github.md`). Put a video alone
+its path relative to the body file. Put a video alone
 in its paragraph.

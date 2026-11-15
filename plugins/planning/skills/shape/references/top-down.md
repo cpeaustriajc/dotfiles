@@ -40,15 +40,8 @@ Stop at the first hit:
 3. Ask once, and offer to add the pointer line. For personal software, recommend a Markdown file
    in the repo over setting up a tracker.
 
-Then read the matching adapter in this folder. It maps each level onto that tracker's objects
-and names the tools that reach it.
-
-| Tracker | Adapter |
-|---|---|
-| Linear | `linear.md` |
-| Jira (with Confluence for documents) | `jira.md` |
-| GitHub Issues and Projects | `github.md` |
-| Asana, ClickUp, Notion, Trello, a Markdown file, anything else | `other-trackers.md` |
+Then fill the project copy's Tracker section (`SKILL.md`, Setup): each level mapped onto that
+tracker's objects, with the tools that reach it.
 
 **The project's facts** override the defaults in these skills: who holds each role, the team's
 templates, which areas are too risky to skip QA, where older specs live. Look for a tracker
