@@ -1,72 +1,60 @@
 # Templates
 
-Contents: Spec · Project (the project check, properties, description, internal tool) · Status
-update.
-
-Proposals, not a standard. The project's own templates and section names win. Where the project
-has none, propose these shapes once and use them; where its template lacks a section below, add
-the section's content under the project's nearest heading.
+Spec · Project · Status update. The project's own templates and section names win. With none,
+propose these once and use them; content for a section its template lacks goes under its nearest
+heading.
 
 ## Spec
 
-Written from decisions already made (`grill`), never to make new ones. A section with nothing
-real to say is left out rather than filled.
+Written from decisions already made (`grill`), never to make new ones. Leave out a section with
+nothing real to say.
 
 ```markdown
 Status: Draft | Confirmed (<date>, <approver>)
 Feature: <the product feature this serves, quoted>
 
 ## Problem
-
 <Whose problem, in their words, and the evidence.>
 
 ## Done
-
 <The observable outcome: who does what, and what they see. One or two sentences.>
 
 ## Requirements
-
 R1. <Who> <does what> and <sees what>.
 R2. <An empty, error or edge state, stated the same way.>
 
 ## Testing seams
-
 - <Where the feature is proven, highest first. One is ideal.>
 
 ## Approaches considered
-
 - <The approach not taken, in one line, and why.>
 
 ## Out of scope
-
-- <What was asked for or obvious, and deliberately left out. Not empty once Confirmed.>
+- <Asked for or obvious, and deliberately left out. Not empty once Confirmed.>
 
 ## Open questions
-
 - <Empty once Confirmed.>
 ```
 
-`scripts/check_tree.py` rejects a Confirmed spec that breaks either.
+`scripts/check_tree.py` rejects a Confirmed spec with Out of scope empty or Open questions left.
 
-- **Requirements are statements, not tasks.** Each says who does what and what they see, for
-  the empty, error, slow and edge states too. None names a data source, vendor, endpoint, model
-  or timing budget: the product owner must be able to confirm it, and mechanism buries intent.
-  Mechanism goes in one line of the project How.
-- **Feasibility gate.** A requirement that needs a system the team neither owns nor has a
-  contract for gets a probe of that system first; the answer often removes the dependency.
-- **Requirements** are numbered once and never renumbered; a dropped one is struck through, so
-  work items that cite it still resolve. A long list is fine: it should cover the feature.
-- No file paths or code (`top-down.md`, Text others read). A prototype's snippet that pins a
-  decision (a state machine, a schema) may be inlined, marked as from a prototype.
+- **Requirements are statements, not tasks**: who does what and what they see, for empty, error,
+  slow and edge states too. None names a data source, vendor, endpoint, model or timing budget:
+  the product owner must be able to confirm it. Mechanism goes in one line of the project How.
+- **Feasibility gate**: a requirement needing a system the team neither owns nor has a contract
+  for gets a probe of that system first; the answer often removes the dependency.
+- Number requirements once and never renumber; strike a dropped one through so items citing it
+  still resolve. A long list is fine if it covers the feature.
+- No file paths or code. A prototype's snippet that pins a decision (a state machine, a schema)
+  may be inlined, marked as from a prototype.
 
 ## Project
 
-Before you draft or audit one, check it is a project at all: one outcome with an end and several
-work items. Flag a single ticket dressed up as a project, a permanent category posing as one, or
-two outcomes in one; say so rather than repair it silently.
+First check it is a project: one outcome with an end and several work items. Flag a single ticket
+dressed as a project, a permanent category, or two outcomes in one, rather than repair it
+silently.
 
-Return the properties separately from the description, because the properties go in the tracker's
-own fields:
+Return the properties apart from the description; they go in the tracker's own fields:
 
 ```markdown
 Name:
@@ -82,60 +70,44 @@ Dependencies:
 Description:
 ```
 
-The description is evergreen: a neutral present tense ("Buyers save names to a shortlist", not
-"will let") and no status narration, completed work, dated updates, migration history,
-temporary blockers or next steps; those go in status updates or native fields.
+The description is evergreen: neutral present tense ("Buyers save names to a shortlist", not
+"will let"), with no status narration, completed work, dated updates, migration history,
+temporary blockers or next steps. Those go in status updates or native fields, as do lead,
+members, teams, product, status, priority, dates, phases, dependencies, links and health.
 
 ```markdown
 ## Why
-
 The enduring problem, who it hurts, and the evidence.
 
 ## What
-
-- Three to five capabilities or changes a user can see.
-- Behaviour, not implementation. No work-item acceptance criteria.
+- Three to five capabilities or changes a user can see. Behaviour, not implementation.
 
 ## How
-
-The product and technical decisions that define how it works, plus any open decision. Only
+The product and technical decisions that define how it works, and any open decision. Only
 constraints that shape the project; detailed plans go in the engineering document.
 
 ## Not in scope
-
-The nearest problems this project deliberately leaves alone.
+The nearest problems this project leaves alone.
 
 ## Success
-
 The one condition, measure or observation that says it worked. A guardrail only when needed.
 
 ## Risks
-
 Only risks that change what gets built. Omit if none.
 
 ## Open questions
-
 | Question | Owner | Needed by |
 | --- | --- | --- |
 ```
 
-Leave Owner blank unless someone named the owner; a role guessed from the question's topic is an invented owner.
+Leave Owner blank unless someone was named; a role guessed from the topic is an invented owner.
+Drop Open questions once scope is settled. Revise the description only when behaviour or boundary
+changes.
 
-Omit Open questions once the scope is settled. Revise the description only when the intended
-behaviour or boundary changes.
-
-A project for an **internal tool** (one only the team uses: a test harness, a mock of another
-team's system, a QA panel) uses the same sections, and its How also says:
-
-- whose behaviour it copies, if it stands in for another team's system, and where it deliberately
-  differs, with the decision that allowed each difference;
-- whether one person's use affects anyone else's, because testers share these tools.
-
-If buyers or end users will ever see the result, it is a product project, even when the team uses
-it first.
-
-**Keep out of the description**, in the tracker's native fields instead: lead, members and teams;
-product and status; priority and dates; phases; dependencies; links and resources; health.
+An **internal tool** (only the team uses it: a test harness, a mock of another team's system, a QA
+panel) has the same sections; its How also says whose behaviour it copies and where it differs,
+with the decision behind each difference, and whether one person's use affects others. If buyers
+or end users will ever see it, it is a product project.
 
 ## Status update
 
@@ -147,7 +119,7 @@ Risks:
 Next:
 ```
 
-Health is the project lead's judgement: propose one and say it needs their confirmation. Rate it
-only when an update was asked for. Read what changed since the previous update first, and report
-changed scope, dates, lead, dependencies or phases. Finished-item counts do not replace the lead's
-judgement: most items done can still be at risk if the remaining one is blocked on another team.
+Health is the lead's judgement: propose one and say it needs their confirmation; rate it only
+when an update was asked for. Read what changed since the last update first, and report changed
+scope, dates, lead, dependencies or phases. Item counts don't set health: most items done is still
+at risk if the last one is blocked on another team.

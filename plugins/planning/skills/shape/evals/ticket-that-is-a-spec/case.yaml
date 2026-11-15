@@ -1,0 +1,9 @@
+schema_version: "1.1"
+name: ticket-that-is-a-spec
+expected_outcome: |
+  A Draft spec document that keeps Priya's text, with the ticket kept (back to the backlog or as
+  the first slice once Confirmed) rather than cancelled, the project in Demo with an approval item
+  for Priya, and the endpoint, storage and estimate details moved out of the requirements.
+  tickets.md is not edited.
+context:
+  scaffold_script: place-files.sh

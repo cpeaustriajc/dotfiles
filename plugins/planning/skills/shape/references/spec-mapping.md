@@ -15,25 +15,24 @@
 | Assumptions | Project Not in scope, or a decision |
 | Risks | Project Risks, only those that change the build |
 | Example values | A verifier's example under the item, generalised |
-| Anything naming infrastructure, a vendor API, an endpoint or a sub-second budget | The engineering document, or a decision when it applies to every project; never carried into items |
+| Anything naming infrastructure, a vendor API, an endpoint or a sub-second budget | The engineering document, or a decision when it applies to every project; never items |
 
 ## A spec filed as a ticket
 
-1. Create the spec document in the project, with the author's text verbatim and status Draft.
-2. Convert the ticket: move it back to the backlog, or keep it as the first build slice once the
-   spec is Confirmed. Never cancel it: a cancel reads as a verdict on the author.
-3. Put the project in Demo, and add the approval item.
+1. Create the spec document in the project with the author's text verbatim, status Draft.
+2. Move the ticket back to the backlog, or keep it as the first build slice once the spec is
+   Confirmed. Never cancel it: a cancel reads as a verdict on the author.
+3. Put the project in Demo and add the approval item.
 
 ## Translating an old epic, brief or plan
 
 An old source is evidence of the problem, not a technical spec: its architecture, services,
-estimates and implementation criteria are hypotheses until current code, tests, contracts or a
-newer decision confirm them, and those outrank it.
+estimates and criteria are hypotheses until current code, tests, contracts or a newer decision
+confirm them, and those outrank it.
 
-- Keep the source's key or link as provenance, recover the intent, and draft from the present state.
-- When sources conflict on a product choice, ask the product owner. Don't ask them to settle a
-  technical question the code or a current contract already answers.
-- Account for every source item as one of: translated into a project; merged with another;
-  split into several projects; kept as goal or reference context; or held for a product decision.
-- Merge several old items when they describe one outcome today, and list every contributing key
-  on the merged draft.
+- Keep its key or link as provenance, recover the intent, and draft from the present state.
+- Sources that conflict on a product choice go to the product owner; a technical question the
+  code or a contract already answers does not.
+- Account for every source item: translated into a project, merged, split into several projects,
+  kept as goal or reference context, or held for a product decision.
+- Merge old items that describe one outcome today, listing every contributing key.
