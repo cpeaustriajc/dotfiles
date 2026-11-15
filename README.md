@@ -160,8 +160,8 @@ These changes to painting-craft made the right-hand pictures better:
 
 - Build recipes for the parts that fail up close, in
   [`references/recipes.md`](plugins/visual/skills/painting-craft/references/recipes.md).
-- Before the composition, a study of each main subject against public-domain references that
-  `scripts/refs.py` fetches and `scripts/compare.py` compares.
-- The bundled 3D figure renderer.
-- A paint pass that unifies the painted styles, with `scripts/paintpass.py`.
+- Before the composition, a study of each main subject beside a public-domain reference.
+- A 3D figure renderer and a paint-pass script. The current skill ships neither: it describes
+  figures as volumes in perspective and one brushwork pass, and uses the project's own tools.
+  The right-hand pictures are from the version with the scripts.
 - Delivery at twice the display size.

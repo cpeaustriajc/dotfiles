@@ -1,6 +1,6 @@
 # painting-craft
 
-A skill that makes Claude draw and paint pictures in code (SVG, canvas, numpy, Blender) to a gallery standard. Claude studies references first, then reviews its own screenshots at 2x zoom.
+A skill that makes Claude draw and paint pictures in code or a 3D tool to a gallery standard, with the project's own tools. Claude studies references first, then reviews its own screenshots at 2x zoom.
 
 ![Knight at dusk, 2x crop: before and after](../../../../docs/images/knight-zoom.jpg)
 
@@ -21,9 +21,9 @@ You say: "Paint a 1600x1000 SVG of a knight asleep against an oak tree at dusk, 
 
 1. Claude asks which artists you like and how closely you will zoom in, unless a project note already says.
 2. Claude fetches public-domain reference images and builds the knight and the tree as separate studies.
-3. Claude composes the picture, runs a paint pass, then shoots and reviews it on desktop and phone.
+3. Claude composes the picture, unifies its medium, then reviews screenshots on desktop and phone.
 
-You get the picture at twice its display size, plus the before and after shots and the commands that made them.
+You get the picture at twice its display size, plus a commit message that says what was reviewed and how.
 
 ## Install
 
@@ -38,21 +38,19 @@ To turn the plugin off, run `claude plugin disable visual@dotfiles`. This also t
 
 ## What it does
 
-The skill is a nine-step workflow: tradition, research, space and light, masses, hero studies, composition, grounding, one medium pass, zoomed review. Its scripts live in `scripts/`.
+The skill is a nine-step workflow: tradition, research, space and light, masses, hero studies, composition, grounding, one medium pass, zoomed review. It ships no scripts: it describes the method, and Claude uses the project's own tools.
 
 - Claude asks about your taste first. It offers to save the answers as a note in your project.
-- Claude fetches references with `refs.py` (the Met and Wikimedia Commons) and compares its crop beside them with `compare.py`.
-- Claude builds a figure that turns or sits in 3D with `render3d.py`. The seated knight in `knight.py` is the worked example.
-- `paintpass.py` gives a painted picture one brushwork style. `shoot.mjs` and `crop.py` make the zoomed review shots.
+- Claude saves public-domain reference images (museum open-access collections, Wikimedia Commons) beside the art, and puts each study beside its reference at the same size.
+- Claude draws figures as volumes in perspective, so a seated or turned body foreshortens.
+- Painted styles get one shared brushwork pass. Review shots are 2× crops against the reference and a checklist.
 - Claude marks guessed facts UNVERIFIED and names proxy values in the commit message.
-
-Scripts need Python packages (numpy, scipy, pillow) and Playwright. `render3d.md`, `code-techniques.md` and `review.md` give the exact commands.
 
 ## Limits
 
 - It does not draw UI icons, charts or diagrams.
-- It cannot rescue a weak drawing with the paint pass. The pass only unifies what is there.
-- Flat-vector and graphic styles skip the paint pass.
+- It cannot rescue a weak drawing with the brushwork pass. The pass only unifies what is there.
+- Flat-vector and graphic styles skip the brushwork pass.
 - It has no settings.
 
 ## More
@@ -63,4 +61,4 @@ Scripts need Python packages (numpy, scipy, pillow) and Playwright. `render3d.md
 - [references/review.md](references/review.md): the screenshot review loop and its checklist.
 - [references/recipes.md](references/recipes.md): how to build foliage, metal, cloth, faces, windows and water.
 - [references/worked-example.md](references/worked-example.md): the knight's kit and the sizes of past pictures' horse, dog and cars.
-- [references/anatomy.md](references/anatomy.md), [scale.md](references/scale.md), [armour.md](references/armour.md), [render3d.md](references/render3d.md) and [code-techniques.md](references/code-techniques.md): measurements, space, accuracy and the paint pass.
+- [references/anatomy.md](references/anatomy.md), [scale.md](references/scale.md), [armour.md](references/armour.md) and [technique.md](references/technique.md): measurements, space, accuracy, layering and the brushwork pass.

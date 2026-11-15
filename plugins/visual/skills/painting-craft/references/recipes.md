@@ -8,8 +8,7 @@ size.
 Fails as coin dabs (camouflage), blobs with blob holes (clip art), branches stopping at the crown.
 - Seeded branch skeleton (trunk, 3–6 limbs, secondaries); clumps hang on the tips.
 - Each clump in three values, underside darker and cooler; inner, lower clumps darker still.
-- Noise-displaced silhouette, 2–3 octaves (`feTurbulence` + `feDisplacementMap`); leaf marks past
-  the lit edge; branches and irregular sky holes show between clumps.
+- Silhouette broken by noise at 2–3 scales; leaf marks past the lit edge; branches and irregular sky holes show between clumps.
 - Lost edges between same-value clumps, found edges against sky. Mark = leaf cluster.
 - Far trees as hedgerows and copses with hidden bases, never lollipops.
 
@@ -25,7 +24,17 @@ Fails as grey tubes with scribbles, lit like plastic.
 - Environment-mapped bands following form (sky, dark horizon band, ground), one specular streak,
   rolled edges, each lame casting onto the plate below, rivets with highlight and shadow.
 - Articulated pieces (cop, wings, lames, finger lames) drawn separately, each banded.
-- A figure whose pose foreshortens goes to `render3d.md`.
+- Steel mirrors its own scene: dusk sky above, dark ground below, the warm light as the streak.
+  The same armour reflects a neon street or an ink-wash void differently.
+- A figure whose pose foreshortens is built as volume first (`anatomy.md`).
+
+## Cloth
+
+Fails as a flat shape with painted lines. Cloth hangs from where it is held (shoulders, belt),
+rests on what is under it, and folds where it bunches or turns: pull folds from each support,
+hanging folds below. It rests on the outermost layer the viewer sees, such as a padded shoulder.
+Wool is matte with soft edges; wet cloth darkens and clings. A pose the cloth can't follow (a knee
+raised high carrying a skirt) gets a changed pose or a cloth that falls aside.
 
 ## Mail and other fine repeating texture
 
