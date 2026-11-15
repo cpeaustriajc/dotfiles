@@ -13,8 +13,8 @@ Arguments: the text after the skill name (`$ARGUMENTS` where the harness fills i
 not a question. A stop point word (default `pr`) sets how far it goes: `references/stop-points.md`.
 
 **Setup**, when the project's hooks have no `stop_gate.py`: add the stop gate, a hook that holds
-the run to its stop point, per `../review-loop/references/<harness>.md`. Copy
-`scripts/stop_gate.py`, write `stop_gate.json` with the keys in its docstring, and wire
+the run to its stop point, the same way as review-loop's test guard. Copy `scripts/stop_gate.py`,
+write `stop_gate.json` with the keys in its docstring, and wire it in, for example with
 `scripts/stop_gate.settings.json`. Run review-loop's setup now too: the gate later refuses edits
 to the hooks folder. A refused setup edit: skip that hook, list it under Needs you.
 

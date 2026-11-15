@@ -19,12 +19,13 @@ harness loads a repo's skills), or its hooks have no `guard_tests.py`, set up fi
 2. Write a project copy of this skill in that folder with those commands filled in and no Setup
    section, and copy `scripts/tests_kept.py` beside it. Stamp this skill's version or commit in
    the copy's front matter or first line.
-3. Add the test guard, a hook that asks before an edit rigs a test, per
-   `references/<harness>.md`:
+3. Add the test guard, a hook that asks before an edit rigs a test, where this project's harness
+   runs committed project hooks (a cloud session sees only committed ones):
    - Mode: run `python3 -I scripts/replay.py` in the project. `full` if the full rules ask on few
      commits, `rigs` if on many, `off` if the rig rules do too. Report the counts.
    - Copy `scripts/guard_tests.py` and `scripts/tests_kept.py`; write `guard_tests.json` with the
-     keys in the script's docstring; wire `scripts/guard_tests.settings.json`.
+     keys in the script's docstring; wire it in, for example with `scripts/merge_hooks.py` and
+     `scripts/guard_tests.settings.json`. Commit the hook on its own.
    - A refused setup edit: skip the guard and report it as not set up.
 4. Run the copy, not this file.
 

@@ -128,8 +128,7 @@ only when you call it by name.
 | [painting-craft](plugins/visual/skills/painting-craft/README.md) | visual | Draws and paints in code to a gallery standard, with a screenshot review loop. It is not for UI icons, charts or diagrams. |
 
 A skill holds no harness details and no project facts. The details of a code host or tracker go
-in the skill's `references/<host>.md` adapters, and a harness's details, such as where a project
-hook goes, in `references/<harness>.md`. A project's own facts stay in that project, or in
+in the skill's `references/<host>.md` adapters. A project's own facts stay in that project, or in
 the project copy that the skill's setup writes.
 
 ## painting-craft: before and after

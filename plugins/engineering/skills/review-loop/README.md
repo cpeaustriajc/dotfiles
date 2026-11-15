@@ -52,7 +52,6 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
-- [references/claude-code.md](references/claude-code.md): where Claude Code runs a project hook, used by this setup and by `implement`'s.
 - [references/tests.md](references/tests.md): the test tiers and the proof rule that `implement`, `create-pr` and `break-it` also use.
 
 ### Sources and evidence
