@@ -50,7 +50,6 @@ in
     ".claude/hooks/deny-go-ahead-questions.sh".source = link "claude/hooks/deny-go-ahead-questions.sh";
     ".claude/hooks/thread-needs-model-and-effort.sh".source = link "claude/hooks/thread-needs-model-and-effort.sh";
     ".claude/hooks/settings-drift.sh".source = link "claude/hooks/settings-drift.sh";
-    ".claude/hooks/compact-reinject.sh".source = link "claude/hooks/compact-reinject.sh";
     # check-facts.sh runs its helper from the folder it is in, so both are linked.
     ".claude/hooks/check-facts.sh".source = link "claude/hooks/check-facts.sh";
     ".claude/hooks/check-facts-seen.py".source = link "claude/hooks/check-facts-seen.py";
