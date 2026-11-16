@@ -19,7 +19,7 @@ Test changes: <the tests_kept.py line as printed, and each allowed finding with 
 - Visual only when it replaces prose: the smallest one, after the line it supports, in this
   order of preference: a `diff`, a tree, pseudocode, Mermaid for a changed flow. A typo or
   one-line fix gets none.
-- Evidence: a visual change, flow or timing follows `evidence.md`; else the test red before, green
+- Evidence: a visual change, flow or timing follows `references/evidence.md`; else the test red before, green
   after. No E2E run: no line.
 - Merge danger: `one-way door, adds premium_prices table; blast radius: search and checkout totals.`
 - Metadata goes in the code host's fields, not the body: reviewers, labels, assignee, milestone and

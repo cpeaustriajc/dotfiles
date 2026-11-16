@@ -58,5 +58,5 @@ or I name; another person's ticket or epic is read-only, so a finding goes in a 
 jargon: paths go stale, and the product owner, QA and other teams lack repo access. A technical
 question goes to me.
 
-After writing, read the tree back and run the check (`tree-outline.md`) with absolute paths. Fix
+After writing, read the tree back and run the check (`references/tree-outline.md`) with absolute paths. Fix
 every line it prints, or say why one stays.
