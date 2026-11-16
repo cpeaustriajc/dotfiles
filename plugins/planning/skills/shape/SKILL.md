@@ -14,19 +14,17 @@ Paths are relative to this skill's folder.
 
 ## Setup
 
-When the project's own skills folder has no copy of this skill:
+When the project's skills folder has no copy of this skill, set up first:
 
-1. Find the tracker (`references/top-down.md`), then the tools that reach it (connected tools,
-   the CLI's `--help`), and read the team's work types, templates, required fields and workflows.
-2. Write a project copy of this skill there: this file without its Setup section, the
-   files its other steps name and the files those use (one outside this skill's folder goes
-   into the copy's folder, with its path rewritten), and a description that keeps only the triggers
-   the copy serves. Add a Tracker section: the table below filled in with the
-   tracker's objects and commands. Put `# <plugin> <version>`, from the marketplace manifest or
-   the version folder in this skill's path, on the line after the opening `---`. Commit it on
-   its own, following the project's branch rules and commit hooks, else on a new branch with the
-   hooks on.
-3. Run the copy from its Steps section, not this file.
+1. Find the tracker (`references/top-down.md`) and the tools that reach it (connected tools, the
+   CLI's `--help`), and read the team's work types, templates, required fields and workflows.
+2. Write the copy in that folder: this file without Setup, every file the copy uses directly or
+   through another file (copied into its folder, paths rewritten), and a description with only
+   the triggers it serves. Add a Tracker section: the table below with the tracker's objects and
+   commands. Put `# <plugin> <version>` (from the marketplace manifest or
+   this skill's version folder) on the line after the opening `---`. Commit it alone under the
+   project's branch rules, else on a new branch, with hooks on.
+3. Run the copy from its Steps section.
 
 | Level | Map to | Fallback |
 |---|---|---|

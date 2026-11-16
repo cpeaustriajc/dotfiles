@@ -1,7 +1,5 @@
 # Screenshots and video for the Evidence line
 
-Read this before you capture or attach a screenshot or a video for a PR. Step 6 of `SKILL.md` says when.
-
 Evidence shows before and after of the same state. A visual change gets a screenshot
 cropped to the change. A flow, a motion or a timing also gets a short video. Each video
 and screenshot:
@@ -21,8 +19,7 @@ and screenshot:
 - closes on screen each tool it opens (a dev panel, a QA menu) before the user's next
   step, so no state changes without a visible cause.
 
-Before you attach a video, run `scripts/check-video.sh <file> <MB>` on it, with the upload limit, and read each WARN still: a
-chapter card is fine, a frozen step is not. Then read a contact sheet of its frames for the
-marks. Upload each file to the code host and reference it in the body by
-its path relative to the body file. Put a video alone
-in its paragraph.
+Before you attach a video, run `scripts/check-video.sh <file> <MB>` with the upload limit and
+read each WARN still: a chapter card is fine, a frozen step is not. Then read a contact sheet of
+its frames for the marks. Upload each file to the code host and reference it in the body by its
+path relative to the body file. Put a video alone in its paragraph.
