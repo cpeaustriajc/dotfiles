@@ -1,12 +1,7 @@
 #!/usr/bin/env python3
-"""Checks the text a model reads in each shipped skill: token cost, sentence length, filler, harness names.
+"""Checks shipped skill text. Usage: python3 -I scripts/check_skills.py [--report]
 
-Usage: python3 -I scripts/check_skills.py [--report]
-
-Scans every Markdown file under plugins/*/skills/*/ except README.md (check_readmes.py owns those).
-Tokens are characters / 4, the estimate `claude plugin details` reports. The every-turn cost (each
-skill's name and description, together) has a hard limit; --report adds each skill's on-use cost.
-.claude/rules/skills.md gives the sources. Sentence, filler and name checks skip the frontmatter.
+Skips README.md: check_readmes.py owns it.
 """
 import math
 import pathlib
@@ -20,11 +15,11 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 MAX_ALWAYS_ON = 2000  # tokens: every skill's name and description, loaded every turn, all together
 TARGET_ALWAYS_ON = 1000
 MAX_SKILL_TOKENS = 5000  # one SKILL.md: after compaction only its first 5,000 tokens are re-attached
-MAX_SENTENCE = 50  # words between [.!?;] after joining wrapped lines; longest today: 49
+MAX_SENTENCE = 50  # words between [.!?;], with wrapped lines joined first
 # A skill runs on any harness and model (AGENTS.md: "A skill names no harness").
 HARNESS = re.compile(r"\b(?:Claude|Anthropic|Codex|OpenAI|ChatGPT|GPT-\d\w*|Gemini|Copilot|Cursor|Windsurf|Kiro"
                      r"|Aider|Opus|Sonnet|Haiku|Fable)\b")
-# Named exceptions: (path, harness name or the first words of a long sentence) -> why it stays.
+# Exceptions: (path, name or sentence start) -> reason.
 EXCEPTIONS = {
     ("plugins/design/skills/ui-polish/references/quality-bar.md", "Cursor"): "a company in a list of product designs",
     ("plugins/design/skills/launch-video/references/voice.md", "OpenAI"): "who runs the Whisper server",
@@ -54,7 +49,6 @@ def tokens(text):
 
 
 def frontmatter(text):
-    """The frontmatter lines, without the --- fences; none when there is no frontmatter."""
     lines = text.splitlines()
     if not lines or lines[0] != "---" or "---" not in lines[1:]:
         return []
@@ -84,11 +78,7 @@ def description(text):
 
 
 def costs():
-    """Yields (skill folder, every-turn tokens, SKILL.md tokens, other files' tokens) for each skill.
-
-    A typed-only skill (disable-model-invocation: true) costs 0 every turn: Claude Code's skills page
-    says its "Description not in context". `claude plugin details` still counts it.
-    """
+    """A typed-only skill costs 0 every turn; `claude plugin details` still counts it."""
     for skill in sorted(ROOT.glob("plugins/*/skills/*/SKILL.md")):
         text = skill.read_text()
         typed = re.search(r"^disable-model-invocation:\s*true\s*$", "\n".join(frontmatter(text)), re.M)
@@ -97,7 +87,6 @@ def costs():
 
 
 def units(lines):
-    """Yields (line number, text) for each paragraph, list item and table cell, wrapped lines joined."""
     fenced, start, buf = False, 0, []
 
     def flush():

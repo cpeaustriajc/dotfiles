@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-"""Tests check_skills.py on a temp root, each limit at its edge."""
 import contextlib
 import io
 import pathlib
