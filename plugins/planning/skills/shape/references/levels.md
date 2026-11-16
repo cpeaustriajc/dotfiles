@@ -4,7 +4,7 @@
 |---|---|---|
 | Product | Product owner | Destination and features (`vision`). Projects link to it rather than repeat it. |
 | Project | Product owner writes intent, engineering the structure | One feature with an end: Why, What, How, Not in scope, Success. |
-| Spec | Product owner writes, engineering formats | The spec template (`templates.md`). |
+| Spec | Product owner writes, engineering formats | The spec template (`references/templates.md`). |
 | Engineering document | Engineering | At most one per project; see Documents. |
 | Phase | Engineering | A fixed phase as a milestone, ended by its exit check, not a progress bar. |
 | Work item | Engineering writes, product owner approves the checks | See `tickets`. |

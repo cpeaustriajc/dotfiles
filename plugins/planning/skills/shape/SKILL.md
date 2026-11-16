@@ -10,16 +10,21 @@ Read `references/top-down.md`; owners, documents and cycles are in `references/l
 Failures to prevent: a spec filed as a ticket gets built unconfirmed, requirements name
 endpoints, a project never ends.
 
+Paths are relative to this skill's folder.
+
 ## Setup
 
-When the project's own skills folder has no copy of this skill:
+When the project's skills folder has no copy of this skill, set up first:
 
-1. Find the tracker (`references/top-down.md`), then the tools that reach it (connected tools,
-   the CLI's `--help`), and read the team's work types, templates, required fields and workflows.
-2. Write a project copy of this skill there without this Setup section, with `references/` and
-   `scripts/` beside it, this skill's version in its first line, and a Tracker section: the
-   table below filled in with the tracker's objects and commands.
-3. Run the copy.
+1. Find the tracker (`references/top-down.md`) and the tools that reach it (connected tools, the
+   CLI's `--help`), and read the team's work types, templates, required fields and workflows.
+2. Write the copy in that folder: this file without Setup, every file the copy uses directly or
+   through another file (copied into its folder, paths rewritten), and a description with only
+   the triggers it serves. Add a Tracker section: the table below with the tracker's objects and
+   commands. Put `# <plugin> <version>` (from the marketplace manifest or
+   this skill's version folder) on the line after the opening `---`. Commit it alone under the
+   project's branch rules, else on a new branch, with hooks on.
+3. Run the copy from its Steps section.
 
 | Level | Map to | Fallback |
 |---|---|---|

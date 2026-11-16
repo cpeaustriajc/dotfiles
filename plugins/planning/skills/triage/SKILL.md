@@ -19,21 +19,26 @@ Give each issue or PR one state and one category (`bug`, `enhancement`):
 Use the team's labels; with none, propose these. No item named, or a direct order:
 `references/requests.md`.
 
+Paths are relative to this skill's folder.
+
 ## Setup
 
-When the project has no copy of this skill among its own project skills (the folder where this
-harness loads a repo's skills), set up first:
+When the project's skills folder has no copy of this skill, set up first:
 
 1. Find the tracker and what reaches it: a pointer in the instruction file, the remote, the
    connected tools' lists, the CLI's `--help`. With none installed, list the commands you would
    run and ask me to run them.
-2. Write a project copy of this skill in that folder with no Setup section and `references/`
-   beside it. Map each state to the tracker's own field: a workflow status the team already has,
-   else a label with the state name; create a label only after I say yes. Add the commands for
-   reading an item and its comments, listing open PRs with their authors' association to the
-   team, setting a state, posting a comment and closing as not planned. Stamp this skill's
-   version or commit in the copy's first line.
-3. Run the copy, not this file.
+2. Write the copy in that folder: this file without Setup, every file the copy uses directly or
+   through another file (copied into its folder, paths rewritten), and a description with only
+   the triggers it serves. Map each state to the tracker's own field: the team's workflow status,
+   else a label named for the state, created only after my yes. Add the commands to read an item
+   and its comments, list open PRs with their authors' association to the team, set a state, post
+   a comment and close as not planned. Put `# <plugin> <version>` (from the marketplace manifest or
+   this skill's version folder) on the line after the opening `---`. Commit it alone under the
+   project's branch rules, else on a new branch, with hooks on.
+3. Run the copy from its Steps section.
+
+## Steps
 
 In every tracker: a bare `#42` can be an issue or a PR, so check which. An outside author is
 one with no role in the team. "A reply after the last triage note" compares the last comment's
