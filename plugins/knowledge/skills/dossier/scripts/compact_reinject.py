@@ -17,7 +17,7 @@ import sys
 
 TRIAL = True
 KEEP = ("CHECKPOINT.md", "PROGRESS.md", "progress.md")
-SKIP = {".git", "node_modules"}
+SKIP = {".git", "node_modules", "worktrees"}
 TEXT = (
     "A compaction just ran. Before your next action:\n"
     "1. Find the user's newest request and steer in the summary, in their words, and act on "
@@ -34,7 +34,8 @@ def arm(session_id):
 
 
 def kept_files(root, depth=4, limit=3):
-    """Checkpoint files under root, at most `depth` folders down, nearest first."""
+    """Checkpoint files under root, at most `depth` folders down, in sorted walk order. Skips
+    other worktrees, whose files belong to other sessions."""
     found = []
     base = root.rstrip(os.sep).count(os.sep)
     for path, dirs, files in os.walk(root):

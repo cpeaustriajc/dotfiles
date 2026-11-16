@@ -19,16 +19,17 @@ and where the open-items list is kept.
 ## 2. The rule
 
 Write it as its own file in the folder where the harness loads a repository's rules, unscoped,
-so it loads in every session. Name the project's tracker, from the Backend section.
+so it loads in every session. Name the issue tracker the project's instruction file names, else
+ask me.
 
 ```markdown
 - Long session (a compaction, or more than one PR open): keep the open items, the open PRs and
-  what was checked in one list in <tracker>, else an artifact. After a compaction, act on the
-  user's newest request and steer as the summary quotes them, not on the older plan; then read
-  that list again. Example: the summary quoted "look up the checker first", and the next turn
-  went back to timing the old script. In chat, mention an item only when it is new or changed;
-  drop it once answered.
+  what was checked in one list in <tracker>, else an artifact; read it again after a
+  compaction. In chat, mention an item only when it is new or changed; drop it once answered.
 ```
+
+While the hook's trial runs, the rule leaves out the hook's "newest steer" step, so the two
+halves differ by that step alone. If the trial keeps the hook, add the step to the rule too.
 
 ## 3. The hook
 

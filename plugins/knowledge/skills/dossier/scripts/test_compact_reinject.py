@@ -45,6 +45,8 @@ def context(out):
 repo = os.path.join(tmp, "repo")
 os.makedirs(os.path.join(repo, ".claude", "work", "x"))
 os.makedirs(os.path.join(repo, "node_modules", "pkg"))
+os.makedirs(os.path.join(repo, ".claude", "worktrees", "other"))
+open(os.path.join(repo, ".claude", "worktrees", "other", "CHECKPOINT.md"), "w").close()
 open(os.path.join(repo, ".claude", "work", "x", "CHECKPOINT.md"), "w").close()
 open(os.path.join(repo, "node_modules", "pkg", "PROGRESS.md"), "w").close()
 bare = os.path.join(tmp, "bare")
@@ -62,6 +64,7 @@ code, out = hook("aa-c", repo)
 text = context(out) or ""
 report("names the checkpoint file", "CHECKPOINT.md" in text, out)
 report("skips node_modules", "node_modules" not in text, out)
+report("skips other worktrees", "worktrees" not in text, out)
 
 code, out = hook("", bare)
 report("missing session id is silent", code == 0 and out == "", out)
