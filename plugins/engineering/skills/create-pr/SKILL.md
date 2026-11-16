@@ -9,6 +9,8 @@ argument-hint: "[draft] [base-branch]"
 
 Arguments: the text after the skill name (`$ARGUMENTS` where the harness fills it in). `draft` opens a draft; any other word is the base.
 
+Paths are relative to this skill's folder.
+
 ## Setup
 
 When the project has no copy of this skill among its own project skills (the folder where this

@@ -9,6 +9,8 @@ description: >
 The thread that built the change runs this loop on its own diff, because it holds the purpose.
 An orchestrator does not run it for a thread.
 
+Paths are relative to this skill's folder.
+
 ## Setup
 
 When the project has no copy of this skill among its own project skills (the folder where this

@@ -10,6 +10,8 @@ Read `references/top-down.md`; owners, documents and cycles are in `references/l
 Failures to prevent: a spec filed as a ticket gets built unconfirmed, requirements name
 endpoints, a project never ends.
 
+Paths are relative to this skill's folder.
+
 ## Setup
 
 When the project's own skills folder has no copy of this skill:

@@ -9,6 +9,8 @@ description: >
 Decision log and research pages live where the team writes, not in the code repo (an existing
 `docs/adr/` is followed: `references/shape.md`), and are written for people; agent instructions go in the project's instruction file (`AGENTS.md`, `CLAUDE.md` or the harness's own).
 
+Paths are relative to this skill's folder.
+
 1. Find the log in the order of `references/locate.md`. When the project has no copy of this
    skill among its own project skills (the folder where this harness loads a repo's skills), set
    up first, then run the copy from its step 2, not this file:
