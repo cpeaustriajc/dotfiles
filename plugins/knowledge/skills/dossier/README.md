@@ -10,8 +10,9 @@ Use it when a decision or a finding must outlive the chat.
 - You ask "what did we decide about X".
 - You ask Claude to record research or a finding.
 - A decision made in conversation will matter to others.
+- You say "set up this project", so a long session stays on track after compaction.
 
-Do not use it for instructions to an agent. Those belong in `CLAUDE.md`. It starts no log in your code repository, but follows an existing `docs/adr/`.
+Do not use it for other instructions to an agent. Those belong in `CLAUDE.md`. It starts no log in your code repository, but follows an existing `docs/adr/`.
 
 ## Example
 
@@ -52,6 +53,9 @@ A GitHub wiki needs the `gh` CLI signed in. Notion and Linear need their MCP ser
 - For a log held as files, `scripts/check_pages.py` checks names, Status, sections, links and index order.
 - Before it publishes, Claude reads each page for AI-sounding prose, such as arrows and metaphor nouns, and rewrites it.
 - For a GitHub wiki, `scripts/ghwiki.sh` keeps one managed clone under `~/.cache/dossier/github/<owner>/<repo>`.
+- Setup commits three long-session pieces: a `# Compact instructions` section in the root `CLAUDE.md`, a rule in `.claude/rules/`, and a hook.
+- The hook runs after each compaction. It is a trial: half the sessions get its text, and `~/.claude/compact-trial.log` records which half.
+- Cloud project threads load the section and the rule, but run no repository hooks.
 
 ## Limits
 

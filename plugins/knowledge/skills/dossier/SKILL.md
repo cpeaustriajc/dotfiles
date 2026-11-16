@@ -2,8 +2,9 @@
 name: dossier
 description: >
   This skill should be used when the user says "note that down as a decision", "what did we decide
-  about X", "supersede that decision" or "record this research". It keeps the project's dossier:
-  decision and research pages in the team's wiki or Notion. Agent rules: the instruction file.
+  about X", "supersede that decision", "record this research" or "set up this project". It keeps
+  the project's dossier: decision and research pages in the team's wiki or Notion, and what a
+  long session needs after compaction. Agent rules: the instruction file.
 ---
 
 Decision log and research pages live where the team writes, not in the code repo (an existing
@@ -11,7 +12,8 @@ Decision log and research pages live where the team writes, not in the code repo
 go in the project's instruction file. Paths are relative to this skill's folder.
 
 1. Find the log in the order of `references/locate.md`. When the project's skills folder has no
-   copy of this skill, set up first, then run the copy from its step 2:
+   copy of this skill, or I say "set up this project", set up first, then run the copy from its
+   step 2:
    - Find what reaches the backend: the connected tools' lists, the CLI's `--help`, a folder of
      files. Read its page and link rules, and the log's newest pages.
    - Write the copy in that folder: this file without these Setup bullets, every file the copy
@@ -21,6 +23,7 @@ go in the project's instruction file. Paths are relative to this skill's folder.
      the page-name and link rules; how a save happens. Put `# <plugin> <version>` (from the
      marketplace manifest or this skill's version folder) on the line after the opening `---`.
      Commit it alone under the project's branch rules, else on a new branch, with hooks on.
+   - Write and commit the pieces of `references/long-session.md`, on their own.
    - A backend with no create or update tool: hand me the page text to paste; never fake a write
      through an issue or a comment. A backend of an unknown kind: say which tool serves each
      operation and how a superseded decision is marked, and get my yes before writing.
