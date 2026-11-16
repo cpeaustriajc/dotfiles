@@ -19,8 +19,7 @@ Decision log and research pages live where the team writes, not in the code repo
      Backend section: which tool serves find, read, record, supersede and link; where Home, the
      decision log and the research pages sit; the page-name and link rules; how a save happens.
      Stamp this skill's version or commit in the copy's first line.
-   - Write the long-session pieces of `references/long-session.md` into the project, with the
-     tracker filled in, and commit them on their own.
+   - Write and commit the pieces of `references/long-session.md`, on their own.
    - A backend with no create or update tool: hand me the page text to paste; never fake a write
      through an issue or a comment. A backend of an unknown kind: say which tool serves each
      operation and how a superseded decision is marked, and get my yes before writing.
