@@ -16,10 +16,15 @@ When the project's own skills folder has no copy of this skill:
 
 1. Find the tracker (`references/top-down.md`), then the tools that reach it (connected tools,
    the CLI's `--help`), and read the team's work types, templates, required fields and workflows.
-2. Write a project copy of this skill there without this Setup section, with `references/` and
-   `scripts/` beside it, this skill's version in its first line, and a Tracker section: the
-   table below filled in with the tracker's objects and commands.
-3. Run the copy.
+2. Write a project copy of this skill there: this file without its Setup section, the
+   files its other steps name and the files those name (one outside this skill's folder goes
+   beside the copy, with its path rewritten), and a description that keeps only the triggers
+   the copy serves. Add a Tracker section: the table below filled in with the
+   tracker's objects and commands. Put `# <plugin> <version>`, from the marketplace manifest or
+   the version folder in this skill's path, on the line after the opening `---`. Commit it on
+   its own, following the project's branch rules and commit hooks, else on a new branch with the
+   hooks on.
+3. Run the copy from its Steps section, not this file.
 
 | Level | Map to | Fallback |
 |---|---|---|

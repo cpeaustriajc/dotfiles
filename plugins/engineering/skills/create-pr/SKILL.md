@@ -16,11 +16,17 @@ harness loads a repo's skills), set up first:
 
 1. Find the code host and its tool: the remote's host, the CLI's `--help`. Read how it attaches
    an image or video to a PR (a flag, an upload call), and its size limit for a video.
-2. Write a project copy of this skill in that folder with no Setup section, and copy `references/`
-   and `scripts/` beside it. Fill in the commands for opening a PR from a body file with its
-   base, for reading a PR's state, and for attaching evidence, with the upload limit. Stamp this
-   skill's version or commit in the copy's first line.
-3. Run the copy, not this file.
+2. Write a project copy of this skill there: this file without its Setup section, the
+   files its other steps name and the files those name (one outside this skill's folder goes
+   beside the copy, with its path rewritten), and a description that keeps only the triggers
+   the copy serves. Fill in the commands for opening a PR from a body file with its
+   base, for reading a PR's state, and for attaching evidence, with the upload limit. Put
+   `# <plugin> <version>`, from the marketplace manifest or the version folder in this skill's
+   path, on the line after the opening `---`. Commit it on its own, following the project's
+   branch rules and commit hooks, else on a new branch with the hooks on.
+3. Run the copy from its Steps section, not this file.
+
+## Steps
 
 Evidence uploads: reference each file in the body by its path relative to the body file. Check a
 video against the limit with `scripts/check-video.sh <file> <MB>`. When one upload fails, the PR

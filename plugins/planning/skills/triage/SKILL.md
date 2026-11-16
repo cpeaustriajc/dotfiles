@@ -27,13 +27,18 @@ harness loads a repo's skills), set up first:
 1. Find the tracker and what reaches it: a pointer in the instruction file, the remote, the
    connected tools' lists, the CLI's `--help`. With none installed, list the commands you would
    run and ask me to run them.
-2. Write a project copy of this skill in that folder with no Setup section and `references/`
-   beside it. Map each state to the tracker's own field: a workflow status the team already has,
-   else a label with the state name; create a label only after I say yes. Add the commands for
-   reading an item and its comments, listing open PRs with their authors' association to the
-   team, setting a state, posting a comment and closing as not planned. Stamp this skill's
-   version or commit in the copy's first line.
-3. Run the copy, not this file.
+2. Write a project copy of this skill there: this file without its Setup section, the
+   files its other steps name and the files those name (one outside this skill's folder goes
+   beside the copy, with its path rewritten), and a description that keeps only the triggers the copy serves. Map each state to the tracker's own field: a workflow status the team already
+   has, else a label with the state name; create a label only after I say yes. Add the commands
+   for reading an item and its comments, listing open PRs with their authors' association to the
+   team, setting a state, posting a comment and closing as not planned. Put
+   `# <plugin> <version>`, from the marketplace manifest or the version folder in this skill's
+   path, on the line after the opening `---`. Commit it on its own, following the project's
+   branch rules and commit hooks, else on a new branch with the hooks on.
+3. Run the copy from its Steps section, not this file.
+
+## Steps
 
 In every tracker: a bare `#42` can be an issue or a PR, so check which. An outside author is
 one with no role in the team. "A reply after the last triage note" compares the last comment's

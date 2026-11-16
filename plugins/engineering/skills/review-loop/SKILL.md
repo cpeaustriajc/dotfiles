@@ -16,9 +16,12 @@ harness loads a repo's skills), or its hooks have no `guard_tests.py`, set up fi
 
 1. Find how the project runs verify, review and simplify: its verify skill or script, its code
    review rule, CI config, package scripts, `AGENTS.md` or `CLAUDE.md`.
-2. Write a project copy of this skill in that folder with those commands filled in and no Setup
-   section, and copy `scripts/tests_kept.py` beside it. Stamp this skill's version or commit in
-   the copy's front matter or first line.
+2. Write a project copy of this skill in that folder: this file without its Setup section, with
+   those commands filled in, `scripts/tests_kept.py` beside it, and a description that keeps
+   only the triggers the copy serves. Put `# <plugin> <version>`, from the marketplace manifest
+   or the version folder in this skill's path, on the line after the opening `---`. Commit it on
+   its own, following the project's branch rules and commit hooks, else on a new branch with the
+   hooks on.
 3. Add the test guard, a hook that asks before an edit rigs a test, where this project's harness
    runs committed project hooks (a cloud session sees only committed ones):
    - Mode: run `python3 -I scripts/replay.py` in the project. `full` if the full rules ask on few
@@ -27,7 +30,7 @@ harness loads a repo's skills), or its hooks have no `guard_tests.py`, set up fi
      keys in the script's docstring; wire it in, for example with `scripts/merge_hooks.py` and
      `scripts/guard_tests.settings.json`. Commit the hook on its own.
    - A refused setup edit: skip the guard and report it as not set up.
-4. Run the copy, not this file.
+4. Run the copy from its Loop section, not this file.
 
 Running setup again regenerates the copy and the guard's config; the wiring is left as is.
 
