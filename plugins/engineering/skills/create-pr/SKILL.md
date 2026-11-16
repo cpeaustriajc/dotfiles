@@ -17,8 +17,8 @@ harness loads a repo's skills), set up first:
 1. Find the code host and its tool: the remote's host, the CLI's `--help`. Read how it attaches
    an image or video to a PR (a flag, an upload call), and its size limit for a video.
 2. Write a project copy of this skill there: this file without its Setup section, the
-   files its other steps name and the files those name (one outside this skill's folder goes
-   beside the copy, with its path rewritten), and a description that keeps only the triggers
+   files its other steps name and the files those use (one outside this skill's folder goes
+   into the copy's folder, with its path rewritten), and a description that keeps only the triggers
    the copy serves. Fill in the commands for opening a PR from a body file with its
    base, for reading a PR's state, and for attaching evidence, with the upload limit. Put
    `# <plugin> <version>`, from the marketplace manifest or the version folder in this skill's

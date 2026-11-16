@@ -28,8 +28,8 @@ harness loads a repo's skills), set up first:
    connected tools' lists, the CLI's `--help`. With none installed, list the commands you would
    run and ask me to run them.
 2. Write a project copy of this skill there: this file without its Setup section, the
-   files its other steps name and the files those name (one outside this skill's folder goes
-   beside the copy, with its path rewritten), and a description that keeps only the triggers the copy serves. Map each state to the tracker's own field: a workflow status the team already
+   files its other steps name and the files those use (one outside this skill's folder goes
+   into the copy's folder, with its path rewritten), and a description that keeps only the triggers the copy serves. Map each state to the tracker's own field: a workflow status the team already
    has, else a label with the state name; create a label only after I say yes. Add the commands
    for reading an item and its comments, listing open PRs with their authors' association to the
    team, setting a state, posting a comment and closing as not planned. Put

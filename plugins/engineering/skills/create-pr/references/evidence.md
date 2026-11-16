@@ -21,7 +21,7 @@ and screenshot:
 - closes on screen each tool it opens (a dev panel, a QA menu) before the user's next
   step, so no state changes without a visible cause.
 
-Before you attach a video, run `scripts/check-video.sh <file>` on it and read each WARN still: a
+Before you attach a video, run `scripts/check-video.sh <file> <MB>` on it, with the upload limit, and read each WARN still: a
 chapter card is fine, a frozen step is not. Then read a contact sheet of its frames for the
 marks. Upload each file to the code host and reference it in the body by
 its path relative to the body file. Put a video alone

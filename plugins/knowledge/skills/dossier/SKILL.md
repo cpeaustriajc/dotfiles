@@ -15,7 +15,7 @@ Decision log and research pages live where the team writes, not in the code repo
    - Find what reaches the backend: the connected tools' lists, the CLI's `--help`, a folder of
      files. Read its page and link rules, and the log's newest pages.
    - Write the copy there: this file without these Setup bullets, the files its other
-     steps name and the files those name (one outside this skill's folder goes beside the copy,
+     steps name and the files those use (one outside this skill's folder goes into the copy's folder,
      with its path rewritten), and a description that keeps only the triggers the copy serves. Add a Backend section: which tool serves find, read, record, supersede and
      link; where Home, the decision log and the research pages sit; the page-name and link
      rules; how a save happens. Put `# <plugin> <version>`, from the marketplace manifest or the
