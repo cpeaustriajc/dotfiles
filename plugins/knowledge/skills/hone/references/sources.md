@@ -13,7 +13,8 @@ Step 1 gathers from each. Scope every run with `--project <substring>` and `--si
 Lens pass: use the same `--project` and `--since` as the correction run. It takes no `--skill`:
 for `/hone <skill>`, run without and keep only that skill's findings. Its file is about 6 times
 the corrections file. Run both with `--chunk-lines 1500` and tell each miner to read its chunk in
-500-line parts: a cheap-model miner given more stops early and reports a partial read as whole.
+500-line parts, 150 for the lens file, whose lines are long: a cheap-model miner given more stops
+early and reports a partial read as whole, and 500 lens lines overflow its context.
 Start the lens miners and correction miners in one message, one per chunk, on the cheapest
 model, read-only; move up one model when a miner misreads a lens. The missed-trigger lens needs
 the skill list: this session's skills plus each project skill's frontmatter.
