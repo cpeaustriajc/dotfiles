@@ -8,6 +8,6 @@
 - **The medium sets the smallest mark** (halftone dot, brush, ink bleed). Enlarge what must read,
   drop what can't; judge a zoomed crop of the stylised output. Repeating texture needs a pitch the
   medium resolves, or it smears into a slab.
-- **Unity.** One light and one medium pass over everything, 3D figures included.
+- **Unity.** One light and one medium pass over everything, figures included.
 - **A state change swaps objects.** A recoloured 2013 car still reads 2013 in 2077: each era,
   season or day/night state gets its own vehicles, signs, clothing. List them, then crossfade.

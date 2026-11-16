@@ -1,83 +1,62 @@
 # Top-down planning
 
-The shared core of `vision`, `shape` and `tickets`. Each of them reads this file first.
-
-| Skill | Level | Holds |
-|---|---|---|
-| `vision` | Product | Worth it, destination, features F1…Fn, not yet specified, out of scope |
-| `shape` | Project | Spec with requirements R1…Rn, testing seams, milestones |
-| `tickets` | Work item | One slice, citing the requirements it meets |
-
-`grill` asks the open questions at the project level; `vision` grills the product itself.
-Questions thin out going down, because each level inherits what the one above settled.
+Shared by `vision` (product: worth it, features F1…Fn, out of scope), `shape` (project: spec with
+requirements R1…Rn, testing seams, milestones) and `tickets` (work item: one slice citing its
+requirements). `grill` asks a project's open questions; `vision` grills the product. Each level
+inherits what the one above settled, so questions thin out going down.
 
 ## Five rules
 
-1. **Read the level above first.** A project starts from one feature of the product; a work item
-   from the spec. With no product, offer `vision` for a minimal one; a one-off internal tool may
-   stand alone if I say so.
-2. **Every item cites its parent.** A project names its feature, every requirement serves the
-   project's Done, every work item names its requirements. An item with no parent is scope nobody
-   asked for.
-3. **A level is built only from a confirmed parent.** A Draft product gets no projects beyond
-   one-line placeholders; a Draft spec gets no build items. Building on an unconfirmed level means
-   rework when it changes, and it usually changes after a demo. No work item is ready until
-   engineering confirms it names only systems the team owns or has a contract for.
-4. **Changes flow down, questions flow up.** A changed feature returns its project's spec to
-   Draft; a changed requirement flags every item that cites it. A lower level never edits a
-   higher one: a requirement found wrong while building comes to me as a question.
-5. **Status rolls up.** Items close milestones, milestones feed the project update, project
-   health feeds the product update. Nobody retypes a level's progress by hand.
+1. **Read the level above first.** A project starts from one product feature, a work item from
+   the spec. No product: offer `vision` for a minimal one; a one-off internal tool may stand
+   alone if I say so.
+2. **Every item cites its parent**: a project its feature, a requirement the project's Done, a
+   work item its requirements. An item with no parent is scope nobody asked for.
+3. **Build a level only from a confirmed parent.** A Draft product gets one-line project
+   placeholders at most; a Draft spec gets no build items, since it usually changes after a demo.
+   A work item is ready only once engineering confirms it names only systems the team owns or
+   has a contract for.
+4. **Changes flow down, questions flow up.** A changed feature returns its spec to Draft; a
+   changed requirement flags every item citing it. A lower level never edits a higher one: a
+   requirement found wrong while building comes to me as a question.
+5. **Status rolls up**: items close milestones, milestones feed the project update, project health
+   feeds the product update. Nobody retypes progress.
 
 ## Find the tracker
 
 Stop at the first hit:
 
-1. A pointer in the project's `CLAUDE.md` or `AGENTS.md`, for example `Tracker: Linear, team ENG`,
-   a Jira URL, or `GitHub issues`.
-2. The connected tools: a Linear MCP server means Linear; an Atlassian MCP server or the `acli`
-   CLI means Jira; a GitHub remote with `gh` signed in means GitHub.
-3. Ask once, and offer to add the pointer line. For personal software, recommend a Markdown file
-   in the repo over setting up a tracker.
+1. A pointer in the project's instruction file, such as `Tracker: Linear, team ENG`, a Jira URL
+   or `GitHub issues`.
+2. The connected tools: a tracker's MCP server, or its CLI signed in (`acli`, `gh`).
+3. Ask once and offer to add the pointer. For personal software, recommend a Markdown file in the
+   repo.
 
-Then read the matching adapter in this folder. It maps each level onto that tracker's objects
-and names the tools that reach it.
+Then fill the project copy's Tracker section (`SKILL.md`, Setup).
 
-| Tracker | Adapter |
-|---|---|
-| Linear | `linear.md` |
-| Jira (with Confluence for documents) | `jira.md` |
-| GitHub Issues and Projects | `github.md` |
-| Asana, ClickUp, Notion, Trello, a Markdown file, anything else | `other-trackers.md` |
+**The project's facts override these defaults**: who holds each role, the templates, which areas
+can't skip QA, where older specs live. Look for a tracker section in the instruction file or a
+file it points to; ask only what the task needs. On a solo project one person holds every role:
 
-**The project's facts** override the defaults in these skills: who holds each role, the team's
-templates, which areas are too risky to skip QA, where older specs live. Look for a tracker
-section in `AGENTS.md` or `CLAUDE.md`, or a file it points to; ask only what the task needs. On a
-solo project one person holds every role:
-
-- **Product owner**: writes intent, priority and requirements, and accepts releases.
+- **Product owner**: intent, priority, requirements; accepts releases.
 - **Approver**: confirms direction, often after a demo; usually the product owner.
-- **Verifier**: marks work done. QA if the team has it, otherwise the product owner.
-- **Engineering**: decomposition, work types, feasibility and the shape of the work.
+- **Verifier**: marks work done. QA if the team has it, else the product owner.
+- **Engineering**: decomposition, work types, feasibility.
 
-When the tracker has the team's own templates, they are the single source of truth: read them
-fresh each time, never copy them into files. Don't invent owners, dates, measurements or dependencies: leave them blank
-or list them as open questions.
+The tracker's own templates are the source of truth: read them fresh, never copy them into files.
+Don't invent owners, dates, measurements or dependencies; leave them blank or ask.
 
 ## Write, then check the tree
 
 Drafting, auditing or translating never authorises a write, and a PR, issue or comment is a
-write: the default is a draft in chat. Before any write, state the exact item and change;
-afterwards, read it back and report what the tracker now holds. Show me the first write to a
-shared tracker before making it: the whole team sees it at once, and many trackers notify a
-channel on every save, so batch related changes into one write. Edit only what this run created
-or I name: another person's ticket or an epic is read-only, so a finding goes in a comment I
-approve.
+write: the default is a draft in chat. Before a write, state the exact item and change; after it,
+read it back and report what the tracker holds. Show me the first write to a shared tracker, and
+batch related changes, since many trackers notify on every save. Edit only what this run created
+or I name; another person's ticket or epic is read-only, so a finding goes in a comment I approve.
 
-**Text others read** (spec, item, update): no file paths, code, project terms or
-engineering jargon. Paths go stale, and the product owner, QA and other teams have no repo access
-or engineering background; a technical question goes to me, not to them.
+**Text others read** (spec, item, update) has no file paths, code, project terms or engineering
+jargon: paths go stale, and the product owner, QA and other teams lack repo access. A technical
+question goes to me.
 
-After writing, read the tree back from the tracker and run the check per `tree-outline.md`. Use
-absolute paths: the session's working directory is the project, not the skill. Fix every line it
-prints before handing back, or say why one stays.
+After writing, read the tree back and run the check (`tree-outline.md`) with absolute paths. Fix
+every line it prints, or say why one stays.

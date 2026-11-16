@@ -4,8 +4,8 @@ Each effect is named by its term in Emil Kowalski's animation-vocabulary skill (
 bad version. For each version:
 
 - `<version>.html`: the demo page. Its CSS is the recipe.
-- `<version>.gif`: the motion as it plays, for the owner. Claude sees only its first frame.
-- `<version>-frames.png`: for Claude. Twelve frames evenly spaced in time, each labelled with its
+- `<version>.gif`: the motion as it plays, for the owner. The model sees only its first frame.
+- `<version>-frames.png`: for the model. Twelve frames evenly spaced in time, each labelled with its
   time, above a plot of the planned curve (line) and the measured progress (dots).
 - `<version>-samples.json`: the measured progress at every frame.
 

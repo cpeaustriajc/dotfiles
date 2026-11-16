@@ -110,10 +110,10 @@ only when you call it by name.
 | [launch-video](plugins/design/skills/launch-video/README.md) | design | Makes a narrated launch video from a live site or a brief, with a voiceover, music, thumbnails, captions and post copy. |
 | [break-it](plugins/engineering/skills/break-it/README.md) | engineering | Drives the app as a careless, impatient or confused user with worst-case data. Reports ranked bugs with screenshots, video and repro steps. |
 | [review-loop](plugins/engineering/skills/review-loop/README.md) | engineering | Runs verify, code review and simplify on a change in rounds, until a round changes no code. |
-| [commit](plugins/engineering/skills/commit/README.md) | engineering | Typed. Commits the changes in small slices in the repo's style, then pushes. With `local`, it does not push. |
+| [commit](plugins/engineering/skills/commit/README.md) | engineering | Commits the changes in small slices in the repo's style, then pushes. With `local`, it does not push. |
 | [create-pr](plugins/engineering/skills/create-pr/README.md) | engineering | Commits, runs the fast checks, pushes, and opens a PR that links the issue and the evidence. |
 | [implement](plugins/engineering/skills/implement/README.md) | engineering | Typed, with a ticket or a spec. Builds each ready ticket without supervision, with checked slices, `review-loop` and a PR. |
-| [blast-radius](plugins/engineering/skills/blast-radius/README.md) | engineering | Typed, with a change. Finds what the change can break outside its diff, and runs code to prove the fact that makes it safe. |
+| [blast-radius](plugins/engineering/skills/blast-radius/README.md) | engineering | Finds what the change can break outside its diff, and runs code to prove the fact that makes it safe. |
 | [cleanup](plugins/engineering/skills/cleanup/README.md) | engineering | Removes what a session left, such as dev servers, stale branches and the session itself, when it is safe. It does not tidy code. |
 | [vision](plugins/planning/skills/vision/README.md) | planning | Asks you about a product idea, first whether it is worth building. Then writes the plan for the product. It does not find ideas. |
 | [shape](plugins/planning/skills/shape/README.md) | planning | Writes the spec, milestones and status updates for one project in any tracker, such as Linear, Jira or GitHub. |
@@ -127,9 +127,9 @@ only when you call it by name.
 | [recall](plugins/knowledge/skills/recall/README.md) | knowledge | Gives a brief of recent work from transcripts, git and PRs. |
 | [painting-craft](plugins/visual/skills/painting-craft/README.md) | visual | Draws and paints in code to a gallery standard, with a screenshot review loop. It is not for UI icons, charts or diagrams. |
 
-A skill holds no harness details and no project facts. The details of a code host or tracker go
-in the skill's `references/<host>.md` adapters. A project's own facts stay in that project, or in
-the project copy that the skill's setup writes.
+A skill holds no harness details, no code-host or tracker details and no project facts. Where a
+skill needs them, its Setup writes a project copy, and the agent fills in the host or tracker it
+finds in the project, as `review-loop` does.
 
 ## painting-craft: before and after
 
@@ -160,8 +160,8 @@ These changes to painting-craft made the right-hand pictures better:
 
 - Build recipes for the parts that fail up close, in
   [`references/recipes.md`](plugins/visual/skills/painting-craft/references/recipes.md).
-- Before the composition, a study of each main subject against public-domain references that
-  `scripts/refs.py` fetches and `scripts/compare.py` compares.
-- The bundled 3D figure renderer.
-- A paint pass that unifies the painted styles, with `scripts/paintpass.py`.
+- Before the composition, a study of each main subject beside a public-domain reference.
+- A 3D figure renderer and a paint-pass script. The current skill ships neither: it describes
+  figures as volumes in perspective and one brushwork pass, and uses the project's own tools.
+  The right-hand pictures are from the version with the scripts.
 - Delivery at twice the display size.

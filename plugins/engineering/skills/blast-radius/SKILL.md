@@ -1,12 +1,12 @@
 ---
 name: blast-radius
-description: "This skill should be used when the user types /blast-radius on a change: find what a change could break somewhere else before it ships, beyond the diff, and prove the one fact it's safe because of by running real code instead of writing it up. Use for 'blast radius of X', 'what could this break', or reviewing a small diff you don't trust."
-disable-model-invocation: true
+description: "This skill should be used when the user asks what a change or PR could break, whether a PR is safe to merge, or for its blast radius or merge risk. It finds breakage beyond the diff and proves the one fact the change is safe because of by running real code."
 argument-hint: "<change: PR, branch, commit or diff>"
 ---
 
-Find what the arguments (the text after the skill name; `$ARGUMENTS` where the harness fills it in) break outside its diff (empty: the branch against its base, plus
-uncommitted edits). Callers are one grep away; find the breakage grep won't show. Detail per step:
+Find what the change breaks outside its diff. The change is the arguments (the text after the skill name;
+`$ARGUMENTS` where the harness fills it in) or the one the user names; with neither, the branch against
+its base, plus uncommitted edits. Callers are one grep away; find the breakage grep won't show. Detail per step:
 `references/method.md`. Writeup: `references/writeup.md`.
 
 1. Read the change and what it now does that the diff doesn't spell out. Pull its PR and commits:

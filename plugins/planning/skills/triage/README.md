@@ -49,11 +49,10 @@ The skill then loads as `/planning:triage`.
 - It writes no label and no comment before you say go. A direct order counts as the go.
 - It does not run on a schedule. You start it.
 - It does not answer design questions. It hands them to `grill`.
-- It supports GitHub with commands. Other trackers use their own MCP server or CLI.
+- It works with any tracker. Claude writes a project copy that names the tracker's own commands.
 
 ## More
 
 - [SKILL.md](SKILL.md): the method Claude follows.
 - [references/agent-brief.md](references/agent-brief.md): the brief and the triage notes.
 - [references/requests.md](references/requests.md): the "what needs attention" list and direct orders.
-- [references/github.md](references/github.md): the `gh` commands.

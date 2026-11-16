@@ -1,10 +1,10 @@
 # blast-radius
 
-A typed `/blast-radius` command that finds what a change can break outside its diff. It proves the one fact the change is safe because of, or says that fact is unproven.
+A skill that finds what a change can break outside its diff. It proves the one fact the change is safe because of, or says that fact is unproven.
 
 ## When to use it
 
-Use it before you merge a change that you do not trust yet, even a small one. A list of callers is not enough. It looks for the breakage that a search does not show.
+Claude starts it when you ask what a change or PR could break, whether a PR is safe to merge, or for its merge risk. You can also type `/blast-radius` with a change. Use it before you merge a change that you do not trust yet, even a small one. A list of callers is not enough. It looks for the breakage that a search does not show.
 
 - For a full review of a risky diff, use `review-loop`.
 

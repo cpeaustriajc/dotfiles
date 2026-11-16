@@ -11,7 +11,7 @@ Use it to review a screen against its design, to polish spacing, type, colour or
 
 ## Example
 
-You say: "Review the new pricing page against the Figma frame before I sign off."
+You type: `/ui-polish the new pricing page against the Figma frame`. Claude does not start it on its own.
 
 1. Claude finds the design and opens the page in a browser at the real width and at 375px.
 2. Claude checks the page against the mistake list and the reference files for motion, interaction and dense app screens.

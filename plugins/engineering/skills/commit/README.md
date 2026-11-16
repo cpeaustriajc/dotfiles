@@ -4,7 +4,7 @@ A skill that commits your uncommitted changes as atomic commits, in the repo's m
 
 ## When to use it
 
-Type `/commit` when you want your work saved as clean commits. The skill sets `disable-model-invocation`, so it runs only when you type the command. Claude never starts it alone.
+Claude starts it when you say "commit", "push it" or ask to save finished work to git. You can also type `/commit`.
 
 To open a pull request, use `create-pr`. To review changes, use `review-loop`.
 

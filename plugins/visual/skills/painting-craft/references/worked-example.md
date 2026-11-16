@@ -1,6 +1,6 @@
 # Worked example: measurements from past pictures
 
-Read with `scripts/knight.py`. Sizes in centimetres. They belong to those pictures; for another
+Sizes in centimetres. They belong to those pictures; for another
 subject, measure it.
 
 - **Henry's kit** (Bohemia, 1403, after the KCD2 cover art): globose breastplate over a red quilted

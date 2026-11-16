@@ -3,7 +3,7 @@
 Read this before you write an item. Step 5 of `SKILL.md` says when.
 
 Use the project's own work-item template and its part names, read fresh as `top-down.md` says.
-With none, propose these parts once and use them. The tracker's adapter in `shape/references/`
+With none, propose these parts once and use them. The Tracker section of the project's copy of `shape`
 says how each part lands: a section, a checklist, a field or a link.
 
 | Part | Holds |

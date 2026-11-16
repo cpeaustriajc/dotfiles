@@ -5,7 +5,7 @@ Step 4 of SKILL.md uses these steps.
 **Record a decision.** When I ask, record it. Offer one unasked, for example while moving
 rationale out of a repo, only when all three hold: it is a one-way door, it surprises a reader
 without its context, and it came from a real trade-off between alternatives.
-1. Read the index and take the next number (skip this where the adapter has no numbers).
+1. Read the index and take the next number (skip this where the backend has no numbers).
 2. Write the page from the decision template.
 3. Add its row to the top of the index, where there is one.
 4. Add or update the Home row, if the decision creates a page.
