@@ -31,7 +31,7 @@
       "name": "engineering",
       "displayName": "Engineering",
       "description": "Prove the work in the real app — unattended builds and loops, user-style testing, change risk, review and PRs.",
-      "version": "3.4.1",
+      "version": "3.4.2",
       "author": {
         "name": "John Carlo Austria"
       },
@@ -73,7 +73,7 @@
       "name": "knowledge",
       "displayName": "Knowledge",
       "description": "Keep what the team learns — a decision log, research pages, lessons from past sessions, and a recap of recent work.",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "author": {
         "name": "John Carlo Austria"
       },

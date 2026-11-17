@@ -14,7 +14,7 @@ Test changes: <the tests_kept.py line as printed, and each allowed finding with 
   when the repo's template or its recent PRs' form sets the shape. Pass the same file to the code
   host. The check rejects a closing keyword, which closes the issue on merge before the verifier
   passes it, the harness's default headings and test-plan checklist, and a summary over 3 lines.
-- Write the title and body through `../../blast-radius/references/ai-tells.md`, rules 26 to 33. Name
+- Write the title and body through `../../blast-radius/references/ai-tells.md`, rules 26 to 35. Name
   code by its identifier: `loadConfig`, not "the config loader".
 - Visual only when it replaces prose: the smallest one, after the line it supports, in this
   order of preference: a `diff`, a tree, pseudocode, Mermaid for a changed flow. A typo or
