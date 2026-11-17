@@ -10,6 +10,7 @@ sys.path.insert(0, HERE)
 import subprocess  # noqa: E402
 
 from check_skill_refs import ROOT, dead, markdown_files, skill_root  # noqa: E402
+from check_skill_refs import crossing, drifted  # noqa: E402
 
 P = pathlib.PurePosixPath
 ROOTS = [P("s/skills/x/references"), P("s/skills/x"), P("")]
@@ -102,6 +103,31 @@ with tempfile.TemporaryDirectory() as tmp:
     write("clean/plugins/p/skills/s/SKILL.md", "# s\nSee `references/x.md`.\n")
     write("clean/plugins/p/skills/s/references/x.md", "# x\n")
     case("the CLI on a clean tree prints ok and exits 0", cli_on(clean), (0, "skill refs ok"))
+
+    write("cross/plugins/p/skills/s/SKILL.md", "# s\nSee `../t/references/x.md`.\n")
+    write("cross/plugins/p/skills/s/references/a.md", "# a\nSee `../../t/references/x.md`.\n")
+    write("cross/plugins/p/skills/t/references/x.md", "# x\n")
+    cross = tree / "cross"
+    case("a path into another skill fails", crossing(cross / "plugins/p/skills/s/SKILL.md", "See `../t/references/x.md`.", cross),
+         [(1, "../t/references/x.md")])
+    case("a path into another skill from references/ fails",
+         crossing(cross / "plugins/p/skills/s/references/a.md", "See `../../t/references/x.md`.", cross), [(1, "../../t/references/x.md")])
+    case("a path inside the skill passes", crossing(cross / "plugins/p/skills/s/SKILL.md", "See `references/a.md`.", cross), [])
+    case("a path to the repo's docs passes",
+         crossing(cross / "plugins/p/skills/s/README.md", "[d](../../../../docs/a.md)", cross), [])
+    code, out = cli_on(cross)
+    case("the CLI reports a path into another skill and exits 1",
+         (code, "plugins/p/skills/s/SKILL.md:2: names ../t/references/x.md, in another skill; copy it into this skill" in out),
+         (1, True))
+
+    write("copies/a/src.md", "same\n")
+    write("copies/b/same.md", "same\n")
+    write("copies/c/other.md", "changed\n")
+    copies = tree / "copies"
+    case("an equal copy passes", drifted(copies, {"a/src.md": ["b/same.md"]}), [])
+    case("a changed copy fails", drifted(copies, {"a/src.md": ["c/other.md"]}),
+         ["c/other.md: differs from a/src.md; edit the source, then copy it again"])
+    case("a missing copy fails", drifted(copies, {"a/src.md": ["d/gone.md"]}), ["d/gone.md: missing copy of a/src.md"])
 
 print(f"{passed} passed, {failed} failed")
 sys.exit(1 if failed else 0)

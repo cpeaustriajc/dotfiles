@@ -1,6 +1,6 @@
 # Tests that prove a change
 
-Read this before you write, change or run a test. implement, create-pr and break-it link here.
+Read this before you write, change or run a test.
 
 ## Tier
 
@@ -25,13 +25,13 @@ the tests that cover the change, not the whole slow suite, unless the project sa
 
 Stop. Name the test and the line, and explain why it is wrong. Do not change the test, and do not
 special-case the code to pass it (ImpossibleBench, arXiv 2510.20270: a stop exit cuts cheating
-but does not end it, so `../scripts/tests_kept.py` checks the diff as well).
+but does not end it, so `tests_kept.py`, the script that compares the tests before and after, checks the diff as well).
 
 A check that fails on code you did not touch: ask the owner before you bypass it.
 
 ## Proof
 
 Proof is the exit code and log that a deterministic check saved: the project's verify skill and
-`../scripts/tests_kept.py`. A pass that you typed, or a review round that has not run since the
+`tests_kept.py`. A pass that you typed, or a review round that has not run since the
 last fix, is not proof. The code review is a backstop: it misses cheats spread over several
 files.

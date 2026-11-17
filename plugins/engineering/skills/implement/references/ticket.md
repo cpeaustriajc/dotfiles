@@ -14,7 +14,7 @@ Check each line. If one fails, stop and name it.
 3. Every item that blocks it is closed, or has a pushed branch with an open PR. Without the
    second case, a stack never builds past its first item.
 
-Then branch per `../../create-pr/references/stacking.md`, unless the current branch is already for
+Then branch per `references/stacking.md`, unless the current branch is already for
 this item.
 
 ## Open questions (step 4)
@@ -32,7 +32,7 @@ A criterion that cannot be met as written, or a test that contradicts the spec, 
 ## Build (step 5)
 
 Cut the work into vertical slices that each end in a state you can check in the running app. Per
-slice: write its test per `../../review-loop/references/tests.md`, see it fail, build, see it pass,
+slice: write its test per `references/tests.md`, see it fail, build, see it pass,
 commit. Never commit red.
 
 ## PR body (step 7)

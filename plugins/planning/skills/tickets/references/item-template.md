@@ -3,7 +3,7 @@
 Read this before you write an item. Step 5 of `SKILL.md` says when.
 
 Use the project's own work-item template and its part names, read fresh as `top-down.md` says.
-With none, propose these parts once and use them. The Tracker section of the project's copy of `shape`
+With none, propose these parts once and use them. The Tracker section of this skill's project copy
 says how each part lands: a section, a checklist, a field or a link.
 
 | Part | Holds |
@@ -40,7 +40,7 @@ says how each part lands: a section, a checklist, a field or a link.
   links a large reference only as a narrow crop or excerpt.
 - **Whole body:** `check_tree.py` enforces the 1,500-character limit and at most 5 checks; the
   estimate in `sizing.md` decides the size.
-- **Behaviour, not file paths or code**, and plain words (`../shape/references/top-down.md`). A
+- **Behaviour, not file paths or code**, and plain words (`references/top-down.md`). A
   prototype's snippet that pins a decision may be inlined, marked as from a prototype.
 - **An item is self-contained**: someone who never saw the conversation can pick it up from the
   item and the spec it links. It settles every design call, so a cheaper builder does not make one

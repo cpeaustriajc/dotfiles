@@ -25,6 +25,7 @@ EXCEPTIONS = {
     ("plugins/design/skills/launch-video/references/voice.md", "OpenAI"): "who runs the Whisper server",
     ("plugins/knowledge/skills/dossier/references/publish.md", "Claude"): "the text to scrub before publishing",
     ("plugins/engineering/skills/blast-radius/references/ai-tells.md", "Substrate (base)"): "a list of words to avoid",
+    ("plugins/engineering/skills/create-pr/references/ai-tells.md", "Substrate (base)"): "a list of words to avoid",
 }
 
 

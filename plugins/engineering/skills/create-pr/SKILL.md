@@ -32,7 +32,8 @@ rest: check the exit code and the rendered body, then attach the missing file. A
 tool reads a browser session to upload.
 
 1. No remote: offer to create the repo, private or public.
-2. Branch and commit per steps 1 and 2 of `../commit/SKILL.md`; keep existing commits. Stack on
+2. On the default branch, branch first: by the project's rule, else the tracker's branch name
+   for the issue, else a short topic, with no prefix. Make atomic commits; keep existing commits. Stack on
    an open blocker PR (`references/stacking.md`).
 3. A fresh reader on the cheapest model gets only `git diff <base>...HEAD` and the comment rule,
    so it needs no tools and sees nothing of this session; the harness's code review does not
@@ -40,7 +41,7 @@ tool reads a browser session to upload.
    blindly) in two sentences and about 20 words at most; the repo's rule wins. It lists every
    other added or changed comment with file:line and why. Cut or shorten each, in one commit;
    the list is final.
-4. Run the repo's fast checks and `python3 -I ../review-loop/scripts/tests_kept.py --base <base>`.
+4. Run the repo's fast checks and `python3 -I scripts/tests_kept.py --base <base>`.
    Red: stop. A `tests_kept.py` finding passes only when the owner allowed that test change.
 5. Push. Read the PR's state on the code host: already open or merged, report its URL and leave
    it.

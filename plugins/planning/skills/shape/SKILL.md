@@ -20,34 +20,11 @@ When the project's skills folder has no copy of this skill, set up first:
    CLI's `--help`), and read the team's work types, templates, required fields and workflows.
 2. Write the copy in that folder: this file without Setup, every file the copy uses directly or
    through another file (copied into its folder, paths rewritten), and a description with only
-   the triggers it serves. Add a Tracker section: the table below with the tracker's objects and
-   commands. Put `# <plugin> <version>` (from the marketplace manifest or
+   the triggers it serves. Add a Tracker section: the Tracker map in `references/top-down.md`, with the
+   tracker's objects and commands. Put `# <plugin> <version>` (from the marketplace manifest or
    this skill's version folder) on the line after the opening `---`. Commit it alone under the
    project's branch rules, else on a new branch, with hooks on.
 3. Run the copy from its Steps section.
-
-| Level | Map to | Fallback |
-|---|---|---|
-| Product | Top-level goal, initiative or portfolio | A pinned page the projects link to |
-| Project | Project, epic or parent item | A parent item with child items |
-| Spec, engineering document, decision | A tracker or wiki document linked from the project, editable by the product owner; never a ticket | A wiki page |
-| Phase | Milestone | A `Phase` field, status or label |
-| Work item, sub-item | Item, child item | none |
-| Work type | Item type or template | A `Task`, `Bug` or `Chore` label |
-| Dependency | Native "blocked by" | A link line in the item's Context |
-| Cycle | The tracker's iteration | none |
-| Checklist | Native checkboxes | A numbered list |
-| Status update | The tracker's update, with health | A comment on the project |
-
-- A level the tool can't create: say so and hand over the text to paste; never fake it with a
-  comment or an unrelated object. Read back what may store differently (checklists, rich text).
-- A Markdown-file tracker: a heading per project, the spec linked, phases as subheadings, work
-  items as checkboxes (the Outcome as the line, its checks nested).
-- Fill a template's headings in the body; upload a private tool's file where its readers sign in.
-- Use the method's terms for sprint language (Success, chosen items); leave estimates blank unless
-  the team estimates. Read a workflow's transitions before moving an item. Batch changes to one
-  item: every write notifies.
-- Closing on merge is not the verifier's Done: say so, and mark "verified" with a label or status.
 
 ## Steps
 
