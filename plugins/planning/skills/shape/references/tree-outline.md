@@ -52,5 +52,5 @@ that project's items.
 - `checks`: the number of checks; `chars`: the body's length, which must stay under 1,500 once
   the quoted lines of its cited requirements are subtracted.
 
-Run `python3 <shape>/scripts/check_tree.py <absolute path to the JSON>` (`<shape>` is this
+Run `python3 <skill>/scripts/check_tree.py <absolute path to the JSON>` (`<skill>` is this
 skill's folder). Add `--launch` when the project enters Launch, so an unsliced requirement fails.

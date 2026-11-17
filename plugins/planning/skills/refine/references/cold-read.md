@@ -15,7 +15,7 @@ The reader takes each persona in turn:
 
 - **User**: what does the user see in each state, including the stale and chained ones?
 - **QA**: can each check pass or fail today, on its environment, with its fixture?
-- **Builder**: is the ticket self-contained and within `../../tickets/references/sizing.md`, so
+- **Builder**: is the ticket self-contained and within `references/sizing.md`, so
   that one agent can finish and prove it in one session?
 - **Red team**: what does a replayed, raced or forged request do?
 

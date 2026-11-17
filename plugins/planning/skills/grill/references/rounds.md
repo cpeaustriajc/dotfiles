@@ -33,7 +33,7 @@ checked. A part of the source I named (a repo to port, a list I pasted) is a que
   consequence. Each question carries a concrete scenario.
 - Plain words: no section numbers, internal IDs or letter codes.
 - A layout, look or feel question shows each option as a mockup, or offers "show me a mockup
-  first"; a flow, state change or structure comes as a diagram (widgets: `SKILL.md`).
+  first"; a flow, state change or structure comes as a diagram (the steps say which widget).
 - A decision that touches other people (PO, QA, another team) is worded blamelessly, as they
   would read it.
 - Done is recommended from what you looked up; "what are the success criteria?" hands your job

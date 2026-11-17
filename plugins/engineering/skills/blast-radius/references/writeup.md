@@ -10,6 +10,6 @@ anything private before it goes anywhere public. Proof levels: `references/metho
   and how to check. Paste the proof for the ones that matter.
 - **Cleared**: what you checked and why it's fine.
 - **Before you merge**: the test at the lowest tier that catches the real bug
-  (`../../review-loop/references/tests.md`), including the script you wrote.
+  (`references/tests.md`), including the script you wrote.
 
 Then the risk map, as the reply paragraph of `SKILL.md` describes.

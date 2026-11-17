@@ -19,7 +19,7 @@ Plain words, no internal jargon:
    actual, the screenshot or video timestamp, and any side effect checked (stored value, request
    sent, file written).
    Each Broken finding also gets a test at the lowest tier that reproduces it
-   (`../../review-loop/references/tests.md`). It is a bug only when that test fails for the stated
+   (`references/tests.md`). It is a bug only when that test fails for the stated
    reason; otherwise mark it UNPROVEN. Run it in the suite, then move it to the run folder
    uncommitted: a committed skip is a `tests_kept.py` finding. Each finding names its test's path
    there, a filed Bug carries the test, and the fix commits it, red first.

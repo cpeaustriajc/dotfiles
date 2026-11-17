@@ -1,7 +1,6 @@
 # Stacked PRs
 
-Read this when the work's issue has a blocker whose PR is still open. Step 2 of `SKILL.md` says
-when.
+Read this when the work's issue has a blocker whose PR is still open.
 
 Build items of one project ship as stacked diffs in blocked-by order, landed bottom-up. Branch off the blocker's
 branch, and open the PR against it; an item with no open blocker branches off the trunk. A stack

@@ -25,7 +25,7 @@ to the hooks folder. A refused setup edit: skip that hook, list it under Needs y
 3. **Gate** and branch per `references/ticket.md`.
 4. **Trust the ticket**: open questions per `references/ticket.md`.
 5. **Build** per `references/ticket.md`. Each criterion becomes a test at the tier in
-   `../review-loop/references/tests.md`. Commit each green slice. Out of Scope and side
+   `references/tests.md`. Commit each green slice. Out of Scope and side
    discoveries go in the report, not the change.
 6. **Review**: run `review-loop` on the commits since the base. One commit per fix, with the
    checks it touches run again; each finding that is not fixed goes in the PR.

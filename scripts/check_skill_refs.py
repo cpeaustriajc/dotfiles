@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Checks that each file a skill README names exists.
+"""Checks that each file a skill names exists, lies in that skill, and that copies match their source.
 
 Usage: python3 -I scripts/check_skill_refs.py [root]
 
@@ -53,13 +53,61 @@ def skill_root(path, root=ROOT):
     return root.joinpath(*rel[:4] if rel[0] == "plugins" else rel[:3])
 
 
+# Each skill works alone, so a file that several skills need is copied into each of them.
+# The first path is the source; each copy must stay equal to it.
+E = "plugins/engineering/skills/"
+P = "plugins/planning/skills/"
+COPIES = {
+    E + "review-loop/references/tests.md": [E + "blast-radius/references/tests.md", E + "break-it/references/tests.md",
+                                            E + "implement/references/tests.md"],
+    E + "review-loop/scripts/tests_kept.py": [E + "create-pr/scripts/tests_kept.py"],
+    E + "create-pr/references/stacking.md": [E + "implement/references/stacking.md"],
+    E + "blast-radius/references/ai-tells.md": [E + "create-pr/references/ai-tells.md"],
+    P + "shape/references/top-down.md": [P + s + "/references/top-down.md" for s in ("tickets", "triage", "vision")],
+    P + "shape/references/tree-outline.md": [P + s + "/references/tree-outline.md" for s in ("tickets", "triage", "vision")],
+    P + "shape/scripts/check_tree.py": [P + s + "/scripts/check_tree.py" for s in ("tickets", "triage", "vision")],
+    P + "tickets/references/sizing.md": [P + "refine/references/sizing.md"],
+    P + "vision/references/worth-it.md": [P + "scout/references/worth-it.md"],
+    P + "grill/references/rounds.md": [P + "vision/references/rounds.md"],
+}
+
+
+def drifted(root, copies=COPIES):
+    """Returns a line for each copy that is missing or differs from its source."""
+    errors = []
+    for src, dests in copies.items():
+        for dest in dests:
+            if not (root / dest).exists():
+                errors.append(f"{dest}: missing copy of {src}")
+            elif (root / dest).read_bytes() != (root / src).read_bytes():
+                errors.append(f"{dest}: differs from {src}; edit the source, then copy it again")
+    return errors
+
+
+def crossing(path, text, root=ROOT):
+    """Returns (line number, path) for each named path that points into another skill's folder."""
+    own = skill_root(path, root)
+    found = []
+    for n, ref in named(text):
+        target = (path.parent / ref).resolve()
+        parts = target.relative_to(root).parts if target.is_relative_to(root) else ()
+        if len(parts) > 3 and parts[0] == "plugins" and parts[2] == "skills" and root.joinpath(*parts[:4]) != own:
+            found.append((n, ref))
+    return found
+
+
 def main(argv):
     root = pathlib.Path(argv[1]).resolve() if len(argv) > 1 else ROOT
     errors = []
     for path in markdown_files(root):
         roots = [path.parent, skill_root(path, root), root]
-        for n, ref in dead(path.read_text(), roots, lambda p: p.resolve().exists()):
+        text = path.read_text()
+        for n, ref in dead(text, roots, lambda p: p.resolve().exists()):
             errors.append(f"{path.relative_to(root)}:{n}: names {ref}, which does not exist")
+        for n, ref in crossing(path, text, root):
+            errors.append(f"{path.relative_to(root)}:{n}: names {ref}, in another skill; copy it into this skill")
+    if root == ROOT:
+        errors += drifted(root)
     print("\n".join(errors) if errors else "skill refs ok")
     return 1 if errors else 0
 

@@ -14,7 +14,7 @@ buyers first, the buyer builds it in a weekend.
 1. Before any method, ask in one round: my edge (a weekly problem, an industry from the inside,
    a community, an audience, a skill, a domain, data), what I want (money: how much, how soon;
    learning; joy; personal software uses the "For me alone" column of
-   `../vision/references/worth-it.md`), and my time. An
+   `references/worth-it.md`), and my time. An
    idea without my edge races everyone with the same agent.
 2. Run one or two methods my edge points at, from `references/methods.md`; look things up. One
    line per candidate: who, painful job, what they pay or do now, method.

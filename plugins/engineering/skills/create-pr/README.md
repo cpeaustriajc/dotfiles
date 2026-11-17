@@ -36,7 +36,7 @@ To turn the plugin off, run `claude plugin disable engineering@dotfiles`. This a
 - It branches and commits as the `commit` skill does, and keeps your existing commits.
 - Before the checks, a separate reader reads the diff for comments only. It keeps a comment only if the comment warns about a trap. A trap is code that breaks when the next person edits it unaware.
 - Claude removes or shortens each comment that the reader lists, and commits that change as its own slice.
-- It runs the fast checks that the repo's `AGENTS.md` or `CLAUDE.md` names, and `tests_kept.py` from `review-loop`, which flags a weakened, skipped or removed test. If one fails, it stops and opens no PR, unless you allowed that test change.
+- It runs the fast checks that the repo's `AGENTS.md` or `CLAUDE.md` names. It also runs its copy of `tests_kept.py`, which flags a weakened, skipped or removed test. If one fails, it stops and opens no PR, unless you allowed that test change.
 - If a PR is already open for the branch, it pushes and reports the URL. It does not open a duplicate.
 - The PR body follows the repo's template. Without one, it follows the form of the repo's last few merged PRs. Without either, it has a short summary, an `Evidence` line, a `Merge danger` line and a `Test changes` line.
 - Evidence videos and screenshots show each click and key press, play at a person's pace, and leave out sign-in and cleanup. Claude attaches them to the PR with `gh --attach`.

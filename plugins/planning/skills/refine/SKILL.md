@@ -15,7 +15,7 @@ calls only I can make and approve the tracker writes. Ask me with the harness's 
 2. Read the trunk, the contract, the ticket threads and the decision log in full; search meeting
    notes and mail for the tickets' terms. Quote my settled answers with their date; never ask again.
    Size before the first cold read: each item fits one session of its builder and the limits
-   in `../tickets/references/sizing.md`. Trim an oversized ticket first, per its "Make it fit";
+   in `references/sizing.md`. Trim an oversized ticket first, per its "Make it fit";
    cut an issue or what is still over into items now, with each order rule as a blocker, so the
    blind read sees the items `tickets` will write.
 3. List the gaps that would stop a builder or QA: edge cases, race conditions, stale state,

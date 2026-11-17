@@ -51,7 +51,7 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 - Items state the measured facts they need, and link a large reference only as a crop or an excerpt.
 - Claude labels each item Task, Bug or Chore. A Chore adds a No-QA check and cites no requirement.
 - A bug found after Done becomes a new item, related to the original.
-- Claude writes through the Tracker section of your project's copy of `shape`, then runs the tree check. Add `--launch` when the project enters Launch.
+- Claude writes through the Tracker section of its project copy, then runs the tree check. Add `--launch` when the project enters Launch.
 
 ## Limits
 
@@ -67,8 +67,8 @@ To turn the plugin off, run `claude plugin disable planning@dotfiles`. This also
 - [references/item-template.md](references/item-template.md): the parts of an item, and the rules for each check. The Tracker section of the project's `shape` copy says how each part lands.
 - [references/item-kinds.md](references/item-kinds.md): work types, the Chore's No-QA check, bugs and wide mechanical changes.
 - [references/sizing.md](references/sizing.md): how Claude estimates context per item, and the measured run behind the numbers.
-- [../shape/references/top-down.md](../shape/references/top-down.md): the five rules and the tracker lookup.
-- [../shape/references/tree-outline.md](../shape/references/tree-outline.md): the tree JSON that the check reads.
+- [references/top-down.md](references/top-down.md): the five rules and the tracker lookup.
+- [references/tree-outline.md](references/tree-outline.md): the tree JSON that the check reads.
 
 ### Sources and evidence
 
