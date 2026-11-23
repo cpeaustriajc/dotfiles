@@ -36,7 +36,7 @@ in
     ".zshrc".source = link "zshrc";
 
     ".claude/CLAUDE.md".text = builtins.readFile ./agents.md + "\n" + builtins.readFile ./claude/claude-code.md;
-    ".codex/AGENTS.md".text = builtins.readFile ./agents.md + "\n";
+    ".codex/AGENTS.md".text = builtins.readFile ./agents.md + "\n" + builtins.readFile ./codex/codex.md;
 
     ".claude/prompting.md".source = link "claude/prompting.md";
     ".claude/statusline-command.sh".source = link "claude/statusline-command.sh";
