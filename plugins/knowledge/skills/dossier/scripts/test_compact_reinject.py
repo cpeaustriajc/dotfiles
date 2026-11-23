@@ -76,6 +76,14 @@ lines = open(LOG, encoding="utf-8").read().splitlines() if os.path.exists(LOG) e
 arms = {line.split("\t")[2] for line in lines}
 report("logs one line per session with both arms", len(lines) == 3 and arms == {"reinject", "control"}, lines)
 
+p = subprocess.run([sys.executable, "-I", os.path.join(HERE, "compact_focus.py")],
+                   input="{}", capture_output=True, text=True)
+report("focus hook prints its text", p.returncode == 0 and "every decision and intent" in p.stdout, p.stdout)
+report("focus text stays short", len(p.stdout) < 1000, len(p.stdout))
+blocks = json.load(open(os.path.join(HERE, "compact_reinject.settings.json")))["hooks"]
+report("settings run the focus hook before compaction",
+       "compact_focus.py" in json.dumps(blocks.get("PreCompact")), list(blocks))
+
 shutil.rmtree(tmp, ignore_errors=True)
 print(f"{passed} passed, {failed} failed")
 sys.exit(1 if failed else 0)

@@ -36,7 +36,9 @@ in
     ".zshrc".source = link "zshrc";
 
     ".claude/CLAUDE.md".text = builtins.readFile ./agents.md + "\n" + builtins.readFile ./claude/claude-code.md;
-    ".codex/AGENTS.md".text = builtins.readFile ./agents.md + "\n";
+    ".codex/AGENTS.md".text = builtins.readFile ./agents.md + "\n" + builtins.readFile ./codex/codex.md;
+    # Codex writes config.toml itself (trust, notices); it writes to the link target, so the link stays.
+    ".codex/config.toml".source = link "codex/config.toml";
 
     ".claude/prompting.md".source = link "claude/prompting.md";
     ".claude/statusline-command.sh".source = link "claude/statusline-command.sh";

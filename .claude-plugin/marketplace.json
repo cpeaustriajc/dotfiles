@@ -73,7 +73,7 @@
       "name": "knowledge",
       "displayName": "Knowledge",
       "description": "Keep what the team learns — a decision log, research pages, lessons from past sessions, and a recap of recent work.",
-      "version": "1.2.1",
+      "version": "1.2.2",
       "author": {
         "name": "John Carlo Austria"
       },

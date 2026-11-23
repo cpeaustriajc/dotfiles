@@ -38,7 +38,7 @@ The way to change a file depends on how home-manager puts it in `~`.
 
 - To change a linked file, edit it here or at its live path. Both paths open the same file, so you
   need no switch.
-- To change `~/.claude/CLAUDE.md` or `~/.codex/AGENTS.md`, edit `agents.md` or
+- To change `~/.claude/CLAUDE.md` or `~/.codex/AGENTS.md`, edit `agents.md`, `codex/codex.md` or
   `claude/claude-code.md`, then run the switch.
 - To add a file or a hook, add a line to `home.nix`, then run the switch.
 
@@ -52,7 +52,7 @@ Zed, gh, git and mise write their config through the link, so a change from the 
 On macOS, Ghostty also loads `~/Library/Application Support/com.mitchellh.ghostty/config` after
 the linked file, and its values win. Keep that file absent, and put each setting in
 `config/ghostty/config`.
-`CLAUDE.md` is `agents.md` followed by `claude/claude-code.md`. `AGENTS.md` is `agents.md` alone.
+`CLAUDE.md` is `agents.md` followed by `claude/claude-code.md`. `AGENTS.md` is `agents.md` followed by `codex/codex.md`.
 
 To look up an option in `home.nix`, search the
 [home-manager options](https://home-manager-options.extranix.com/).
