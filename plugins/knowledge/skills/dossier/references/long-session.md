@@ -6,17 +6,11 @@ project's copy of this skill.
 
 ## 1. Summary instructions
 
-Add this section to the root instruction file, creating it when missing, under the heading the
-harness reads for compaction (`# Compact instructions` where it has one). It replaces an older
-copy.
-
-```markdown
-# Compact instructions
-
-Quote the user's newest request and every correction or decision in their own words, newest
-first. Keep the open PRs, branches, running sessions and subagents with their ids and state,
-and where the open-items list is kept.
-```
+Copy `scripts/compact_focus.py` into the project's hooks folder. The settings block of piece 3
+runs it before each compaction (`PreCompact` where the harness has one), and its output joins
+the summarizer's instructions. Delete an older `# Compact instructions` section from the root
+instruction file, because the harness does not apply it. A harness with no hook before
+compaction: put the script's text in that section instead.
 
 ## 2. The rule
 
@@ -38,7 +32,7 @@ add the step to the rule.
 Copy `scripts/compact_reinject.py` into the project's hooks folder and merge
 `scripts/compact_reinject.settings.json` into the project's hook settings, creating the file when
 missing, unless an entry already runs the same command. A harness with no hook after compaction:
-skip it and say so. A session that loads no repository hooks still gets pieces 1 and 2.
+skip it and say so. A session that loads no repository hooks still gets piece 2.
 
 ## Evidence
 
@@ -46,3 +40,8 @@ skip it and say so. A session that loads no repository hooks still gets pieces 1
   it, so the pieces point at the summary's newest steer instead of adding facts.
 - The hook is a trial: it logs which half of the sessions got its text. Compare corrections
   after compaction per half before keeping it.
+- A `# Compact instructions` section was applied in 0 of 354 compactions
+  (`anthropics/claude-code#89797`) and in 0 of 3 tests on 2026-11-19. The hook before
+  compaction reached the summary in 3 of 3, auto-compaction included.
+- In a replay of a real session on 2026-11-19, the summary kept 2 of 10 of the agent's
+  decisions without that hook and 3 with it. One run each, so the gain is unproven.
