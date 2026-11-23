@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
-"""A command hook that tells the compaction summarizer what to keep.
-
-Wire it for PreCompact (compact_reinject.settings.json has the block). The harness appends its
-stdout to the compaction instructions on manual and auto compaction; a `# Compact instructions`
-section in the instruction file was applied in 0 of 354 runs (anthropics/claude-code#89797).
-Keep TEXT short: the harness sets no size limit, and a 2.2 MB output made auto-compaction
-thrash (anthropics/claude-code#101057).
+"""Keep TEXT under 1000 characters: a 2.2 MB output made auto-compaction thrash (anthropics/claude-code#101057).
+A `# Compact instructions` section is no substitute: the harness applied it in 0 of 354 runs (anthropics/claude-code#89797).
 """
 
 TEXT = (
