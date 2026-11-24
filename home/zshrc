@@ -22,6 +22,10 @@ compinit
 
 export HOMEBREW_CURLRC=1
 
+# T3 Code: stop usage events and relay traces
+export T3CODE_TELEMETRY_ENABLED=false
+export T3CODE_OTEL_SDK_DISABLED=true
+
 
 
 
